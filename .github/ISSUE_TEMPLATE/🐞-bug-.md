@@ -3,7 +3,7 @@ name: "\U0001F41E[Bug]"
 about: BUG 발생시 작성해주세요
 title: ''
 labels: ''
-assignees: howooking, hahahaday12, HyunJunPark0, 0299bang
+assignees: '0299bang, hahahaday12, howooking, HyunJunPark0'
 
 ---
 
