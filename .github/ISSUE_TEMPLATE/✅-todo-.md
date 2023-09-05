@@ -3,7 +3,7 @@ name: "✅[Todo]"
 about: Todo 에 대해 작성해주세요!
 title: ''
 labels: ''
-assignees: howooking, hahahaday12, HyunJunPark0, 0299bang
+assignees: '0299bang, hahahaday12, howooking, HyunJunPark0'
 
 ---
 
