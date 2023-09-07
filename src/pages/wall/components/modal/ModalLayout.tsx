@@ -3,7 +3,7 @@ import { Button,  Modal, Select, Input} from 'antd';
 import styled from 'styled-components';
 import BestTemplate from '../ModalInner';
 import CategoryTemplet from '../CategoryTemplate';
-import SelecteTemplate from './SelectTemplate';
+import SelecteTemplate from './SearchTemplate';
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
