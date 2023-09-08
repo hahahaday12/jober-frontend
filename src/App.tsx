@@ -16,7 +16,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
-        <Route path="wall/:wallId" element={<Wall />} />
+        <Route path="wall/:wallId" element={<WallPage />} />
       </Routes>
     </ConfigProvider>
   );
