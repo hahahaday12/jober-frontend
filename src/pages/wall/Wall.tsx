@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import WallHeader from "./WallHeader";
-import { Button, FloatButton, message } from "antd";
+import { FloatButton, message } from "antd";
+import ModalOpen from "./components/modal/modalLayout";
 
 export default function Wall() {
   const { wallId } = useParams();
@@ -11,7 +12,7 @@ export default function Wall() {
       {contextHolder}
       <WallHeader />
       <main className="pt-10 flex-1 ">
-        <Button>템플릿 생성</Button>
+        <ModalOpen/>
         <div className="h-[5000px]">{wallId}</div>
         <FloatButton
           onClick={() => {
