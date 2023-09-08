@@ -1,6 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  html {
+    font-family: 'Noto Sans', sans-serif;
+  }
+}
+.db-34 {
+  @apply font-bold text-[34px] -tracking-[1px];
+}
+.db-30 {
+  @apply font-bold text-[30px] -tracking-[1px];
+}
+.db-24 {
+  @apply font-bold text-[24px] -tracking-[1px];
+}
+.db-20 {
+  @apply font-bold text-[20px] -tracking-[1px];
+}
+.db-18 {
+  @apply font-bold text-[18px] -tracking-[1px];
+}
+.db-16 {
+  @apply font-bold text-[16px] -tracking-[1px];
+}
+.db-14 {
+  @apply font-bold text-[14px] -tracking-[1px];
+}
+.dm-24 {
+  @apply font-[500] text-[24px] -tracking-[1px];
+}
+.dm-20 {
+  @apply font-[500] text-[20px] -tracking-[1px];
+}
+.dm-18 {
+  @apply font-[500] text-[18px] -tracking-[1px];
+}
+.dm-16 {
+  @apply font-[500] text-[16px] -tracking-[1px];
+}
+.dm-14 {
+  @apply font-[500] text-[14px] -tracking-[1px];
+}
+.dmn-20 {
+  @apply font-[500] text-[20px];
+}
+.dmn-16 {
+  @apply font-[500] text-[16px];
+}
 
 ::-webkit-scrollbar {
   width: 0.5rem;
