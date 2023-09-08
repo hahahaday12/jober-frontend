@@ -6,7 +6,7 @@ interface Props {
   number: number;
 }
 
-export default function ListTemplete({ category }: { category: Props }) {
+export const ListTemplete = ({ category }: { category: Props }) => {
   const [list] = useState([
     {
       id: 1,

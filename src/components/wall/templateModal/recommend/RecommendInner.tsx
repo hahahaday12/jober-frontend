@@ -7,7 +7,7 @@ interface TemplateData {
   description: string;
 }
 
-export default function BestTemplate() {
+export const BestTemplate = () => {
   const [templateData] = useState<TemplateData[]>([
     {
       id: 1,

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ListTemplete from './CategoryList';
+//import ListTemplete from './CategoryListc';
+import { ListTemplete } from 'components/index'
 
 type BookTypeArr = BookType[];
 
@@ -17,7 +18,7 @@ const bookcategory: BookTypeArr = [
   { type: '카테고리3', number: 5 },
 ];
 
-export default function CategoryTemplet() {
+export const CategoryTemplet = () => {
   const [type, setType] = useState<string>();
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function Category() {
+export const Category = () => {
   const navigate = useNavigate();
 
   const uuid = uuidv4().replace(/-/g, '');

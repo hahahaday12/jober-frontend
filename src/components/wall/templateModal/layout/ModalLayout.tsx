@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Button, Modal, Select, Input } from 'antd';
 import styled from 'styled-components';
-import BestTemplate from '../ModalInner';
-import CategoryTemplet from '../CategoryTemplate';
-// import SelecteTemplate from './SelectTemplate';
+// import BestTemplate from '../ModalInner';
+// import CategoryTemplet from '../CategoryTemplateC';
+// import SelecteTemplate from './SearchTemplatec';
+
+import {BestTemplate,CategoryTemplet,SelecteSearchTemplate} from 'components/index'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ModalOpen() {
+export const ModalOpen = () => {
   const { Search } = Input;
   // 모달 오픈을 관리하기 위한 상태관리
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -106,7 +108,7 @@ export default function ModalOpen() {
             </InputBox>
             {showBestTemplate && <BestTemplate />}
             {categoryTemplate && <CategoryTemplet />}
-            {/* {inputText && <SelecteTemplate />} */}
+            {inputText && <SelecteSearchTemplate />}
           </SelectBox>
         </SettingTemplet>
       </Modals>

@@ -1,9 +1,8 @@
 import koKR from 'antd/locale/ko_KR';
 import { ConfigProvider } from 'antd';
 import { Route, Routes } from 'react-router-dom';
-import Home from '@/pages/home/Home';
-import WallPage from '@/pages/wall/WallPage';
-import Category from '@/pages/category/Category';
+import { HomePage, WallAllPage, CategoryPage } from 'pages/index'
+import UIUX from './UIUX';
 
 export default function App() {
   const theme = {
@@ -14,9 +13,10 @@ export default function App() {
   return (
     <ConfigProvider theme={theme} locale={koKR}>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/category" element={<Category />} />
-        <Route path="wall/:wallId" element={<Wall />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/uiux" element={<UIUX />} />
+        <Route path="/category" element={<CategoryPage />} />
+        <Route path="wall/:wallId" element={<WallAllPage />} />
       </Routes>
     </ConfigProvider>
   );
