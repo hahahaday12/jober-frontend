@@ -17,9 +17,7 @@ const bookcategory: BookTypeArr = [
   { type: '카테고리3', number: 5 },
 ];
 
-
 export default function CategoryTemplet() {
-
   const [type, setType] = useState<string>();
 
   useEffect(() => {
@@ -32,7 +30,7 @@ export default function CategoryTemplet() {
           setType(entry.target.id);
         }
       },
-      { threshold: 0.3, rootMargin: `0px 0px -50% 0px` }
+      { threshold: 0.3, rootMargin: `0px 0px -50% 0px` },
     );
     target.forEach((item) => {
       io.observe(item);
@@ -57,9 +55,9 @@ export default function CategoryTemplet() {
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: 'smooth' });
     }
-  }
-  
-  return(
+  };
+
+  return (
     <CategoryLayout>
       <Categorybox>
         <ul className="Category-menu__text">
@@ -68,8 +66,7 @@ export default function CategoryTemplet() {
               key={item.number}
               className={item.type === type ? 'active' : ''}
             >
-              <a href={`#${item.type}`}
-              onClick={(e) => handleItemClick(e)}>
+              <a href={`#${item.type}`} onClick={(e) => handleItemClick(e)}>
                 {item.type}
               </a>
             </li>
@@ -82,7 +79,7 @@ export default function CategoryTemplet() {
         ))}
       </TemplateList>
     </CategoryLayout>
-  )
+  );
 }
 
 const CategoryLayout = styled.div`
@@ -96,40 +93,39 @@ const CategoryLayout = styled.div`
   max-height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
-
-`
+`;
 
 const Categorybox = styled.div`
   width: 20%;
   height: inherit;
   float: left;
   box-sizing: border-box;
- //background-color: aqua;
+  //background-color: aqua;
   border-right: 1px solid gray;
 
-  .Category-menu__text{
+  .Category-menu__text {
     //background-color: tan;
     width: 110px;
     margin: auto;
     padding-bottom: 10px;
 
     li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 40px;
-        width: 6.8rem;
-        margin-top: 5px;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 15px;
-        transition: background-color 0.3s;
-      }
-      .active {
-        background-color: #15c6b7;
-      }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      width: 6.8rem;
+      margin-top: 5px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 15px;
+      transition: background-color 0.3s;
+    }
+    .active {
+      background-color: #15c6b7;
+    }
   }
-`
+`;
 const TemplateList = styled.div`
   width: 80%;
   float: right;
@@ -137,4 +133,4 @@ const TemplateList = styled.div`
   //background-color: blue;
   max-height: 500px;
   overflow-y: auto;
-`
+`;

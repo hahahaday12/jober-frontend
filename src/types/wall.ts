@@ -6,7 +6,7 @@ import {
   SnsType,
   StyleType,
   TemplateType,
-} from './blocks';
+} from '@/types/blocks';
 
 export type CategoryType =
   | 'career'

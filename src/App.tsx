@@ -1,15 +1,14 @@
-import koKR from "antd/locale/ko_KR";
-import { ConfigProvider } from "antd";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/home/Home";
-import Wall from "./pages/wall/Wall";
-import Category from "./pages/category/Category";
+import koKR from 'antd/locale/ko_KR';
+import { ConfigProvider } from 'antd';
+import { Route, Routes } from 'react-router-dom';
+import Home from '@/pages/home/Home';
+import WallPage from '@/pages/wall/WallPage';
+import Category from '@/pages/category/Category';
 
-// 함수형 컴포넌트 컨벤션??
 export default function App() {
   const theme = {
     token: {
-      colorPrimary: "#03bafc",
+      colorPrimary: '#2493FB',
     },
   };
   return (
