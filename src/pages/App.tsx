@@ -1,10 +1,10 @@
 import koKR from 'antd/locale/ko_KR';
 import { ConfigProvider } from 'antd';
 import { Route, Routes } from 'react-router-dom';
-import { HomePage, WallAllPage, CategoryPage } from 'pages/index'
-import UIUX from './UIUX';
+import UIUX from '../UIUX';
+import { CategoryPage, HomePage, WallAllPage } from 'pages/index';
 
-export default function App() {
+export const App = () => {
   const theme = {
     token: {
       colorPrimary: '#2493FB',

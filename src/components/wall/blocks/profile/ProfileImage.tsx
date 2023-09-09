@@ -7,7 +7,7 @@ interface ProfileImageUploadProps {
   isEdit: boolean;
 }
 
-export default function ProfileImage({ isEdit }: ProfileImageUploadProps) {
+export const  ProfileImage = ({ isEdit }: ProfileImageUploadProps) => {
   const { wall, setWall } = useWallStore();
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile = event.target.files?.[0];
