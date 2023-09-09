@@ -20,10 +20,6 @@ import {
 } from 'components/wall/blocks/index';
 import React from 'react';
 
-interface ItemType {
-  id: string;
-  block: React.ReactNode;
-}
 const BlockMapper: { [key: string]: JSX.Element } = {
   listBlock: <ListBlock />,
   fileBlock: <FileBlock />,
@@ -64,7 +60,12 @@ export const WallPage = () => {
     getData();
   }, [messageApi, setWall]);
 
-  const [sortableBlocks, setSortableBlocks] = useState<ItemType[]>([]);
+  const [sortableBlocks, setSortableBlocks] = useState<
+    {
+      id: string;
+      block: React.ReactNode;
+    }[]
+  >([]);
 
   useEffect(() => {
     if (wall.order) {

@@ -1,13 +1,13 @@
 import defaultImage from '@/assets/default.jpg';
 import { useWallStore } from '@/store';
-import { CameraOutlined } from '@ant-design/icons';
 import { produce } from 'immer';
+import galleryIcon from '@/assets/icons/gallery.svg';
 
 interface BackgroundImageProps {
   isEdit: boolean;
 }
 
-export const  BackgroundImage = ({ isEdit }: BackgroundImageProps) => {
+export const BackgroundImage = ({ isEdit }: BackgroundImageProps) => {
   const { wall, setWall: addToWall } = useWallStore();
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +27,7 @@ export const  BackgroundImage = ({ isEdit }: BackgroundImageProps) => {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center bg-white">
+    <>
       <img
         src={wall.profileBgUrl ?? defaultImage}
         alt="profile"
@@ -36,8 +36,8 @@ export const  BackgroundImage = ({ isEdit }: BackgroundImageProps) => {
         }`}
       />
       {isEdit && (
-        <label className="cursor-pointer absolute top-5 right-5 bg-white w-10 h-10 rounded-full flex justify-center items-center">
-          <CameraOutlined />
+        <label className="cursor-pointer hover:opacity-60 transition absolute top-[20px] right-[20px] bg-white w-[36px] h-[36px] rounded-full flex justify-center items-center">
+          <img src={galleryIcon} alt="gallery icon" />
           <input
             type="file"
             className="hidden"
@@ -46,6 +46,6 @@ export const  BackgroundImage = ({ isEdit }: BackgroundImageProps) => {
           />
         </label>
       )}
-    </div>
+    </>
   );
-}
+};

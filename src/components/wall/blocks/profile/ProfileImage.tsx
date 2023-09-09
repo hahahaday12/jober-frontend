@@ -1,14 +1,11 @@
 import defaultImage from '@/assets/default.jpg';
 import { useWallStore } from '@/store';
-import { CameraOutlined } from '@ant-design/icons';
+import galleryIcon from '@/assets/icons/gallery.svg';
 import { produce } from 'immer';
 
-interface ProfileImageUploadProps {
-  isEdit: boolean;
-}
+export const ProfileImage = () => {
+  const { wall, setWall, isEdit } = useWallStore();
 
-export const  ProfileImage = ({ isEdit }: ProfileImageUploadProps) => {
-  const { wall, setWall } = useWallStore();
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile = event.target.files?.[0];
     const reader = new FileReader();
@@ -36,8 +33,8 @@ export const  ProfileImage = ({ isEdit }: ProfileImageUploadProps) => {
         }`}
       />
       {isEdit && (
-        <label className="cursor-pointer absolute bg-white w-10 h-10 rounded-full flex justify-center items-center">
-          <CameraOutlined />
+        <label className="cursor-pointer hover:opacity-60 transition absolute bg-white w-10 h-10 rounded-full flex justify-center items-center">
+          <img src={galleryIcon} alt="gallery icon" />
           <input
             type="file"
             className="hidden"
@@ -48,4 +45,4 @@ export const  ProfileImage = ({ isEdit }: ProfileImageUploadProps) => {
       )}
     </div>
   );
-}
+};
