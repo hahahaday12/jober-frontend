@@ -5,13 +5,20 @@ import UIUX from '../UIUX';
 import { CategoryPage, HomePage, WallAllPage } from 'pages/index';
 
 export const App = () => {
-  const theme = {
-    token: {
-      colorPrimary: '#2493FB',
-    },
-  };
   return (
-    <ConfigProvider theme={theme} locale={koKR}>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#2493FB',
+        },
+        components: {
+          Button: {
+            borderRadius: 2,
+          },
+        },
+      }}
+      locale={koKR}
+    >
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/uiux" element={<UIUX />} />
@@ -20,4 +27,4 @@ export const App = () => {
       </Routes>
     </ConfigProvider>
   );
-}
+};

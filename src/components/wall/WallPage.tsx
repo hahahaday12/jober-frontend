@@ -99,15 +99,15 @@ export const WallPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-line flex flex-col ">
+    <div className="min-h-screen bg-lightGray flex flex-col ">
       {contextHolder}
       <WallHeader wallId={wallId} />
 
       {loading ? (
-        <div className="py-[120px] ">loading...</div>
+        <div className="py-[106px] ">loading...</div>
       ) : (
         <>
-          <main className="py-[120px] flex-1 flex flex-col gap-7 w-[866px] mx-auto">
+          <main className="py-[106px] flex-1 flex flex-col gap-7 w-[866px] mx-auto">
             <ProfileBlock />
             <ReactSortable
               list={sortableBlocks}
