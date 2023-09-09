@@ -7,67 +7,121 @@
     "ProfileImageUrl": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2643&q=80",
     "pageTitle": "이호우",
     "pageDescription": "프론트엔드 개발자 이호우입니다.",
-    "listBlock": {
-      "listTitle": "Qualification",
-      "lists": [
+    "templatesBlock": {
+      "templates": [
         {
           "id": 1,
-          "listSubtitle": "학력",
-          "listDesc": "MIT 컴퓨터공학 석사",
-          "isLink": false
+          "templateTitle": "이력서",
+          "templateDescription": "개발자 이호우 이력서"
         },
         {
           "id": 2,
-          "listSubtitle": "경력",
-          "listDesc": "현 토스 CTO\n전 메타 FE총괄",
-          "isLink": false
-        },
-        {
-          "id": 3,
-          "listSubtitle": "이력서",
-          "listDesc": "https://github.com/Fastcampus-Final-Team3/jober-frontend",
-          "isLink": true
+          "templateTitle": "건강검결과",
+          "templateDescription": "개발자 이호우 건강검진"
         }
       ]
     },
-    "fileBlock": {
-      "fileTitle": "이력서",
-      "fileSubtitle": "포트폴리오",
-      "file": "파일"
+    "snsBlock": {
+      "snss": [
+        {
+          "id": 1,
+          "snsTitle": "facebook",
+          "snsUrl": "https://www.facebook.com/neocsv"
+        },
+        {
+          "id": 2,
+          "snsTitle": "instagram",
+          "snsUrl": "https://www.instagram.com/moai_kc/"
+        }
+      ]
     },
-    "snsBlock": [
+    "listBlocks": [
       {
         "id": 1,
-        "snsTitle": "facebook",
-        "snsUrl": "https://www.facebook.com/neocsv"
+        "listTitle": "Qualification",
+        "lists": [
+          {
+            "id": 1,
+            "listSubtitle": "학력",
+            "listDescription": "MIT 컴퓨터공학 석사",
+            "isLink": false
+          },
+          {
+            "id": 2,
+            "listSubtitle": "경력",
+            "listDescription": "현 토스 CTO\n전 메타 FE총괄",
+            "isLink": false
+          }
+        ]
       },
       {
         "id": 2,
-        "snsTitle": "instagram",
-        "snsUrl": "https://www.instagram.com/moai_kc/"
+        "listTitle": "자격증 목록",
+        "lists": [
+          {
+            "id": 1,
+            "listSubtitle": "토익",
+            "listDescription": "900",
+            "isLink": false
+          },
+          {
+            "id": 2,
+            "listSubtitle": "운전면허증",
+            "listDescription": "보통2종",
+            "isLink": false
+          }
+        ]
       }
     ],
-    "templateBlock": [
+    "fileBlocks": [
       {
         "id": 1,
-        "templateTitle": "이려서",
-        "templateDesc": "개발자 이호우 이력서"
+        "fileTitle": "이력서",
+        "fileSubtitle": "이력서",
+        "fileName": "fdfds.pdf",
+        "file": "파일1"
+      },
+      {
+        "id": 2,
+        "fileTitle": "포트폴리오",
+        "fileSubtitle": "포트폴리오",
+        "fileName": "1212fdfds.pdf",
+        "file": "파일2"
       }
     ],
-    "freeBlock": {
-      "freeTitle": "자유블록이다",
-      "freeDesc": "자유로운 사람"
-    },
+    "freeBlocks": [
+      {
+        "id": 1,
+        "freeTitle": "자유블록이다1",
+        "freeDescription": "자유로운 내용2"
+      },
+      {
+        "id": 2,
+        "freeTitle": "자유블록이다2",
+        "freeDescription": "자유로운 내용2"
+      }
+    ],
     "order": [
-      "listBlock",
-      "fileBlock",
-      "snsBlock",
-      "templateBlock",
-      "freeBlock"
+      { "blockType": "templatesBlock", "id": 0 },
+      { "blockType": "snsBlock", "id": 0 },
+      { "blockType": "listBlock", "id": 1 },
+      { "blockType": "listBlock", "id": 2 },
+      { "blockType": "fileBlock", "id": 1 },
+      { "blockType": "fileBlock", "id": 2 },
+      { "blockType": "freeBlock", "id": 1 },
+      { "blockType": "freeBlock", "id": 2 }
     ],
     "style": {
-      "background": { "color": "#eee", "gradation": false, "imageUrl": null },
-      "block": { "gradation": false, "shape": "0px", "style": "flat" },
+      "background": {
+        "color": "#eee",
+        "gradation": false,
+        "imageUrl": null
+      },
+      "block": {
+        "gradation": false,
+        "shape": "0px",
+        "style": "flat"
+      },
       "theme": null
     }
   }

@@ -19,7 +19,7 @@ export const BlockContainer = ({children,blockName,}: BlockContainerProps) => {
     );
   };
   return (
-    <div className="bg-slate-100 rounded-[7px] overflow-hidden relative">
+    <div className="bg-white rounded-[7px] overflow-hidden relative">
       {blockName !== 'profileBlock' && (
         <>
           {isEdit && (
