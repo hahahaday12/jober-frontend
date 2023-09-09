@@ -6,7 +6,7 @@ import WallHeaderUser from './WallHeaderUser';
 import closeIcon from '@/assets/icons/close.svg';
 import inputSuffixIcon from '@/assets/icons/input-suffix.svg';
 
-export const WallHeader = ({ wallId }: { wallId: string }) => {
+export const WallHeader = ({ wallId }: { wallId?: string }) => {
   // const {
   //   token: { colorPrimaryHover },
   // } = theme.useToken();
@@ -45,17 +45,16 @@ export const WallHeader = ({ wallId }: { wallId: string }) => {
   };
 
   return (
-    <header className="bg-white h-[72px] z-10 flex items-center fixed w-full">
+    <header className="bg-white h-[72px] z-10 flex items-center fixed w-full ring-line ring-[2px]">
       <div className="w-[866px] mx-auto">
         {isEdit ? (
           <div className="flex gap-[73px] items-center">
             <WallHeaderUser pageTitle={wall.pageTitle} />
             <Input
+              className="flex-1"
               addonBefore={
                 <div className="dm-14 text-gray88">
-                  {`${(import.meta.env.VITE_CLIENT_URL as string).slice(
-                    7,
-                  )}/wall/`}
+                  {`${import.meta.env.VITE_CLIENT_URL.slice(7)}/wall/`}
                 </div>
               }
               suffix={
@@ -67,10 +66,9 @@ export const WallHeader = ({ wallId }: { wallId: string }) => {
               }
               value={wallIdInput}
               onChange={(e) => setwallIdInput(e.target.value)}
-              className="w-full flex-1"
             />
             <div className="flex gap-[8px]">
-              <Button className="dm-14 h-[32px] px-[16px]  text-gray88 rounded-[2px] border-[1px] border-gray88">
+              <Button className="dm-14 h-[32px] px-[16px] text-gray88 rounded-[2px] border-[1px] border-gray88">
                 미리보기
               </Button>
               <Button
