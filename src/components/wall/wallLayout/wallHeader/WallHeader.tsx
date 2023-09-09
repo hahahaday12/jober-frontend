@@ -1,6 +1,4 @@
-import { Button, Input, message, theme } from 'antd';
-//import WallHeaderActions from '@/pages/wall/WallHeaderActions';
-import { CloseOutlined } from '@ant-design/icons';
+import { Button, Input, message } from 'antd';
 import { useWallStore } from '@/store';
 import { useState } from 'react';
 import { WallHeaderActions } from 'components/index';
@@ -8,16 +6,12 @@ import WallHeaderUser from './WallHeaderUser';
 import closeIcon from '@/assets/icons/close.svg';
 import inputSuffixIcon from '@/assets/icons/input-suffix.svg';
 
-interface WallHeaderProps {
-  wallId?: string;
-}
-
-export const WallHeader = ({ wallId }: WallHeaderProps) => {
-  const {
-    token: { colorPrimaryHover },
-  } = theme.useToken();
-
+export const WallHeader = ({ wallId }: { wallId: string }) => {
+  // const {
+  //   token: { colorPrimaryHover },
+  // } = theme.useToken();
   const { wall, isEdit, toggleEdit, getWall } = useWallStore();
+  const [wallIdInput, setwallIdInput] = useState(wallId);
 
   const [saving, setSaving] = useState(false);
   const handleSave = async () => {
@@ -35,7 +29,7 @@ export const WallHeader = ({ wallId }: WallHeaderProps) => {
       message.error({ content: '저장 실패' });
     } finally {
       setSaving(false);
-      location.reload(); // 개별 클로져 상태 초기화
+      location.reload();
       toggleEdit();
     }
   };
@@ -59,11 +53,20 @@ export const WallHeader = ({ wallId }: WallHeaderProps) => {
             <Input
               addonBefore={
                 <div className="dm-14 text-gray88">
-                  {(import.meta.env.VITE_CLIENT_URL as string).slice(7)}
+                  {`${(import.meta.env.VITE_CLIENT_URL as string).slice(
+                    7,
+                  )}/wall/`}
                 </div>
               }
-              suffix={<img src={inputSuffixIcon} />}
-              value={wallId}
+              suffix={
+                <img
+                  src={inputSuffixIcon}
+                  onClick={() => setwallIdInput('')}
+                  className="cursor-pointer hover:opacity-60 transition"
+                />
+              }
+              value={wallIdInput}
+              onChange={(e) => setwallIdInput(e.target.value)}
               className="w-full flex-1"
             />
             <div className="flex gap-[8px]">
