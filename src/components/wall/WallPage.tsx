@@ -14,12 +14,12 @@ import { produce } from 'immer';
 //import AddBlockModal from '@/pages/wall/AddBlockModal';
 import { BlockType } from '@/types/blocks';
 import { WallType } from '@/types/wall';
-import {WallHeader,ListBlock,SnsBlock,ProfileBlock,
-  TemplateBlock,FileBlock,FreeBlock,AddBlockModal } from 'components/index'
-
+import {WallHeader,ProfileBlock,AddBlockModal,ModalOpen } from 'components/index'
+// 상위 index.ts 안에 있는 페이지기 때문에 blocks안의 index 경로로 연결해야함.
+import { FileBlock,SnsBlock,TemplateBlock,FreeBlock } from 'components/wall/blocks/index';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
-  listBlock: <ListBlock />,
+ 
   fileBlock: <FileBlock />,
   snsBlock: <SnsBlock />,
   templateBlock: <TemplateBlock />,
@@ -117,6 +117,7 @@ export const WallPage = () => {
               isAddBlockModalOpen={isAddBlockModalOpen}
               setIsAddBlockModalOpen={setIsAddBlockModalOpen}
             />
+            <ModalOpen/>
           </main>
         </>
       )}

@@ -1,5 +1,5 @@
 import { Input, Typography } from 'antd';
-import ProfileImage from './ProfileImage';
+import { ProfileImage } from './ProfileImage';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
 import {BackgroundImage, BlockContainer} from  'components/index'
