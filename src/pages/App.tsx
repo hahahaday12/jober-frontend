@@ -15,6 +15,9 @@ export const App = () => {
           Button: {
             borderRadius: 2,
           },
+          Input: {
+            borderRadius: 9,
+          },
         },
       }}
       locale={koKR}

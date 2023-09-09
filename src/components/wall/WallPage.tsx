@@ -99,7 +99,7 @@ export const WallPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-lightGray flex flex-col ">
+    <div className="min-h-screen bg-gray flex flex-col ">
       {contextHolder}
       <WallHeader wallId={wallId} />
 
