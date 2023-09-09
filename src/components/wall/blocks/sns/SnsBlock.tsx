@@ -38,7 +38,7 @@ export const SnsBlock = () => {
           <p>보여주고 싶은 SNS를 연결해주세요!</p>
         </div>
         <div className="flex gap-3 justify-center">
-          {wall.snsBlock?.map((sns) => (
+          {wall.snsBlock?.snss.map((sns) => (
             <Button
               key={sns.snsUrl}
               className="w-16 h-16 text-4xl"
