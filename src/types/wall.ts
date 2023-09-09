@@ -1,20 +1,3 @@
-// import {
-//   BlockType,
-//   FileBlockType,
-//   FreeBlockType,
-//   ListBlockType,
-//   SnsType,
-//   StyleType,
-//   TemplateType,
-// } from '@/types/blocks';
-
-export type CategoryType =
-  | 'career'
-  | 'private'
-  | 'event'
-  | 'enterprise'
-  | 'basic';
-
 export interface WallType {
   userId: number;
   category: CategoryType;
@@ -28,8 +11,15 @@ export interface WallType {
   snsBlock?: SnsBlockType;
   freeBlocks?: FreeBlockType[];
   templatesBlock?: TemplateBlockType;
+  order: OrderType[];
   style: StyleType;
 }
+export type CategoryType =
+  | 'career'
+  | 'private'
+  | 'event'
+  | 'enterprise'
+  | 'basic';
 
 export interface ListBlockType {
   id: number;
@@ -43,6 +33,7 @@ export interface ListType {
   listDescription: string;
   isLink: boolean;
 }
+
 export interface FileBlockType {
   id: number;
   order: number;
@@ -66,6 +57,7 @@ export interface FreeBlockType {
   freeTitle: string;
   freeDescription: string;
 }
+
 export interface TemplateBlockType {
   order: number;
   templates: TemplateType[];
@@ -75,6 +67,11 @@ export interface TemplateType {
   order: number;
   templateTitle: string;
   templateDescription: string;
+}
+
+export interface OrderType {
+  blockType: BlockType;
+  id: number;
 }
 export type BlockType =
   | 'listBlock'
