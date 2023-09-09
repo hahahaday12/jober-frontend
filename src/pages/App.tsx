@@ -16,7 +16,7 @@ export const App = () => {
             borderRadius: 2,
           },
           Input: {
-            borderRadius: 2,
+            borderRadius: 9,
           },
         },
       }}
