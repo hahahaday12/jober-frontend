@@ -1,4 +1,3 @@
-import defaultImage from '@/assets/default.jpg';
 import { useWallStore } from '@/store';
 import galleryIcon from '@/assets/icons/gallery.svg';
 import { produce } from 'immer';
@@ -24,16 +23,21 @@ export const ProfileImage = () => {
   };
 
   return (
-    <div className="flex w-[140px] h-[140px] flex-col items-center justify-center rounded-full bg-white">
-      <img
-        src={wall.ProfileImageUrl ?? defaultImage}
-        alt="profile"
-        className={`h-full w-full rounded-full object-cover ${
-          isEdit ? 'opacity-50' : 'opacity-100'
-        }`}
-      />
+    <div className="flex w-[140px] h-[140px] flex-col items-center justify-center rounded-full bg-white overflow-hidden">
+      {wall.ProfileImageUrl ? (
+        <img
+          src={wall.ProfileImageUrl}
+          alt="profile"
+          className={`h-full w-full rounded-full object-cover ${
+            isEdit ? 'opacity-50' : 'opacity-100'
+          }`}
+        />
+      ) : (
+        <div className="w-full bg-lightGray h-full" />
+      )}
+
       {isEdit && (
-        <label className="cursor-pointer hover:opacity-60 transition absolute bg-white w-10 h-10 rounded-full flex justify-center items-center">
+        <label className="cursor-pointer hover:opacity-60 transition absolute bg-white z-20 w-10 h-10 rounded-full flex justify-center items-center">
           <img src={galleryIcon} alt="gallery icon" />
           <input
             type="file"

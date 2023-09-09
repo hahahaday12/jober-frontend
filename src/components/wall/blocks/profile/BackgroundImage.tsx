@@ -26,15 +26,23 @@ export const BackgroundImage = ({ isEdit }: BackgroundImageProps) => {
       reader.readAsDataURL(imageFile);
     }
   };
+  console.log(wall.ProfileImageUrl);
   return (
     <>
-      <img
-        src={wall.profileBgUrl ?? defaultImage}
-        alt="profile"
-        className={`object-cover h-[291px] w-full ${
-          isEdit ? 'opacity-50' : 'opacity-100'
-        }`}
-      />
+      {wall.profileBgUrl ? (
+        <>
+          <img
+            src={wall.profileBgUrl || defaultImage}
+            alt="profile"
+            className={`object-cover h-[291px] w-full ${
+              isEdit ? 'opacity-50' : 'opacity-100'
+            }`}
+          />
+        </>
+      ) : (
+        <div className="h-[291px] w-full bg-sky"></div>
+      )}
+
       {isEdit && (
         <label className="cursor-pointer hover:opacity-60 transition absolute top-[20px] right-[20px] bg-white w-[36px] h-[36px] rounded-full flex justify-center items-center">
           <img src={galleryIcon} alt="gallery icon" />
