@@ -1,35 +1,37 @@
 import { useParams } from 'react-router-dom';
-//import WallHeader from '@/pages/wall/WallHeader';
 import { Button, message } from 'antd';
-//import ListBlock from '@/pages/wall/blocks/list/ListBlock';
 import { useEffect, useState } from 'react';
 import { ReactSortable, Sortable } from 'react-sortablejs';
-// import SnsBlock from '@/pages/wall/blocks/sns/SnsBlock';
-// import ProfileBlock from '@/pages/wall/blocks/profile/ProfileBlock';
-// import TemplateBlock from '@/pages/wall/blocks/template/TemplateBlock';
 import { useWallStore } from '@/store';
-//import FileBlock from '@/pages/wall/blocks/file/FileBlock';
-//import FreeBlock from '@/pages/wall/blocks/free/FreeBlock';
 import { produce } from 'immer';
-//import AddBlockModal from '@/pages/wall/AddBlockModal';
-import { BlockType } from '@/types/blocks';
-import { WallType } from '@/types/wall';
-import {WallHeader,ProfileBlock,AddBlockModal,ModalOpen } from 'components/index'
-// 상위 index.ts 안에 있는 페이지기 때문에 blocks안의 index 경로로 연결해야함.
-import { FileBlock,SnsBlock,TemplateBlock,FreeBlock } from 'components/wall/blocks/index';
+import { BlockType, WallType } from '@/types/wall';
+import {
+  WallHeader,
+  ProfileBlock,
+  AddBlockModal,
+  ModalOpen,
+} from 'components/index';
+import {
+  FileBlock,
+  SnsBlock,
+  TemplateBlock,
+  FreeBlock,
+  ListBlock,
+} from 'components/wall/blocks/index';
+import React from 'react';
 
+interface ItemType {
+  id: string;
+  block: React.ReactNode;
+}
 const BlockMapper: { [key: string]: JSX.Element } = {
- 
+  listBlock: <ListBlock />,
   fileBlock: <FileBlock />,
   snsBlock: <SnsBlock />,
-  templateBlock: <TemplateBlock />,
+  templatesBlock: <TemplateBlock />,
   freeBlock: <FreeBlock />,
 };
 
-interface ItemType {
-  id: BlockType;
-  block: React.ReactNode;
-}
 export const WallPage = () => {
   // const category: CategoryType = 'career';
 
@@ -38,6 +40,8 @@ export const WallPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const { wall, setWall, isEdit } = useWallStore();
+
+  const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
 
   // wall data fetching
   const [loading, setLoading] = useState(false);
@@ -61,12 +65,21 @@ export const WallPage = () => {
   }, [messageApi, setWall]);
 
   const [sortableBlocks, setSortableBlocks] = useState<ItemType[]>([]);
+
   useEffect(() => {
     if (wall.order) {
+      const objToComponent = wall.order.map((block) => {
+        const { blockType, id } = block;
+        const component = BlockMapper[block.blockType];
+        return React.cloneElement(component, {
+          id,
+          blockType,
+        });
+      });
       setSortableBlocks(
-        wall.order.map((block) => ({
-          id: block,
-          block: BlockMapper[block],
+        objToComponent.map((block) => ({
+          block,
+          id: `${block.props.blockType}-${block.props.id}`,
         })),
       );
     }
@@ -77,15 +90,16 @@ export const WallPage = () => {
     sortableBlocks.splice(event.newIndex as number, 0, item);
     setWall(
       produce(wall, (draft) => {
-        draft.order = sortableBlocks.map((block) => block.id);
+        draft.order = sortableBlocks.map((block) => ({
+          blockType: block.id.split('-')[0] as BlockType,
+          id: Number(block.id.split('-')[1]),
+        }));
       }),
     );
   };
 
-  const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
-
   return (
-    <div className="min-h-screen flex flex-col ">
+    <div className="min-h-screen bg-line flex flex-col ">
       {contextHolder}
       <WallHeader wallId={wallId} />
 
@@ -101,6 +115,8 @@ export const WallPage = () => {
               handle=".handle"
               className="flex gap-4 flex-col"
               animation={400}
+              scroll
+              forceFallback
               onEnd={handleSortBlocks}
             >
               {sortableBlocks?.map((item) => (
@@ -117,10 +133,10 @@ export const WallPage = () => {
               isAddBlockModalOpen={isAddBlockModalOpen}
               setIsAddBlockModalOpen={setIsAddBlockModalOpen}
             />
-            <ModalOpen/>
+            <ModalOpen />
           </main>
         </>
       )}
     </div>
   );
-}
+};
