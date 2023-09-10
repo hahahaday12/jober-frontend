@@ -33,6 +33,32 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
       toggleEdit();
     }
   };
+  // multipart/form-data json 같이 보내기 (서버 완성되면 수정할 예정)
+  // const handleSave = async () => {
+  //   setSaving(true);
+  //   const formData = new FormData();
+  //   formData.append('profileImage', wall.profileImageUrl);
+  //   const jsonData = JSON.stringify(wall);
+  //   formData.append(
+  //     'jsonData',
+  //     new Blob([jsonData], { type: 'application/json' }),
+  //   );
+  //   try {
+  //     const res = await axios.post('http://localhost:3000/wall', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data', // 세팅 안해야될수도 있음
+  //       },
+  //     });
+  //     console.log(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //     message.error({ content: '저장 실패' });
+  //   } finally {
+  //     setSaving(false);
+  //     location.reload();
+  //     toggleEdit();
+  //   }
+  // };
 
   const handleTempSave = () => {
     toggleEdit();
@@ -51,9 +77,9 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
           <div className="flex gap-[73px] items-center">
             <WallHeaderUser pageTitle={wall.pageTitle} />
             <Input
-              className="flex-1"
+              className="flex-1 rounded-[10px] bg-sky"
               addonBefore={
-                <div className="dm-14 text-gray88">
+                <div className="dm-14 text-gray88 ">
                   {`${import.meta.env.VITE_CLIENT_URL.slice(7)}/wall/`}
                 </div>
               }

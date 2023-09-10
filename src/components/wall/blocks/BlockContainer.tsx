@@ -7,7 +7,10 @@ interface BlockContainerProps {
   blockName: string;
 }
 
-export const BlockContainer = ({children,blockName,}: BlockContainerProps) => {
+export const BlockContainer = ({
+  children,
+  blockName,
+}: BlockContainerProps) => {
   const { isEdit, wall, setWall } = useWallStore();
   const handleDeletBlock = () => {
     setWall(
@@ -19,7 +22,7 @@ export const BlockContainer = ({children,blockName,}: BlockContainerProps) => {
     );
   };
   return (
-    <div className="bg-white rounded-[7px] overflow-hidden relative">
+    <div className="bg-white rounded-[10px] overflow-hidden relative">
       {blockName !== 'profileBlock' && (
         <>
           {isEdit && (
@@ -38,4 +41,4 @@ export const BlockContainer = ({children,blockName,}: BlockContainerProps) => {
       {children}
     </div>
   );
-}
+};
