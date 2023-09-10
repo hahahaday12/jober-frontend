@@ -77,9 +77,9 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
           <div className="flex gap-[73px] items-center">
             <WallHeaderUser pageTitle={wall.pageTitle} />
             <Input
-              className="flex-1"
+              className="flex-1 rounded-[10px] bg-sky"
               addonBefore={
-                <div className="dm-14 text-gray88">
+                <div className="dm-14 text-gray88 ">
                   {`${import.meta.env.VITE_CLIENT_URL.slice(7)}/wall/`}
                 </div>
               }
