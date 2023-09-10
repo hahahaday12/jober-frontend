@@ -4,7 +4,8 @@ export interface WallType {
   shareUrl: string;
   pageTitle: string;
   pageDescription: string;
-  ProfileImageUrl: string | null;
+  profileImageUrl: string | null;
+  // profileImageUrl: string | Blob; // 서버 완성되면
   profileBgUrl: string | null;
   listBlocks?: ListBlockType[];
   fileBlocks?: FileBlockType[];

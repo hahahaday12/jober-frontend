@@ -26,7 +26,6 @@ export const BackgroundImage = ({ isEdit }: BackgroundImageProps) => {
       reader.readAsDataURL(imageFile);
     }
   };
-  console.log(wall.ProfileImageUrl);
   return (
     <>
       {wall.profileBgUrl ? (

@@ -12,7 +12,7 @@ export const ProfileImage = () => {
       if (reader.readyState === FileReader.DONE) {
         setWall(
           produce(wall, (draft) => {
-            draft.ProfileImageUrl = reader.result as string;
+            draft.profileImageUrl = reader.result as string;
           }),
         );
       }
@@ -24,9 +24,9 @@ export const ProfileImage = () => {
 
   return (
     <div className="flex w-[140px] h-[140px] flex-col items-center justify-center rounded-full bg-white overflow-hidden">
-      {wall.ProfileImageUrl ? (
+      {wall.profileImageUrl ? (
         <img
-          src={wall.ProfileImageUrl}
+          src={wall.profileImageUrl}
           alt="profile"
           className={`h-full w-full rounded-full object-cover ${
             isEdit ? 'opacity-50' : 'opacity-100'

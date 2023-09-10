@@ -6,7 +6,7 @@ export const defaultWall: { [key: string]: WallType } = {
     category: 'career',
     userId: 1,
     profileBgUrl: '',
-    ProfileImageUrl: '',
+    profileImageUrl: '',
     pageTitle: '',
     pageDescription: '',
     listBlock: {
@@ -39,7 +39,7 @@ export const defaultWall: { [key: string]: WallType } = {
     category: 'private',
     userId: 1,
     profileBgUrl: '',
-    ProfileImageUrl: '',
+    profileImageUrl: '',
     pageTitle: '',
     pageDescription: '',
     listBlock: {
@@ -70,7 +70,7 @@ export const defaultWall: { [key: string]: WallType } = {
     category: 'event',
     userId: 1,
     profileBgUrl: '',
-    ProfileImageUrl: '',
+    profileImageUrl: '',
     pageTitle: '',
     pageDescription: '',
     freeBlock: {
@@ -97,7 +97,7 @@ export const defaultWall: { [key: string]: WallType } = {
     category: 'enterprise',
     userId: 1,
     profileBgUrl: '',
-    ProfileImageUrl: '',
+    profileImageUrl: '',
     pageTitle: '',
     pageDescription: '',
 
@@ -120,7 +120,7 @@ export const defaultWall: { [key: string]: WallType } = {
     shareUrl: '',
     userId: 1,
     profileBgUrl: '',
-    ProfileImageUrl: '',
+    profileImageUrl: '',
     pageTitle: '',
     pageDescription: '',
     freeBlock: {
