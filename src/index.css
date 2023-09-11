@@ -52,6 +52,9 @@
 .dmn-16 {
   @apply font-[500] text-[16px];
 }
+.hover {
+  @apply hover:opacity-60 transition cursor-pointer;
+}
 
 ::-webkit-scrollbar {
   width: 0.5rem;
