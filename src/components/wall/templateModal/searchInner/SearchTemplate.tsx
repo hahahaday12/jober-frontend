@@ -1,46 +1,60 @@
-import { useState } from "react"
-import styled from 'styled-components'
-import { BestTemplate } from 'components/index'
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { BestTemplate } from 'components/index';
 
-interface Result{
-  id: number,
-  title:string,
-  description:string
+interface ProductItem {
+  id: number;
+  title: string;
+  description: string;
+  tag: string;
 }
 
+interface Props {
+  inputText: string;
+}
 
-export const SelecteSearchTemplate = ( ) => {
+export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
+  const [product, setProductInfo] = useState<ProductItem[]>([]);
+  const [filteredResults, setFilteredResults] = useState<ProductItem[]>([]);
 
-  const [result] = useState<Result[]>([
-    {
-      id: 1,
-      title:"제목1",
-      description:'내용입니당'
-    },
-    {
-      id: 1,
-      title:"제목2",
-      description:'내용입니당'
-    },
-    
-  ]) 
-  return(
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch('http://localhost:3003/list');
+        if (response.ok) {
+          const data = await response.json();
+          setProductInfo([...product, ...data]);
+        } else {
+          console.error('Response not OK:', response);
+        }
+      } catch (error) {
+        console.error('Error while fetching data:', error);
+      }
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const filteredResults = product.filter((item) =>
+      item.title.toLowerCase().includes(inputText.toLowerCase()),
+    );
+    setFilteredResults(filteredResults);
+  }, [inputText, product]);
+
+  return (
     <>
-    <SeleteContainer>
-      <h3>검색결과</h3>
-      <ResultBox>
-        {result.map((item) => (
-          <ResultTemBox>
-            {item.title}
-          </ResultTemBox>
-        ))}
-      </ResultBox>
-          <BestTemplate />
-    </SeleteContainer>
-
+      <SeleteContainer>
+        <h3>검색결과</h3>
+        <ResultBox>
+          {filteredResults.map((item) => (
+            <ResultTemBox key={item.id}>{item.title}</ResultTemBox>
+          ))}
+        </ResultBox>
+        <BestTemplate />
+      </SeleteContainer>
     </>
-  )
-}
+  );
+};
 
 const SeleteContainer = styled.div`
   width: 100%;
@@ -48,16 +62,19 @@ const SeleteContainer = styled.div`
   margin-top: 100px;
   position: absolute;
 
-  h3{
+  h3 {
     font-weight: 800;
   }
-`
+`;
 
-const ResultBox = styled.div `
+const ResultBox = styled.div`
   width: 90%;
   height: 210px;
   margin: auto;
-`
+  background-color: #108fdd;
+  max-height: 200px;
+  overflow-y: auto;
+`;
 
 const ResultTemBox = styled.div`
   width: 100%;
@@ -65,4 +82,4 @@ const ResultTemBox = styled.div`
   background-color: gray;
   border-radius: 10px;
   margin-top: 10px;
-`
+`;
