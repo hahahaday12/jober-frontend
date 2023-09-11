@@ -4,6 +4,7 @@
 @layer base {
   html {
     font-family: 'Noto Sans', sans-serif;
+    color: #2d2c38;
   }
 }
 * {

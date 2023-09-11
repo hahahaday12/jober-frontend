@@ -24,7 +24,6 @@ export type CategoryType =
 
 export interface ListBlockType {
   id: number;
-  order: number;
   listTitle: string;
   lists: ListType[];
 }
@@ -37,14 +36,12 @@ export interface ListType {
 
 export interface FileBlockType {
   id: number;
-  order: number;
   fileTitle: string;
   fileSubtitle: string;
   fileName: string;
   file: string;
 }
 export interface SnsBlockType {
-  order: number;
   snss: SnsType[];
 }
 export interface SnsType {
@@ -54,7 +51,6 @@ export interface SnsType {
 }
 export interface FreeBlockType {
   id: number;
-  order: number;
   freeTitle: string;
   freeDescription: string;
 }
@@ -65,7 +61,6 @@ export interface TemplateBlockType {
 }
 export interface TemplateType {
   id: number;
-  order: number;
   templateTitle: string;
   templateDescription: string;
 }
