@@ -6,12 +6,13 @@ import { produce } from 'immer';
 import { BlockContainer, SingleList } from 'components/index';
 import { BlockType, ListBlockType, ListType } from '@/types/wall';
 import trashIcon from '@/assets/icons/trash.svg';
+import editThickIcon from '@/assets/icons/edit-thick.svg';
 
 interface ListBlockProps {
   id?: number;
   blockType?: BlockType;
 }
-export const ListBlock = ({ id, blockType }: ListBlockProps) => {
+export const ListBlock = ({ id }: ListBlockProps) => {
   const [isListTitleEdit, setIsListTitleEdit] = useState(false);
 
   const { isEdit, wall, setWall } = useWallStore();
@@ -66,20 +67,26 @@ export const ListBlock = ({ id, blockType }: ListBlockProps) => {
       )}
 
       <div className="px-[28px] py-[26px] flex flex-col">
-        <div className="flex items-center text-lightBlack gap-[6px] db-20 mb-[16px]">
+        <div
+          className={`flex items-center gap-[6px] db-20 mb-[16px] ${
+            isEdit && 'text-gray88'
+          }`}
+        >
           {isListTitleEdit ? (
             <Input
               placeholder="내용을 입력해주세요."
               value={targetBlockData?.listTitle}
               onChange={handleListTile}
-              className="db-20 text-lightBlack w-1/3"
+              className="db-20 text-gray88 w-1/3"
             />
           ) : (
-            <h4>{targetBlockData?.listTitle || '내용을 입력해주세요.'}</h4>
+            <div>{targetBlockData?.listTitle || '내용을 입력해주세요.'}</div>
           )}
           {isEdit && (
-            <EditOutlined
-              className="cursor-pointer hover:opacity-60 transition"
+            <img
+              src={editThickIcon}
+              alt="edit icon"
+              className="hover:opacity-60 transition cursor-pointer"
               onClick={() => setIsListTitleEdit((prev) => !prev)}
             />
           )}
@@ -87,6 +94,7 @@ export const ListBlock = ({ id, blockType }: ListBlockProps) => {
         <div className="flex flex-col gap-[30px]">
           {targetBlockData?.lists.map((list: ListType) => (
             <SingleList
+              blockId={id}
               key={list.id}
               isEdit={isEdit}
               id={list.id}
