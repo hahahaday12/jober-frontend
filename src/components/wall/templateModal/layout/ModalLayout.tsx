@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Button, Modal, Select, Input } from 'antd';
 import styled from 'styled-components';
-// import BestTemplate from '../ModalInner';
-// import CategoryTemplet from '../CategoryTemplateC';
-// import SelecteTemplate from './SearchTemplatec';
 
-import {BestTemplate,CategoryTemplet,SelecteSearchTemplate} from 'components/index'
+import {
+  BestTemplate,
+  CategoryTemplet,
+  SelecteSearchTemplate,
+} from 'components/index';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ModalOpen = () => {
@@ -100,21 +101,23 @@ export const ModalOpen = () => {
               />
               <Search
                 className="searchBox"
+                type="text"
                 placeholder="input search text"
                 onSearch={onSearch}
                 onFocus={handleSearchFocus}
+                value={inputText}
                 onChange={handleChangeText}
               />
             </InputBox>
             {showBestTemplate && <BestTemplate />}
             {categoryTemplate && <CategoryTemplet />}
-            {inputText && <SelecteSearchTemplate />}
+            {inputText && <SelecteSearchTemplate inputText={inputText} />}
           </SelectBox>
         </SettingTemplet>
       </Modals>
     </>
   );
-}
+};
 
 const Modals = styled(Modal)`
   .ant-modal-content {
