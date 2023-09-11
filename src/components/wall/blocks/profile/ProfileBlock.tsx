@@ -31,7 +31,7 @@ export const ProfileBlock = () => {
                   name="pageTitle"
                   value={wall.pageTitle}
                   placeholder="이름"
-                  className="h-[58px] text-2xl db-24 rounded-br-none rounded-bl-none"
+                  className="h-[58px] text-2xl db-24 rounded-br-none rounded-bl-none text-lightBlack"
                 />
                 <Input
                   onChange={handleChange}
@@ -43,7 +43,7 @@ export const ProfileBlock = () => {
               </>
             ) : (
               <>
-                <Typography className="h-[58px] px-[12px] db-24  flex items-center">
+                <Typography className="h-[58px] px-[12px] db-24  flex items-center text-lightBlack">
                   {wall.pageTitle || '페이지명'}
                 </Typography>
                 <Typography className="h-[58px] px-[12px] dm-16  rounded-tr-none rounded-tl-none flex items-center text-gray88">
