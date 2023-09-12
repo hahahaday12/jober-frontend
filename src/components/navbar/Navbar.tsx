@@ -4,7 +4,7 @@ import message from '@/assets/icons/message.svg';
 import zoom from '@/assets/icons/zoom-in.svg';
 import { Input } from 'antd';
 
-export const CategoryNavbar = () => {
+export const Navbar = () => {
   return (
     <nav className="flex h-[70px] items-center bg-sky px-[30px] justify-between">
       <img src={jober_logo} alt="jober_logo" className="w-[115px] h-[37px] " />
