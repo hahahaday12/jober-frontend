@@ -102,14 +102,38 @@
       }
     ],
     "order": [
-      { "blockType": "templatesBlock", "id": 0 },
-      { "blockType": "snsBlock", "id": 0 },
-      { "blockType": "listBlock", "id": 1 },
-      { "blockType": "listBlock", "id": 2 },
-      { "blockType": "fileBlock", "id": 1 },
-      { "blockType": "fileBlock", "id": 2 },
-      { "blockType": "freeBlock", "id": 1 },
-      { "blockType": "freeBlock", "id": 2 }
+      {
+        "blockType": "templatesBlock",
+        "id": 0
+      },
+      {
+        "blockType": "snsBlock",
+        "id": 0
+      },
+      {
+        "blockType": "listBlock",
+        "id": 1
+      },
+      {
+        "blockType": "listBlock",
+        "id": 2
+      },
+      {
+        "blockType": "fileBlock",
+        "id": 1
+      },
+      {
+        "blockType": "fileBlock",
+        "id": 2
+      },
+      {
+        "blockType": "freeBlock",
+        "id": 1
+      },
+      {
+        "blockType": "freeBlock",
+        "id": 2
+      }
     ],
     "style": {
       "background": {
