@@ -19,6 +19,7 @@ import {
 } from 'components/wall/blocks/index';
 import React from 'react';
 import { SubDataClassType, SubDatumType, WallType } from '@/types/wall';
+import AddBlockButton from './wallLayout/AddBlockButton';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
   listBlock: <ListBlock />,
@@ -127,12 +128,7 @@ export const WallPage = () => {
               <div key={item.id}>{item.block}</div>
             ))}
           </ReactSortable>
-          <Button
-            onClick={() => setIsAddBlockModalOpen(true)}
-            className={`${!isEdit && 'hidden'}`}
-          >
-            블록 추가
-          </Button>
+          <AddBlockButton setIsAddBlockModalOpen={setIsAddBlockModalOpen} />
           <AddBlockModal
             isAddBlockModalOpen={isAddBlockModalOpen}
             setIsAddBlockModalOpen={setIsAddBlockModalOpen}

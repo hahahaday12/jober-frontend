@@ -11,7 +11,7 @@
     },
     "blocks": [
       {
-        "position": 1,
+        "id": 1,
         "blockType": "listBlock",
         "subData": {
           "listTitle": "학력경력",
@@ -30,7 +30,7 @@
         }
       },
       {
-        "position": 2,
+        "id": 2,
         "blockType": "listBlock",
         "subData": {
           "listTitle": "자격증",
@@ -49,7 +49,7 @@
         }
       },
       {
-        "position": 1,
+        "id": 3,
         "blockType": "freeBlock",
         "subData": {
           "freeTitle": "자유블록 제목",
@@ -57,7 +57,7 @@
         }
       },
       {
-        "position": 4,
+        "id": 4,
         "blockType": "freeBlock",
         "subData": {
           "freeTitle": "자유블록 제목",
@@ -65,8 +65,8 @@
         }
       },
       {
-        "position": 5,
-        "blockType": "templateBlock",
+        "id": 5,
+        "blockType": "templatesBlock",
         "subData": [
           {
             "templateTitle": "자기소개서 1",
@@ -79,7 +79,7 @@
         ]
       },
       {
-        "position": 6,
+        "id": 6,
         "blockType": "snsBlock",
         "subData": [
           {
@@ -93,7 +93,7 @@
         ]
       },
       {
-        "position": 7,
+        "id": 7,
         "blockType": "fileBlock",
         "subData": {
           "fileTitle": "포트폴리오1",
@@ -103,7 +103,7 @@
         }
       },
       {
-        "position": 8,
+        "id": 8,
         "blockType": "fileBlock",
         "subData": {
           "fileTitle": "포트폴리오2",
