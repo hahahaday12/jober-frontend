@@ -13,8 +13,6 @@ export const useWallStore = create<WallStoreType>((set) => ({
   isEdit: false,
   toggleEdit: () => set((state) => ({ isEdit: !state.isEdit })),
 
-  wall: {} as WallType,
-
   getWall: async () => {
     const response = await fetch('http://localhost:3000/wall');
     if (response.ok) {
@@ -22,6 +20,7 @@ export const useWallStore = create<WallStoreType>((set) => ({
     }
   },
 
+  wall: {} as WallType,
   setWall: (states: object) =>
     set((state) => ({ wall: { ...state.wall, ...states } })),
 }));
