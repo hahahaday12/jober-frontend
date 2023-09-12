@@ -1,6 +1,6 @@
-import {BlockContainer, Template} from 'components/index'
+import { BlockContainer, Template } from 'components/index';
 
-export const TemplateBlock = () => {
+export const TemplatesBlock = () => {
   return (
     <BlockContainer blockName="templateBlock">
       <div className="p-7 flex flex-col gap-5">
@@ -11,4 +11,4 @@ export const TemplateBlock = () => {
       </div>
     </BlockContainer>
   );
-}
+};

@@ -24,8 +24,6 @@ export const SingleList = ({
   isLink,
   isEdit,
 }: ListProps) => {
-  console.log({ id, subTitle, desc, isEdit });
-
   const { wall, setWall } = useWallStore();
 
   const [isListDescEdit, setIsListDescEdit] = useState(false);

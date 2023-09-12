@@ -1,20 +1,25 @@
-import { EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { Input } from 'antd';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
 import { BlockContainer, SingleList } from 'components/index';
-import { BlockType, ListBlockType, ListType } from '@/types/wall';
+import {
+  BlockType,
+  ListType,
+  SubDataClassType,
+  SubDatumType,
+} from '@/types/wall';
 import trashIcon from '@/assets/icons/trash.svg';
 import editThickIcon from '@/assets/icons/edit-thick.svg';
+import plusIcon from '@/assets/icons/plus.svg';
 
 interface ListBlockProps {
   id?: number;
   blockType?: BlockType;
+  subData?: SubDatumType[] | SubDataClassType;
 }
-export const ListBlock = ({ id }: ListBlockProps) => {
+export const ListBlock = ({ id, blockType, subData }: ListBlockProps) => {
   const [isListTitleEdit, setIsListTitleEdit] = useState(false);
-
   const { isEdit, wall, setWall } = useWallStore();
   const targetBlockData = wall.listBlocks?.find((block) => block.id === id);
 
@@ -66,7 +71,7 @@ export const ListBlock = ({ id }: ListBlockProps) => {
         />
       )}
 
-      <div className="px-[28px] py-[26px] flex flex-col">
+      <div className="px-[28px] pt-[26px] pb-[22px] flex flex-col">
         <div
           className={`flex items-center gap-[6px] db-20 mb-[16px] ${
             isEdit && 'text-gray88'
@@ -107,10 +112,7 @@ export const ListBlock = ({ id }: ListBlockProps) => {
 
         {isEdit && (
           <div className="w-full text-center">
-            <PlusOutlined
-              className="cursor-pointer"
-              // onClick={handleAddList}
-            />
+            <img src={plusIcon} alt="plus icon" className="hover mt-[20px]" />
           </div>
         )}
       </div>
