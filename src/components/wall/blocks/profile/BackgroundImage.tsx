@@ -1,4 +1,3 @@
-import defaultImage from '@/assets/default.jpg';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
 import galleryIcon from '@/assets/icons/gallery.svg';
@@ -17,7 +16,7 @@ export const BackgroundImage = ({ isEdit }: BackgroundImageProps) => {
       if (reader.readyState === FileReader.DONE) {
         addToWall(
           produce(wall, (draft) => {
-            draft.profileBgUrl = reader.result as string;
+            draft.profileBlock.profileBgUrl = reader.result as string;
           }),
         );
       }
@@ -28,10 +27,10 @@ export const BackgroundImage = ({ isEdit }: BackgroundImageProps) => {
   };
   return (
     <>
-      {wall.profileBgUrl ? (
+      {wall.profileBlock?.profileBgUrl ? (
         <>
           <img
-            src={wall.profileBgUrl || defaultImage}
+            src={wall.profileBlock.profileBgUrl}
             alt="profile"
             className={`object-cover h-[291px] w-full ${
               isEdit ? 'opacity-50' : 'opacity-100'

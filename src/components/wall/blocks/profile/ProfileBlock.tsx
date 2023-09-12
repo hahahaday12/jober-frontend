@@ -12,7 +12,7 @@ export const ProfileBlock = () => {
     setWall(
       produce(wall, (draft) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (draft as any)[name] = value;
+        (draft.profileBlock as any)[name] = value;
       }),
     );
   };
@@ -28,15 +28,15 @@ export const ProfileBlock = () => {
               <>
                 <Input
                   onChange={handleChange}
-                  name="pageTitle"
-                  value={wall.pageTitle}
+                  name="profileTitle"
+                  value={wall.profileBlock.profileTitle}
                   placeholder="이름"
                   className="h-[58px] text-2xl db-24 rounded-br-none rounded-bl-none text-lightBlack"
                 />
                 <Input
                   onChange={handleChange}
-                  name="pageDescription"
-                  value={wall.pageDescription}
+                  name="profileDescription"
+                  value={wall.profileBlock.profileDescription}
                   placeholder="소개란"
                   className="h-[58px] dm-16 text-gray88 rounded-tr-none rounded-tl-none"
                 />
@@ -44,10 +44,10 @@ export const ProfileBlock = () => {
             ) : (
               <>
                 <Typography className="h-[58px] px-[12px] db-24  flex items-center text-lightBlack">
-                  {wall.pageTitle || '페이지명'}
+                  {wall.profileBlock?.profileTitle || '페이지명'}
                 </Typography>
                 <Typography className="h-[58px] px-[12px] dm-16  rounded-tr-none rounded-tl-none flex items-center text-gray88">
-                  {wall.pageDescription || '페이지설명'}
+                  {wall.profileBlock?.profileDescription || '페이지설명'}
                 </Typography>
               </>
             )}
