@@ -1,7 +1,7 @@
-import jober_logo from '@/assets/icons/jober_logo.png';
-import info from '@/assets/icons/info-circle.svg';
-import message from '@/assets/icons/message.svg';
-import zoom from '@/assets/icons/zoom-in.svg';
+import jober_logo from '@/assets/icons/categories/jober_logo.png';
+import info from '@/assets/icons/categories/info-circle.svg';
+import message from '@/assets/icons/categories/message.svg';
+import zoom from '@/assets/icons/categories/zoom-in.svg';
 import { Input } from 'antd';
 
 export const Navbar = () => {
