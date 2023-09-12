@@ -1,96 +1,77 @@
 export interface WallType {
   userId: number;
-  category: CategoryType;
   shareUrl: string;
-  pageTitle: string;
-  pageDescription: string;
-  profileImageUrl: string | null;
-  // profileImageUrl: string | Blob; // 서버 완성되면
-  profileBgUrl: string | null;
-  listBlocks?: ListBlockType[];
-  fileBlocks?: FileBlockType[];
-  snsBlock?: SnsBlockType;
-  freeBlocks?: FreeBlockType[];
-  templatesBlock?: TemplateBlockType;
-  order: OrderType[];
-  style: StyleType;
+  category: CategoryType;
+  profileBlock: ProfileBlockType;
+  blocks: BlockElementType[];
+  style: Style;
 }
+
+export interface BlockElementType {
+  id: number;
+  blockType: BlockType;
+  subData: SubDatumType[] | SubDataClassType;
+}
+
 export type CategoryType =
   | 'career'
-  | 'private'
+  | 'personal'
   | 'event'
   | 'enterprise'
   | 'basic';
 
-export interface ListBlockType {
-  id: number;
-  order: number;
-  listTitle: string;
-  lists: ListType[];
+export type BlockType =
+  | 'listsBlock'
+  | 'fileBlock'
+  | 'snsBlock'
+  | 'templatesBlcok' // template's' 템플릿'들'의 블록
+  | 'freeBlock';
+
+export interface SubDatumType {
+  templateTitle?: string;
+  templateDescription?: string;
+  snsTitle?: string;
+  snsUrl?: string;
 }
+
+export interface SubDataClassType {
+  listTitle?: string;
+  lists?: ListType[];
+  freeTitle?: string;
+  freeDescription?: string;
+  fileTitle?: string;
+  fileSubtitle?: string;
+  fileName?: string;
+  file?: string;
+}
+
 export interface ListType {
-  id: number;
   listSubtitle: string;
   listDescription: string;
   isLink: boolean;
 }
 
-export interface FileBlockType {
-  id: number;
-  order: number;
-  fileTitle: string;
-  fileSubtitle: string;
-  fileName: string;
-  file: string;
-}
-export interface SnsBlockType {
-  order: number;
-  snss: SnsType[];
-}
-export interface SnsType {
-  id: number;
-  snsTitle: string;
-  snsUrl: string;
-}
-export interface FreeBlockType {
-  id: number;
-  order: number;
-  freeTitle: string;
-  freeDescription: string;
+export interface ProfileBlockType {
+  profileTitle: string;
+  profileDescription: string;
+  profileBgUrl: string;
+  profileImageUrl: string;
 }
 
-export interface TemplateBlockType {
-  order: number;
-  templates: TemplateType[];
-}
-export interface TemplateType {
-  id: number;
-  order: number;
-  templateTitle: string;
-  templateDescription: string;
+export interface Style {
+  background: BackgroundType;
+  block: StyleBlockType;
+  theme: string | null;
 }
 
-export interface OrderType {
-  blockType: BlockType;
-  id: number;
+export interface BackgroundType {
+  color: string;
+  gradation: boolean;
+  image: string;
 }
-export type BlockType =
-  | 'listBlock'
-  | 'fileBlock'
-  | 'freeBlock'
-  | 'snsBlock'
-  | 'templateBlock';
 
-export interface StyleType {
-  background: {
-    color: string;
-    gradation: boolean;
-    imageUrl: string | null;
-  };
-  block: {
-    shape: '0px' | '7px' | '14px';
-    style: 'dark' | 'shadow' | 'flat';
-    gradation: boolean;
-  };
-  theme: ('modern' | 'classic' | 'simple' | 'dark') | null;
+export interface StyleBlockType {
+  gradation: boolean;
+  shape: string;
+  style: string;
 }

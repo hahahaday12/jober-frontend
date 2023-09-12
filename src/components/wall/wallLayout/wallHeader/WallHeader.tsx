@@ -5,6 +5,7 @@ import { WallHeaderActions } from 'components/index';
 import WallHeaderUser from './WallHeaderUser';
 import closeIcon from '@/assets/icons/close.svg';
 import inputSuffixIcon from '@/assets/icons/input-suffix.svg';
+import axios from 'axios';
 
 export const WallHeader = ({ wallId }: { wallId?: string }) => {
   // const {
@@ -14,42 +15,16 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
   const [wallIdInput, setwallIdInput] = useState(wallId);
 
   const [saving, setSaving] = useState(false);
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      await fetch('http://localhost:3000/wall', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(wall),
-      });
-    } catch (error) {
-      console.log(error);
-      message.error({ content: '저장 실패' });
-    } finally {
-      setSaving(false);
-      location.reload();
-      toggleEdit();
-    }
-  };
-  // multipart/form-data json 같이 보내기 (서버 완성되면 수정할 예정)
   // const handleSave = async () => {
   //   setSaving(true);
-  //   const formData = new FormData();
-  //   formData.append('profileImage', wall.profileImageUrl);
-  //   const jsonData = JSON.stringify(wall);
-  //   formData.append(
-  //     'jsonData',
-  //     new Blob([jsonData], { type: 'application/json' }),
-  //   );
   //   try {
-  //     const res = await axios.post('http://localhost:3000/wall', formData, {
+  //     await fetch('http://localhost:3000/wall', {
+  //       method: 'POST',
   //       headers: {
-  //         'Content-Type': 'multipart/form-data', // 세팅 안해야될수도 있음
+  //         'Content-Type': 'application/json',
   //       },
+  //       body: JSON.stringify(wall),
   //     });
-  //     console.log(res);
   //   } catch (error) {
   //     console.log(error);
   //     message.error({ content: '저장 실패' });
@@ -59,6 +34,34 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
   //     toggleEdit();
   //   }
   // };
+  // multipart/form-data json 같이 보내기 (서버 완성되면 수정할 예정)
+  const handleSave = async () => {
+    setSaving(true);
+    const formData = new FormData();
+    formData.append('pro', wall.profileBlock.profileImageUrl);
+    // formData.append('profileImage', wall.profileBlock.profileImageUrl);
+    const jsonData = JSON.stringify(wall);
+    // formData.append(
+    //   'jsonData',
+    //   new Blob([jsonData], { type: 'application/json' }),
+    // );
+    formData.append('jsonData', JSON.stringify(jsonData));
+    try {
+      const res = await axios.post('http://localhost:4000/wall', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // 세팅 안해야될수도 있음
+        },
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      message.error({ content: '저장 실패' });
+    } finally {
+      setSaving(false);
+      // location.reload();
+      toggleEdit();
+    }
+  };
 
   const handleTempSave = () => {
     toggleEdit();
@@ -75,7 +78,7 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
       <div className="w-[866px] mx-auto">
         {isEdit ? (
           <div className="flex gap-[73px] items-center">
-            <WallHeaderUser pageTitle={wall.pageTitle} />
+            <WallHeaderUser />
             <Input
               className="flex-1 rounded-[10px] bg-sky"
               addonBefore={
@@ -123,7 +126,7 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
           </div>
         ) : (
           <div className="flex items-center justify-between">
-            <WallHeaderUser pageTitle={wall.pageTitle} />
+            <WallHeaderUser />
             <WallHeaderActions />
             <img
               src={closeIcon}

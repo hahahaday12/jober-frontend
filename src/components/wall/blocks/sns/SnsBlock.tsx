@@ -8,8 +8,7 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 import { useWallStore } from '@/store';
-import {BlockContainer, SnsBlockModal} from 'components/index'
-
+import { BlockContainer, SnsBlockModal } from 'components/index';
 
 export interface Sns {
   title: string;
@@ -38,7 +37,7 @@ export const SnsBlock = () => {
           <p>보여주고 싶은 SNS를 연결해주세요!</p>
         </div>
         <div className="flex gap-3 justify-center">
-          {wall.snsBlock?.snss.map((sns) => (
+          {wall.snsBlock?.map((sns) => (
             <Button
               key={sns.snsUrl}
               className="w-16 h-16 text-4xl"
@@ -65,4 +64,4 @@ export const SnsBlock = () => {
       </div>
     </BlockContainer>
   );
-}
+};

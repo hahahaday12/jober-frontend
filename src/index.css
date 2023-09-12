@@ -4,6 +4,7 @@
 @layer base {
   html {
     font-family: 'Noto Sans', sans-serif;
+    color: #2d2c38;
   }
 }
 * {
@@ -50,6 +51,9 @@
 }
 .dmn-16 {
   @apply font-[500] text-[16px];
+}
+.hover {
+  @apply hover:opacity-60 transition cursor-pointer;
 }
 
 ::-webkit-scrollbar {
