@@ -1,14 +1,10 @@
-import defaultImage from '@/assets/default.jpg';
 import { useWallStore } from '@/store';
-import { CameraOutlined } from '@ant-design/icons';
+import galleryIcon from '@/assets/icons/gallery.svg';
 import { produce } from 'immer';
 
-interface ProfileImageUploadProps {
-  isEdit: boolean;
-}
+export const ProfileImage = () => {
+  const { wall, setWall, isEdit } = useWallStore();
 
-export const  ProfileImage = ({ isEdit }: ProfileImageUploadProps) => {
-  const { wall, setWall } = useWallStore();
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile = event.target.files?.[0];
     const reader = new FileReader();
@@ -16,7 +12,7 @@ export const  ProfileImage = ({ isEdit }: ProfileImageUploadProps) => {
       if (reader.readyState === FileReader.DONE) {
         setWall(
           produce(wall, (draft) => {
-            draft.ProfileImageUrl = reader.result as string;
+            draft.profileBlock.profileImageUrl = reader.result as string;
           }),
         );
       }
@@ -27,17 +23,22 @@ export const  ProfileImage = ({ isEdit }: ProfileImageUploadProps) => {
   };
 
   return (
-    <div className="flex w-[140px] h-[140px] flex-col items-center justify-center rounded-full bg-white">
-      <img
-        src={wall.ProfileImageUrl ?? defaultImage}
-        alt="profile"
-        className={`h-full w-full rounded-full object-cover ${
-          isEdit ? 'opacity-50' : 'opacity-100'
-        }`}
-      />
+    <div className="flex w-[140px] h-[140px] flex-col items-center justify-center rounded-full bg-white overflow-hidden">
+      {wall.profileBlock?.profileImageUrl ? (
+        <img
+          src={wall.profileBlock.profileImageUrl}
+          alt="profile"
+          className={`h-full w-full rounded-full object-cover ${
+            isEdit ? 'opacity-50' : 'opacity-100'
+          }`}
+        />
+      ) : (
+        <div className="w-full bg-lightGray h-full" />
+      )}
+
       {isEdit && (
-        <label className="cursor-pointer absolute bg-white w-10 h-10 rounded-full flex justify-center items-center">
-          <CameraOutlined />
+        <label className="cursor-pointer hover:opacity-60 transition absolute bg-white z-20 w-10 h-10 rounded-full flex justify-center items-center">
+          <img src={galleryIcon} alt="gallery icon" />
           <input
             type="file"
             className="hidden"
@@ -48,4 +49,4 @@ export const  ProfileImage = ({ isEdit }: ProfileImageUploadProps) => {
       )}
     </div>
   );
-}
+};

@@ -2,7 +2,7 @@ import { Input, Typography } from 'antd';
 import { ProfileImage } from './ProfileImage';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
-import {BackgroundImage, BlockContainer} from  'components/index'
+import { BackgroundImage, BlockContainer } from 'components/index';
 
 export const ProfileBlock = () => {
   const { wall, setWall, isEdit } = useWallStore();
@@ -12,8 +12,7 @@ export const ProfileBlock = () => {
     setWall(
       produce(wall, (draft) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (draft as any)[name] = value;
-        // draft[name as keyof Wall] = value; 안되는 이유 질문
+        (draft.profileBlock as any)[name] = value;
       }),
     );
   };
@@ -22,33 +21,33 @@ export const ProfileBlock = () => {
     <BlockContainer blockName="profileBlock">
       <div className="h-[483px]">
         <BackgroundImage isEdit={isEdit} />
-        <div className="flex px-4 py-6 items-center gap-2">
-          <ProfileImage isEdit={isEdit} />
+        <div className="flex gap-[24px] px-[24px] py-[26px] items-center ">
+          <ProfileImage />
           <div className="flex flex-col flex-1">
             {isEdit ? (
               <>
                 <Input
                   onChange={handleChange}
-                  name="pageTitle"
-                  value={wall.pageTitle}
+                  name="profileTitle"
+                  value={wall.profileBlock.profileTitle}
                   placeholder="이름"
-                  className="h-[58px] text-2xl font-bold rounded-br-none rounded-bl-none placeholder:text-black"
+                  className="h-[58px] text-2xl db-24 rounded-br-none rounded-bl-none text-lightBlack"
                 />
                 <Input
                   onChange={handleChange}
-                  name="pageDescription"
-                  value={wall.pageDescription}
+                  name="profileDescription"
+                  value={wall.profileBlock.profileDescription}
                   placeholder="소개란"
-                  className="h-[58px] rounded-tr-none rounded-tl-none"
+                  className="h-[58px] dm-16 text-gray88 rounded-tr-none rounded-tl-none"
                 />
               </>
             ) : (
               <>
-                <Typography className="h-[58px] text-2xl font-bold rounded-br-none rounded-bl-none placeholder:text-black">
-                  {wall.pageTitle}
+                <Typography className="h-[58px] px-[12px] db-24  flex items-center text-lightBlack">
+                  {wall.profileBlock?.profileTitle || '페이지명'}
                 </Typography>
-                <Typography className="h-[58px] rounded-tr-none rounded-tl-none">
-                  {wall.pageDescription}
+                <Typography className="h-[58px] px-[12px] dm-16  rounded-tr-none rounded-tl-none flex items-center text-gray88">
+                  {wall.profileBlock?.profileDescription || '페이지설명'}
                 </Typography>
               </>
             )}
@@ -57,4 +56,4 @@ export const ProfileBlock = () => {
       </div>
     </BlockContainer>
   );
-}
+};

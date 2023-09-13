@@ -8,8 +8,7 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 import { useWallStore } from '@/store';
-import {BlockContainer, SnsBlockModal} from 'components/index'
-
+import { BlockContainer, SnsBlockModal } from 'components/index';
 
 export interface Sns {
   title: string;
@@ -65,4 +64,4 @@ export const SnsBlock = () => {
       </div>
     </BlockContainer>
   );
-}
+};

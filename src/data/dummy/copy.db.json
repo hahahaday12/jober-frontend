@@ -1,73 +1,129 @@
 {
   "wall": {
+    "userId": 1,
     "shareUrl": "http://localhost:5173/wall/5c04348bb7d64b73a427a46b9d5ca830",
     "category": "career",
-    "userId": 1,
-    "profileBgUrl": "https://images.unsplash.com/photo-1692606674503-267da3da7da7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2680&q=80",
-    "ProfileImageUrl": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2643&q=80",
-    "pageTitle": "이호우",
-    "pageDescription": "프론트엔드 개발자 이호우입니다.",
-    "listBlock": {
-      "listTitle": "Qualification",
-      "lists": [
-        {
-          "id": 1,
-          "listSubtitle": "학력",
-          "listDesc": "MIT 컴퓨터공학 석사",
-          "isLink": false
-        },
-        {
-          "id": 2,
-          "listSubtitle": "경력",
-          "listDesc": "현 토스 CTO\n전 메타 FE총괄",
-          "isLink": false
-        },
-        {
-          "id": 3,
-          "listSubtitle": "이력서",
-          "listDesc": "https://github.com/Fastcampus-Final-Team3/jober-frontend",
-          "isLink": true
-        }
-      ]
+    "profileBlock": {
+      "profileTitle": "이호우",
+      "profileDescription": "프론트엔드 개발자",
+      "profileBgUrl": "https://images.unsplash.com/photo-1692606674503-267da3da7da7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2680&q=80",
+      "profileImageUrl": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2643&q=80"
     },
-    "fileBlock": {
-      "fileTitle": "이력서",
-      "fileSubtitle": "포트폴리오",
-      "file": "파일"
-    },
-    "snsBlock": [
+    "blocks": [
       {
-        "id": 1,
-        "snsTitle": "facebook",
-        "snsUrl": "https://www.facebook.com/neocsv"
+        "position": 1,
+        "blockType": "listBlock",
+        "subData": {
+          "listTitle": "학력경력",
+          "lists": [
+            {
+              "listSubtitle": "학력",
+              "listDescription": "서울대학교",
+              "isLink": false
+            },
+            {
+              "listSubtitle": "경력",
+              "listDescription": "www.naver.com",
+              "isLink": true
+            }
+          ]
+        }
       },
       {
-        "id": 2,
-        "snsTitle": "instagram",
-        "snsUrl": "https://www.instagram.com/moai_kc/"
-      }
-    ],
-    "templateBlock": [
+        "position": 2,
+        "blockType": "listBlock",
+        "subData": {
+          "listTitle": "자격증",
+          "lists": [
+            {
+              "listSubtitle": "운전면허증",
+              "listDescription": "2종보통",
+              "isLink": false
+            },
+            {
+              "listSubtitle": "바리스타자격증",
+              "listDescription": "스타벅스",
+              "isLink": false
+            }
+          ]
+        }
+      },
       {
-        "id": 1,
-        "templateTitle": "이려서",
-        "templateDesc": "개발자 이호우 이력서"
+        "position": 1,
+        "blockType": "freeBlock",
+        "subData": {
+          "freeTitle": "자유블록 제목",
+          "freeDescription": "자유블록 내용"
+        }
+      },
+      {
+        "position": 4,
+        "blockType": "freeBlock",
+        "subData": {
+          "freeTitle": "자유블록 제목",
+          "freeDescription": "자유블록 내용"
+        }
+      },
+      {
+        "position": 5,
+        "blockType": "templateBlock",
+        "subData": [
+          {
+            "templateTitle": "자기소개서 1",
+            "templateDescription": "자기소개서 1"
+          },
+          {
+            "templateTitle": "자기소개서 2",
+            "templateDescription": "자기소개서 2"
+          }
+        ]
+      },
+      {
+        "position": 6,
+        "blockType": "snsBlock",
+        "subData": [
+          {
+            "snsTitle": "facebook",
+            "snsUrl": "asdf.facebook.com"
+          },
+          {
+            "templateTitle": "instagram",
+            "templateDescription": "adfd.instagram.com"
+          }
+        ]
+      },
+      {
+        "position": 7,
+        "blockType": "fileBlock",
+        "subData": {
+          "fileTitle": "포트폴리오1",
+          "fileSubtitle": "2022년 포트폴리오",
+          "fileName": "portfolio2022.pdf",
+          "file": "portfolio2022.pdf"
+        }
+      },
+      {
+        "position": 8,
+        "blockType": "fileBlock",
+        "subData": {
+          "fileTitle": "포트폴리오2",
+          "fileSubtitle": "2023년 포트폴리오2",
+          "fileName": "portfolio2023.pdf",
+          "file": "portfolio2023.pdf"
+        }
       }
-    ],
-    "freeBlock": {
-      "freeTitle": "자유블록이다",
-      "freeDesc": "자유로운 사람"
-    },
-    "order": [
-      "listBlock",
-      "fileBlock",
-      "snsBlock",
-      "templateBlock",
-      "freeBlock"
     ],
     "style": {
-      "background": { "color": "#eee", "gradation": false, "imageUrl": null },
-      "block": { "gradation": false, "shape": "0px", "style": "flat" },
+      "background": {
+        "color": "#eee",
+        "gradation": false,
+        "image": "https://images.unsplash.com/photo-1692606674503-267da3da7da7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2680&q=80"
+      },
+      "block": {
+        "gradation": false,
+        "shape": "0px",
+        "style": "flat"
+      },
       "theme": null
     }
   }

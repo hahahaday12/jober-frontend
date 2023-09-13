@@ -1,35 +1,34 @@
 import { useParams } from 'react-router-dom';
-//import WallHeader from '@/pages/wall/WallHeader';
 import { Button, message } from 'antd';
-//import ListBlock from '@/pages/wall/blocks/list/ListBlock';
 import { useEffect, useState } from 'react';
 import { ReactSortable, Sortable } from 'react-sortablejs';
-// import SnsBlock from '@/pages/wall/blocks/sns/SnsBlock';
-// import ProfileBlock from '@/pages/wall/blocks/profile/ProfileBlock';
-// import TemplateBlock from '@/pages/wall/blocks/template/TemplateBlock';
 import { useWallStore } from '@/store';
-//import FileBlock from '@/pages/wall/blocks/file/FileBlock';
-//import FreeBlock from '@/pages/wall/blocks/free/FreeBlock';
 import { produce } from 'immer';
-//import AddBlockModal from '@/pages/wall/AddBlockModal';
-import { BlockType } from '@/types/blocks';
-import { WallType } from '@/types/wall';
-import {WallHeader,ProfileBlock,AddBlockModal,ModalOpen } from 'components/index'
-// 상위 index.ts 안에 있는 페이지기 때문에 blocks안의 index 경로로 연결해야함.
-import { FileBlock,SnsBlock,TemplateBlock,FreeBlock } from 'components/wall/blocks/index';
+import {
+  WallHeader,
+  ProfileBlock,
+  AddBlockModal,
+  ModalOpen,
+} from 'components/index';
+import {
+  FileBlock,
+  SnsBlock,
+  FreeBlock,
+  ListBlock,
+  TemplatesBlock,
+} from 'components/wall/blocks/index';
+import React from 'react';
+import { SubDataClassType, SubDatumType, WallType } from '@/types/wall';
+import { CustomizationLayout } from 'components/index';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
- 
+  listBlock: <ListBlock />,
   fileBlock: <FileBlock />,
   snsBlock: <SnsBlock />,
-  templateBlock: <TemplateBlock />,
+  templatesBlock: <TemplatesBlock />,
   freeBlock: <FreeBlock />,
 };
 
-interface ItemType {
-  id: BlockType;
-  block: React.ReactNode;
-}
 export const WallPage = () => {
   // const category: CategoryType = 'career';
 
@@ -38,6 +37,8 @@ export const WallPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const { wall, setWall, isEdit } = useWallStore();
+
+  const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
 
   // wall data fetching
   const [loading, setLoading] = useState(false);
@@ -60,13 +61,30 @@ export const WallPage = () => {
     getData();
   }, [messageApi, setWall]);
 
-  const [sortableBlocks, setSortableBlocks] = useState<ItemType[]>([]);
+  const [sortableBlocks, setSortableBlocks] = useState<
+    {
+      id: number;
+      block: JSX.Element;
+      subData: SubDatumType[] | SubDataClassType;
+    }[]
+  >([]);
+
   useEffect(() => {
-    if (wall.order) {
+    if (wall.blocks) {
+      const objToComponent = wall.blocks.map((block) => {
+        const { blockType, id, subData } = block;
+        const component = BlockMapper[blockType];
+        return React.cloneElement(component, {
+          blockType,
+          id,
+          subData,
+        });
+      });
       setSortableBlocks(
-        wall.order.map((block) => ({
-          id: block,
-          block: BlockMapper[block],
+        objToComponent.map((block) => ({
+          block,
+          id: block.props.id,
+          subData: block.props.subData,
         })),
       );
     }
@@ -75,52 +93,55 @@ export const WallPage = () => {
   const handleSortBlocks = (event: Sortable.SortableEvent) => {
     const item = sortableBlocks.splice(event.oldIndex as number, 1)[0];
     sortableBlocks.splice(event.newIndex as number, 0, item);
+    const compToObj = sortableBlocks.map((comp) => ({
+      id: comp.id,
+      blockType: comp.block.props.blockType,
+      subData: comp.block.props.subData,
+    }));
     setWall(
       produce(wall, (draft) => {
-        draft.order = sortableBlocks.map((block) => block.id);
+        draft.blocks = compToObj;
       }),
     );
   };
 
-  const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
-
   return (
-    <div className="min-h-screen flex flex-col ">
+    <div className="min-h-screen bg-gray flex flex-col ">
       {contextHolder}
       <WallHeader wallId={wallId} />
 
       {loading ? (
-        <div className="py-[120px] ">loading...</div>
+        <div className="py-[106px] ">loading...</div>
       ) : (
-        <>
-          <main className="py-[120px] flex-1 flex flex-col gap-7 w-[866px] mx-auto">
-            <ProfileBlock />
-            <ReactSortable
-              list={sortableBlocks}
-              setList={setSortableBlocks}
-              handle=".handle"
-              className="flex gap-4 flex-col"
-              animation={400}
-              onEnd={handleSortBlocks}
-            >
-              {sortableBlocks?.map((item) => (
-                <div key={item.id}>{item.block}</div>
-              ))}
-            </ReactSortable>
-            <Button
-              onClick={() => setIsAddBlockModalOpen(true)}
-              className={`${!isEdit && 'hidden'}`}
-            >
-              블록 추가
-            </Button>
-            <AddBlockModal
-              isAddBlockModalOpen={isAddBlockModalOpen}
-              setIsAddBlockModalOpen={setIsAddBlockModalOpen}
-            />
-            <ModalOpen/>
-          </main>
-        </>
+        <main className="py-[106px] flex-1 flex flex-col gap-4 w-[866px] mx-auto">
+          <ProfileBlock />
+          <ReactSortable
+            list={sortableBlocks}
+            setList={setSortableBlocks}
+            handle=".handle"
+            className="flex gap-4 flex-col"
+            animation={400}
+            forceFallback
+            onEnd={handleSortBlocks}
+          >
+            {sortableBlocks?.map((item) => (
+              <div key={item.id}>{item.block}</div>
+            ))}
+          </ReactSortable>
+          <Button
+            onClick={() => setIsAddBlockModalOpen(true)}
+            className={`${!isEdit && 'hidden'}`}
+          >
+            블록 추가
+          </Button>
+          <AddBlockModal
+            isAddBlockModalOpen={isAddBlockModalOpen}
+            setIsAddBlockModalOpen={setIsAddBlockModalOpen}
+          />
+          <ModalOpen />
+          <CustomizationLayout />
+        </main>
       )}
     </div>
   );
-}
+};
