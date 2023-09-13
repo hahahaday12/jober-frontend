@@ -37,8 +37,7 @@ export const WallPage = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const { wall, setWall } = useWallStore();
-  console.log(wall);
+  const { wall, setWall, isEdit } = useWallStore();
 
   const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
 
@@ -136,7 +135,7 @@ export const WallPage = () => {
             setIsAddBlockModalOpen={setIsAddBlockModalOpen}
           />
           <ModalOpen />
-          <CustomizationLayout />
+          {isEdit && <CustomizationLayout />}
         </main>
       )}
     </div>

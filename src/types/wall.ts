@@ -4,7 +4,7 @@ export interface WallType {
   category: CategoryType;
   profileBlock: ProfileBlockType;
   blocks: BlockElementType[];
-  style: Style;
+  style: StyleType;
 }
 
 export interface BlockElementType {
@@ -58,20 +58,20 @@ export interface ProfileBlockType {
   profileImageUrl: string;
 }
 
-export interface Style {
+export interface StyleType {
   background: BackgroundType;
   block: StyleBlockType;
-  theme: string | null;
+  theme: ('modern' | 'classic' | 'simple' | 'dark') | null;
 }
 
 export interface BackgroundType {
   color: string;
   gradation: boolean;
-  image: string;
+  imageUrl: string | null;
 }
 
 export interface StyleBlockType {
   gradation: boolean;
-  shape: string;
-  style: string;
+  shape: '0px' | '6px' | '13px';
+  style: 'dark' | 'shadow' | 'flat';
 }
