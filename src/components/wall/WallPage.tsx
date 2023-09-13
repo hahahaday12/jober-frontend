@@ -19,6 +19,7 @@ import {
 } from 'components/wall/blocks/index';
 import React from 'react';
 import { SubDataClassType, SubDatumType, WallType } from '@/types/wall';
+import { CustomizationLayout } from 'components/index';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
   listBlock: <ListBlock />,
@@ -138,6 +139,7 @@ export const WallPage = () => {
             setIsAddBlockModalOpen={setIsAddBlockModalOpen}
           />
           <ModalOpen />
+          <CustomizationLayout />
         </main>
       )}
     </div>
