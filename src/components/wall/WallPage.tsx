@@ -20,7 +20,7 @@ import React from 'react';
 import { SubDataClassType, SubDatumType, WallType } from '@/types/wall';
 import { message } from 'antd';
 import { CustomizationLayout } from 'components/index';
-import AddBlockButton from './wallLayout/AddBlockButton';
+import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
   listBlock: <ListBlock />,
@@ -84,7 +84,7 @@ export const WallPage = () => {
       setSortableBlocks(
         objToComponent.map((block) => ({
           block,
-          id: block.props.id,
+          id: block.props.blockUUID,
           subData: block.props.subData,
         })),
       );
@@ -120,7 +120,7 @@ export const WallPage = () => {
             list={sortableBlocks}
             setList={setSortableBlocks}
             handle=".handle"
-            className="flex gap-4 flex-col"
+            className="flex gap-[24px] flex-col"
             animation={400}
             forceFallback
             onEnd={handleSortBlocks}

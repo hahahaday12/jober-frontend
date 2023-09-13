@@ -1,12 +1,12 @@
 import { useWallStore } from '@/store';
-import { BlockContainer } from '..';
+import { BlockContainer } from '../..';
 import plusIcon from '@/assets/icons/plus.svg';
 
-export default function AddBlockButton({
+export const AddBlockButton = ({
   setIsAddBlockModalOpen,
 }: {
   setIsAddBlockModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+}) => {
   const { isEdit } = useWallStore();
   return (
     <BlockContainer blockName="profileBlock">
@@ -21,4 +21,4 @@ export default function AddBlockButton({
       </div>
     </BlockContainer>
   );
-}
+};
