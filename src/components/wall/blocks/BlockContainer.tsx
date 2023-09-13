@@ -10,10 +10,12 @@ export const BlockContainer = ({
   children,
   blockName,
 }: BlockContainerProps) => {
-  const { isEdit } = useWallStore();
+  const { isEdit, wall } = useWallStore();
 
   return (
-    <div className="bg-white rounded-[10px] overflow-hidden relative">
+    <div
+      className={`bg-white rounded-[${wall?.style?.block?.shape}] overflow-hidden relative`}
+    >
       {blockName !== 'profileBlock' && <>{isEdit && <DragHandle />}</>}
       {children}
     </div>

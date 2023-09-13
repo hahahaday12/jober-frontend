@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import { Button, message } from 'antd';
 import { useEffect, useState } from 'react';
 import { ReactSortable, Sortable } from 'react-sortablejs';
 import { useWallStore } from '@/store';
@@ -7,8 +6,8 @@ import { produce } from 'immer';
 import {
   WallHeader,
   ProfileBlock,
-  AddBlockModal,
   ModalOpen,
+  AddBlockModal,
 } from 'components/index';
 import {
   FileBlock,
@@ -19,7 +18,9 @@ import {
 } from 'components/wall/blocks/index';
 import React from 'react';
 import { SubDataClassType, SubDatumType, WallType } from '@/types/wall';
+import { message } from 'antd';
 import { CustomizationLayout } from 'components/index';
+import AddBlockButton from './wallLayout/AddBlockButton';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
   listBlock: <ListBlock />,
@@ -63,7 +64,7 @@ export const WallPage = () => {
 
   const [sortableBlocks, setSortableBlocks] = useState<
     {
-      id: number;
+      id: string;
       block: JSX.Element;
       subData: SubDatumType[] | SubDataClassType;
     }[]
@@ -72,11 +73,11 @@ export const WallPage = () => {
   useEffect(() => {
     if (wall.blocks) {
       const objToComponent = wall.blocks.map((block) => {
-        const { blockType, id, subData } = block;
+        const { blockType, blockUUID, subData } = block;
         const component = BlockMapper[blockType];
         return React.cloneElement(component, {
           blockType,
-          id,
+          blockUUID,
           subData,
         });
       });
@@ -94,7 +95,7 @@ export const WallPage = () => {
     const item = sortableBlocks.splice(event.oldIndex as number, 1)[0];
     sortableBlocks.splice(event.newIndex as number, 0, item);
     const compToObj = sortableBlocks.map((comp) => ({
-      id: comp.id,
+      blockUUID: comp.id,
       blockType: comp.block.props.blockType,
       subData: comp.block.props.subData,
     }));
@@ -128,18 +129,13 @@ export const WallPage = () => {
               <div key={item.id}>{item.block}</div>
             ))}
           </ReactSortable>
-          <Button
-            onClick={() => setIsAddBlockModalOpen(true)}
-            className={`${!isEdit && 'hidden'}`}
-          >
-            블록 추가
-          </Button>
+          <AddBlockButton setIsAddBlockModalOpen={setIsAddBlockModalOpen} />
           <AddBlockModal
             isAddBlockModalOpen={isAddBlockModalOpen}
             setIsAddBlockModalOpen={setIsAddBlockModalOpen}
           />
           <ModalOpen />
-          <CustomizationLayout />
+          {isEdit && <CustomizationLayout />}
         </main>
       )}
     </div>
