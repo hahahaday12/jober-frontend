@@ -1,15 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { Button, message } from 'antd';
 import { useEffect, useState } from 'react';
 import { ReactSortable, Sortable } from 'react-sortablejs';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
-import {
-  WallHeader,
-  ProfileBlock,
-  AddBlockModal,
-  ModalOpen,
-} from 'components/index';
+import { WallHeader, ProfileBlock, ModalOpen } from 'components/index';
 import {
   FileBlock,
   SnsBlock,
@@ -19,7 +13,9 @@ import {
 } from 'components/wall/blocks/index';
 import React from 'react';
 import { SubDataClassType, SubDatumType, WallType } from '@/types/wall';
-import AddBlockButton from './wallLayout/AddBlockButton';
+import { AddBlockModal } from './wallLayout/addBlock/AddBlockModal';
+import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
+import { message } from 'antd';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
   listBlock: <ListBlock />,
@@ -36,7 +32,8 @@ export const WallPage = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const { wall, setWall, isEdit } = useWallStore();
+  const { wall, setWall } = useWallStore();
+  console.log(wall);
 
   const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
 
@@ -63,7 +60,7 @@ export const WallPage = () => {
 
   const [sortableBlocks, setSortableBlocks] = useState<
     {
-      id: number;
+      id: string;
       block: JSX.Element;
       subData: SubDatumType[] | SubDataClassType;
     }[]
@@ -72,11 +69,11 @@ export const WallPage = () => {
   useEffect(() => {
     if (wall.blocks) {
       const objToComponent = wall.blocks.map((block) => {
-        const { blockType, id, subData } = block;
+        const { blockType, blockUUID, subData } = block;
         const component = BlockMapper[blockType];
         return React.cloneElement(component, {
           blockType,
-          id,
+          blockUUID,
           subData,
         });
       });
@@ -94,7 +91,7 @@ export const WallPage = () => {
     const item = sortableBlocks.splice(event.oldIndex as number, 1)[0];
     sortableBlocks.splice(event.newIndex as number, 0, item);
     const compToObj = sortableBlocks.map((comp) => ({
-      id: comp.id,
+      blockUUID: comp.id,
       blockType: comp.block.props.blockType,
       subData: comp.block.props.subData,
     }));

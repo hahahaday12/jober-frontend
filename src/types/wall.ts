@@ -8,7 +8,7 @@ export interface WallType {
 }
 
 export interface BlockElementType {
-  id: number;
+  blockUUID: string;
   blockType: BlockType;
   subData: SubDatumType[] | SubDataClassType;
 }
@@ -21,7 +21,7 @@ export type CategoryType =
   | 'basic';
 
 export type BlockType =
-  | 'listsBlock'
+  | 'listBlock'
   | 'fileBlock'
   | 'snsBlock'
   | 'templatesBlcok' // template's' 템플릿'들'의 블록
