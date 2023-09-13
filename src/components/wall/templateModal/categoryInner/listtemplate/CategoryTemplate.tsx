@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 //import ListTemplete from './CategoryListc';
-import { ListTemplete } from 'components/index'
+import { ListTemplete } from 'components/index';
 
 type BookTypeArr = BookType[];
 
@@ -11,11 +11,10 @@ interface BookType {
 }
 
 const bookcategory: BookTypeArr = [
-  { type: '개인', number: 1 },
-  { type: '소개', number: 2 },
-  { type: '카테고리1', number: 3 },
-  { type: '카테고리2', number: 4 },
-  { type: '카테고리3', number: 5 },
+  { type: '개인/소개', number: 1 },
+  { type: '이벤트/일상', number: 2 },
+  { type: '기업/근로양식', number: 3 },
+  { type: '취업/이직', number: 4 },
 ];
 
 export const CategoryTemplet = () => {
@@ -81,7 +80,7 @@ export const CategoryTemplet = () => {
       </TemplateList>
     </CategoryLayout>
   );
-}
+};
 
 const CategoryLayout = styled.div`
   width: 100%;
