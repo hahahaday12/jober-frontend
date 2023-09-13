@@ -9,16 +9,19 @@ import {
   SubDataClassType,
   SubDatumType,
 } from '@/types/wall';
-import trashIcon from '@/assets/icons/trash.svg';
 import editThickIcon from '@/assets/icons/edit-thick.svg';
 import plusIcon from '@/assets/icons/plus.svg';
 
 interface ListBlockProps {
-  id?: number;
+  blockUUID?: string;
   blockType?: BlockType;
   subData?: SubDatumType[] | SubDataClassType;
 }
-export const ListBlock = ({ id, blockType, subData }: ListBlockProps) => {
+export const ListBlock = ({
+  blockUUID,
+  blockType,
+  subData,
+}: ListBlockProps) => {
   const [isListTitleEdit, setIsListTitleEdit] = useState(false);
   const { isEdit, wall, setWall } = useWallStore();
   const targetBlockData = wall.listBlocks?.find((block) => block.id === id);
@@ -61,16 +64,7 @@ export const ListBlock = ({ id, blockType, subData }: ListBlockProps) => {
   // };
 
   return (
-    <BlockContainer blockName="listBlock">
-      {isEdit && (
-        <img
-          src={trashIcon}
-          alt="trash icon"
-          className="absolute right-[27px] top-[26px] hover:opacity-60 transition cursor-pointer"
-          // onClick={handleDeletBlock}
-        />
-      )}
-
+    <BlockContainer blockName="listBlock" blockUUID={blockUUID}>
       <div className="px-[28px] pt-[26px] pb-[22px] flex flex-col">
         <div
           className={`flex items-center gap-[6px] db-20 mb-[16px] ${

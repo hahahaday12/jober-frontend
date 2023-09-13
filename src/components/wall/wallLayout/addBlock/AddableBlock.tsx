@@ -13,6 +13,7 @@ export const AddableBlock = ({
   selectedBlock,
   hasSnsBlock,
 }: AddableBlockProp) => {
+  console.log(selectedBlock);
   return (
     <label
       className={`w-[238px] ${hasSnsBlock && block === 'snsBlock' && 'hidden'}`}
@@ -22,6 +23,7 @@ export const AddableBlock = ({
         type="radio"
         name="block"
         value={block}
+        checked={block === selectedBlock}
         onChange={handleSelect}
       />
       <div className="mb-[16px] dm-16">{ADDABLE_BLOCKS[block].title}</div>

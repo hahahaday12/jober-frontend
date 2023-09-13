@@ -114,7 +114,7 @@ export const WallPage = () => {
       {loading ? (
         <div className="py-[106px] ">loading...</div>
       ) : (
-        <main className="py-[106px] flex-1 flex flex-col gap-4 w-[866px] mx-auto">
+        <main className="py-[106px] flex-1 flex flex-col gap-[24px] w-[866px] mx-auto">
           <ProfileBlock />
           <ReactSortable
             list={sortableBlocks}

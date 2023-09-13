@@ -4,9 +4,19 @@ import { produce } from 'immer';
 import { useWallStore } from '@/store';
 import { EditOutlined } from '@ant-design/icons';
 import { BlockContainer, FileUpload } from 'components/index';
+import { BlockType, SubDataClassType, SubDatumType } from '@/types/wall';
 
+interface FileBlockProps {
+  blockUUID?: string;
+  blockType?: BlockType;
+  subData?: SubDatumType[] | SubDataClassType;
+}
 
-export const FileBlock = () => {
+export const FileBlock = ({
+  blockType,
+  blockUUID,
+  subData,
+}: FileBlockProps) => {
   const [isFileTitleEdit, setIsFileTitleEdit] = useState(false);
   const [isFileSubtitleEdit, setIsFileSubtitleEdit] = useState(false);
 
@@ -23,7 +33,7 @@ export const FileBlock = () => {
   };
 
   return (
-    <BlockContainer blockName="fileBlock">
+    <BlockContainer blockName="fileBlock" blockUUID={blockUUID}>
       <div className="p-7 flex flex-col gap-5">
         <div className="flex text-xl font-bold items-center gap-2 text-gray-600">
           {isFileTitleEdit ? (
@@ -63,4 +73,4 @@ export const FileBlock = () => {
       </div>
     </BlockContainer>
   );
-}
+};

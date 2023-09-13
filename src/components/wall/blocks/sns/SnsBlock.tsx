@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 import { useWallStore } from '@/store';
 import { BlockContainer, SnsBlockModal } from 'components/index';
+import { BlockType, SubDataClassType, SubDatumType } from '@/types/wall';
 
 export interface Sns {
   title: string;
@@ -24,13 +25,19 @@ const SNS_ICONS: {
   github: <GithubOutlined />,
 };
 
-export const SnsBlock = () => {
+interface SnsBlockProps {
+  blockUUID?: string;
+  blockType?: BlockType;
+  subData?: SubDatumType[] | SubDataClassType;
+}
+
+export const SnsBlock = ({ blockUUID, blockType, subData }: SnsBlockProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { isEdit, wall } = useWallStore();
 
   return (
-    <BlockContainer blockName="snsBlock">
+    <BlockContainer blockName="snsBlock" blockUUID={blockUUID}>
       <div className="p-7 space-y-5">
         <div className="flex items-center text-gray-600 gap-2">
           <h4 className="flex text-xl font-bold items-center">SNS 연결</h4>
