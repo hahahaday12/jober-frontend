@@ -3,7 +3,12 @@ import { useEffect, useState } from 'react';
 import { ReactSortable, Sortable } from 'react-sortablejs';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
-import { WallHeader, ProfileBlock, ModalOpen } from 'components/index';
+import {
+  WallHeader,
+  ProfileBlock,
+  ModalOpen,
+  AddBlockModal,
+} from 'components/index';
 import {
   FileBlock,
   SnsBlock,
@@ -13,9 +18,9 @@ import {
 } from 'components/wall/blocks/index';
 import React from 'react';
 import { SubDataClassType, SubDatumType, WallType } from '@/types/wall';
-import { AddBlockModal } from './wallLayout/addBlock/AddBlockModal';
-import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
 import { message } from 'antd';
+import { CustomizationLayout } from 'components/index';
+import AddBlockButton from './wallLayout/AddBlockButton';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
   listBlock: <ListBlock />,
@@ -131,6 +136,7 @@ export const WallPage = () => {
             setIsAddBlockModalOpen={setIsAddBlockModalOpen}
           />
           <ModalOpen />
+          <CustomizationLayout />
         </main>
       )}
     </div>
