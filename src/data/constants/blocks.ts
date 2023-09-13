@@ -1,4 +1,4 @@
-export const DEFAULT_BLOCKS = {
+export const DEFAULT_BLOCKS: { [key: string]: object } = {
   listBlock: {
     blockType: 'listBlock',
     subData: {
@@ -53,26 +53,26 @@ import freeBlock from '@/assets/addableBlocks/listBlock.png';
 import fileBlock from '@/assets/addableBlocks/fileBlock.png';
 import snsBlock from '@/assets/addableBlocks/snsBlock.png';
 
-export const ADDANLE_BLOCKS: {
+export const ADDABLE_BLOCKS: {
   [key: string]: {
     title: string;
     image: string;
   };
 } = {
-  listBlock: {
-    title: '리스트블록',
-    image: listBlock,
-  },
   fileBlock: {
-    title: '파일블록',
+    title: '파일 블록',
     image: fileBlock,
   },
+  listBlock: {
+    title: '리스트 블록',
+    image: listBlock,
+  },
   freeBlock: {
-    title: '자유블록',
+    title: '자유 블록',
     image: freeBlock,
   },
   snsBlock: {
-    title: 'SNS블록',
+    title: 'SNS 블록',
     image: snsBlock,
   },
 };
