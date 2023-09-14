@@ -71,7 +71,8 @@ export interface BackgroundType {
 }
 
 export interface StyleBlockType {
+  color: string;
   gradation: boolean;
   shape: '0px' | '6px' | '13px';
-  style: 'dark' | 'shadow' | 'flat';
+  style: 'none' | 'flat' | 'shadow';
 }
