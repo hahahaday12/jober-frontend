@@ -35,9 +35,9 @@ export const Category = () => {
   };
 
   return (
-    <div>
+    <div className='w-[auto] h-[auto]'>
       <div className=" h-[calc(100vh-70px)] items-center flex flex-col justify-center">
-        <div>
+        <div >
           <div className=" ">
             <div className="dm-24">생성하기 원하는 페이지의</div>
             <div className="db-34 mt-[3px]">카테고리를 선택 해주세요</div>
