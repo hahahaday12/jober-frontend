@@ -4,6 +4,7 @@ import { Modal, ColorPicker, Button, theme } from 'antd';
 import type { Color } from 'antd/es/color-picker';
 import { produce } from 'immer';
 import { useMemo, useState } from 'react';
+import galleryIcon from '@/assets/icons/gallery.svg';
 //import { useState } from 'react';
 //import modernTheme from '@/assets/theme/modern.svg';
 
@@ -17,8 +18,9 @@ export const CustomizationModal = ({
   // handleOk,
   handleCancel,
 }: CustomizationModalProps) => {
-  const { wall, setWall } = useWallStore();
+  const { wall, setWall, isEdit } = useWallStore();
 
+  // antD 예시로 넣음, handleColor로 관리하도록 변경해야 함.
   const { token } = theme.useToken();
 
   const [color, setColor] = useState<Color | string>(token.colorPrimary);
@@ -27,6 +29,7 @@ export const CustomizationModal = ({
     () => (typeof color === 'string' ? color : color.toHexString()),
     [color],
   );
+  //console.log(color.toHex);
 
   const btnStyle: React.CSSProperties = {
     backgroundColor: bgColor,
@@ -52,13 +55,30 @@ export const CustomizationModal = ({
     console.log(e.target.value);
   };
 
-  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWall(
-      produce(wall, (draft) => {
-        draft.style.block.gradation = e.target.value as unknown as boolean;
-      }),
-    );
-    console.log(e.target.value);
+  // const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setWall(
+  //     produce(wall, (draft) => {
+  //       draft.style.block.imageUrl = e.target.value as unknown as boolean;
+  //     }),
+  //   );
+  //   console.log(e.target.value);
+  // };
+  // 정우님, 프로필이미지 방식
+  const handleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const imageFile = event.target.files?.[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === FileReader.DONE) {
+        setWall(
+          produce(wall, (draft) => {
+            draft.style.background.imageUrl = reader.result as string;
+          }),
+        );
+      }
+    };
+    if (imageFile) {
+      reader.readAsDataURL(imageFile);
+    }
   };
 
   // 블록-모양
@@ -179,6 +199,15 @@ export const CustomizationModal = ({
                 wall.style.background.imageUrl === 'ring-blue ring-1'
               }`}
             >
+              {/* <label className="cursor-pointer hover:opacity-60 transition absolute bg-white z-20 w-10 h-10 rounded-full flex justify-center items-center">
+                <img src={galleryIcon} alt="gallery icon" />
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handleImageUpload}
+                  accept="image/*"
+                />
+              </label>
               <input
                 className="hidden"
                 type="radio"
@@ -186,7 +215,32 @@ export const CustomizationModal = ({
                 value="image"
                 checked={wall.style.background.imageUrl === null}
                 onChange={handleImage}
-              />
+              /> */}
+              <div className="flex w-[36px] h-[36px] flex-col items-center justify-center rounded-full bg-white overflow-hidden">
+                {wall.style.background.imageUrl ? (
+                  <img
+                    src={wall.style.background.imageUrl}
+                    alt="profile"
+                    className={`h-full w-full rounded-full object-cover ${
+                      isEdit ? 'opacity-50' : 'opacity-100'
+                    }`}
+                  />
+                ) : (
+                  <div className="w-full bg-lightGray h-full" />
+                )}
+
+                {isEdit && (
+                  <label className="cursor-pointer hover:opacity-60 transition absolute bg-white z-20 w-10 h-10 rounded-full flex justify-center items-center">
+                    <img src={galleryIcon} alt="gallery icon" />
+                    <input
+                      type="file"
+                      className="hidden"
+                      onChange={handleImage}
+                      accept="image/*"
+                    />
+                  </label>
+                )}
+              </div>
             </label>
           </div>
         </div>
