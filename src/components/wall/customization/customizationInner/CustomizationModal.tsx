@@ -1,7 +1,9 @@
 import { useWallStore } from '@/store';
 //import { StyleType, BackgroundType, StyleBlockType } from '@/types/wall';
-import { Modal } from 'antd';
+import { Modal, ColorPicker, Button, theme } from 'antd';
+import type { Color } from 'antd/es/color-picker';
 import { produce } from 'immer';
+import { useMemo, useState } from 'react';
 //import { useState } from 'react';
 //import modernTheme from '@/assets/theme/modern.svg';
 
@@ -17,20 +19,43 @@ export const CustomizationModal = ({
 }: CustomizationModalProps) => {
   const { wall, setWall } = useWallStore();
 
-  // 배경-컬러
-  const handleColor = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWall(
-      produce(wall, (draft) => {
-        draft.style.background.color = e.target.value;
-      }),
-    );
-    console.log(e.target.value);
+  const { token } = theme.useToken();
+
+  const [color, setColor] = useState<Color | string>(token.colorPrimary);
+
+  const bgColor = useMemo<string>(
+    () => (typeof color === 'string' ? color : color.toHexString()),
+    [color],
+  );
+
+  const btnStyle: React.CSSProperties = {
+    backgroundColor: bgColor,
   };
+
+  // 배경-컬러
+  // const handleColor = (color: string) => {
+  //   setWall(
+  //     produce(wall, (draft) => {
+  //       draft.style.background.color = color;
+  //     }),
+  //   );
+  //   //console.log(e.target.value);
+  // };
+
   // 배경-그라데이션
   const handleGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
         draft.style.background.gradation = e.target.value as unknown as boolean;
+      }),
+    );
+    console.log(e.target.value);
+  };
+
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWall(
+      produce(wall, (draft) => {
+        draft.style.block.gradation = e.target.value as unknown as boolean;
       }),
     );
     console.log(e.target.value);
@@ -83,15 +108,6 @@ export const CustomizationModal = ({
     console.log(e.target.value);
   };
 
-  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWall(
-      produce(wall, (draft) => {
-        draft.style.block.gradation = e.target.value as unknown as boolean;
-      }),
-    );
-    console.log(e.target.value);
-  };
-
   // const handleApplyCustomization = () => {
   //   console.log('선택된 스타일 옵션:', style);
   //   // 선택된 스타일 옵션을 여기서 활용하거나 필요한 대로 처리합니다.
@@ -110,7 +126,7 @@ export const CustomizationModal = ({
     >
       {/* 배경 */}
       <div>
-        <div className="db-18 mb-[16px]">배경</div>
+        <div className="db-18 mt-[30px] mb-[16px]">배경</div>
         <div className="flex justify-between">
           <div className="flex flex-row gap-[10px]">
             <label
@@ -119,13 +135,29 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="color"
                 checked={wall.style.background.color === '#eee'}
-                onChange={handleColor}
+                //onChange={handleColor}
               />
+              <ColorPicker value={color} onChange={setColor}>
+                <Button
+                  type="primary"
+                  style={btnStyle}
+                  className="w-[194px] h-[100px] rounded-[8px]"
+                >
+                  컬러 피커
+                </Button>
+              </ColorPicker>
+              {/* <ColorPicker
+                className="w-[194px] h-[100px]"
+                color={wall.style.background.color}
+                onChange={(color) => {
+                  handleColor(color);
+                }}
+              /> */}
             </label>
             <label
               className={`bg-sky rounded-[8px] w-[194px] h-[100px] block hover ${
@@ -133,7 +165,7 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="gradation"
@@ -148,7 +180,7 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="image"
@@ -162,7 +194,7 @@ export const CustomizationModal = ({
 
       {/* 블록 */}
       <div>
-        <div className="db-18 mb-[16px]">블록</div>
+        <div className="db-18 mt-[30px] mb-[16px]">블록</div>
         <div className="flex justify-between">
           <div className="flex flex-col gap-[8px]">
             <label
@@ -171,7 +203,7 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="0px"
@@ -185,7 +217,7 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="6px"
@@ -199,7 +231,7 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="13px"
@@ -217,7 +249,7 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="none"
@@ -231,7 +263,7 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="flat"
@@ -245,7 +277,7 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="shadow"
@@ -264,13 +296,22 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="color"
                 checked={wall.style.block.color === '#eee'}
                 onChange={handleStyleColor}
               />
+              {/* <ColorPicker value={color} onChange={setColor}>
+                <Button
+                  type="primary"
+                  style={btnStyle}
+                  className="w-[194px] h-[48px]"
+                >
+                  컬러 피커
+                </Button>
+              </ColorPicker> */}
             </label>
             {/* 그라데이션 */}
             <label
@@ -279,7 +320,7 @@ export const CustomizationModal = ({
               }`}
             >
               <input
-                // className="hidden"
+                className="hidden"
                 type="radio"
                 name="style"
                 value="gradation"
@@ -294,7 +335,7 @@ export const CustomizationModal = ({
 
       {/* 이미지 질문 */}
       {/* bg-[${modernTheme}] */}
-      <div className="db-18 mb-[16px]">테마</div>
+      <div className="db-18 mt-[30px] mb-[16px]">테마</div>
       <div className="overflow-x-auto flex justify-between">
         <div className="flex flex-row gap-[10px]">
           <label
@@ -303,7 +344,7 @@ export const CustomizationModal = ({
             }`}
           >
             <input
-              // className="hidden"
+              className="hidden"
               type="radio"
               name="style"
               value="modern"
@@ -317,7 +358,7 @@ export const CustomizationModal = ({
             }`}
           >
             <input
-              // className="hidden"
+              className="hidden"
               type="radio"
               name="style"
               value="modern"
@@ -331,7 +372,7 @@ export const CustomizationModal = ({
             }`}
           >
             <input
-              // className="hidden"
+              className="hidden"
               type="radio"
               name="style"
               value="modern"
@@ -345,7 +386,7 @@ export const CustomizationModal = ({
             }`}
           >
             <input
-              // className="hidden"
+              className="hidden"
               type="radio"
               name="style"
               value="modern"
