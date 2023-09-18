@@ -28,7 +28,9 @@ export const BlockContainer = ({
 
   return (
     <div
-      className={`bg-white rounded-[${wall?.style?.block?.shape}] overflow-hidden relative`}
+      className={`bg-white rounded-[${
+        wall?.style?.block?.shape
+      }] overflow-hidden relative ${isEdit && 'text-gray88'}`}
     >
       {blockName !== 'profileBlock' && (
         <>

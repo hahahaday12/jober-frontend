@@ -67,11 +67,7 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
   return (
     <BlockContainer blockName="listBlock" blockUUID={blockUUID}>
       <div className="px-[28px] pt-[26px] pb-[22px] flex flex-col">
-        <div
-          className={`flex items-center gap-[6px] db-20 mb-[16px] ${
-            isEdit && 'text-gray88'
-          }`}
-        >
+        <div className={`flex items-center gap-[6px] db-20 mb-[16px]`}>
           {isListTitleEdit ? (
             <Input
               placeholder="블록 제목을 입력해주세요."

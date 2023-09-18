@@ -11,6 +11,22 @@
     },
     "blocks": [
       {
+        "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
+        "blockType": "snsBlock",
+        "subData": [
+          {
+            "snsUUID": "f108fff1-e106-4340-b505-280e15626ecc",
+            "snsTitle": "facebook",
+            "snsUrl": "asdf.facebook.com"
+          },
+          {
+            "snsUUID": "f108fff1-f106-4340-b505-280e15626ecc",
+            "snsTitle": "instagram",
+            "snsUrl": "adfd.instagram.com"
+          }
+        ]
+      },
+      {
         "blockUUID": "f108fff1-0106-4340-b505-280e15626ecc",
         "blockType": "listBlock",
         "subData": {
@@ -48,6 +64,18 @@
               "listSubtitle": "운전면허증",
               "listDescription": "2종보통",
               "isLink": false
+            },
+            {
+              "listUUID": "1b539400-5bfb-4459-b60d-ba65080d8211",
+              "listSubtitle": "토익",
+              "listDescription": "930점",
+              "isLink": false
+            },
+            {
+              "listUUID": "2d7394be-a1d9-4d58-ac94-9543e5116611",
+              "listSubtitle": "바리스타자격증",
+              "listDescription": "커피 물조절 잘함",
+              "isLink": false
             }
           ]
         }
@@ -81,22 +109,6 @@
             "templateUUID": "f108fff1-e106-4340-b505-280e15626ecc",
             "templateTitle": "자기소개서 2",
             "templateDescription": "자기소개서 2"
-          }
-        ]
-      },
-      {
-        "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
-        "blockType": "snsBlock",
-        "subData": [
-          {
-            "snsUUID": "f108fff1-e106-4340-b505-280e15626ecc",
-            "snsTitle": "facebook",
-            "snsUrl": "asdf.facebook.com"
-          },
-          {
-            "snsUUID": "f108fff1-f106-4340-b505-280e15626ecc",
-            "snsTitle": "instagram",
-            "snsUrl": "adfd.instagram.com"
           }
         ]
       },
