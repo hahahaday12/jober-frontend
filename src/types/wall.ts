@@ -4,11 +4,11 @@ export interface WallType {
   category: CategoryType;
   profileBlock: ProfileBlockType;
   blocks: BlockElementType[];
-  style: Style;
+  style: StyleType;
 }
 
 export interface BlockElementType {
-  id: number;
+  blockUUID: string;
   blockType: BlockType;
   subData: SubDatumType[] | SubDataClassType;
 }
@@ -21,15 +21,17 @@ export type CategoryType =
   | 'basic';
 
 export type BlockType =
-  | 'listsBlock'
+  | 'listBlock'
   | 'fileBlock'
   | 'snsBlock'
   | 'templatesBlcok' // template's' 템플릿'들'의 블록
   | 'freeBlock';
 
 export interface SubDatumType {
+  templateUUID?: string;
   templateTitle?: string;
   templateDescription?: string;
+  snsUUID?: string;
   snsTitle?: string;
   snsUrl?: string;
 }
@@ -46,6 +48,7 @@ export interface SubDataClassType {
 }
 
 export interface ListType {
+  listUUID: string;
   listSubtitle: string;
   listDescription: string;
   isLink: boolean;
@@ -58,20 +61,21 @@ export interface ProfileBlockType {
   profileImageUrl: string;
 }
 
-export interface Style {
+export interface StyleType {
   background: BackgroundType;
   block: StyleBlockType;
-  theme: string | null;
+  theme: ('modern' | 'classic' | 'simple' | 'dark') | null;
 }
 
 export interface BackgroundType {
   color: string;
   gradation: boolean;
-  image: string;
+  imageUrl: string | null;
 }
 
 export interface StyleBlockType {
+  color: string;
   gradation: boolean;
-  shape: string;
-  style: string;
+  shape: '0px' | '6px' | '13px';
+  style: 'none' | 'flat' | 'shadow';
 }

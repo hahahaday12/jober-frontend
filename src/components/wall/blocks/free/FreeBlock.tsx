@@ -10,8 +10,19 @@ import 'froala-editor/js/plugins.pkgd.min.js';
 import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
 import 'froala-editor/js/languages/ko.js';
+import { BlockType, SubDataClassType, SubDatumType } from '@/types/wall';
 
-export const FreeBlock = () => {
+interface FreeBlockProps {
+  blockUUID?: string;
+  blockType?: BlockType;
+  subData?: SubDatumType[] | SubDataClassType;
+}
+
+export const FreeBlock = ({
+  blockType,
+  blockUUID,
+  subData,
+}: FreeBlockProps) => {
   const { isEdit, wall, setWall } = useWallStore();
 
   const [, setEditorContent] = useState<string | undefined>(
@@ -37,7 +48,7 @@ export const FreeBlock = () => {
   };
 
   return (
-    <BlockContainer blockName="freeBlock">
+    <BlockContainer blockName="freeBlock" blockUUID={blockUUID}>
       <div className="p-7 flex flex-col gap-5">
         <div className="flex text-xl font-bold items-center gap-2 text-gray-600">
           {isEdit ? (
@@ -46,6 +57,7 @@ export const FreeBlock = () => {
               value={wall.freeBlock?.freeTitle}
               onChange={handleFreeTitle}
               placeholder="자유블록제목"
+              className="w-60"
             />
           ) : (
             <h4>{wall.freeBlock?.freeTitle || '자유블록제목'}</h4>
@@ -82,4 +94,4 @@ export const FreeBlock = () => {
       </div>
     </BlockContainer>
   );
-}
+};

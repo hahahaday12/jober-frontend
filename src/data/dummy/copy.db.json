@@ -11,7 +11,7 @@
     },
     "blocks": [
       {
-        "position": 1,
+        "blockUUID": "f108fff1-0106-4340-b505-280e15626ecc",
         "blockType": "listBlock",
         "subData": {
           "listTitle": "학력경력",
@@ -30,7 +30,7 @@
         }
       },
       {
-        "position": 2,
+        "blockUUID": "ae4bf0e4-b861-46c2-939e-c3db0ad1c402",
         "blockType": "listBlock",
         "subData": {
           "listTitle": "자격증",
@@ -49,7 +49,7 @@
         }
       },
       {
-        "position": 1,
+        "blockUUID": "124bf0e4-b861-46c2-939e-c3db0ad1c432",
         "blockType": "freeBlock",
         "subData": {
           "freeTitle": "자유블록 제목",
@@ -57,7 +57,7 @@
         }
       },
       {
-        "position": 4,
+        "blockUUID": "224bf0e4-b861-46c2-939e-c3db0ad1c402",
         "blockType": "freeBlock",
         "subData": {
           "freeTitle": "자유블록 제목",
@@ -65,8 +65,8 @@
         }
       },
       {
-        "position": 5,
-        "blockType": "templateBlock",
+        "blockUUID": "444bf0e4-b861-46c2-939e-c3db0ad1c402",
+        "blockType": "templatesBlock",
         "subData": [
           {
             "templateTitle": "자기소개서 1",
@@ -79,7 +79,7 @@
         ]
       },
       {
-        "position": 6,
+        "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
         "blockType": "snsBlock",
         "subData": [
           {
@@ -87,13 +87,13 @@
             "snsUrl": "asdf.facebook.com"
           },
           {
-            "templateTitle": "instagram",
-            "templateDescription": "adfd.instagram.com"
+            "snsTitle": "instagram",
+            "snsUrl": "adfd.instagram.com"
           }
         ]
       },
       {
-        "position": 7,
+        "blockUUID": "123bf0e4-b861-46c2-939e-c3db0ad1c402",
         "blockType": "fileBlock",
         "subData": {
           "fileTitle": "포트폴리오1",
@@ -103,13 +103,21 @@
         }
       },
       {
-        "position": 8,
+        "blockUUID": "123bf0e4-b861-46c2-939e-c3db0ad1c123",
         "blockType": "fileBlock",
         "subData": {
           "fileTitle": "포트폴리오2",
           "fileSubtitle": "2023년 포트폴리오2",
           "fileName": "portfolio2023.pdf",
           "file": "portfolio2023.pdf"
+        }
+      },
+      {
+        "blockUUID": "ba7f3ee6-d212-4ed3-a33d-29e2dc7e3f2b",
+        "blockType": "freeBlock",
+        "subData": {
+          "freeTitle": "",
+          "freeDescription": ""
         }
       }
     ],
@@ -121,7 +129,7 @@
       },
       "block": {
         "gradation": false,
-        "shape": "0px",
+        "shape": "13px",
         "style": "flat"
       },
       "theme": null

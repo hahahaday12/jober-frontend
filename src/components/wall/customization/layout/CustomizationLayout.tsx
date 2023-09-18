@@ -1,55 +1,33 @@
-//import React from 'react';
-//import { useState } from 'react';
-import { FloatButton } from 'antd';
-//import Brush from '@/assets/icons/customization/brush.svg';
-//import { CustomizationModal } from '..';
+import { Button } from 'antd';
+import brushIcon from '@/assets/icons/brush.svg';
+import { CustomizationModal } from '../customizationInner/CustomizationModal';
+import { useState } from 'react';
 
 export const CustomizationLayout = () => {
-  // const [isCustomizationLayout, setIsCustomizationLayout] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // const showModal = () => {
-  //   setIsCustomizationLayout(true);
-  // };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
 
-  // const handleOk = () => {
-  //   setIsCustomizationLayout(false);
-  // };
-
-  // const handleCancel = () => {
-  //   alert('취소');
-  //   setIsCustomizationLayout(false);
-  // };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
-      {/* <CustomizationModal
+      <CustomizationModal
         isModalOpen={isModalOpen}
         handleOk={handleOk}
         handleCancel={handleCancel}
-      /> */}
-
-      <FloatButton onClick={() => console.log('click')} />
-      {/* <FloatButton
-        icon={<Brush />}
-        description="스타일 설정"
-        shape="square"
-        onClick={showModal}
-        className="px-2 py-2 w-auto inline-flex items-center flex-row"
-      /> */}
-
-      {/* <FloatButton
-        icon={<Brush />}
-        description="HELP INFO"
-        shape="square"
-        style={{ right: 24 }}
-      /> */}
-
-      {/* <Modal
-        title="스타일 설정"
-        open={isCustomizationLayout}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      ></Modal> */}
+      />
+      <Button
+        className="flex items-center justify-center gap-[6px] w-[174px] h-[62px] rounded-full fixed bottom-10 right-10"
+        onClick={() => setIsModalOpen(true)}
+      >
+        <img src={brushIcon} alt="brush icon" />
+        스타일 설정
+      </Button>
     </>
   );
 };
