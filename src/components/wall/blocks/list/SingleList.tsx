@@ -1,26 +1,29 @@
 import { useWallStore } from '@/store';
-import { ListBlockType } from '@/types/wall';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { SubDataClassType } from '@/types/wall';
 import { Checkbox, Input } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { produce } from 'immer';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import editIcon from '@/assets/icons/edit.svg';
+import Icon from '@/components/Icon';
+import minusIcon from '@/assets/icons/minus.svg';
 
 interface ListProps {
-  blockId?: number;
-  isEdit: boolean;
   id: number;
-  subTitle: string;
-  desc: string;
+  targetListBlockIndex: number;
+  listUUID: string;
+  isEdit: boolean;
+  listSubtitle: string;
+  listDescription: string;
   isLink: boolean;
 }
 
 export const SingleList = ({
-  blockId,
   id,
-  subTitle,
-  desc,
+  targetListBlockIndex,
+  listUUID,
+  listSubtitle,
+  listDescription,
   isLink,
   isEdit,
 }: ListProps) => {
@@ -28,103 +31,143 @@ export const SingleList = ({
 
   const [isListDescEdit, setIsListDescEdit] = useState(false);
 
-  const handleSubtitle = (e: React.ChangeEvent<HTMLInputElement>) => {};
-
-  const handleIsLink = (e: CheckboxChangeEvent) => {
-    setWall(
-      produce(wall, (draft) => {
-        if (draft.listBlock) {
-          draft.listBlock.lists = draft.listBlock.lists.map((list) =>
-            list.id === id ? { ...list, isLink: e.target.checked } : list,
-          );
-        }
-      }),
-    );
-  };
-
-  const handleDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWall(
-      produce(wall, (draft) => {
-        if (draft.listBlock && draft.listBlock.lists) {
-          draft.listBlock.lists = draft.listBlock.lists.map((list) => {
-            if (list.id === id) {
-              list.listDescription = e.target.value;
+  const handleSubtitle = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setWall(
+        produce(wall, (draft) => {
+          if (targetListBlockIndex !== -1) {
+            const targetListBlockSubData = draft.blocks[targetListBlockIndex]
+              .subData as SubDataClassType;
+            if (targetListBlockSubData && targetListBlockSubData.lists) {
+              const listIndex = targetListBlockSubData.lists.findIndex(
+                (list) => list.listUUID === listUUID,
+              );
+              if (listIndex !== -1) {
+                targetListBlockSubData.lists[listIndex].listSubtitle =
+                  e.target.value;
+              }
             }
-            return list;
-          });
-        }
-      }),
-    );
-  };
+          }
+        }),
+      );
+    },
+    [listUUID, setWall, targetListBlockIndex, wall],
+  );
 
-  const handleDeleteList = () => {
+  const handleIsLink = useCallback(
+    (e: CheckboxChangeEvent) => {
+      setWall(
+        produce(wall, (draft) => {
+          if (targetListBlockIndex !== -1) {
+            const targetListBlockSubData = draft.blocks[targetListBlockIndex]
+              .subData as SubDataClassType;
+            if (targetListBlockSubData && targetListBlockSubData.lists) {
+              const listIndex = targetListBlockSubData.lists.findIndex(
+                (list) => list.listUUID === listUUID,
+              );
+              if (listIndex !== -1) {
+                targetListBlockSubData.lists[listIndex].isLink =
+                  e.target.checked;
+              }
+            }
+          }
+        }),
+      );
+    },
+    [listUUID, setWall, targetListBlockIndex, wall],
+  );
+
+  const handleListDesc = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setWall(
+        produce(wall, (draft) => {
+          if (targetListBlockIndex !== -1) {
+            const targetListBlockSubData = draft.blocks[targetListBlockIndex]
+              .subData as SubDataClassType;
+            if (targetListBlockSubData && targetListBlockSubData.lists) {
+              const listIndex = targetListBlockSubData.lists.findIndex(
+                (list) => list.listUUID === listUUID,
+              );
+              if (listIndex !== -1) {
+                targetListBlockSubData.lists[listIndex].listDescription =
+                  e.target.value;
+              }
+            }
+          }
+        }),
+      );
+    },
+    [listUUID, setWall, targetListBlockIndex, wall],
+  );
+
+  const handleDeleteList = useCallback(() => {
     setWall(
       produce(wall, (draft) => {
-        if (draft.listBlock) {
-          draft.listBlock.lists = draft.listBlock?.lists.filter(
-            (list) => list.id !== id,
-          );
+        if (targetListBlockIndex !== -1) {
+          (
+            draft.blocks[targetListBlockIndex].subData as SubDataClassType
+          ).lists = (
+            draft.blocks[targetListBlockIndex].subData as SubDataClassType
+          ).lists?.filter((list) => list.listUUID !== listUUID);
         }
       }),
     );
-  };
+  }, [listUUID, setWall, targetListBlockIndex, wall]);
+
   return (
-    <div className="space-y-2">
+    <div className={`space-y-2 ${isEdit ? 'text-gray88' : 'text-lightBlack'}`}>
       <div className="flex justify-between">
-        <div className="flex items-center dm-16 gap-[6px] text-gray88">
+        <div className="flex items-center dm-16 gap-[6px]">
           {isListDescEdit ? (
             <Input
-              value={subTitle}
+              value={listSubtitle}
               onChange={handleSubtitle}
-              className="w-1/3"
+              className="py-0 px-1"
             />
           ) : (
-            <div
-              className={`db-16 ${
-                isEdit ? 'text-gray88' : 'text-lightBlack'
-              }  flex items-center gap-[12px]`}
-            >
-              {subTitle || '입력'}
+            <div className={`db-16 flex items-center gap-3`}>
+              {listSubtitle || '입력'}
               {!isEdit && (
                 <>
-                  <div className="w-[2px] h-[22px] bg-lightBlack" />
-                  <span className="dm-16">{desc}</span>
+                  <span className="relative -top-[2.3px]">|</span>
+                  {isLink ? (
+                    <a href={listDescription} target="_blank">
+                      {listDescription}
+                    </a>
+                  ) : (
+                    <span className="dm-16">{listDescription}</span>
+                  )}
                 </>
               )}
             </div>
           )}
           {isEdit && (
-            <>
-              <img
-                src={editIcon}
-                alt="edit icon"
-                className="hover"
-                onClick={() => setIsListDescEdit((prev) => !prev)}
-              />
-              <Checkbox
-                onChange={handleIsLink}
-                checked={isLink}
-                className="ml-5"
-              >
-                링크
-              </Checkbox>
-            </>
+            <Icon
+              src={editIcon}
+              onClick={() => setIsListDescEdit((prev) => !prev)}
+            />
           )}
         </div>
         {isEdit && (
-          <DeleteOutlined
-            className={`cursor-pointer ${id === 1 && 'hidden'}`}
+          <Icon
+            src={minusIcon}
             onClick={handleDeleteList}
+            className={`${id === 0 && 'hidden'} mr-[16px]`}
           />
         )}
       </div>
       {isEdit && (
-        <Input
-          placeholder="내용"
-          value={desc}
-          onChange={handleDesc}
-          className="h-[50px] text-gray88"
-        />
+        <>
+          <Input
+            placeholder="내용"
+            value={listDescription}
+            onChange={handleListDesc}
+            className="h-[50px]"
+          />
+          <Checkbox onChange={handleIsLink} checked={isLink} className="dm-16">
+            링크
+          </Checkbox>
+        </>
       )}
     </div>
   );

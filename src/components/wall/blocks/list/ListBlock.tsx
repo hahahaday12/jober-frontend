@@ -1,67 +1,68 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Input } from 'antd';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
 import { BlockContainer, SingleList } from 'components/index';
-import {
-  BlockType,
-  ListType,
-  SubDataClassType,
-  SubDatumType,
-} from '@/types/wall';
+import { BlockType, SubDataClassType, SubDatumType } from '@/types/wall';
 import editThickIcon from '@/assets/icons/edit-thick.svg';
 import plusIcon from '@/assets/icons/plus.svg';
+import Icon from '@/components/Icon';
 
 interface ListBlockProps {
   blockUUID?: string;
   blockType?: BlockType;
   subData?: SubDatumType[] | SubDataClassType;
 }
-export const ListBlock = ({
-  blockUUID,
-  blockType,
-  subData,
-}: ListBlockProps) => {
-  const [isListTitleEdit, setIsListTitleEdit] = useState(false);
+export const ListBlock = ({ blockUUID }: ListBlockProps) => {
   const { isEdit, wall, setWall } = useWallStore();
-  const targetBlockData = wall.listBlocks?.find((block) => block.id === id);
+  const [isListTitleEdit, setIsListTitleEdit] = useState(false);
 
-  const handleListTile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const targetListBlock = useMemo(
+    () => wall.blocks.find((block) => block.blockUUID === blockUUID),
+    [blockUUID, wall.blocks],
+  );
+  const targetListBlockIndex = useMemo(
+    () => wall.blocks.findIndex((block) => block.blockUUID === blockUUID),
+    [blockUUID, wall.blocks],
+  );
+
+  const handleListTile = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setWall(
+        produce(wall, (draft) => {
+          const listBlockIndex = draft.blocks.findIndex(
+            (block) => block.blockUUID === blockUUID,
+          );
+          if (listBlockIndex !== -1) {
+            (
+              draft.blocks[listBlockIndex].subData as SubDataClassType
+            ).listTitle = e.target.value;
+          }
+        }),
+      );
+    },
+    [blockUUID, setWall, wall],
+  );
+
+  const handleAddList = useCallback(() => {
     setWall(
       produce(wall, (draft) => {
-        const listBlockIndex = (draft.listBlocks as ListBlockType[]).findIndex(
-          (block) => block.id === id,
+        const listBlockIndex = draft.blocks.findIndex(
+          (block) => block.blockUUID === blockUUID,
         );
         if (listBlockIndex !== -1) {
-          (draft.listBlocks as ListBlockType[])[listBlockIndex].listTitle =
-            e.target.value;
+          (
+            draft.blocks[listBlockIndex].subData as SubDataClassType
+          ).lists?.push({
+            listUUID: crypto.randomUUID(),
+            listSubtitle: '',
+            listDescription: '',
+            isLink: false,
+          });
         }
       }),
     );
-  };
-
-  // const handleDeletBlock = () => {
-  //   setWall(
-  //     produce(wall, (draft) => {
-  //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //       (draft as any)[blockName] = undefined;
-  //       draft.order = draft.order.filter((block) => block !== blockName);
-  //     }),
-  //   );
-  // };
-
-  // const handleAddList = () => {
-  //   setWall(
-  //     produce(wall, (draft) => {
-  //       draft.listBlock?.lists.push({
-  //         id: draft.listBlock.lists[draft.listBlock.lists.length - 1].id + 1,
-  //         listSubtitle: '',
-  //         listDescription: '',
-  //         isLink: false,
-  //       });
-  //     }),
-  //   );
-  // };
+  }, [blockUUID, setWall, wall]);
 
   return (
     <BlockContainer blockName="listBlock" blockUUID={blockUUID}>
@@ -73,40 +74,49 @@ export const ListBlock = ({
         >
           {isListTitleEdit ? (
             <Input
-              placeholder="내용을 입력해주세요."
-              value={targetBlockData?.listTitle}
+              placeholder="블록 제목을 입력해주세요."
+              value={(targetListBlock?.subData as SubDataClassType).listTitle}
               onChange={handleListTile}
-              className="db-20 text-gray88 w-1/3"
+              className="w-1/3 px-1 py-0 "
             />
           ) : (
-            <div>{targetBlockData?.listTitle || '내용을 입력해주세요.'}</div>
+            <>
+              {(targetListBlock?.subData as SubDataClassType).listTitle ||
+                '블록 제목을 입력해주세요.'}
+            </>
           )}
           {isEdit && (
-            <img
+            <Icon
               src={editThickIcon}
-              alt="edit icon"
-              className="hover:opacity-60 transition cursor-pointer"
               onClick={() => setIsListTitleEdit((prev) => !prev)}
             />
           )}
         </div>
+
         <div className="flex flex-col gap-[30px]">
-          {targetBlockData?.lists.map((list: ListType) => (
-            <SingleList
-              blockId={id}
-              key={list.id}
-              isEdit={isEdit}
-              id={list.id}
-              subTitle={list.listSubtitle}
-              desc={list.listDescription}
-              isLink={list.isLink}
-            />
-          ))}
+          {(targetListBlock?.subData as SubDataClassType).lists?.map(
+            (list, id) => (
+              <SingleList
+                id={id}
+                targetListBlockIndex={targetListBlockIndex}
+                listUUID={list.listUUID}
+                key={list.listUUID}
+                isEdit={isEdit}
+                listSubtitle={list.listSubtitle}
+                listDescription={list.listDescription}
+                isLink={list.isLink}
+              />
+            ),
+          )}
         </div>
 
         {isEdit && (
           <div className="w-full text-center">
-            <img src={plusIcon} alt="plus icon" className="hover mt-[20px]" />
+            <Icon
+              src={plusIcon}
+              onClick={handleAddList}
+              className="mt-[20px]"
+            />
           </div>
         )}
       </div>
