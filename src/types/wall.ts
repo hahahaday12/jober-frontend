@@ -79,3 +79,9 @@ export interface StyleBlockType {
   shape: '0px' | '6px' | '13px';
   style: 'none' | 'flat' | 'shadow';
 }
+
+export interface SingleSnsType {
+  snsUUID: string;
+  snsTitle: string;
+  snsUrl: string;
+}

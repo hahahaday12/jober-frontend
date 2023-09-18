@@ -17,12 +17,27 @@
           {
             "snsUUID": "f108fff1-e106-4340-b505-280e15626ecc",
             "snsTitle": "facebook",
-            "snsUrl": "asdf.facebook.com"
+            "snsUrl": "https://www.facebook.com/neocsv"
           },
           {
-            "snsUUID": "f108fff1-f106-4340-b505-280e15626ecc",
+            "snsUUID": "f108fff1-1106-4340-b505-280e15626ecc",
             "snsTitle": "instagram",
-            "snsUrl": "adfd.instagram.com"
+            "snsUrl": "https://www.instagram.com/shin0._.e/"
+          },
+          {
+            "snsUUID": "f108fff1-2106-4340-b505-280e15626ecc",
+            "snsTitle": "linkedin",
+            "snsUrl": "https://www.linkedin.com/in/drsohail269/"
+          },
+          {
+            "snsUUID": "f108fff1-3106-4340-b505-280e15626ecc",
+            "snsTitle": "github",
+            "snsUrl": "https://github.com/howooking"
+          },
+          {
+            "snsUUID": "f108fff1-4106-4340-b505-280e15626ecc",
+            "snsTitle": "behance",
+            "snsUrl": "https://www.behance.net/siwangchan"
           }
         ]
       },
