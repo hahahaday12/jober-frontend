@@ -5,12 +5,5 @@ interface IconProps {
 }
 
 export const Icon = ({ src, onClick, className }: IconProps) => {
-  return (
-    <img
-      src={src}
-      alt={src}
-      className={`${className} hover`}
-      onClick={onClick}
-    />
-  );
+  return <img src={src} alt={src} className={className} onClick={onClick} />;
 };
