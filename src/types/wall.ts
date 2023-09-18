@@ -28,8 +28,10 @@ export type BlockType =
   | 'freeBlock';
 
 export interface SubDatumType {
+  templateUUID?: string;
   templateTitle?: string;
   templateDescription?: string;
+  snsUUID?: string;
   snsTitle?: string;
   snsUrl?: string;
 }
@@ -46,6 +48,7 @@ export interface SubDataClassType {
 }
 
 export interface ListType {
+  listUUID: string;
   listSubtitle: string;
   listDescription: string;
   isLink: boolean;
