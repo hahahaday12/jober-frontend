@@ -5,7 +5,7 @@ import { produce } from 'immer';
 import { useEffect, useState } from 'react';
 import galleryIcon from '@/assets/icons/gallery.svg';
 
-const BackgroundSettings = () => {
+export const BackgroundSettings = () => {
   const { wall, isEdit, setWall } = useWallStore();
 
   const [color, setColor] = useState<Color | string>(
@@ -49,7 +49,7 @@ const BackgroundSettings = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="db-18 mt-[30px] mb-[16px]">배경</div>
       <div className="flex justify-between">
         <div className="flex flex-row gap-[10px]">
@@ -146,8 +146,6 @@ const BackgroundSettings = () => {
           </label>
         </div>
       </div>
-    </div>
+    </>
   );
 };
-
-export default BackgroundSettings;
