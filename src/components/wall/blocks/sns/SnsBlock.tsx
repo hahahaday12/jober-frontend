@@ -1,71 +1,55 @@
 import { Button } from 'antd';
 import { useState } from 'react';
-import {
-  FacebookOutlined,
-  GithubOutlined,
-  InstagramOutlined,
-  LinkedinOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
 import { useWallStore } from '@/store';
 import { BlockContainer, SnsBlockModal } from 'components/index';
-import { BlockType, SubDataClassType, SubDatumType } from '@/types/wall';
-
-export interface Sns {
-  title: string;
-  href: string;
-}
-
-const SNS_ICONS: {
-  [key: string]: JSX.Element;
-} = {
-  facebook: <FacebookOutlined />,
-  instagram: <InstagramOutlined />,
-  linkedin: <LinkedinOutlined />,
-  github: <GithubOutlined />,
-};
+import { SingleSnsType, SubDataClassType, SubDatumType } from '@/types/wall';
+import { Icon } from '@/components/common';
+import { ADDABLE_SNSS } from '@/data/constants/blocks';
+import { PlusOutlined } from '@ant-design/icons';
 
 interface SnsBlockProps {
   blockUUID?: string;
-  blockType?: BlockType;
   subData?: SubDatumType[] | SubDataClassType;
 }
 
-export const SnsBlock = ({ blockUUID, blockType, subData }: SnsBlockProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export const SnsBlock = ({ blockUUID, subData }: SnsBlockProps) => {
+  const [isSnsModalOpen, setIsSnsModalOpen] = useState(false);
 
-  const { isEdit, wall } = useWallStore();
+  const { isEdit } = useWallStore();
+
+  const handleClickSnsIcons = (sns: SingleSnsType) => {
+    isEdit ? console.log(sns.snsTitle) : window.open(sns.snsUrl, '_blank');
+  };
 
   return (
     <BlockContainer blockName="snsBlock" blockUUID={blockUUID}>
-      <div className="p-7 space-y-5">
-        <div className="flex items-center text-gray-600 gap-2">
-          <h4 className="flex text-xl font-bold items-center">SNS 연결</h4>
-          <p>보여주고 싶은 SNS를 연결해주세요!</p>
+      <div className="px-[28px] py-[26px]">
+        <div className="flex items-center gap-[8px] mb-[23px]">
+          <p className="db-20">SNS 연결</p>
+          <p className="dm-16">보여주고 싶은 SNS를 연결해주세요!</p>
         </div>
-        <div className="flex gap-3 justify-center">
-          {wall.snsBlock?.map((sns) => (
-            <Button
-              key={sns.snsUrl}
-              className="w-16 h-16 text-4xl"
-              shape="circle"
-            >
-              <a target="_blank" href={sns.snsUrl}>
-                {SNS_ICONS[sns.snsTitle]}
-              </a>
-            </Button>
+        <div className="flex gap-[24px] justify-center">
+          {(subData as SubDatumType[])?.map((sns) => (
+            <Icon
+              src={ADDABLE_SNSS[sns.snsTitle as string].svg}
+              className="w-[60px] h-[60px] rounded-full"
+              onClick={() => handleClickSnsIcons(sns as SingleSnsType)}
+            />
           ))}
-          <Button
-            shape="circle"
-            type="default"
-            className={`w-16 h-16 ${!isEdit && 'hidden'}`}
-            onClick={() => setIsModalOpen(true)}
-          >
-            <PlusOutlined />
-          </Button>
+          {isEdit && (
+            <Button
+              shape="circle"
+              type="default"
+              className="w-[60px] h-[60px] flex justify-center items-center"
+              onClick={() => setIsSnsModalOpen(true)}
+            >
+              <PlusOutlined />
+            </Button>
+          )}
+
           <SnsBlockModal
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
+            isSnsModalOpen={isSnsModalOpen}
+            setIsSnsModalOpen={setIsSnsModalOpen}
           />
         </div>
       </div>
