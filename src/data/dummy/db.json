@@ -14,17 +14,25 @@
         "blockUUID": "f108fff1-0106-4340-b505-280e15626ecc",
         "blockType": "listBlock",
         "subData": {
-          "listTitle": "학력경력",
+          "listTitle": "학력/경력",
           "lists": [
             {
-              "listSubtitle": "학력",
-              "listDescription": "서울대학교",
+              "listUUID": "f108fff1-a106-4340-b505-280e15626ecc",
+              "listSubtitle": "졸업한 학교",
+              "listDescription": "카이스트/ 화학공학과",
               "isLink": false
             },
             {
-              "listSubtitle": "경력",
-              "listDescription": "www.naver.com",
+              "listUUID": "5f1b0451-306d-4ea2-a379-cbaa31bb0974",
+              "listSubtitle": "깃허브링크",
+              "listDescription": "https://www.naver.com",
               "isLink": true
+            },
+            {
+              "listUUID": "84ac4528-76e2-43bc-bdb8-6e607e3f706c",
+              "listSubtitle": "경력",
+              "listDescription": "CTO",
+              "isLink": false
             }
           ]
         }
@@ -36,13 +44,9 @@
           "listTitle": "자격증",
           "lists": [
             {
+              "listUUID": "f108fff1-c106-4340-b505-280e15626ecc",
               "listSubtitle": "운전면허증",
               "listDescription": "2종보통",
-              "isLink": false
-            },
-            {
-              "listSubtitle": "바리스타자격증",
-              "listDescription": "스타벅스",
               "isLink": false
             }
           ]
@@ -69,10 +73,12 @@
         "blockType": "templatesBlock",
         "subData": [
           {
+            "templateUUID": "f108fff1-d106-4340-b505-280e15626ecc",
             "templateTitle": "자기소개서 1",
             "templateDescription": "자기소개서 1"
           },
           {
+            "templateUUID": "f108fff1-e106-4340-b505-280e15626ecc",
             "templateTitle": "자기소개서 2",
             "templateDescription": "자기소개서 2"
           }
@@ -83,10 +89,12 @@
         "blockType": "snsBlock",
         "subData": [
           {
+            "snsUUID": "f108fff1-e106-4340-b505-280e15626ecc",
             "snsTitle": "facebook",
             "snsUrl": "asdf.facebook.com"
           },
           {
+            "snsUUID": "f108fff1-f106-4340-b505-280e15626ecc",
             "snsTitle": "instagram",
             "snsUrl": "adfd.instagram.com"
           }
@@ -98,7 +106,7 @@
         "subData": {
           "fileTitle": "포트폴리오1",
           "fileSubtitle": "2022년 포트폴리오",
-          "fileName": "portfolio2022.pdf",
+          "fileName": "portfolio2022+uuid.pdf",
           "file": "portfolio2022.pdf"
         }
       },
