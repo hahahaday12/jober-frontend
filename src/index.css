@@ -69,15 +69,12 @@
   background-color: #666;
 }
 
+.flat {
+  border: 1px solid var(--Light-Black, #2d2c38);
+  background: var(--Light-Gray, #fafafa);
+}
 .shadow {
-  /* 순수 CSS로 바꾸기 */
-  --tw-shadow: 3px 3px 0 0;
-  --tw-shadow-colored: 3px 3px 0 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  --tw-bg-opacity: 1;
-  background-color: rgb(250 250 250 / var(--tw-bg-opacity));
-  border: 1px solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(45 44 56 / var(--tw-border-opacity));
+  border: 1px solid var(--Light-Black, #2d2c38);
+  background: var(--Light-Gray, #fafafa);
+  box-shadow: 3px 3px 0px 0px #2d2c38;
 }

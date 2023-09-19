@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import brushIcon from '@/assets/icons/brush.svg';
-import { CustomizationModal } from '../customizationInner/CustomizationModal.1';
+import { CustomizationModal } from '../customizationInner/CustomizationModal';
 import { useState } from 'react';
 
 export const CustomizationLayout = () => {
@@ -22,7 +22,7 @@ export const CustomizationLayout = () => {
         handleCancel={handleCancel}
       />
       <Button
-        className="flex items-center justify-center gap-[6px] w-[174px] h-[62px] rounded-full fixed bottom-10 right-10"
+        className=" z-10 flex items-center justify-center gap-[6px] w-[174px] h-[62px] rounded-full fixed bottom-10 right-10"
         onClick={() => setIsModalOpen(true)}
       >
         <img src={brushIcon} alt="brush icon" />

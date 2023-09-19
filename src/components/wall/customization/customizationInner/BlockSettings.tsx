@@ -1,19 +1,16 @@
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
-import { BLOCK_SHAPE } from '@/data/constants/customization';
+import { BLOCK_SHAPE, BLOCK_STYLE } from '@/data/constants/customization';
+import { useEffect, useState } from 'react';
+import { Button, ColorPicker } from 'antd';
+import { Color } from 'antd/es/color-picker';
 
 export const BlockSettings = () => {
-  const { wall, isEdit, setWall } = useWallStore();
+  const { wall, setWall } = useWallStore();
+  const [color, setColor] = useState<Color | string>(wall.style.block.color);
 
   // 블록-모양
   const handleBorder = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setWall({
-    //   ...wall,
-    //   style: {
-    //     ...wall.style,
-    //     block: { ...wall.style.block, shape: e.target.value },
-    //   },
-    // });
     //immer
     setWall(
       produce(wall, (draft) => {
@@ -30,17 +27,31 @@ export const BlockSettings = () => {
         draft.style.block.style = e.target.value as 'none' | 'shadow' | 'flat';
       }),
     );
+    console.log(e.target.value);
   };
 
   // 블록-스타일 컬러
-  const handleStyleColor = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // const handleStyleColor = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setWall(
+  //     produce(wall, (draft) => {
+  //       draft.style.block.color = e.target.value; //질문
+  //     }),
+  //   );
+  //   console.log(e.target.value);
+  // };
+  useEffect(() => {
+    const bgColor = typeof color === 'string' ? color : color.toHexString();
     setWall(
       produce(wall, (draft) => {
-        draft.style.block.color = e.target.value; //질문
+        draft.style.background.color = bgColor;
       }),
     );
-    console.log(e.target.value);
+  }, [color]);
+
+  const handleColorChange = (newColor: Color) => {
+    setColor(newColor.toHexString());
   };
+
   // 블록-스타일 컬러 그라데이션
   const handleStyleGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
@@ -72,61 +83,34 @@ export const BlockSettings = () => {
               />
             </label>
           ))}
-
           <div className="dm-16 mt-[10px]">모양</div>
         </div>
 
         <div className="flex flex-col gap-[8px]">
-          <label
-            className={`bg-lightGray w-[194px] h-[30px] block hover ${
-              wall.style.block.style === 'none' && 'ring-blue ring-1'
-            }`}
-          >
-            <input
-              className="hidden"
-              type="radio"
-              name="style"
-              value="none"
-              checked={wall.style.block.style === 'none'}
-              onChange={handleStyle}
-            />
-          </label>
-          <label
-            className={`bg-lightGray border-[1px] border-solid border-lightBlack w-[194px] h-[30px] block hover ${
-              wall.style.block.style === 'flat' && 'ring-blue ring-1'
-            }`}
-          >
-            <input
-              className="hidden"
-              type="radio"
-              name="style"
-              value="flat"
-              checked={wall.style.block.style === 'flat'}
-              onChange={handleStyle}
-            />
-          </label>
-          <label
-            className={`shadow-[3px_3px_0_0] bg-lightGray border-[1px] border-solid border-lightBlack w-[194px] h-[30px] block hover ${
-              wall.style.block.style === 'shadow' && 'ring-blue ring-1'
-            }`}
-          >
-            <input
-              className="hidden"
-              type="radio"
-              name="style"
-              value="shadow"
-              checked={wall.style.block.style === 'shadow'}
-              onChange={handleStyle}
-            />
-          </label>
+          {BLOCK_STYLE.map((style) => (
+            <label
+              className={`bg-lightGray w-[194px] h-[30px] block hover ${
+                wall.style.block.style === style && 'ring-blue ring-1'
+              }`}
+            >
+              <input
+                className="hidden"
+                type="radio"
+                name="style"
+                value={style}
+                checked={wall.style.block.style === style}
+                onChange={handleStyle}
+              />
+            </label>
+          ))}
           <div className="dm-16 mt-[8px]">스타일</div>
         </div>
 
-        {/* 스타일 색상 - 컬러, 그라데이션 어떻게 처리할지 생각하기 */}
+        {/* 블록-색상 */}
         <div className="flex flex-col gap-[10px]">
           <label
             className={` bg-sky rounded-[8px] w-[194px] h-[48px] block hover ${
-              wall.style.block.color === '#eee' && 'ring-blue ring-1'
+              wall.style.block.color === color && 'ring-blue ring-1'
             }`}
           >
             <input
@@ -134,20 +118,19 @@ export const BlockSettings = () => {
               type="radio"
               name="style"
               value="color"
-              checked={wall.style.block.color === '#eee'}
-              onChange={handleStyleColor}
+              checked={wall.style.block.color === color}
+              //onChange={handleStyleColor}
             />
-            {/* <ColorPicker value={color} onChange={setColor}>
+            <ColorPicker value={color} onChange={handleColorChange}>
               <Button
                 type="primary"
-                style={btnStyle}
-                className="w-[194px] h-[48px]"
-              >
-                컬러 피커
-              </Button>
-            </ColorPicker> */}
+                className={`w-[194px] h-[48px] rounded-[8px]`}
+                style={{ backgroundColor: color as string }}
+              />
+            </ColorPicker>
           </label>
-          {/* 그라데이션 */}
+
+          {/* 블록-그라데이션 */}
           <label
             className={`bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)] bg-sky rounded-[8px] w-[194px] h-[48px] block hover ${
               wall.style.block.gradation === true && 'ring-blue ring-1'
