@@ -11,6 +11,14 @@
     },
     "blocks": [
       {
+        "blockUUID": "124bf0e4-b861-46c2-939e-c3db0ad1c432",
+        "blockType": "freeBlock",
+        "subData": {
+          "freeTitle": "자유의 여신상 블록입니다.",
+          "freeDescription": "<p style=\"text-align: left;\"><strong>1. 자버</strong></p><p><strong>2. 버스</strong></p><p>3. 스타</p><p><u>4. 타조</u></p><p><sup><span style=\"font-family: Impact, Charcoal, sans-serif;\">5. 조리</span></sup></p>"
+        }
+      },
+      {
         "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
         "blockType": "snsBlock",
         "subData": [
@@ -91,19 +99,11 @@
         }
       },
       {
-        "blockUUID": "124bf0e4-b861-46c2-939e-c3db0ad1c432",
-        "blockType": "freeBlock",
-        "subData": {
-          "freeTitle": "자유블록 제목",
-          "freeDescription": "자유블록 내용"
-        }
-      },
-      {
         "blockUUID": "224bf0e4-b861-46c2-939e-c3db0ad1c402",
         "blockType": "freeBlock",
         "subData": {
-          "freeTitle": "자유블록 제목",
-          "freeDescription": "자유블록 내용"
+          "freeTitle": "자유롭게 저하늘을",
+          "freeDescription": "<p>날아가도 놀라지마라탕</p>"
         }
       },
       {
@@ -140,14 +140,6 @@
           "fileSubtitle": "2023년 포트폴리오2",
           "fileName": "portfolio2023.pdf",
           "file": "portfolio2023.pdf"
-        }
-      },
-      {
-        "blockUUID": "ba7f3ee6-d212-4ed3-a33d-29e2dc7e3f2b",
-        "blockType": "freeBlock",
-        "subData": {
-          "freeTitle": "",
-          "freeDescription": ""
         }
       }
     ],

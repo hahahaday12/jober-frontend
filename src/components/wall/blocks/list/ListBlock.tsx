@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Input } from 'antd';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
@@ -17,34 +17,22 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
   const { isEdit, wall, setWall } = useWallStore();
   const [isListTitleEdit, setIsListTitleEdit] = useState(false);
 
-  const targetListBlock = useMemo(
-    () => wall.blocks.find((block) => block.blockUUID === blockUUID),
-    [blockUUID, wall.blocks],
+  const targetListBlockIndex = wall.blocks.findIndex(
+    (block) => block.blockUUID === blockUUID,
   );
-  const targetListBlockIndex = useMemo(
-    () => wall.blocks.findIndex((block) => block.blockUUID === blockUUID),
-    [blockUUID, wall.blocks],
-  );
+  const targetListBlock = wall.blocks[targetListBlockIndex];
 
-  const handleListTile = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setWall(
-        produce(wall, (draft) => {
-          const listBlockIndex = draft.blocks.findIndex(
-            (block) => block.blockUUID === blockUUID,
-          );
-          if (listBlockIndex !== -1) {
-            (
-              draft.blocks[listBlockIndex].subData as SubDataClassType
-            ).listTitle = e.target.value;
-          }
-        }),
-      );
-    },
-    [blockUUID, setWall, wall],
-  );
+  const handleListTile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWall(
+      produce(wall, (draft) => {
+        (
+          draft.blocks[targetListBlockIndex].subData as SubDataClassType
+        ).listTitle = e.target.value;
+      }),
+    );
+  };
 
-  const handleAddList = useCallback(() => {
+  const handleAddList = () => {
     setWall(
       produce(wall, (draft) => {
         const listBlockIndex = draft.blocks.findIndex(
@@ -62,7 +50,7 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
         }
       }),
     );
-  }, [blockUUID, setWall, wall]);
+  };
 
   return (
     <BlockContainer blockName="listBlock" blockUUID={blockUUID}>
