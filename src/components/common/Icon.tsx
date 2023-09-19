@@ -5,5 +5,13 @@ interface IconProps {
 }
 
 export const Icon = ({ src, onClick, className }: IconProps) => {
-  return <img src={src} alt={src} className={className} onClick={onClick} />;
+  return (
+    <img
+      draggable={false}
+      src={src}
+      alt={src}
+      className={className}
+      onClick={onClick}
+    />
+  );
 };

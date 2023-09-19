@@ -1,16 +1,23 @@
+import { ADDABLE_SNSS } from '@/data/constants/blocks';
 import { Input } from 'antd';
 
-const SnsModalInput = ({ sns }: { sns: string }) => {
+type SnsModalInputProps = {
+  sns: string;
+  snsInput: string;
+  setSnsInput: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const SnsModalInput = ({ sns, setSnsInput, snsInput }: SnsModalInputProps) => {
   return (
     <div className="text-center">
       <Input
-        className="mb-[6px] rounded-[10px] bg-sky w-[395px]"
+        className="mt-[24px] mb-[6px] rounded-[10px] bg-sky w-[395px]"
         addonBefore={
-          <div className="dm-14 text-gray88 ">{`${sns.toLowerCase()}.com/`}</div>
+          <div className="dm-14 text-gray88 ">{`${ADDABLE_SNSS[sns].url}`}</div>
         }
         placeholder="주소를 입력해주세요"
-        // value={wallIdInput}
-        // onChange={(e) => setwallIdInput(e.target.value)}
+        value={snsInput}
+        onChange={(e) => setSnsInput(e.target.value)}
       />
     </div>
   );

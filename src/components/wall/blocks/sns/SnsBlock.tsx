@@ -2,7 +2,7 @@ import { Button, Popconfirm } from 'antd';
 import { useMemo, useState } from 'react';
 import { useWallStore } from '@/store';
 import { BlockContainer, SnsBlockModal } from 'components/index';
-import { SingleSnsType, SubDataClassType, SubDatumType } from '@/types/wall';
+import { SingleSnsType, SubDatumType } from '@/types/wall';
 import { Icon } from '@/components/common';
 import { ADDABLE_SNSS } from '@/data/constants/blocks';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
@@ -10,13 +10,22 @@ import { produce } from 'immer';
 
 interface SnsBlockProps {
   blockUUID?: string;
-  subData?: SubDatumType[] | SubDataClassType;
+  subData?: SubDatumType[];
 }
 
 export const SnsBlock = ({ blockUUID, subData }: SnsBlockProps) => {
   const [isSnsModalOpen, setIsSnsModalOpen] = useState(false);
 
   const { isEdit, wall, setWall } = useWallStore();
+
+  const unregisteredSns = useMemo(
+    () =>
+      Object.keys(ADDABLE_SNSS).filter(
+        (sns) =>
+          !(subData as SubDatumType[]).map((sns) => sns.snsTitle).includes(sns),
+      ),
+    [subData],
+  );
 
   const handleClickSnsIcons = (sns: SingleSnsType) => {
     !isEdit && window.open(sns.snsUrl, '_blank');
@@ -37,11 +46,6 @@ export const SnsBlock = ({ blockUUID, subData }: SnsBlockProps) => {
     }
   };
 
-  const registeredSns = useMemo(
-    () => (subData as SubDatumType[]).map((sns) => sns.snsTitle),
-    [subData],
-  );
-
   return (
     <BlockContainer blockName="snsBlock" blockUUID={blockUUID}>
       <div className="px-[28px] py-[26px]">
@@ -53,10 +57,10 @@ export const SnsBlock = ({ blockUUID, subData }: SnsBlockProps) => {
         )}
 
         <div className="flex gap-[24px] justify-center">
-          {(subData as SubDatumType[])?.map((sns) => (
+          {subData?.map((sns) => (
             <div
               key={sns.snsUUID}
-              className="relative rounded-full group overflow-hidden"
+              className="relative rounded-full group overflow-hidden hover"
             >
               <Popconfirm
                 title="SNS 연결해제"
@@ -66,20 +70,20 @@ export const SnsBlock = ({ blockUUID, subData }: SnsBlockProps) => {
                 disabled={!isEdit}
                 okButtonProps={{ danger: true }}
               >
-                <div className="hover">
+                <div>
                   <Icon
                     src={ADDABLE_SNSS[sns.snsTitle as string].svg}
-                    className="w-[60px] h-[60px] rounded-full group-hover:hover"
+                    className="w-[60px] h-[60px] rounded-full"
                     onClick={() => handleClickSnsIcons(sns as SingleSnsType)}
                   />
                   {isEdit && (
-                    <CloseOutlined className="group-hover:block hidden font-extrabold absolute top-[21.5px] left-[21.5px]" />
+                    <CloseOutlined className="group-hover:block hidden absolute top-[21.5px] left-[21.5px]" />
                   )}
                 </div>
               </Popconfirm>
             </div>
           ))}
-          {isEdit && (
+          {isEdit && unregisteredSns.length > 0 && (
             <Button
               shape="circle"
               type="default"
@@ -91,7 +95,7 @@ export const SnsBlock = ({ blockUUID, subData }: SnsBlockProps) => {
           )}
 
           <SnsBlockModal
-            registeredSns={registeredSns}
+            unregisteredSns={unregisteredSns}
             isSnsModalOpen={isSnsModalOpen}
             setIsSnsModalOpen={setIsSnsModalOpen}
           />
