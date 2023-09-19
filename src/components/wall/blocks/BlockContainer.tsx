@@ -28,9 +28,12 @@ export const BlockContainer = ({
 
   return (
     <div
-      className={`bg-white rounded-[${
-        wall?.style?.block?.shape
-      }] overflow-hidden relative ${isEdit && 'text-gray88'}`}
+      className={`rounded-[${wall?.style?.block?.shape}] ${
+        wall?.style?.block?.style
+      } border-solid border-lightBlack overflow-hidden relative ${
+        isEdit && 'text-gray88'
+      }`}
+      style={{ backgroundColor: wall?.style?.block?.color }}
     >
       {blockName !== 'profileBlock' && (
         <>

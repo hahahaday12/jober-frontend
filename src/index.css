@@ -68,3 +68,13 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #666;
 }
+
+.flat {
+  border: 1px solid var(--Light-Black, #2d2c38);
+  background: var(--Light-Gray, #fafafa);
+}
+.shadow {
+  border: 1px solid var(--Light-Black, #2d2c38);
+  background: var(--Light-Gray, #fafafa);
+  box-shadow: 3px 3px 0px 0px #2d2c38;
+}
