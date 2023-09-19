@@ -11,20 +11,59 @@
     },
     "blocks": [
       {
+        "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
+        "blockType": "snsBlock",
+        "subData": [
+          {
+            "snsUUID": "f108fff1-e106-4340-b505-280e15626ecc",
+            "snsTitle": "facebook",
+            "snsUrl": "https://www.facebook.com/neocsv"
+          },
+          {
+            "snsUUID": "f108fff1-1106-4340-b505-280e15626ecc",
+            "snsTitle": "instagram",
+            "snsUrl": "https://www.instagram.com/shin0._.e/"
+          },
+          {
+            "snsUUID": "f108fff1-2106-4340-b505-280e15626ecc",
+            "snsTitle": "linkedin",
+            "snsUrl": "https://www.linkedin.com/in/drsohail269/"
+          },
+          {
+            "snsUUID": "f108fff1-3106-4340-b505-280e15626ecc",
+            "snsTitle": "github",
+            "snsUrl": "https://github.com/howooking"
+          },
+          {
+            "snsUUID": "f108fff1-4106-4340-b505-280e15626ecc",
+            "snsTitle": "behance",
+            "snsUrl": "https://www.behance.net/siwangchan"
+          }
+        ]
+      },
+      {
         "blockUUID": "f108fff1-0106-4340-b505-280e15626ecc",
         "blockType": "listBlock",
         "subData": {
-          "listTitle": "학력경력",
+          "listTitle": "학력/경력",
           "lists": [
             {
-              "listSubtitle": "학력",
-              "listDescription": "서울대학교",
+              "listUUID": "f108fff1-a106-4340-b505-280e15626ecc",
+              "listSubtitle": "졸업한 학교",
+              "listDescription": "카이스트/ 화학공학과",
               "isLink": false
             },
             {
-              "listSubtitle": "경력",
-              "listDescription": "www.naver.com",
+              "listUUID": "5f1b0451-306d-4ea2-a379-cbaa31bb0974",
+              "listSubtitle": "깃허브링크",
+              "listDescription": "https://www.naver.com",
               "isLink": true
+            },
+            {
+              "listUUID": "84ac4528-76e2-43bc-bdb8-6e607e3f706c",
+              "listSubtitle": "경력",
+              "listDescription": "CTO",
+              "isLink": false
             }
           ]
         }
@@ -36,13 +75,21 @@
           "listTitle": "자격증",
           "lists": [
             {
+              "listUUID": "f108fff1-c106-4340-b505-280e15626ecc",
               "listSubtitle": "운전면허증",
               "listDescription": "2종보통",
               "isLink": false
             },
             {
+              "listUUID": "1b539400-5bfb-4459-b60d-ba65080d8211",
+              "listSubtitle": "토익",
+              "listDescription": "930점",
+              "isLink": false
+            },
+            {
+              "listUUID": "2d7394be-a1d9-4d58-ac94-9543e5116611",
               "listSubtitle": "바리스타자격증",
-              "listDescription": "스타벅스",
+              "listDescription": "커피 물조절 잘함",
               "isLink": false
             }
           ]
@@ -69,26 +116,14 @@
         "blockType": "templatesBlock",
         "subData": [
           {
+            "templateUUID": "f108fff1-d106-4340-b505-280e15626ecc",
             "templateTitle": "자기소개서 1",
             "templateDescription": "자기소개서 1"
           },
           {
+            "templateUUID": "f108fff1-e106-4340-b505-280e15626ecc",
             "templateTitle": "자기소개서 2",
             "templateDescription": "자기소개서 2"
-          }
-        ]
-      },
-      {
-        "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
-        "blockType": "snsBlock",
-        "subData": [
-          {
-            "snsTitle": "facebook",
-            "snsUrl": "asdf.facebook.com"
-          },
-          {
-            "snsTitle": "instagram",
-            "snsUrl": "adfd.instagram.com"
           }
         ]
       },
@@ -98,7 +133,7 @@
         "subData": {
           "fileTitle": "포트폴리오1",
           "fileSubtitle": "2022년 포트폴리오",
-          "fileName": "portfolio2022.pdf",
+          "fileName": "portfolio2022+uuid.pdf",
           "file": "portfolio2022.pdf"
         }
       },
@@ -128,9 +163,10 @@
         "image": "https://images.unsplash.com/photo-1692606674503-267da3da7da7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2680&q=80"
       },
       "block": {
+        "color": "#eee",
         "gradation": false,
-        "shape": "13px",
-        "style": "flat"
+        "shape": "0px",
+        "style": "none"
       },
       "theme": null
     }
