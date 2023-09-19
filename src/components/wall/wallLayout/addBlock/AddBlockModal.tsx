@@ -3,7 +3,7 @@ import { useWallStore } from '@/store';
 import { Modal } from 'antd';
 import { produce } from 'immer';
 import { useMemo, useState } from 'react';
-import { AddBlockHeader } from './AddBlockHeader';
+import { ModalHeader } from '../../../common/ModalHeader';
 import { v4 as uuidv4 } from 'uuid';
 import { BlockElementType } from '@/types/wall';
 import { AddableBlock } from './AddableBlock';
@@ -55,7 +55,8 @@ export const AddBlockModal = ({
       centered
       closeIcon={false}
       title={
-        <AddBlockHeader
+        <ModalHeader
+          text="항목 추가하기"
           handleCloseModal={handleCloseModal}
           handleAddBLock={handleAddBLock}
         />
