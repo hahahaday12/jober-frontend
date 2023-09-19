@@ -5,8 +5,8 @@ import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { produce } from 'immer';
 import { useCallback, useState } from 'react';
 import editIcon from '@/assets/icons/edit.svg';
-import Icon from '@/components/Icon';
 import minusIcon from '@/assets/icons/minus.svg';
+import { Icon } from '@/components/common';
 
 interface ListProps {
   id: number;

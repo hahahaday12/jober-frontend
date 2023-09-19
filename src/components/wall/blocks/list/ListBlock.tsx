@@ -6,7 +6,7 @@ import { BlockContainer, SingleList } from 'components/index';
 import { BlockType, SubDataClassType, SubDatumType } from '@/types/wall';
 import editThickIcon from '@/assets/icons/edit-thick.svg';
 import plusIcon from '@/assets/icons/plus.svg';
-import Icon from '@/components/Icon';
+import { Icon } from '@/components/common';
 
 interface ListBlockProps {
   blockUUID?: string;
@@ -66,12 +66,8 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
 
   return (
     <BlockContainer blockName="listBlock" blockUUID={blockUUID}>
-      <div className="px-[28px] pt-[26px] pb-[22px] flex flex-col">
-        <div
-          className={`flex items-center gap-[6px] db-20 mb-[16px] ${
-            isEdit && 'text-gray88'
-          }`}
-        >
+      <div className="px-[28px] py-[26px] flex flex-col">
+        <div className={`flex items-center gap-[6px] db-20 mb-[16px]`}>
           {isListTitleEdit ? (
             <Input
               placeholder="블록 제목을 입력해주세요."
