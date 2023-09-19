@@ -3,10 +3,11 @@ import { useWallStore } from '@/store';
 import { Modal } from 'antd';
 import { produce } from 'immer';
 import { useMemo, useState } from 'react';
-import { ModalHeader } from '../../../common/ModalHeader';
+scrollX;
 import { v4 as uuidv4 } from 'uuid';
 import { BlockElementType } from '@/types/wall';
 import { AddableBlock } from './AddableBlock';
+import { ModalHeader } from '@/components/common/ModalHeader';
 
 interface AddBlockModalProps {
   setIsAddBlockModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

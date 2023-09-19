@@ -6,7 +6,6 @@ import { SingleSnsType, SubDataClassType, SubDatumType } from '@/types/wall';
 import { Icon } from '@/components/common';
 import { ADDABLE_SNSS } from '@/data/constants/blocks';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
-import Test from '@/test';
 import { produce } from 'immer';
 
 interface SnsBlockProps {
@@ -37,6 +36,11 @@ export const SnsBlock = ({ blockUUID, subData }: SnsBlockProps) => {
       );
     }
   };
+
+  const registeredSns = useMemo(
+    () => (subData as SubDatumType[]).map((sns) => sns.snsTitle),
+    [subData],
+  );
 
   return (
     <BlockContainer blockName="snsBlock" blockUUID={blockUUID}>
@@ -84,6 +88,7 @@ export const SnsBlock = ({ blockUUID, subData }: SnsBlockProps) => {
           )}
 
           <SnsBlockModal
+            registeredSns={registeredSns}
             isSnsModalOpen={isSnsModalOpen}
             setIsSnsModalOpen={setIsSnsModalOpen}
           />
