@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Input } from 'antd';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
@@ -6,7 +6,7 @@ import { BlockContainer, SingleList } from 'components/index';
 import { BlockType, SubDataClassType, SubDatumType } from '@/types/wall';
 import editThickIcon from '@/assets/icons/edit-thick.svg';
 import plusIcon from '@/assets/icons/plus.svg';
-import Icon from '@/components/Icon';
+import { Icon } from '@/components/common';
 
 interface ListBlockProps {
   blockUUID?: string;
@@ -17,34 +17,22 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
   const { isEdit, wall, setWall } = useWallStore();
   const [isListTitleEdit, setIsListTitleEdit] = useState(false);
 
-  const targetListBlock = useMemo(
-    () => wall.blocks.find((block) => block.blockUUID === blockUUID),
-    [blockUUID, wall.blocks],
+  const targetListBlockIndex = wall.blocks.findIndex(
+    (block) => block.blockUUID === blockUUID,
   );
-  const targetListBlockIndex = useMemo(
-    () => wall.blocks.findIndex((block) => block.blockUUID === blockUUID),
-    [blockUUID, wall.blocks],
-  );
+  const targetListBlock = wall.blocks[targetListBlockIndex];
 
-  const handleListTile = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setWall(
-        produce(wall, (draft) => {
-          const listBlockIndex = draft.blocks.findIndex(
-            (block) => block.blockUUID === blockUUID,
-          );
-          if (listBlockIndex !== -1) {
-            (
-              draft.blocks[listBlockIndex].subData as SubDataClassType
-            ).listTitle = e.target.value;
-          }
-        }),
-      );
-    },
-    [blockUUID, setWall, wall],
-  );
+  const handleListTile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWall(
+      produce(wall, (draft) => {
+        (
+          draft.blocks[targetListBlockIndex].subData as SubDataClassType
+        ).listTitle = e.target.value;
+      }),
+    );
+  };
 
-  const handleAddList = useCallback(() => {
+  const handleAddList = () => {
     setWall(
       produce(wall, (draft) => {
         const listBlockIndex = draft.blocks.findIndex(
@@ -62,16 +50,12 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
         }
       }),
     );
-  }, [blockUUID, setWall, wall]);
+  };
 
   return (
     <BlockContainer blockName="listBlock" blockUUID={blockUUID}>
-      <div className="px-[28px] pt-[26px] pb-[22px] flex flex-col">
-        <div
-          className={`flex items-center gap-[6px] db-20 mb-[16px] ${
-            isEdit && 'text-gray88'
-          }`}
-        >
+      <div className="px-[28px] py-[26px] flex flex-col">
+        <div className={`flex items-center gap-[6px] db-20 mb-[16px]`}>
           {isListTitleEdit ? (
             <Input
               placeholder="블록 제목을 입력해주세요."

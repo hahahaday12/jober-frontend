@@ -1,71 +1,103 @@
-import { Button } from 'antd';
-import { useState } from 'react';
-import {
-  FacebookOutlined,
-  GithubOutlined,
-  InstagramOutlined,
-  LinkedinOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
+import { Button, Popconfirm } from 'antd';
+import { useMemo, useState } from 'react';
 import { useWallStore } from '@/store';
 import { BlockContainer, SnsBlockModal } from 'components/index';
-import { BlockType, SubDataClassType, SubDatumType } from '@/types/wall';
-
-export interface Sns {
-  title: string;
-  href: string;
-}
-
-const SNS_ICONS: {
-  [key: string]: JSX.Element;
-} = {
-  facebook: <FacebookOutlined />,
-  instagram: <InstagramOutlined />,
-  linkedin: <LinkedinOutlined />,
-  github: <GithubOutlined />,
-};
+import { SingleSnsType, SubDatumType } from '@/types/wall';
+import { Icon } from '@/components/common';
+import { ADDABLE_SNSS } from '@/data/constants/blocks';
+import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
+import { produce } from 'immer';
 
 interface SnsBlockProps {
   blockUUID?: string;
-  blockType?: BlockType;
-  subData?: SubDatumType[] | SubDataClassType;
+  subData?: SubDatumType[];
 }
 
-export const SnsBlock = ({ blockUUID, blockType, subData }: SnsBlockProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export const SnsBlock = ({ blockUUID, subData }: SnsBlockProps) => {
+  const [isSnsModalOpen, setIsSnsModalOpen] = useState(false);
 
-  const { isEdit, wall } = useWallStore();
+  const { isEdit, wall, setWall } = useWallStore();
+
+  const unregisteredSns = useMemo(
+    () =>
+      Object.keys(ADDABLE_SNSS).filter(
+        (sns) =>
+          !(subData as SubDatumType[]).map((sns) => sns.snsTitle).includes(sns),
+      ),
+    [subData],
+  );
+
+  const handleClickSnsIcons = (sns: SingleSnsType) => {
+    !isEdit && window.open(sns.snsUrl, '_blank');
+  };
+
+  const handleDeleteSingleSns = (snsUUID: string) => {
+    const snsBlockIndex = wall.blocks.findIndex(
+      (block) => block.blockType === 'snsBlock',
+    );
+    if (snsBlockIndex !== -1) {
+      setWall(
+        produce(wall, (draft) => {
+          draft.blocks[snsBlockIndex].subData = (
+            draft.blocks[snsBlockIndex].subData as SubDatumType[]
+          ).filter((sns) => sns.snsUUID !== snsUUID);
+        }),
+      );
+    }
+  };
 
   return (
     <BlockContainer blockName="snsBlock" blockUUID={blockUUID}>
-      <div className="p-7 space-y-5">
-        <div className="flex items-center text-gray-600 gap-2">
-          <h4 className="flex text-xl font-bold items-center">SNS 연결</h4>
-          <p>보여주고 싶은 SNS를 연결해주세요!</p>
-        </div>
-        <div className="flex gap-3 justify-center">
-          {wall.snsBlock?.map((sns) => (
-            <Button
-              key={sns.snsUrl}
-              className="w-16 h-16 text-4xl"
-              shape="circle"
+      <div className="px-[28px] py-[26px]">
+        {isEdit && (
+          <div className="flex items-center gap-[8px] mb-[23px]">
+            <p className="db-20">SNS 연결</p>
+            <p className="dm-16">보여주고 싶은 SNS를 연결해주세요!</p>
+          </div>
+        )}
+
+        <div className="flex gap-[24px] justify-center">
+          {subData?.map((sns) => (
+            <div
+              key={sns.snsUUID}
+              className="relative rounded-full group overflow-hidden hover"
             >
-              <a target="_blank" href={sns.snsUrl}>
-                {SNS_ICONS[sns.snsTitle]}
-              </a>
-            </Button>
+              <Popconfirm
+                title="SNS 연결해제"
+                description="정말로 해당 SNS연결을 해제하시겠습니까?"
+                showCancel={false}
+                onConfirm={() => handleDeleteSingleSns(sns.snsUUID as string)}
+                disabled={!isEdit}
+                okButtonProps={{ danger: true }}
+              >
+                <div>
+                  <Icon
+                    src={ADDABLE_SNSS[sns.snsTitle as string].svg}
+                    className="w-[60px] h-[60px] rounded-full"
+                    onClick={() => handleClickSnsIcons(sns as SingleSnsType)}
+                  />
+                  {isEdit && (
+                    <CloseOutlined className="group-hover:block hidden absolute top-[21.5px] left-[21.5px]" />
+                  )}
+                </div>
+              </Popconfirm>
+            </div>
           ))}
-          <Button
-            shape="circle"
-            type="default"
-            className={`w-16 h-16 ${!isEdit && 'hidden'}`}
-            onClick={() => setIsModalOpen(true)}
-          >
-            <PlusOutlined />
-          </Button>
+          {isEdit && unregisteredSns.length > 0 && (
+            <Button
+              shape="circle"
+              type="default"
+              className="w-[60px] h-[60px] flex justify-center items-center"
+              onClick={() => setIsSnsModalOpen(true)}
+            >
+              <PlusOutlined />
+            </Button>
+          )}
+
           <SnsBlockModal
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
+            unregisteredSns={unregisteredSns}
+            isSnsModalOpen={isSnsModalOpen}
+            setIsSnsModalOpen={setIsSnsModalOpen}
           />
         </div>
       </div>

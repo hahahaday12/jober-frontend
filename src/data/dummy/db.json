@@ -11,6 +11,40 @@
     },
     "blocks": [
       {
+        "blockUUID": "124bf0e4-b861-46c2-939e-c3db0ad1c432",
+        "blockType": "freeBlock",
+        "subData": {
+          "freeTitle": "자유의 여신상 블록입니다.",
+          "freeDescription": "<p style=\"text-align: left;\"><strong>1. 자버</strong></p><p><strong>2. 버스</strong></p><p>3. 스타</p><p><u>4. 타조</u></p><p><sup><span style=\"font-family: Impact, Charcoal, sans-serif;\">5. 조리</span></sup></p>"
+        }
+      },
+      {
+        "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
+        "blockType": "snsBlock",
+        "subData": [
+          {
+            "snsUUID": "f108fff1-e106-4340-b505-280e15626ecc",
+            "snsTitle": "facebook",
+            "snsUrl": "https://www.facebook.com/neocsv"
+          },
+          {
+            "snsUUID": "f108fff1-1106-4340-b505-280e15626ecc",
+            "snsTitle": "instagram",
+            "snsUrl": "https://www.instagram.com/shin0._.e/"
+          },
+          {
+            "snsUUID": "f108fff1-2106-4340-b505-280e15626ecc",
+            "snsTitle": "linkedin",
+            "snsUrl": "https://www.linkedin.com/in/drsohail269/"
+          },
+          {
+            "snsUUID": "f108fff1-3106-4340-b505-280e15626ecc",
+            "snsTitle": "github",
+            "snsUrl": "https://github.com/howooking"
+          }
+        ]
+      },
+      {
         "blockUUID": "f108fff1-0106-4340-b505-280e15626ecc",
         "blockType": "listBlock",
         "subData": {
@@ -48,24 +82,28 @@
               "listSubtitle": "운전면허증",
               "listDescription": "2종보통",
               "isLink": false
+            },
+            {
+              "listUUID": "1b539400-5bfb-4459-b60d-ba65080d8211",
+              "listSubtitle": "토익",
+              "listDescription": "930점",
+              "isLink": false
+            },
+            {
+              "listUUID": "2d7394be-a1d9-4d58-ac94-9543e5116611",
+              "listSubtitle": "바리스타자격증",
+              "listDescription": "커피 물조절 잘함",
+              "isLink": false
             }
           ]
-        }
-      },
-      {
-        "blockUUID": "124bf0e4-b861-46c2-939e-c3db0ad1c432",
-        "blockType": "freeBlock",
-        "subData": {
-          "freeTitle": "자유블록 제목",
-          "freeDescription": "자유블록 내용"
         }
       },
       {
         "blockUUID": "224bf0e4-b861-46c2-939e-c3db0ad1c402",
         "blockType": "freeBlock",
         "subData": {
-          "freeTitle": "자유블록 제목",
-          "freeDescription": "자유블록 내용"
+          "freeTitle": "자유롭게 저하늘을",
+          "freeDescription": "<p>날아가도 놀라지마라탕</p>"
         }
       },
       {
@@ -81,22 +119,6 @@
             "templateUUID": "f108fff1-e106-4340-b505-280e15626ecc",
             "templateTitle": "자기소개서 2",
             "templateDescription": "자기소개서 2"
-          }
-        ]
-      },
-      {
-        "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
-        "blockType": "snsBlock",
-        "subData": [
-          {
-            "snsUUID": "f108fff1-e106-4340-b505-280e15626ecc",
-            "snsTitle": "facebook",
-            "snsUrl": "asdf.facebook.com"
-          },
-          {
-            "snsUUID": "f108fff1-f106-4340-b505-280e15626ecc",
-            "snsTitle": "instagram",
-            "snsUrl": "adfd.instagram.com"
           }
         ]
       },
@@ -118,14 +140,6 @@
           "fileSubtitle": "2023년 포트폴리오2",
           "fileName": "portfolio2023.pdf",
           "file": "portfolio2023.pdf"
-        }
-      },
-      {
-        "blockUUID": "ba7f3ee6-d212-4ed3-a33d-29e2dc7e3f2b",
-        "blockType": "freeBlock",
-        "subData": {
-          "freeTitle": "",
-          "freeDescription": ""
         }
       }
     ],
