@@ -8,21 +8,24 @@ import galleryIcon from '@/assets/icons/gallery.svg';
 export const BackgroundSettings = () => {
   const { wall, isEdit, setWall } = useWallStore();
 
-  const [color, setColor] = useState<Color | string>(
+  const [backgroundColor, setBackgroundColor] = useState<Color | string>(
     wall.style.background.color,
   );
 
   useEffect(() => {
-    const bgColor = typeof color === 'string' ? color : color.toHexString();
+    const bgColor =
+      typeof backgroundColor === 'string'
+        ? backgroundColor
+        : backgroundColor.toHexString();
     setWall(
       produce(wall, (draft) => {
         draft.style.background.color = bgColor;
       }),
     );
-  }, [color]);
+  }, [backgroundColor]);
 
   const handleColorChange = (newColor: Color) => {
-    setColor(newColor.toHexString());
+    setBackgroundColor(newColor.toHexString());
   };
 
   // 배경-그라데이션
@@ -60,7 +63,8 @@ export const BackgroundSettings = () => {
         <div className="flex flex-row gap-[10px]">
           <label
             className={`bg-sky rounded-[8px] w-[194px] h-[100px] block hover ${
-              wall.style.background.color === color && 'ring-blue ring-1'
+              wall.style.background.color === backgroundColor &&
+              'ring-blue ring-1'
             }`}
           >
             <input
@@ -68,14 +72,14 @@ export const BackgroundSettings = () => {
               type="radio"
               name="style"
               value="color"
-              checked={wall.style.background.color === color}
+              checked={wall.style.background.color === backgroundColor}
               //onChange={handleColor}
             />
-            <ColorPicker value={color} onChange={handleColorChange}>
+            <ColorPicker value={backgroundColor} onChange={handleColorChange}>
               <Button
                 type="primary"
                 className={`w-[194px] h-[100px] rounded-[8px]`}
-                style={{ backgroundColor: color as string }}
+                style={{ backgroundColor: backgroundColor as string }}
                 //style={{ backgroundColor }}
               />
             </ColorPicker>

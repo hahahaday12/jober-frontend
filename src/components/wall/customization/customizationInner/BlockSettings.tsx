@@ -7,7 +7,9 @@ import { Color } from 'antd/es/color-picker';
 
 export const BlockSettings = () => {
   const { wall, setWall } = useWallStore();
-  const [color, setColor] = useState<Color | string>(wall.style.block.color);
+  const [blockColor, setBlocklColor] = useState<Color | string>(
+    wall.style.block.color,
+  );
 
   // 블록-모양
   const handleBorder = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,16 +42,17 @@ export const BlockSettings = () => {
   //   console.log(e.target.value);
   // };
   useEffect(() => {
-    const bgColor = typeof color === 'string' ? color : color.toHexString();
+    const bgColor =
+      typeof blockColor === 'string' ? blockColor : blockColor.toHexString();
     setWall(
       produce(wall, (draft) => {
-        draft.style.background.color = bgColor;
+        draft.style.block.color = bgColor;
       }),
     );
-  }, [color]);
+  }, [blockColor]);
 
   const handleColorChange = (newColor: Color) => {
-    setColor(newColor.toHexString());
+    setBlocklColor(newColor.toHexString());
   };
 
   // 블록-스타일 컬러 그라데이션
@@ -70,8 +73,10 @@ export const BlockSettings = () => {
           {BLOCK_SHAPE.map((shape) => (
             <label
               className={`bg-lightGray border-[1px] border-solid border-line w-[194px] h-[30px] block hover ${
-                wall.style.block.shape === shape && 'ring-blue ring-1'
-              } rounded-[${shape}]`}
+                wall.style.block.shape === shape &&
+                'ring-blue ring-1 ring-offset-2'
+              }`}
+              style={{ borderRadius: shape }}
             >
               <input
                 className="hidden"
@@ -89,8 +94,9 @@ export const BlockSettings = () => {
         <div className="flex flex-col gap-[8px]">
           {BLOCK_STYLE.map((style) => (
             <label
-              className={`bg-lightGray w-[194px] h-[30px] block hover ${
-                wall.style.block.style === style && 'ring-blue ring-1'
+              className={`${style} bg-lightGray w-[194px] h-[30px] block hover ${
+                wall.style.block.style === style &&
+                'ring-blue ring-1 ring-offset-2'
               }`}
             >
               <input
@@ -106,11 +112,10 @@ export const BlockSettings = () => {
           <div className="dm-16 mt-[8px]">스타일</div>
         </div>
 
-        {/* 블록-색상 */}
         <div className="flex flex-col gap-[10px]">
           <label
             className={` bg-sky rounded-[8px] w-[194px] h-[48px] block hover ${
-              wall.style.block.color === color && 'ring-blue ring-1'
+              wall.style.block.color === blockColor && 'ring-blue ring-1'
             }`}
           >
             <input
@@ -118,14 +123,14 @@ export const BlockSettings = () => {
               type="radio"
               name="style"
               value="color"
-              checked={wall.style.block.color === color}
+              checked={wall.style.block.color === blockColor}
               //onChange={handleStyleColor}
             />
-            <ColorPicker value={color} onChange={handleColorChange}>
+            <ColorPicker value={blockColor} onChange={handleColorChange}>
               <Button
                 type="primary"
                 className={`w-[194px] h-[48px] rounded-[8px]`}
-                style={{ backgroundColor: color as string }}
+                style={{ backgroundColor: blockColor as string }}
               />
             </ColorPicker>
           </label>

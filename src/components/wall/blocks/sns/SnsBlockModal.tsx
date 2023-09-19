@@ -64,9 +64,9 @@ export const SnsBlockModal = ({
         closeIcon={false}
         title={
           <ModalHeader
-            text="SNS 연결하기"
+            title="SNS 연결하기"
             handleCloseModal={handleCloseSnsModal}
-            handleAddBLock={handleOk}
+            handleOk={handleOk}
           />
         }
         footer={null}
