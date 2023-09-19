@@ -6,7 +6,7 @@ import SnsModalInput from './SnsModalInput';
 import { ModalHeader } from '@/components/common/ModalHeader';
 
 interface SnsBlockModalProps {
-  registeredSns: string[];
+  registeredSns: (string | undefined)[];
   isSnsModalOpen: boolean;
   setIsSnsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }

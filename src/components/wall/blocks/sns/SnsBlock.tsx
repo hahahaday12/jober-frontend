@@ -45,10 +45,13 @@ export const SnsBlock = ({ blockUUID, subData }: SnsBlockProps) => {
   return (
     <BlockContainer blockName="snsBlock" blockUUID={blockUUID}>
       <div className="px-[28px] py-[26px]">
-        <div className="flex items-center gap-[8px] mb-[23px]">
-          <p className="db-20">SNS 연결</p>
-          <p className="dm-16">보여주고 싶은 SNS를 연결해주세요!</p>
-        </div>
+        {isEdit && (
+          <div className="flex items-center gap-[8px] mb-[23px]">
+            <p className="db-20">SNS 연결</p>
+            <p className="dm-16">보여주고 싶은 SNS를 연결해주세요!</p>
+          </div>
+        )}
+
         <div className="flex gap-[24px] justify-center">
           {(subData as SubDatumType[])?.map((sns) => (
             <div
