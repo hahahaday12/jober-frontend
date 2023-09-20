@@ -9,7 +9,7 @@ export const AddBlockButton = ({
 }) => {
   const { isEdit } = useWallStore();
   return (
-    <BlockContainer blockName="profileBlock">
+    <BlockContainer blockName="addButton">
       <div
         onClick={() => setIsAddBlockModalOpen(true)}
         className={`dm-16 hover text-gray88 flex justify-center items-center h-[76px] ${

@@ -33,9 +33,12 @@ export const BlockContainer = ({
       } border-solid border-lightBlack overflow-hidden relative ${
         isEdit && 'text-gray88'
       }`}
-      style={{ backgroundColor: wall?.style?.block?.color }}
+      style={{
+        backgroundColor: wall?.style?.block?.color,
+        border: `${blockName === 'addButton' && 'none'}`,
+      }}
     >
-      {blockName !== 'profileBlock' && (
+      {blockName !== 'profileBlock' && blockName !== 'addButton' && (
         <>
           {isEdit && (
             <>
