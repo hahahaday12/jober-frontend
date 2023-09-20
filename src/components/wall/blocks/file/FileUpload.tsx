@@ -3,6 +3,7 @@ import { useWallStore } from '@/store';
 import { BlockElementType, SubDataClassType } from '@/types/wall';
 import { produce } from 'immer';
 import resetInput from '@/assets/icons/reset-input.svg';
+import PdfPreview from './PdfPreview';
 
 type FileUploadProps = {
   isEdit: boolean;
@@ -74,10 +75,7 @@ export const FileUpload = ({
           />
         </div>
       ) : (
-        <>
-          미리보기 구현
-          {(targetFileBlock.subData as SubDataClassType).fileName}
-        </>
+        <PdfPreview targetFileBlock={targetFileBlock} />
       )}
     </div>
   );
