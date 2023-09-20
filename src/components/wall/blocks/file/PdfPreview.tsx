@@ -20,7 +20,7 @@ export default function PdfPreview({
 
   const [numPages, setNumPages] = useState<number>();
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }): void =>
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) =>
     setNumPages(numPages);
 
   const handleClickPrevious = () => {
@@ -37,8 +37,8 @@ export default function PdfPreview({
       setPageNumber(pageNumber + 1);
     }
   };
+
   const handleDownload = () => {
-    // Step 2: Convert Base64 to Blob
     const byteCharacters = atob(
       ((targetFileBlock.subData as SubDataClassType).file as string).split(
         ',',
@@ -51,19 +51,15 @@ export default function PdfPreview({
     const byteArray = new Uint8Array(byteNumbers);
     const blob = new Blob([byteArray], { type: 'application/octet-stream' });
 
-    // Step 3: Create Blob URL
     const blobUrl = URL.createObjectURL(blob);
 
-    // Step 4: Create an invisible anchor element
     const anchor = document.createElement('a');
     anchor.href = blobUrl;
     anchor.download =
-      (targetFileBlock.subData as SubDataClassType).fileName || 'file.txt'; // You can set a default file name
+      (targetFileBlock.subData as SubDataClassType).fileName || 'file.pdf';
 
-    // Step 5: Trigger a click event on the anchor element
     anchor.click();
 
-    // Step 6: Clean up
     URL.revokeObjectURL(blobUrl);
   };
 
