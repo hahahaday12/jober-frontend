@@ -2,32 +2,41 @@ import { useState } from 'react';
 import { Input } from 'antd';
 import { produce } from 'immer';
 import { useWallStore } from '@/store';
-import { EditOutlined } from '@ant-design/icons';
 import { BlockContainer, FileUpload } from 'components/index';
-import { BlockType, SubDataClassType, SubDatumType } from '@/types/wall';
+import { SubDataClassType } from '@/types/wall';
+import { Icon } from '@/components/common';
+import editThickIcon from '@/assets/icons/edit-thick.svg';
+import editIcon from '@/assets/icons/edit.svg';
 
 interface FileBlockProps {
   blockUUID?: string;
-  blockType?: BlockType;
-  subData?: SubDatumType[] | SubDataClassType;
 }
 
-export const FileBlock = ({
-  blockType,
-  blockUUID,
-  subData,
-}: FileBlockProps) => {
+export const FileBlock = ({ blockUUID }: FileBlockProps) => {
+  const { isEdit, wall, setWall } = useWallStore();
   const [isFileTitleEdit, setIsFileTitleEdit] = useState(false);
   const [isFileSubtitleEdit, setIsFileSubtitleEdit] = useState(false);
 
-  const { isEdit, wall, setWall } = useWallStore();
+  const tragetFileBlockIndex = wall.blocks.findIndex(
+    (block) => block.blockUUID === blockUUID,
+  );
+  const targetFileBlock = wall.blocks[tragetFileBlockIndex];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handleFileTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (draft.fileBlock as any)[name] = value;
+        (
+          draft.blocks[tragetFileBlockIndex].subData as SubDataClassType
+        ).fileTitle = e.target.value;
+      }),
+    );
+  };
+  const handleFileSubtitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWall(
+      produce(wall, (draft) => {
+        (
+          draft.blocks[tragetFileBlockIndex].subData as SubDataClassType
+        ).fileSubtitle = e.target.value;
       }),
     );
   };
@@ -38,16 +47,21 @@ export const FileBlock = ({
         <div className="flex text-xl font-bold items-center gap-2 text-gray-600">
           {isFileTitleEdit ? (
             <Input
+              className="w-1/3 px-1 py-0 "
               name="fileTitle"
-              value={wall.fileBlock?.fileTitle}
-              onChange={handleChange}
+              value={(targetFileBlock.subData as SubDataClassType).fileTitle}
+              onChange={handleFileTitle}
             />
           ) : (
-            <h4>{wall.fileBlock?.fileTitle || '파일블록제목'}</h4>
+            <div>
+              {(targetFileBlock.subData as SubDataClassType).fileTitle ||
+                '파일블록제목'}
+            </div>
           )}
           {isEdit && (
-            <EditOutlined
-              className="cursor-pointer"
+            <Icon
+              src={editThickIcon}
+              className="hover"
               onClick={() => setIsFileTitleEdit((prev) => !prev)}
             />
           )}
@@ -55,21 +69,30 @@ export const FileBlock = ({
         <div className="flex text-lg items-center gap-2 text-gray-600">
           {isFileSubtitleEdit ? (
             <Input
+              className="w-1/3 px-1 py-0 "
               name="fileSubtitle"
-              value={wall.fileBlock?.fileSubtitle}
-              onChange={handleChange}
+              value={(targetFileBlock.subData as SubDataClassType).fileSubtitle}
+              onChange={handleFileSubtitle}
             />
           ) : (
-            <h4>{wall.fileBlock?.fileSubtitle || '파일블록소제목'}</h4>
+            <div>
+              {(targetFileBlock.subData as SubDataClassType).fileSubtitle ||
+                '파일블록소제목'}
+            </div>
           )}
           {isEdit && (
-            <EditOutlined
-              className="cursor-pointer"
+            <Icon
+              src={editIcon}
+              className="hover"
               onClick={() => setIsFileSubtitleEdit((prev) => !prev)}
             />
           )}
         </div>
-        <FileUpload isEdit={isEdit} />
+        <FileUpload
+          isEdit={isEdit}
+          tragetFileBlockIndex={tragetFileBlockIndex}
+          targetFileBlock={targetFileBlock}
+        />
       </div>
     </BlockContainer>
   );
