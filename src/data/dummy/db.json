@@ -7,10 +7,36 @@
       "wallInfoTitle": "김현우",
       "wallInfoDescription": "안녕하세요, 건축가 김현우입니다.",
       "backgroundImgURL": "https://images.unsplash.com/photo-1694198250632-b2fbc6746e17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDN8Ym84alFLVGFFMFl8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=60",
-      "wallInfoImgURL": "https://avatars.githubusercontent.com/u/87072568?v=4",
-      "profileTitle": "이호"
+      "wallInfoImgURL": "https://avatars.githubusercontent.com/u/87072568?v=4"
     },
-    "blocks": [],
+    "blocks": [
+      {
+        "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
+        "blockType": "snsBlock",
+        "subData": [
+          {
+            "snsBlockUUID": "f108fff1-e106-4340-b505-280e15626ecc",
+            "snsType": "facebook",
+            "snsUrl": "https://www.facebook.com/neocsv"
+          },
+          {
+            "snsBlockUUID": "f108fff1-1106-4340-b505-280e15626ecc",
+            "snsType": "instagram",
+            "snsUrl": "https://www.instagram.com/shin0._.e/"
+          },
+          {
+            "snsBlockUUID": "f108fff1-2106-4340-b505-280e15626ecc",
+            "snsType": "linkedin",
+            "snsUrl": "https://www.linkedin.com/in/drsohail269/"
+          },
+          {
+            "snsBlockUUID": "f108fff1-3106-4340-b505-280e15626ecc",
+            "snsType": "github",
+            "snsUrl": "https://github.com/howooking"
+          }
+        ]
+      }
+    ],
     "styleSetting": {
       "backgroundSetting": {
         "solidColor": "#ffdaa2",

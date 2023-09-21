@@ -21,46 +21,23 @@ import { SubDatumType, WallType } from '@/types/wall';
 import { message } from 'antd';
 import { CustomizationLayout } from 'components/index';
 import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
+import useFetchWallData from '@/hooks/useFetchWallData';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
   // listBlock: <ListBlock />,
   // fileBlock: <FileBlock />,
-  // snsBlock: <SnsBlock />,
+  snsBlock: <SnsBlock />,
   // templatesBlock: <TemplatesBlock />,
   // freeBlock: <FreeBlock />,
 };
 
 export const WallPage = () => {
-  // const category: CategoryType = 'career';
-
   const { wallId } = useParams();
-
-  const [messageApi, contextHolder] = message.useMessage();
-
-  const { wall, setWall, isEdit } = useWallStore();
 
   const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
 
-  // wall data fetching
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('http://localhost:3000/wall');
-        if (response.ok) {
-          const wallData = (await response.json()) as WallType;
-          setWall(wallData);
-        }
-      } catch (error) {
-        console.log(error);
-        messageApi.error({ content: 'data fetching error' });
-      } finally {
-        setLoading(false);
-      }
-    };
-    getData();
-  }, [messageApi, setWall]);
+  const { contextHolder, isEdit, wall, loading, error, setWall } =
+    useFetchWallData();
 
   const [sortableBlocks, setSortableBlocks] = useState<
     {
@@ -105,6 +82,11 @@ export const WallPage = () => {
       }),
     );
   };
+
+  // TODO : 에러핸들링
+  if (error) {
+    return <div>ERROR, {error.message}</div>;
+  }
 
   return (
     <div
