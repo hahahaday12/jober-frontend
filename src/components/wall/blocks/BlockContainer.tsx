@@ -28,17 +28,17 @@ export const BlockContainer = ({
 
   return (
     <div
-      className={`rounded-[${wall?.style?.block?.shape}] ${
-        wall?.style?.block?.style
+      className={`rounded-[${wall?.styleSetting?.blockSetting?.shape}] ${
+        wall?.styleSetting?.blockSetting?.style
       } border-solid border-lightBlack overflow-hidden relative ${
         isEdit && 'text-gray88'
       }`}
       style={{
-        backgroundColor: wall?.style?.block?.color,
+        backgroundColor: wall?.styleSetting?.blockSetting?.styleColor,
         border: `${blockName === 'addButton' && 'none'}`,
       }}
     >
-      {blockName !== 'profileBlock' && blockName !== 'addButton' && (
+      {blockName !== 'wallInfoBlock' && blockName !== 'addButton' && (
         <>
           {isEdit && (
             <>

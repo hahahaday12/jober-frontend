@@ -5,7 +5,7 @@ import { useWallStore } from '@/store';
 import { produce } from 'immer';
 import {
   WallHeader,
-  ProfileBlock,
+  WallInfoBlock,
   ModalOpen,
   AddBlockModal,
 } from 'components/index';
@@ -17,17 +17,17 @@ import {
   TemplatesBlock,
 } from 'components/wall/blocks/index';
 import React from 'react';
-import { SubDataClassType, SubDatumType, WallType } from '@/types/wall';
+import { SubDatumType, WallType } from '@/types/wall';
 import { message } from 'antd';
 import { CustomizationLayout } from 'components/index';
 import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
-  listBlock: <ListBlock />,
-  fileBlock: <FileBlock />,
-  snsBlock: <SnsBlock />,
-  templatesBlock: <TemplatesBlock />,
-  freeBlock: <FreeBlock />,
+  // listBlock: <ListBlock />,
+  // fileBlock: <FileBlock />,
+  // snsBlock: <SnsBlock />,
+  // templatesBlock: <TemplatesBlock />,
+  // freeBlock: <FreeBlock />,
 };
 
 export const WallPage = () => {
@@ -66,7 +66,7 @@ export const WallPage = () => {
     {
       id: string;
       block: JSX.Element;
-      subData: SubDatumType[] | SubDataClassType;
+      subData: SubDatumType[];
     }[]
   >([]);
 
@@ -109,7 +109,9 @@ export const WallPage = () => {
   return (
     <div
       className={`min-h-screen bg-gray flex flex-col`}
-      style={{ backgroundColor: wall?.style?.background?.color }}
+      style={{
+        backgroundColor: wall?.styleSetting?.backgroundSetting?.solidColor,
+      }}
     >
       {contextHolder}
       <WallHeader wallId={wallId} />
@@ -118,7 +120,7 @@ export const WallPage = () => {
         <div className="py-[106px] ">loading...</div>
       ) : (
         <main className="py-[106px] flex-1 flex flex-col gap-[24px] w-[866px] mx-auto">
-          <ProfileBlock />
+          <WallInfoBlock />
           <ReactSortable
             list={sortableBlocks}
             setList={setSortableBlocks}

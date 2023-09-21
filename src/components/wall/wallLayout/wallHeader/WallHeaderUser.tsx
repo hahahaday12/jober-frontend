@@ -8,7 +8,7 @@ export default function WallHeaderUser() {
       <div className="bg-sky w-[36px] h-[36px] flex justify-center items-center rounded-full">
         <img src={userIcon} alt="user icon" />
       </div>
-      <div className="db-16">{wall.profileBlock?.profileTitle}</div>
+      <div className="db-16">{wall.wallInfoBlock?.wallInfoTitle}</div>
     </div>
   );
 }

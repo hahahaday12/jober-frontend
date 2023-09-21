@@ -1,3 +1,5 @@
+export const IMAGE_FILE_SIZE_LIMIT = 2 * 1024 * 1024;
+
 export const DEFAULT_BLOCKS: { [key: string]: object } = {
   listBlock: {
     blockType: 'listBlock',

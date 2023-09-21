@@ -4,10 +4,11 @@
     "category": "career",
     "memberId": 1,
     "wallInfoBlock": {
-      "wallInfoTitle": "이호우",
-      "wallInfoDescription": "프론트엔드 개발자",
-      "backgroundImgURL": "https://images.unsplash.com/photo-1692606674503-267da3da7da7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2680&q=80",
-      "wallInfoImgURL": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2643&q=80"
+      "wallInfoTitle": "김현우",
+      "wallInfoDescription": "안녕하세요, 건축가 김현우입니다.",
+      "backgroundImgURL": "https://images.unsplash.com/photo-1694198250632-b2fbc6746e17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDN8Ym84alFLVGFFMFl8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=60",
+      "wallInfoImgURL": "https://avatars.githubusercontent.com/u/87072568?v=4",
+      "profileTitle": "이호"
     },
     "blocks": [],
     "styleSetting": {
@@ -17,7 +18,7 @@
         "styleImgURL": "https://images.unsplash.com/photo-1692606674503-267da3da7da7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2680&q=80"
       },
       "blockSetting": {
-        "styleColor": "#e4feef",
+        "styleColor": "#fbfeff",
         "gradation": true,
         "shape": "13px",
         "style": "shadow"
