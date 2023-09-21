@@ -1,5 +1,3 @@
-import career from '@/assets/category/carrer.png';
-
 export default function UIUX() {
   return (
     <div className="flex justify-center flex-col items-center gap-20 h-screen">
@@ -38,10 +36,6 @@ export default function UIUX() {
         <div className="bg-sky w-20 h-20 text-lightBlack">sky</div>
         <div className="bg-blue w-20 h-20 text-white">blue</div>
         <div className="bg-red w-20 h-20 text-white">red</div>
-      </div>
-      <div className="flex gap-5">
-        <img src={career} className="w-14" />
-        <img src={career} className="grayscale-[100] w-14" />
       </div>
     </div>
   );
