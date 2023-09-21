@@ -2,12 +2,13 @@ import { useWallStore } from '@/store';
 import DragHandle from '@/components/wall/blocks/DragHandle';
 import trashIcon from '@/assets/icons/trash.svg';
 import { produce } from 'immer';
+import { Icon } from '@/components/common';
 
-interface BlockContainerProps {
+type BlockContainerProps = {
   children: React.ReactNode;
   blockName: string;
   blockUUID?: string;
-}
+};
 
 export const BlockContainer = ({
   blockUUID,
@@ -26,6 +27,9 @@ export const BlockContainer = ({
     );
   };
 
+  const defaultBlocks =
+    blockName === 'wallInfoBlock' || blockName === 'addButton';
+
   return (
     <div
       className={`rounded-[${wall?.styleSetting?.blockSetting?.shape}] ${
@@ -35,24 +39,18 @@ export const BlockContainer = ({
       }`}
       style={{
         backgroundColor: wall?.styleSetting?.blockSetting?.styleColor,
-        border: `${blockName === 'addButton' && 'none'}`,
       }}
     >
-      {blockName !== 'wallInfoBlock' && blockName !== 'addButton' && (
+      {isEdit && !defaultBlocks && (
         <>
-          {isEdit && (
-            <>
-              <DragHandle />
-              <img
-                src={trashIcon}
-                alt="trash icon"
-                className={`absolute right-[27px] top-[26px] hover:opacity-60 transition cursor-pointer ${
-                  blockName === 'templatesBlock' && 'hidden'
-                }`}
-                onClick={handleDeleteBlock}
-              />
-            </>
-          )}
+          <DragHandle />
+          <Icon
+            src={trashIcon}
+            className={`absolute right-[26px] top-[26px] hover ${
+              blockName === 'templateBlock' && 'hidden'
+            }`}
+            onClick={handleDeleteBlock}
+          />
         </>
       )}
       {children}

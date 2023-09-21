@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ReactSortable, Sortable } from 'react-sortablejs';
-import { useWallStore } from '@/store';
 import { produce } from 'immer';
 import {
   WallHeader,
@@ -17,8 +16,7 @@ import {
   TemplatesBlock,
 } from 'components/wall/blocks/index';
 import React from 'react';
-import { SubDatumType, WallType } from '@/types/wall';
-import { message } from 'antd';
+import { SubDatumType } from '@/types/wall';
 import { CustomizationLayout } from 'components/index';
 import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
 import useFetchWallData from '@/hooks/useFetchWallData';
@@ -116,13 +114,20 @@ export const WallPage = () => {
               <div key={item.id}>{item.block}</div>
             ))}
           </ReactSortable>
-          <AddBlockButton setIsAddBlockModalOpen={setIsAddBlockModalOpen} />
+
+          {isEdit && (
+            <>
+              <AddBlockButton setIsAddBlockModalOpen={setIsAddBlockModalOpen} />
+              <CustomizationLayout />
+            </>
+          )}
+
           <AddBlockModal
             isAddBlockModalOpen={isAddBlockModalOpen}
             setIsAddBlockModalOpen={setIsAddBlockModalOpen}
           />
+
           <ModalOpen />
-          {isEdit && <CustomizationLayout />}
         </main>
       )}
     </div>
