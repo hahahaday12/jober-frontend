@@ -13,7 +13,7 @@ import {
   SnsBlock,
   FreeBlock,
   ListBlock,
-  TemplatesBlock,
+  TemplateBlock,
 } from 'components/wall/blocks/index';
 import React from 'react';
 import { SubDatumType } from '@/types/wall';
@@ -22,11 +22,11 @@ import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
 import useFetchWallData from '@/hooks/useFetchWallData';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
-  // listBlock: <ListBlock />,
+  listBlock: <ListBlock />,
   // fileBlock: <FileBlock />,
   snsBlock: <SnsBlock />,
-  // templatesBlock: <TemplatesBlock />,
-  // freeBlock: <FreeBlock />,
+  // templateBlock: <TemplateBlock />,
+  freeBlock: <FreeBlock />,
 };
 
 export const WallPage = () => {

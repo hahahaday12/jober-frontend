@@ -11,6 +11,81 @@
     },
     "blocks": [
       {
+        "blockUUID": "ae4bf0e4-b861-46c2-939e-3edb0ad1c402",
+        "blockType": "listBlock",
+        "subData": [
+          {
+            "listBlockUUID": "f108fff1-c106-4340-bd05-280e15626ecc",
+            "listLabel": "기술 스택",
+            "listTitle": "HTML",
+            "listDescription": "최상",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "1b539400-5bfb-4459-bc0d-ba65080d8211",
+            "listLabel": "",
+            "listTitle": "CSS",
+            "listDescription": "상",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "2d7394be-a1d9-4d58-ab94-9543e5116611",
+            "listLabel": "",
+            "listTitle": "JAVASCRIPT",
+            "listDescription": "최하",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "2d7394be-a1d9-4d58-aa94-9543e5116611",
+            "listLabel": "",
+            "listTitle": "REACT",
+            "listDescription": "극상",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "df583049-76ba-46e8-8e1a-7b685d4bc5d8",
+            "listLabel": "",
+            "listTitle": "블로그",
+            "listDescription": "https://velog.io/@junsgk",
+            "isLink": true
+          }
+        ]
+      },
+      {
+        "blockUUID": "ae4bf0e4-b861-46c2-939e-c2db0ad1c402",
+        "blockType": "listBlock",
+        "subData": [
+          {
+            "listBlockUUID": "f108fff1-c106-4340-b535-280e15626ecc",
+            "listLabel": "자격증",
+            "listTitle": "운전면허증",
+            "listDescription": "2종보통",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "f108fff1-c206-4340-b535-280e15626ecc",
+            "listLabel": "",
+            "listTitle": "정보처리기사",
+            "listDescription": "엘셀잘함",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "f108fff1-c306-4340-b535-280e15626ecc",
+            "listLabel": "",
+            "listTitle": "AWS 시험봄",
+            "listDescription": "떨어졌음",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "79cba211-f75d-495e-a206-ea0f94928974",
+            "listLabel": "",
+            "listTitle": "고양이 집사 자격증",
+            "listDescription": "최종면접 탈락",
+            "isLink": false
+          }
+        ]
+      },
+      {
         "blockUUID": "3f8a9e4c-134f-472d-a6e2-7ae9a6c9957d",
         "blockType": "freeBlock",
         "subData": [
@@ -25,7 +100,7 @@
         "blockType": "freeBlock",
         "subData": [
           {
-            "freeTitle": "자유블록의 제목입니다.",
+            "freeTitle": "시력검사",
             "freeDescription": "<p><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 96px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">가</span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 72px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">나</span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 60px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">다</span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 48px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">라</span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 36px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">마</span><span style=\"font-size: 30px;\">바</span><span style=\"font-size: 24px;\">사</span><span style=\"font-size: 18px;\"><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">아</span></span><span style=\"font-size: 14px;\">자</span><span style=\"font-size: 12px;\">차</span><span style=\"font-size: 11px;\">카</span><span style=\"font-size: 10px;\">타</span><span style=\"font-size: 9px;\">파</span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 8px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\" id=\"isPasted\">하</span></p>"
           }
         ]
