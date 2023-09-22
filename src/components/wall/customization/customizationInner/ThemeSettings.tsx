@@ -12,7 +12,7 @@ export const ThemeSettings = () => {
         <div className="flex flex-row gap-[10px]">
           <label
             className={` bg-blue rounded-[8px] w-[194px] h-[100px] block hover ${
-              wall.style.theme === 'modern' && 'ring-blue ring-1'
+              wall.styleSetting.themeSetting === 'modern' && 'ring-blue ring-1'
             }`}
           >
             <input
@@ -20,12 +20,12 @@ export const ThemeSettings = () => {
               type="radio"
               name="style"
               value="modern"
-              checked={wall.style.theme === 'modern'}
+              checked={wall.styleSetting.themeSetting === 'modern'}
             />
           </label>
           <label
             className={` bg-blue rounded-[8px] w-[194px] h-[100px] block hover ${
-              wall.style.theme === 'modern' && 'ring-blue ring-1'
+              wall.styleSetting.themeSetting === 'modern' && 'ring-blue ring-1'
             }`}
           >
             <input
@@ -33,12 +33,12 @@ export const ThemeSettings = () => {
               type="radio"
               name="style"
               value="modern"
-              checked={wall.style.theme === 'modern'}
+              checked={wall.styleSetting.themeSetting === 'modern'}
             />
           </label>
           <label
             className={` bg-blue rounded-[8px] w-[194px] h-[100px] block hover ${
-              wall.style.theme === 'modern' && 'ring-blue ring-1'
+              wall.styleSetting.themeSetting === 'modern' && 'ring-blue ring-1'
             }`}
           >
             <input
@@ -46,12 +46,12 @@ export const ThemeSettings = () => {
               type="radio"
               name="style"
               value="modern"
-              checked={wall.style.theme === 'modern'}
+              checked={wall.styleSetting.themeSetting === 'modern'}
             />
           </label>
           <label
             className={` bg-blue rounded-[8px] w-[194px] h-[100px] block hover ${
-              wall.style.theme === 'modern' && 'ring-blue ring-1'
+              wall.styleSetting.themeSetting === 'modern' && 'ring-blue ring-1'
             }`}
           >
             <input
@@ -59,7 +59,7 @@ export const ThemeSettings = () => {
               type="radio"
               name="style"
               value="modern"
-              checked={wall.style.theme === 'modern'}
+              checked={wall.styleSetting.themeSetting === 'modern'}
             />
           </label>
         </div>

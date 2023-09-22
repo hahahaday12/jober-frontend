@@ -1,11 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ReactSortable, Sortable } from 'react-sortablejs';
-import { useWallStore } from '@/store';
 import { produce } from 'immer';
 import {
   WallHeader,
-  ProfileBlock,
+  WallInfoBlock,
   ModalOpen,
   AddBlockModal,
 } from 'components/index';
@@ -17,56 +16,32 @@ import {
   TemplatesBlock,
 } from 'components/wall/blocks/index';
 import React from 'react';
-import { SubDataClassType, SubDatumType, WallType } from '@/types/wall';
-import { message } from 'antd';
+import { SubDatumType } from '@/types/wall';
 import { CustomizationLayout } from 'components/index';
 import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
+import useFetchWallData from '@/hooks/useFetchWallData';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
-  listBlock: <ListBlock />,
-  fileBlock: <FileBlock />,
+  // listBlock: <ListBlock />,
+  // fileBlock: <FileBlock />,
   snsBlock: <SnsBlock />,
-  templatesBlock: <TemplatesBlock />,
-  freeBlock: <FreeBlock />,
+  // templatesBlock: <TemplatesBlock />,
+  // freeBlock: <FreeBlock />,
 };
 
 export const WallPage = () => {
-  // const category: CategoryType = 'career';
-
   const { wallId } = useParams();
-
-  const [messageApi, contextHolder] = message.useMessage();
-
-  const { wall, setWall, isEdit } = useWallStore();
 
   const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
 
-  // wall data fetching
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('http://localhost:3000/wall');
-        if (response.ok) {
-          const wallData = (await response.json()) as WallType;
-          setWall(wallData);
-        }
-      } catch (error) {
-        console.log(error);
-        messageApi.error({ content: 'data fetching error' });
-      } finally {
-        setLoading(false);
-      }
-    };
-    getData();
-  }, [messageApi, setWall]);
+  const { contextHolder, isEdit, wall, loading, error, setWall } =
+    useFetchWallData();
 
   const [sortableBlocks, setSortableBlocks] = useState<
     {
       id: string;
       block: JSX.Element;
-      subData: SubDatumType[] | SubDataClassType;
+      subData: SubDatumType[];
     }[]
   >([]);
 
@@ -106,10 +81,17 @@ export const WallPage = () => {
     );
   };
 
+  // TODO : 에러핸들링
+  if (error) {
+    return <div>ERROR, {error.message}</div>;
+  }
+
   return (
     <div
       className={`min-h-screen bg-gray flex flex-col`}
-      style={{ backgroundColor: wall?.style?.background?.color }}
+      style={{
+        backgroundColor: wall?.styleSetting?.backgroundSetting?.solidColor,
+      }}
     >
       {contextHolder}
       <WallHeader wallId={wallId} />
@@ -118,7 +100,7 @@ export const WallPage = () => {
         <div className="py-[106px] ">loading...</div>
       ) : (
         <main className="py-[106px] flex-1 flex flex-col gap-[24px] w-[866px] mx-auto">
-          <ProfileBlock />
+          <WallInfoBlock />
           <ReactSortable
             list={sortableBlocks}
             setList={setSortableBlocks}
@@ -132,13 +114,20 @@ export const WallPage = () => {
               <div key={item.id}>{item.block}</div>
             ))}
           </ReactSortable>
-          <AddBlockButton setIsAddBlockModalOpen={setIsAddBlockModalOpen} />
+
+          {isEdit && (
+            <>
+              <AddBlockButton setIsAddBlockModalOpen={setIsAddBlockModalOpen} />
+              <CustomizationLayout />
+            </>
+          )}
+
           <AddBlockModal
             isAddBlockModalOpen={isAddBlockModalOpen}
             setIsAddBlockModalOpen={setIsAddBlockModalOpen}
           />
+
           <ModalOpen />
-          {isEdit && <CustomizationLayout />}
         </main>
       )}
     </div>

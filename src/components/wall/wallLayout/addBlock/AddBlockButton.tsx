@@ -1,23 +1,20 @@
-import { useWallStore } from '@/store';
 import { BlockContainer } from '../..';
 import plusIcon from '@/assets/icons/plus.svg';
+import { Icon } from '@/components/common';
 
 export const AddBlockButton = ({
   setIsAddBlockModalOpen,
 }: {
   setIsAddBlockModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { isEdit } = useWallStore();
   return (
-    <BlockContainer blockName="profileBlock">
+    <BlockContainer blockName="addButton">
       <div
         onClick={() => setIsAddBlockModalOpen(true)}
-        className={`dm-16 hover text-gray88 flex justify-center items-center h-[76px] ${
-          !isEdit && 'hidden'
-        }`}
+        className="dm-16 hover flex justify-center items-center h-[76px]"
       >
-        항목 추가하기
-        <img src={plusIcon} alt="plus icon" />
+        <span>항목 추가하기</span>
+        <Icon src={plusIcon} className="ml-[6px]" />
       </div>
     </BlockContainer>
   );

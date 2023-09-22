@@ -1,17 +1,11 @@
-export interface WallType {
-  userId: number;
-  shareUrl: string;
+export type WallType = {
+  isPublic: boolean;
+  memberId: number;
   category: CategoryType;
-  profileBlock: ProfileBlockType;
-  blocks: BlockElementType[];
-  style: StyleType;
-}
-
-export interface BlockElementType {
-  blockUUID: string;
-  blockType: BlockType;
-  subData: SubDatumType[] | SubDataClassType;
-}
+  wallInfoBlock: wallInfoBlockType;
+  blocks: Block[];
+  styleSetting: StyleSettingType;
+};
 
 export type CategoryType =
   | 'career'
@@ -20,68 +14,63 @@ export type CategoryType =
   | 'enterprise'
   | 'basic';
 
+export type wallInfoBlockType = {
+  wallInfoTitle: string;
+  wallInfoDescription: string;
+  backgroundImgURL: string;
+  wallInfoImgURL: string;
+};
+
+export type Block = {
+  blockUUID: string;
+  blockType: BlockType;
+  subData: SubDatumType[];
+};
+
 export type BlockType =
   | 'listBlock'
   | 'fileBlock'
   | 'snsBlock'
-  | 'templatesBlcok' // template's' 템플릿'들'의 블록
+  | 'templateBlock'
   | 'freeBlock';
 
-export interface SubDatumType {
-  templateUUID?: string;
-  templateTitle?: string;
-  templateDescription?: string;
-  snsUUID?: string;
-  snsTitle?: string;
-  snsUrl?: string;
-}
-
-export interface SubDataClassType {
+export type SubDatumType = {
+  listBlockUUID?: string;
+  listLabel?: string;
   listTitle?: string;
-  lists?: ListType[];
-  freeTitle?: string;
-  freeDescription?: string;
+  listDescription?: string;
+  isLink?: boolean;
   fileTitle?: string;
-  fileSubtitle?: string;
+  fileDescription?: string;
   fileName?: string;
   file?: string;
-}
+  freeTitle?: string;
+  freeDescription?: string;
+  snsBlockUUID?: string;
+  snsType?: string;
+  snsUrl?: string;
+  templateBlockUUID?: string;
+  templateTitle?: string;
+  templateDescription?: string;
+  hasAccessTemplateAuth?: number[];
+  hasDenyTemplateAuth?: number[];
+};
 
-export interface ListType {
-  listUUID: string;
-  listSubtitle: string;
-  listDescription: string;
-  isLink: boolean;
-}
+export type StyleSettingType = {
+  backgroundSetting: BackgroundSettingType;
+  blockSetting: BlockSettingType;
+  themeSetting: ('modern' | 'classic' | 'simple' | 'dark') | null;
+};
 
-export interface ProfileBlockType {
-  profileTitle: string;
-  profileDescription: string;
-  profileBgUrl: string;
-  profileImageUrl: string;
-}
-
-export interface StyleType {
-  background: BackgroundType;
-  block: StyleBlockType;
-  theme: ('modern' | 'classic' | 'simple' | 'dark') | null;
-}
-
-export interface BackgroundType {
-  color: string;
+export type BackgroundSettingType = {
+  solidColor: string;
   gradation: boolean;
-  imageUrl: string | null;
-}
+  styleImgURL: string;
+};
 
-export interface StyleBlockType {
-  color: string;
-  gradation: boolean;
+export type BlockSettingType = {
   shape: '0px' | '6px' | '13px';
   style: 'none' | 'flat' | 'shadow';
-}
-
-export interface SingleSnsType {
-  snsUUID: string;
-  snsTitle: string;
-  snsUrl: string;
-}
+  styleColor: string;
+  gradation: boolean;
+};

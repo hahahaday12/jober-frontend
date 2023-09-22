@@ -84,7 +84,7 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
               className="flex-1 rounded-[10px] bg-sky"
               addonBefore={
                 <div className="dm-14 text-gray88 ">
-                  {`${import.meta.env.VITE_CLIENT_URL.slice(7)}/wall/`}
+                  java-jober.netlify.ap/wall/
                 </div>
               }
               suffix={

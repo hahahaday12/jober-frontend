@@ -1,13 +1,15 @@
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import brushIcon from '@/assets/icons/brush.svg';
 import { CustomizationModal } from '../customizationInner/CustomizationModal';
 import { useState } from 'react';
 
 export const CustomizationLayout = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOk = () => {
     setIsModalOpen(false);
+    messageApi.error('스타일 변경 성공');
   };
 
   const handleCancel = () => {
@@ -16,6 +18,7 @@ export const CustomizationLayout = () => {
 
   return (
     <>
+      {contextHolder}
       <CustomizationModal
         isModalOpen={isModalOpen}
         handleOk={handleOk}

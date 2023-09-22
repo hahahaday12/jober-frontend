@@ -57,9 +57,9 @@ export const AddBlockModal = ({
       closeIcon={false}
       title={
         <ModalHeader
-          text="항목 추가하기"
+          title="항목 추가하기"
           handleCloseModal={handleCloseModal}
-          handleAddBLock={handleAddBLock}
+          handleOk={handleAddBLock}
         />
       }
       footer={null}

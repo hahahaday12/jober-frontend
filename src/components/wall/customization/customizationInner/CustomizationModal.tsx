@@ -1,8 +1,14 @@
 import { Modal } from 'antd';
-import { CustomizationModalProps } from './CustomizationModal';
 import { BackgroundSettings } from './BackgroundSettings';
 import { BlockSettings } from './BlockSettings';
 import { ThemeSettings } from './ThemeSettings';
+import { ModalHeader } from '@/components/common/ModalHeader';
+
+type CustomizationModalProps = {
+  isModalOpen: boolean;
+  handleOk: () => void;
+  handleCancel: () => void;
+};
 
 export const CustomizationModal = ({
   isModalOpen,
@@ -14,17 +20,18 @@ export const CustomizationModal = ({
       centered
       title="Modal 제목"
       open={isModalOpen}
-      onOk={handleOk}
       onCancel={handleCancel}
       width="660px"
+      footer={null}
     >
-      {/* 배경 */}
+      <ModalHeader
+        title={'스타일 수정'}
+        handleOk={handleOk}
+        handleCloseModal={handleCancel}
+        reset
+      />
       <BackgroundSettings />
-
-      {/* 블록 */}
       <BlockSettings />
-
-      {/* 테마 */}
       <ThemeSettings />
     </Modal>
   );

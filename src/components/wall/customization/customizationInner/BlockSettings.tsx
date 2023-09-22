@@ -7,14 +7,19 @@ import { Color } from 'antd/es/color-picker';
 
 export const BlockSettings = () => {
   const { wall, setWall } = useWallStore();
-  const [color, setColor] = useState<Color | string>(wall.style.block.color);
+  const [blockColor, setBlocklColor] = useState<Color | string>(
+    wall.styleSetting.blockSetting.styleColor,
+  );
 
   // 블록-모양
   const handleBorder = (e: React.ChangeEvent<HTMLInputElement>) => {
     //immer
     setWall(
       produce(wall, (draft) => {
-        draft.style.block.shape = e.target.value as '0px' | '6px' | '13px';
+        draft.styleSetting.blockSetting.shape = e.target.value as
+          | '0px'
+          | '6px'
+          | '13px';
       }),
     );
     console.log(e.target.value);
@@ -24,7 +29,10 @@ export const BlockSettings = () => {
   const handleStyle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
-        draft.style.block.style = e.target.value as 'none' | 'shadow' | 'flat';
+        draft.styleSetting.blockSetting.style = e.target.value as
+          | 'none'
+          | 'shadow'
+          | 'flat';
       }),
     );
     console.log(e.target.value);
@@ -40,23 +48,25 @@ export const BlockSettings = () => {
   //   console.log(e.target.value);
   // };
   useEffect(() => {
-    const bgColor = typeof color === 'string' ? color : color.toHexString();
+    const bgColor =
+      typeof blockColor === 'string' ? blockColor : blockColor.toHexString();
     setWall(
       produce(wall, (draft) => {
-        draft.style.background.color = bgColor;
+        draft.styleSetting.blockSetting.styleColor = bgColor;
       }),
     );
-  }, [color]);
+  }, [blockColor]);
 
   const handleColorChange = (newColor: Color) => {
-    setColor(newColor.toHexString());
+    setBlocklColor(newColor.toHexString());
   };
 
   // 블록-스타일 컬러 그라데이션
   const handleStyleGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
-        draft.style.block.gradation = e.target.value as unknown as boolean;
+        draft.styleSetting.blockSetting.gradation = e.target
+          .value as unknown as boolean;
       }),
     );
     console.log(e.target.value);
@@ -70,15 +80,17 @@ export const BlockSettings = () => {
           {BLOCK_SHAPE.map((shape) => (
             <label
               className={`bg-lightGray border-[1px] border-solid border-line w-[194px] h-[30px] block hover ${
-                wall.style.block.shape === shape && 'ring-blue ring-1'
-              } rounded-[${shape}]`}
+                wall.styleSetting.blockSetting.shape === shape &&
+                'ring-blue ring-1 ring-offset-2'
+              }`}
+              style={{ borderRadius: shape }}
             >
               <input
                 className="hidden"
                 type="radio"
                 name="style"
                 value={shape}
-                checked={wall.style.block.shape === shape}
+                checked={wall.styleSetting.blockSetting.shape === shape}
                 onChange={handleBorder}
               />
             </label>
@@ -89,8 +101,9 @@ export const BlockSettings = () => {
         <div className="flex flex-col gap-[8px]">
           {BLOCK_STYLE.map((style) => (
             <label
-              className={`bg-lightGray w-[194px] h-[30px] block hover ${
-                wall.style.block.style === style && 'ring-blue ring-1'
+              className={`${style} bg-lightGray w-[194px] h-[30px] block hover ${
+                wall.styleSetting.blockSetting.style === style &&
+                'ring-blue ring-1 ring-offset-2'
               }`}
             >
               <input
@@ -98,7 +111,7 @@ export const BlockSettings = () => {
                 type="radio"
                 name="style"
                 value={style}
-                checked={wall.style.block.style === style}
+                checked={wall.styleSetting.blockSetting.style === style}
                 onChange={handleStyle}
               />
             </label>
@@ -106,11 +119,11 @@ export const BlockSettings = () => {
           <div className="dm-16 mt-[8px]">스타일</div>
         </div>
 
-        {/* 블록-색상 */}
         <div className="flex flex-col gap-[10px]">
           <label
             className={` bg-sky rounded-[8px] w-[194px] h-[48px] block hover ${
-              wall.style.block.color === color && 'ring-blue ring-1'
+              wall.styleSetting.blockSetting.styleColor === blockColor &&
+              'ring-blue ring-1'
             }`}
           >
             <input
@@ -118,14 +131,14 @@ export const BlockSettings = () => {
               type="radio"
               name="style"
               value="color"
-              checked={wall.style.block.color === color}
+              checked={wall.styleSetting.blockSetting.styleColor === blockColor}
               //onChange={handleStyleColor}
             />
-            <ColorPicker value={color} onChange={handleColorChange}>
+            <ColorPicker value={blockColor} onChange={handleColorChange}>
               <Button
                 type="primary"
                 className={`w-[194px] h-[48px] rounded-[8px]`}
-                style={{ backgroundColor: color as string }}
+                style={{ backgroundColor: blockColor as string }}
               />
             </ColorPicker>
           </label>
@@ -133,7 +146,8 @@ export const BlockSettings = () => {
           {/* 블록-그라데이션 */}
           <label
             className={`bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)] bg-sky rounded-[8px] w-[194px] h-[48px] block hover ${
-              wall.style.block.gradation === true && 'ring-blue ring-1'
+              wall.styleSetting.blockSetting.gradation === true &&
+              'ring-blue ring-1'
             }`}
           >
             <input
@@ -141,7 +155,7 @@ export const BlockSettings = () => {
               type="radio"
               name="style"
               value="gradation"
-              checked={wall.style.block.gradation === true}
+              checked={wall.styleSetting.blockSetting.gradation === true}
               onChange={handleStyleGradation}
             />
           </label>
