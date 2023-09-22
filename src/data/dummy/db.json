@@ -11,6 +11,26 @@
     },
     "blocks": [
       {
+        "blockUUID": "3f8a9e4c-134f-472d-a6e2-7ae9a6c9957d",
+        "blockType": "freeBlock",
+        "subData": [
+          {
+            "freeTitle": "자유블록은 자유롭고싶다.",
+            "freeDescription": "<p>자유는 공짜가 아니다.</p>"
+          }
+        ]
+      },
+      {
+        "blockUUID": "124bf0e4-b861-46c2-939e-c3db0ad1c432",
+        "blockType": "freeBlock",
+        "subData": [
+          {
+            "freeTitle": "자유블록의 제목입니다.",
+            "freeDescription": "<p><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 96px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">가</span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 72px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">나</span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 60px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">다</span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 48px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">라</span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 36px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">마</span><span style=\"font-size: 30px;\">바</span><span style=\"font-size: 24px;\">사</span><span style=\"font-size: 18px;\"><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\">아</span></span><span style=\"font-size: 14px;\">자</span><span style=\"font-size: 12px;\">차</span><span style=\"font-size: 11px;\">카</span><span style=\"font-size: 10px;\">타</span><span style=\"font-size: 9px;\">파</span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 8px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\" id=\"isPasted\">하</span></p>"
+          }
+        ]
+      },
+      {
         "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
         "blockType": "snsBlock",
         "subData": [

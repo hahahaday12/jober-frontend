@@ -1,57 +1,28 @@
 export const IMAGE_FILE_SIZE_LIMIT = 2 * 1024 * 1024;
 
 export const DEFAULT_BLOCKS: { [key: string]: object } = {
-  listBlock: {
-    blockType: 'listBlock',
-    subData: {
-      listTitle: '',
-      lists: [
-        {
-          listSubtitle: '',
-          listDescription: '',
-          isLink: false,
-        },
-      ],
-    },
-  },
-  fileBlock: {
-    blockType: 'fileBlock',
-    subData: {
+  listBlock: [],
+  fileBlock: [
+    {
       fileTitle: '',
-      fileSubtitle: '',
+      fileDescription: '',
       fileName: '',
       file: '',
     },
-  },
-  snsBlock: {
-    blockType: 'snsBlock',
-    subData: [
-      {
-        snsTitle: '',
-        snsUrl: '',
-      },
-    ],
-  },
-  templatesBlcok: {
-    blockType: 'templatesBlock',
-    subData: [
-      {
-        templateTitle: '',
-        templateDescription: '',
-      },
-    ],
-  },
-  freeBlock: {
-    blockType: 'freeBlock',
-    subData: {
+  ],
+
+  snsBlock: [],
+  templateBlock: [],
+  freeBlock: [
+    {
       freeTitle: '',
       freeDescription: '',
     },
-  },
+  ],
 };
 
 import listBlock from '@/assets/addableBlocks/listBlock.png';
-import freeBlock from '@/assets/addableBlocks/listBlock.png';
+import freeBlock from '@/assets/addableBlocks/freeBlock.png';
 import fileBlock from '@/assets/addableBlocks/fileBlock.png';
 import snsBlock from '@/assets/addableBlocks/snsBlock.png';
 

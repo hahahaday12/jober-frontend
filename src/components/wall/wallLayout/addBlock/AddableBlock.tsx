@@ -13,7 +13,6 @@ export const AddableBlock = ({
   selectedBlock,
   hasSnsBlock,
 }: AddableBlockProp) => {
-  console.log(selectedBlock);
   return (
     <label
       className={`w-[238px] ${hasSnsBlock && block === 'snsBlock' && 'hidden'}`}
@@ -28,10 +27,11 @@ export const AddableBlock = ({
       />
       <div className="mb-[16px] dm-16">{ADDABLE_BLOCKS[block].title}</div>
       <img
+        draggable={false}
         src={ADDABLE_BLOCKS[block].image}
-        alt="block"
-        className={`overflow-hidden rounded-[11px] w-[238px] h-[128px] hover:ring-blue hover:ring-1 hover ${
-          selectedBlock === block && 'ring-blue ring-1'
+        alt={ADDABLE_BLOCKS[block].title}
+        className={`overflow-hidden rounded-[11px] w-[238px] h-[128px] hover:ring-blue hover:ring-2 hover ${
+          selectedBlock === block && 'ring-blue ring-2'
         }`}
       />
     </label>

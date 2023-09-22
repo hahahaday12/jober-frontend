@@ -15,6 +15,7 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
   const [wallIdInput, setwallIdInput] = useState(wallId);
 
   const [saving, setSaving] = useState(false);
+
   const handleSave = async () => {
     setSaving(true);
     try {
@@ -70,7 +71,7 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
   };
 
   const handleCancel = async () => {
-    await getWall();
+    location.reload();
     toggleEdit();
   };
 
