@@ -1,7 +1,7 @@
 //import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-export const ListTemplete = ({ list }) => {
+export const ListTemplete = ({ list, category }) => {
   return (
     <Listbox>
       {list.map((item) => (

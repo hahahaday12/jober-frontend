@@ -14,8 +14,8 @@ const BookCategory: Category[] = [
   { category: 'employment', text: '취업/이직' },
 ];
 
-export const CategoryTemplate = () => {
-  const [categoryList, setCategoryList] = useState<string[]>([]);
+export const CategoryTemplet = () => {
+  const [categoryList, setCategoryList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('self');
 
   useEffect(() => {
@@ -23,18 +23,18 @@ export const CategoryTemplate = () => {
     getListData('self');
   }, []); // 빈 배열을 전달하여 한 번만 실행되도록 함
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     getListData(category);
+    setModalContent()
   };
 
-  const getListData = async (category: string) => {
+  const getListData = async (category) => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SERVER_BASE_URL}/${category}`,
-      );
+      const response = await fetch(`http://localhost:4001/${category}`);
       if (response.ok) {
         const data = await response.json();
+        // 'data' 객체 안의 'list'를 사용하여 카테고리별 데이터에 접근
         setCategoryList([...data]);
       } else {
         console.error('API 호출 실패:', response.status);
@@ -48,7 +48,7 @@ export const CategoryTemplate = () => {
     <CategoryLayout>
       <Categorybox>
         <ul className="Category-menu__text">
-          {BookCategory.map((item) => (
+          {BookCategory.map((item, index) => (
             <li
               key={item.category}
               className={item.category === selectedCategory ? 'active' : ''}
@@ -60,7 +60,7 @@ export const CategoryTemplate = () => {
         </ul>
       </Categorybox>
       <TemplateList>
-        <ListTemplete list={categoryList} />
+        <ListTemplete list={categoryList} category={selectedCategory} />
       </TemplateList>
     </CategoryLayout>
   );
