@@ -6,7 +6,7 @@ import SnsModalInput from './SnsModalInput';
 import { ModalHeader } from '@/components/common/ModalHeader';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
-import { SubDatumType } from '@/types/wall';
+import { SingleSns } from '..';
 
 interface SnsBlockModalProps {
   unregisteredSns: string[];
@@ -26,10 +26,6 @@ export const SnsBlockModal = ({
   const [selectedSns, setSelectedSns] = useState('');
   const [snsInput, setSnsInput] = useState('');
 
-  const handleSnsClick = (snsTitle: string) => {
-    setSelectedSns(snsTitle);
-  };
-
   const handleCloseSnsModal = () => {
     setIsSnsModalOpen(false);
     setSelectedSns('');
@@ -37,18 +33,19 @@ export const SnsBlockModal = ({
   };
 
   const handleOk = () => {
-    const newSns = {
-      snsUUID: crypto.randomUUID(),
-      snsTitle: selectedSns,
+    const newSns: SingleSns = {
+      snsBlockUUID: crypto.randomUUID(),
+      snsType: selectedSns,
       snsUrl: `https://${ADDABLE_SNSS[selectedSns].url}${snsInput}`,
     };
+    console.log(newSns);
     const snsBlockIndex = wall.blocks.findIndex(
       (block) => block.blockType === 'snsBlock',
     );
     if (snsBlockIndex !== -1) {
       setWall(
         produce(wall, (draft) => {
-          (draft.blocks[snsBlockIndex].subData as SubDatumType[]).push(newSns);
+          draft.blocks[snsBlockIndex].subData.push(newSns);
         }),
       );
     }
@@ -79,18 +76,14 @@ export const SnsBlockModal = ({
             <div key={sns} className="flex flex-col items-center gap-[8px]">
               <Icon
                 src={ADDABLE_SNSS[sns].svg}
-                onClick={() => handleSnsClick(sns)}
+                onClick={() => setSelectedSns(sns)}
                 className={`rounded-full hover w-[60px] h-[60px] ${
                   selectedSns === sns && 'ring-[3px] ring-offset-2 ring-blue'
                 }`}
               />
-              <span
-                className={`dm-12 ${
-                  selectedSns === sns ? 'text-lightBlack' : 'text-gray88'
-                }`}
-              >
+              <p className={`dm-12 ${selectedSns !== sns && 'text-gray88'}`}>
                 {ADDABLE_SNSS[sns].title}
-              </span>
+              </p>
             </div>
           ))}
         </div>

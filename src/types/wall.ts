@@ -24,7 +24,7 @@ export type wallInfoBlockType = {
 export type Block = {
   blockUUID: string;
   blockType: BlockType;
-  subData: SubDatum[];
+  subData: SubDatumType[];
 };
 
 export type BlockType =
@@ -34,7 +34,7 @@ export type BlockType =
   | 'templateBlock'
   | 'freeBlock';
 
-export type SubDatum = {
+export type SubDatumType = {
   listBlockUUID?: string;
   listLabel?: string;
   listTitle?: string;
@@ -54,17 +54,6 @@ export type SubDatum = {
   templateDescription?: string;
   hasAccessTemplateAuth?: number[];
   hasDenyTemplateAuth?: number[];
-};
-
-export type SubDatumType = {
-  templateBlockUUID?: string;
-  templateTitle?: string;
-  templateDescription?: string;
-  hasAccessTemplateAuth?: number[];
-  hasDenyTemplateAuth?: number[];
-  snsBlockUUID?: string;
-  snsType?: string;
-  snsUrl?: string;
 };
 
 export type StyleSettingType = {

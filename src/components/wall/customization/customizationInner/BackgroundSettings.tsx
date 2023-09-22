@@ -9,7 +9,7 @@ export const BackgroundSettings = () => {
   const { wall, isEdit, setWall } = useWallStore();
 
   const [backgroundColor, setBackgroundColor] = useState<Color | string>(
-    wall.style.background.color,
+    wall.styleSetting.backgroundSetting.solidColor,
   );
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const BackgroundSettings = () => {
         : backgroundColor.toHexString();
     setWall(
       produce(wall, (draft) => {
-        draft.style.background.color = bgColor;
+        draft.styleSetting.backgroundSetting.solidColor = bgColor;
       }),
     );
   }, [backgroundColor]);
@@ -32,7 +32,8 @@ export const BackgroundSettings = () => {
   const handleGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
-        draft.style.background.gradation = e.target.value as unknown as boolean;
+        draft.styleSetting.backgroundSetting.gradation = e.target
+          .value as unknown as boolean;
       }),
     );
     console.log(e.target.value);
@@ -46,7 +47,8 @@ export const BackgroundSettings = () => {
       if (reader.readyState === FileReader.DONE) {
         setWall(
           produce(wall, (draft) => {
-            draft.style.background.imageUrl = reader.result as string;
+            draft.styleSetting.backgroundSetting.styleImgURL =
+              reader.result as string;
           }),
         );
       }
@@ -63,8 +65,8 @@ export const BackgroundSettings = () => {
         <div className="flex flex-row gap-[10px]">
           <label
             className={`bg-sky rounded-[8px] w-[194px] h-[100px] block hover ${
-              wall.style.background.color === backgroundColor &&
-              'ring-blue ring-1'
+              wall.styleSetting.backgroundSetting.solidColor ===
+                backgroundColor && 'ring-blue ring-1'
             }`}
           >
             <input
@@ -72,7 +74,10 @@ export const BackgroundSettings = () => {
               type="radio"
               name="style"
               value="color"
-              checked={wall.style.background.color === backgroundColor}
+              checked={
+                wall.styleSetting.backgroundSetting.solidColor ===
+                backgroundColor
+              }
               //onChange={handleColor}
             />
             <ColorPicker value={backgroundColor} onChange={handleColorChange}>
@@ -88,7 +93,8 @@ export const BackgroundSettings = () => {
           {/* 그라데이션 */}
           <label
             className={`bg-sky rounded-[8px] w-[194px] h-[100px] block hover ${
-              wall.style.background.gradation === true && 'ring-blue ring-1'
+              wall.styleSetting.backgroundSetting.gradation === true &&
+              'ring-blue ring-1'
             }`}
           >
             <input
@@ -96,20 +102,21 @@ export const BackgroundSettings = () => {
               type="radio"
               name="style"
               value="gradation"
-              checked={wall.style.background.gradation === true}
+              checked={wall.styleSetting.backgroundSetting.gradation === true}
               onChange={handleGradation}
             />
           </label>
           {/* 이미지 */}
           <label
             className={`bg-sky rounded-[8px] w-[194px] h-[100px] block hover ${
-              wall.style.background.imageUrl === 'ring-blue ring-1'
+              wall.styleSetting.backgroundSetting.styleImgURL ===
+              'ring-blue ring-1'
             }`}
           >
             <div className="flex w-[36px] h-[36px] flex-col items-center justify-center rounded-full bg-white overflow-hidden">
-              {wall.style.background.imageUrl ? (
+              {wall.styleSetting.backgroundSetting.styleImgURL ? (
                 <img
-                  src={wall.style.background.imageUrl}
+                  src={wall.styleSetting.backgroundSetting.styleImgURL}
                   alt="profile"
                   className={`h-full w-full rounded-full object-cover ${
                     isEdit ? 'opacity-50' : 'opacity-100'
