@@ -42,7 +42,7 @@ export const FreeBlock = ({ blockUUID }: FreeBlockProps) => {
   };
 
   if (targetFreeBlockIndex === -1) {
-    return <></>;
+    return null;
   }
   return (
     <BlockContainer blockName="freeBlock" blockUUID={blockUUID}>

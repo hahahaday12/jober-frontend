@@ -50,8 +50,10 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
       }),
     );
   };
-  console.log(wall.blocks[0].subData);
 
+  if (targetListBlockIndex === -1) {
+    return null;
+  }
   return (
     <BlockContainer blockName="listBlock" blockUUID={blockUUID}>
       <div className="p-block flex flex-col">

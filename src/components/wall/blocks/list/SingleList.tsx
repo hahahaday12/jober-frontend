@@ -2,7 +2,7 @@ import { useWallStore } from '@/store';
 import { Checkbox, Input } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { produce } from 'immer';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import editIcon from '@/assets/icons/edit.svg';
 import minusIcon from '@/assets/icons/minus.svg';
 import { Icon } from '@/components/common';

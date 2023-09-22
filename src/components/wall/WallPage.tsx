@@ -23,7 +23,7 @@ import useFetchWallData from '@/hooks/useFetchWallData';
 
 const BlockMapper: { [key: string]: JSX.Element } = {
   listBlock: <ListBlock />,
-  // fileBlock: <FileBlock />,
+  fileBlock: <FileBlock />,
   snsBlock: <SnsBlock />,
   // templateBlock: <TemplateBlock />,
   freeBlock: <FreeBlock />,
