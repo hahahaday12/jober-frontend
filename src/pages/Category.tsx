@@ -1,9 +1,9 @@
-import { Category } from "components/index"
+import { Category } from 'components/index';
 
 export const CategoryPage = () => {
-  return(
+  return (
     <>
-    <Category/>
+      <Category />
     </>
-  )
-}
+  );
+};
