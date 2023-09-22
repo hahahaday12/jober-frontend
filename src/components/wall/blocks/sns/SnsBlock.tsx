@@ -8,28 +8,28 @@ import { ADDABLE_SNSS } from '@/data/constants/blocks';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { produce } from 'immer';
 
-export type SingleSns = Pick<
+export type SnsBlockSubData = Pick<
   SubDatumType,
   'snsBlockUUID' | 'snsType' | 'snsUrl'
 >;
 
 type SnsBlockProps = {
   blockUUID?: string;
-  subData?: SingleSns[];
+  subData?: SnsBlockSubData[];
 };
 
 export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
   const { isEdit, wall, setWall } = useWallStore();
-  // const targetSnsBlock = wall.blocks.find(block=> block.blockType === 'snsBlock')
 
   const [isSnsModalOpen, setIsSnsModalOpen] = useState(false);
 
-  console.log(snsData);
   const unregisteredSns = useMemo(
     () =>
       Object.keys(ADDABLE_SNSS).filter(
         (sns) =>
-          !(snsData as SingleSns[]).map((sns) => sns.snsType).includes(sns),
+          !(snsData as SnsBlockSubData[])
+            .map((sns) => sns.snsType)
+            .includes(sns),
       ),
     [snsData],
   );

@@ -6,7 +6,7 @@ import SnsModalInput from './SnsModalInput';
 import { ModalHeader } from '@/components/common/ModalHeader';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
-import { SingleSns } from '..';
+import { SnsBlockSubData } from '..';
 
 interface SnsBlockModalProps {
   unregisteredSns: string[];
@@ -33,7 +33,7 @@ export const SnsBlockModal = ({
   };
 
   const handleOk = () => {
-    const newSns: SingleSns = {
+    const newSns: SnsBlockSubData = {
       snsBlockUUID: crypto.randomUUID(),
       snsType: selectedSns,
       snsUrl: `https://${ADDABLE_SNSS[selectedSns].url}${snsInput}`,
