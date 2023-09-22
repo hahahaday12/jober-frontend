@@ -31,7 +31,6 @@ export const ModalOpen = () => {
     setIsModalOpen(true);
     setShowBestTemplate(true);
     setCategoryTemplate(false);
-    //setInputText('');
   };
 
   const handleSearchFocus = () => {
