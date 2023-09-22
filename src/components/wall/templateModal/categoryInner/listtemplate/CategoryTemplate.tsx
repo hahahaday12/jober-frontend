@@ -14,7 +14,7 @@ const BookCategory: Category[] = [
   { category: 'employment', text: '취업/이직' },
 ];
 
-export const CategoryTemplet = () => {
+export const CategoryTemplate = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('self');
 
@@ -26,7 +26,7 @@ export const CategoryTemplet = () => {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     getListData(category);
-    setModalContent()
+    setModalContent();
   };
 
   const getListData = async (category) => {
