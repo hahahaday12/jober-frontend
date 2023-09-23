@@ -1,4 +1,3 @@
-import { BlockMapper } from '@/components/wall/WallPage';
 import { useWallStore } from '@/store';
 import { SubDatumType, WallType } from '@/types/wall';
 import { message } from 'antd';
@@ -11,7 +10,9 @@ type SortableBlockType = {
   subData: SubDatumType[];
 }[];
 
-export default function useFetchWallData() {
+export default function useFetchWallData(BlockMapper: {
+  [key: string]: JSX.Element;
+}) {
   const [messageApi, contextHolder] = message.useMessage();
   const { wall, setWall, isEdit } = useWallStore();
   const [error, setError] = useState<Error>();

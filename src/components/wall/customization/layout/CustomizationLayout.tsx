@@ -3,7 +3,13 @@ import brushIcon from '@/assets/icons/brush.svg';
 import { CustomizationModal } from '../customizationInner/CustomizationModal';
 import { useState } from 'react';
 
-export const CustomizationLayout = () => {
+type CustomizationLayoutProps = {
+  styleSettingRef: React.MutableRefObject<null>;
+};
+
+export const CustomizationLayout = ({
+  styleSettingRef,
+}: CustomizationLayoutProps) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -25,6 +31,7 @@ export const CustomizationLayout = () => {
         handleCancel={handleCancel}
       />
       <Button
+        ref={styleSettingRef}
         className=" z-10 flex items-center justify-center gap-[6px] w-[174px] h-[62px] rounded-full fixed bottom-10 right-10"
         onClick={() => setIsModalOpen(true)}
       >

@@ -14,11 +14,13 @@ export type TemplateBlockSubDataType = Pick<
 
 type TemplateBlockProps = {
   blockUUID?: string;
-  subData: TemplateBlockSubDataType[];
+  subData?: TemplateBlockSubDataType[];
+  templateAddButtonRef: React.MutableRefObject<null>;
 };
 
 export const TemplateBlock = ({
   subData: templateBlockSubData,
+  templateAddButtonRef,
 }: TemplateBlockProps) => {
   const { isEdit, wall } = useWallStore();
   const backgroundColor = wall.styleSetting.backgroundSetting.solidColor;
@@ -32,7 +34,7 @@ export const TemplateBlock = ({
         `}
         style={{ background: isEdit ? 'white' : backgroundColor }}
       >
-        {templateBlockSubData.map((template) => (
+        {templateBlockSubData?.map((template) => (
           <SingleTemplate
             key={template.templateBlockUUID}
             templateTitle={template.templateTitle}
@@ -42,7 +44,10 @@ export const TemplateBlock = ({
 
         {isEdit && (
           <BlockContainer blockName="template">
-            <div className="h-[210px] flex flex-col items-center justify-center gap-[8px] dm-16 hover">
+            <div
+              className="h-[210px] flex flex-col items-center justify-center gap-[8px] dm-16 hover"
+              ref={templateAddButtonRef}
+            >
               <p>템플릿추가하기</p>
               <p className="text-[24px]">+</p>
             </div>

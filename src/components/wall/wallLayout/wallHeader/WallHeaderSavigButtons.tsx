@@ -2,7 +2,13 @@ import { useWallStore } from '@/store';
 import { Button, message } from 'antd';
 import { useState } from 'react';
 
-export default function WallHeaderEditButtons() {
+type WallHeaderEditButtonsProps = {
+  previewRef?: React.MutableRefObject<null>;
+};
+
+export default function WallHeaderEditButtons({
+  previewRef,
+}: WallHeaderEditButtonsProps) {
   const { wall, toggleEdit, isPreview, togglePreview } = useWallStore();
   const [saving, setSaving] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -70,6 +76,7 @@ export default function WallHeaderEditButtons() {
         <Button
           className="dm-14 text-gray88 border-gray88"
           onClick={handlePreview}
+          ref={previewRef}
         >
           {isPreview ? '미리보기 종료' : ' 미리보기'}
         </Button>

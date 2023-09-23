@@ -24,6 +24,127 @@
         ]
       },
       {
+        "blockUUID": "8fa9d0d4-ea76-4e41-8c31-accf1e09b2a8",
+        "blockType": "listBlock",
+        "subData": [
+          {
+            "listBlockUUID": "f7984000-2525-4e29-837e-2361efa4f88f",
+            "listLabel": "기술 스택",
+            "listTitle": "HTML",
+            "listDescription": "고수",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "f1dd50ff-bb7c-417a-95a9-190e76255c0a",
+            "listLabel": "",
+            "listTitle": "CSS",
+            "listDescription": "중수",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "b559280b-ef04-4131-9292-529a6502cb77",
+            "listLabel": "",
+            "listTitle": "JAVASCRIPT",
+            "listDescription": "하수",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "90f26199-2a06-4bd7-ba8d-7ab489fa39dc",
+            "listLabel": "",
+            "listTitle": "리액트",
+            "listDescription": "마스터",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "60f72491-ec68-4d5c-bea4-f7d55d4716b2",
+            "listLabel": "",
+            "listTitle": "뷰",
+            "listDescription": "문외한",
+            "isLink": false
+          }
+        ]
+      },
+      {
+        "blockUUID": "3f8a9e4c-134f-472d-a6e2-7ae9a6c9437d",
+        "blockType": "freeBlock",
+        "subData": [
+          {
+            "freeTitle": "자유블록은 자유롭고싶다.",
+            "freeDescription": "<p>자유는 공짜가 아니다.</p>"
+          }
+        ]
+      },
+      {
+        "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
+        "blockType": "snsBlock",
+        "subData": [
+          {
+            "snsBlockUUID": "f108fff1-e106-4340-b505-280e15626ecc",
+            "snsType": "facebook",
+            "snsUrl": "https://www.facebook.com/neocsv"
+          },
+          {
+            "snsBlockUUID": "f108fff1-1106-4340-b505-280e15626ecc",
+            "snsType": "instagram",
+            "snsUrl": "https://www.instagram.com/shin0._.e/"
+          },
+          {
+            "snsBlockUUID": "f108fff1-2106-4340-b505-280e15626ecc",
+            "snsType": "linkedin",
+            "snsUrl": "https://www.linkedin.com/in/drsohail269/"
+          },
+          {
+            "snsBlockUUID": "f108fff1-3106-4340-b505-280e15626ecc",
+            "snsType": "github",
+            "snsUrl": "https://github.com/howooking"
+          }
+        ]
+      },
+      {
+        "blockUUID": "124bf0e4-b861-46c2-939e-c3db0ad1c432",
+        "blockType": "freeBlock",
+        "subData": [
+          {
+            "freeTitle": "시력검사",
+            "freeDescription": "<p><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 96px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>가</strong></span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 72px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>나</strong></span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 60px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>다</strong></span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 48px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>라</strong></span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 36px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>마</strong></span><span style=\"font-size: 30px;\"><strong>바</strong></span><span style=\"font-size: 24px;\"><strong>사</strong></span><span style=\"font-size: 18px;\"><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>아</strong></span></span><span style=\"font-size: 14px;\"><strong>자</strong></span><span style=\"font-size: 12px;\"><strong>차</strong></span><span style=\"font-size: 11px;\"><strong>카</strong></span><span style=\"font-size: 10px;\"><strong>타</strong></span><span style=\"font-size: 9px;\"><strong>파</strong></span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 8px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\" id=\"isPasted\"><strong>하</strong></span></p>"
+          }
+        ]
+      },
+      {
+        "blockUUID": "5e4bf0e4-b861-46c2-939e-c2db0a12c402",
+        "blockType": "listBlock",
+        "subData": [
+          {
+            "listBlockUUID": "4f108fff1-c106-4340-b535-281215626ecc6",
+            "listLabel": "자격증",
+            "listTitle": "운전면허증",
+            "listDescription": "2종보통",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "3f108fff1-c206-4340-b535-212e15626ecc7",
+            "listLabel": "",
+            "listTitle": "정보처리기사",
+            "listDescription": "엘셀잘함",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "2f108fff1-c306-4340-b535-120e15626ecc8",
+            "listLabel": "",
+            "listTitle": "AWS 시험봄",
+            "listDescription": "떨어졌음",
+            "isLink": false
+          },
+          {
+            "listBlockUUID": "19cba211-f75d-495e-a206-ea23949289749",
+            "listLabel": "",
+            "listTitle": "고양이 집사 자격증",
+            "listDescription": "최종면접 탈락",
+            "isLink": false
+          }
+        ]
+      },
+      {
         "blockUUID": "444bf0e4-b861-46c2-939e-c3db0ad1c402",
         "blockType": "templateBlock",
         "subData": [
@@ -66,137 +187,16 @@
             ]
           }
         ]
-      },
-      {
-        "blockUUID": "3f8a9e4c-134f-472d-a6e2-7ae9a6c9437d",
-        "blockType": "freeBlock",
-        "subData": [
-          {
-            "freeTitle": "자유블록은 자유롭고싶다.",
-            "freeDescription": "<p>자유는 공짜가 아니다.</p>"
-          }
-        ]
-      },
-      {
-        "blockUUID": "124bf0e4-b861-46c2-939e-c3db0ad1c432",
-        "blockType": "freeBlock",
-        "subData": [
-          {
-            "freeTitle": "시력검사",
-            "freeDescription": "<p><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 96px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>가</strong></span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 72px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>나</strong></span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 60px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>다</strong></span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 48px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>라</strong></span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 36px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>마</strong></span><span style=\"font-size: 30px;\"><strong>바</strong></span><span style=\"font-size: 24px;\"><strong>사</strong></span><span style=\"font-size: 18px;\"><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\" id=\"isPasted\"><strong>아</strong></span></span><span style=\"font-size: 14px;\"><strong>자</strong></span><span style=\"font-size: 12px;\"><strong>차</strong></span><span style=\"font-size: 11px;\"><strong>카</strong></span><span style=\"font-size: 10px;\"><strong>타</strong></span><span style=\"font-size: 9px;\"><strong>파</strong></span><span style=\"color: rgb(65, 65, 65); font-family: sans-serif; font-size: 8px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\" id=\"isPasted\"><strong>하</strong></span></p>"
-          }
-        ]
-      },
-      {
-        "blockUUID": "ad4bf0e4-b861-46c2-939e-c3db0ad1c402",
-        "blockType": "snsBlock",
-        "subData": [
-          {
-            "snsBlockUUID": "f108fff1-e106-4340-b505-280e15626ecc",
-            "snsType": "facebook",
-            "snsUrl": "https://www.facebook.com/neocsv"
-          },
-          {
-            "snsBlockUUID": "f108fff1-1106-4340-b505-280e15626ecc",
-            "snsType": "instagram",
-            "snsUrl": "https://www.instagram.com/shin0._.e/"
-          },
-          {
-            "snsBlockUUID": "f108fff1-2106-4340-b505-280e15626ecc",
-            "snsType": "linkedin",
-            "snsUrl": "https://www.linkedin.com/in/drsohail269/"
-          },
-          {
-            "snsBlockUUID": "f108fff1-3106-4340-b505-280e15626ecc",
-            "snsType": "github",
-            "snsUrl": "https://github.com/howooking"
-          }
-        ]
-      },
-      {
-        "blockUUID": "8fa9d0d4-ea76-4e41-8c31-accf1e09b2a8",
-        "blockType": "listBlock",
-        "subData": [
-          {
-            "listBlockUUID": "f7984000-2525-4e29-837e-2361efa4f88f",
-            "listLabel": "기술 스택",
-            "listTitle": "HTML",
-            "listDescription": "고수",
-            "isLink": false
-          },
-          {
-            "listBlockUUID": "f1dd50ff-bb7c-417a-95a9-190e76255c0a",
-            "listLabel": "",
-            "listTitle": "CSS",
-            "listDescription": "중수",
-            "isLink": false
-          },
-          {
-            "listBlockUUID": "b559280b-ef04-4131-9292-529a6502cb77",
-            "listLabel": "",
-            "listTitle": "JAVASCRIPT",
-            "listDescription": "하수",
-            "isLink": false
-          },
-          {
-            "listBlockUUID": "90f26199-2a06-4bd7-ba8d-7ab489fa39dc",
-            "listLabel": "",
-            "listTitle": "리액트",
-            "listDescription": "마스터",
-            "isLink": false
-          },
-          {
-            "listBlockUUID": "60f72491-ec68-4d5c-bea4-f7d55d4716b2",
-            "listLabel": "",
-            "listTitle": "뷰",
-            "listDescription": "문외한",
-            "isLink": false
-          }
-        ]
-      },
-      {
-        "blockUUID": "5e4bf0e4-b861-46c2-939e-c2db0a12c402",
-        "blockType": "listBlock",
-        "subData": [
-          {
-            "listBlockUUID": "4f108fff1-c106-4340-b535-281215626ecc6",
-            "listLabel": "자격증",
-            "listTitle": "운전면허증",
-            "listDescription": "2종보통",
-            "isLink": false
-          },
-          {
-            "listBlockUUID": "3f108fff1-c206-4340-b535-212e15626ecc7",
-            "listLabel": "",
-            "listTitle": "정보처리기사",
-            "listDescription": "엘셀잘함",
-            "isLink": false
-          },
-          {
-            "listBlockUUID": "2f108fff1-c306-4340-b535-120e15626ecc8",
-            "listLabel": "",
-            "listTitle": "AWS 시험봄",
-            "listDescription": "떨어졌음",
-            "isLink": false
-          },
-          {
-            "listBlockUUID": "19cba211-f75d-495e-a206-ea23949289749",
-            "listLabel": "",
-            "listTitle": "고양이 집사 자격증",
-            "listDescription": "최종면접 탈락",
-            "isLink": false
-          }
-        ]
       }
     ],
     "styleSetting": {
       "backgroundSetting": {
-        "solidColor": "#ffdaa2",
+        "solidColor": "#fff8a1",
         "gradation": false,
         "styleImgURL": "https://images.unsplash.com/photo-1692606674503-267da3da7da7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2680&q=80"
       },
       "blockSetting": {
-        "styleColor": "#fbe4e4",
+        "styleColor": "#ffebeb",
         "gradation": true,
         "shape": "6px",
         "style": "shadow"

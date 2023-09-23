@@ -6,7 +6,11 @@ import WallHeaderInput from './WallHeaderInput';
 import { Icon } from '@/components/common';
 import WallHeaderEditButtons from './WallHeaderSavigButtons';
 
-export const WallHeader = () => {
+type WallHeaderProps = {
+  previewRef: React.MutableRefObject<null>;
+};
+
+export const WallHeader = ({ previewRef }: WallHeaderProps) => {
   const { isEdit, toggleEdit, isPreview } = useWallStore();
 
   const handleCancelSave = () => {
@@ -45,7 +49,7 @@ export const WallHeader = () => {
               <div className="flex gap-[73px] items-center">
                 <WallHeaderUser />
                 <WallHeaderInput />
-                <WallHeaderEditButtons />
+                <WallHeaderEditButtons previewRef={previewRef} />
                 <Icon
                   src={closeIcon}
                   className="absolute top-[21px] right-[30px] hover"

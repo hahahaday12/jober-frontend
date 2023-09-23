@@ -1,5 +1,4 @@
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ReactSortable, Sortable } from 'react-sortablejs';
 import { produce } from 'immer';
 import {
@@ -18,17 +17,67 @@ import {
 import { CustomizationLayout } from 'components/index';
 import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
 import useFetchWallData from '@/hooks/useFetchWallData';
-
-export const BlockMapper: { [key: string]: JSX.Element } = {
-  listBlock: <ListBlock />,
-  fileBlock: <FileBlock />,
-  snsBlock: <SnsBlock />,
-  templateBlock: <TemplateBlock />,
-  freeBlock: <FreeBlock />,
-};
+import { Tour, type TourProps } from 'antd';
+import previewTour from '@/assets/tour/preview.gif';
+import styleTour from '@/assets/tour/style.gif';
 
 export const WallPage = () => {
-  const { wallId } = useParams();
+  const tourWallInfoRef = useRef(null);
+  const tourTemplateAddButtonRef = useRef(null);
+  const tourAddBlockButtonRef = useRef(null);
+  const tourStyleSettingRef = useRef(null);
+  const tourPreviewRef = useRef(null);
+
+  const BlockMapper: { [key: string]: JSX.Element } = {
+    listBlock: <ListBlock />,
+    fileBlock: <FileBlock />,
+    snsBlock: <SnsBlock />,
+    templateBlock: (
+      <TemplateBlock templateAddButtonRef={tourTemplateAddButtonRef} />
+    ),
+    freeBlock: <FreeBlock />,
+  };
+
+  const [tourOpen, setTourOpen] = useState(
+    localStorage.getItem('hasVisited') ? false : true,
+  );
+
+  const steps: TourProps['steps'] = [
+    {
+      title: (
+        <>
+          <p>페이지의 기본 정보를 설정합니다.</p>
+          <p>여러분과 페이지를 설명해주세요</p>
+        </>
+      ),
+      target: () => tourWallInfoRef.current,
+    },
+    {
+      title: <>원하는 템플릿을 넣고 빠르게 사용할 수 있어요!</>,
+      target: () => tourTemplateAddButtonRef.current,
+    },
+    {
+      title: <>손쉽게 여러종류의 블록을 추가해보세요!</>,
+      target: () => tourAddBlockButtonRef.current,
+    },
+    {
+      // TODO : 이미지 변경
+      cover: <img src={styleTour} alt="style gif" />,
+      title: <>페이지 스타일을 설정해 본인의 개선을 쉽게 표현해보세요!</>,
+      target: () => tourStyleSettingRef.current,
+    },
+    {
+      // TODO : 이미지 변경
+      cover: <img src={previewTour} alt="preview gif" />,
+      title: <>만든페이지를 미리 볼 수 있어요!</>,
+      target: () => tourPreviewRef.current,
+    },
+  ];
+
+  const handleTourClose = () => {
+    setTourOpen(false);
+    localStorage.setItem('hasVisited', '네');
+  };
 
   const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
 
@@ -41,7 +90,7 @@ export const WallPage = () => {
     setWall,
     sortableBlocks,
     setSortableBlocks,
-  } = useFetchWallData();
+  } = useFetchWallData(BlockMapper);
 
   const handleSortBlocks = (event: Sortable.SortableEvent) => {
     const item = sortableBlocks.splice(event.oldIndex as number, 1)[0];
@@ -71,13 +120,14 @@ export const WallPage = () => {
       }}
     >
       {contextHolder}
-      <WallHeader wallId={wallId} />
+      <WallHeader previewRef={tourPreviewRef} />
 
+      {/* TODO : 로딩 */}
       {loading ? (
-        <div className="py-[106px] ">loading...</div>
+        <div className="py-[106px]">loading...</div>
       ) : (
         <main className="py-[106px] flex-1 flex flex-col gap-[24px] w-[866px] mx-auto">
-          <WallInfoBlock />
+          <WallInfoBlock wallInfoRef={tourWallInfoRef} />
           <ReactSortable
             list={sortableBlocks}
             setList={setSortableBlocks}
@@ -94,8 +144,11 @@ export const WallPage = () => {
 
           {isEdit && (
             <>
-              <AddBlockButton setIsAddBlockModalOpen={setIsAddBlockModalOpen} />
-              <CustomizationLayout />
+              <AddBlockButton
+                addBlockButtonRef={tourAddBlockButtonRef}
+                setIsAddBlockModalOpen={setIsAddBlockModalOpen}
+              />
+              <CustomizationLayout styleSettingRef={tourStyleSettingRef} />
             </>
           )}
 
@@ -103,7 +156,9 @@ export const WallPage = () => {
             isAddBlockModalOpen={isAddBlockModalOpen}
             setIsAddBlockModalOpen={setIsAddBlockModalOpen}
           />
-
+          {isEdit && (
+            <Tour open={tourOpen} onClose={handleTourClose} steps={steps} />
+          )}
           <ModalOpen />
         </main>
       )}
