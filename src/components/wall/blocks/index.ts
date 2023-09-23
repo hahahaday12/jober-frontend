@@ -9,5 +9,4 @@ export * from 'components/wall/blocks/wallInfo/WallInfoBlock';
 export * from 'components/wall/blocks/wallInfo/ProfileImage';
 export * from 'components/wall/blocks/sns/SnsBlock';
 export * from 'components/wall/blocks/sns/SnsBlockModal';
-export * from 'components/wall/blocks/templates/Template';
 export * from 'components/wall/blocks/templates/TemplatesBlock';

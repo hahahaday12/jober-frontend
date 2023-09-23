@@ -29,28 +29,34 @@ export const BlockContainer = ({
 
   const defaultBlocks =
     blockName === 'wallInfoBlock' || blockName === 'addButton';
+  const templateBlock = blockName === 'templateBlock';
+  const template = blockName === 'template';
+  const blockStyleClassName = wall?.styleSetting?.blockSetting?.style;
+  const blockBorderRadius = wall?.styleSetting?.blockSetting?.shape;
+  const blockBackgroundColor = wall?.styleSetting?.blockSetting?.styleColor;
 
   return (
     <div
-      className={`rounded-[${wall?.styleSetting?.blockSetting?.shape}] ${
-        wall?.styleSetting?.blockSetting?.style
-      } border-solid border-lightBlack overflow-hidden relative ${
-        isEdit && 'text-gray88'
-      }`}
+      className={`
+      ${isEdit && 'text-gray88'}
+      rounded-[${blockBorderRadius}] 
+      ${!templateBlock && blockStyleClassName} 
+      border-solid border-lightBlack relative
+      `}
       style={{
-        backgroundColor: wall?.styleSetting?.blockSetting?.styleColor,
+        backgroundColor: blockBackgroundColor,
       }}
     >
       {isEdit && !defaultBlocks && (
         <>
-          <DragHandle />
-          <Icon
-            src={trashIcon}
-            className={`absolute right-[26px] top-[26px] hover ${
-              blockName === 'templateBlock' && 'hidden'
-            }`}
-            onClick={handleDeleteBlock}
-          />
+          {blockName !== 'template' && <DragHandle />}
+          {!templateBlock && !template && (
+            <Icon
+              src={trashIcon}
+              className={'absolute right-[26px] top-[26px] hover '}
+              onClick={handleDeleteBlock}
+            />
+          )}
         </>
       )}
       {children}

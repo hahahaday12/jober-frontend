@@ -11,7 +11,7 @@ export const WallHeader = ({ wallId }: { wallId?: string }) => {
   // const {
   //   token: { colorPrimaryHover },
   // } = theme.useToken();
-  const { wall, isEdit, toggleEdit, getWall } = useWallStore();
+  const { wall, isEdit, toggleEdit } = useWallStore();
   const [wallIdInput, setwallIdInput] = useState(wallId);
 
   const [saving, setSaving] = useState(false);

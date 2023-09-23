@@ -40,15 +40,15 @@ export const WallInfoBlock = () => {
                 onChange={handleChange}
                 name="wallInfoTitle"
                 value={wall.wallInfoBlock.wallInfoTitle}
-                placeholder="이름"
+                placeholder="페이지명"
                 className="h-[58px] db-24 rounded-br-none rounded-bl-none"
               />
               <Input
                 onChange={handleChange}
                 name="wallInfoDescription"
                 value={wall.wallInfoBlock.wallInfoDescription}
-                placeholder="소개란"
-                className="h-[58px] dm-16 text-gray88 rounded-tr-none rounded-tl-none"
+                placeholder="페이지설명"
+                className="h-[58px] dm-16 rounded-tr-none rounded-tl-none"
               />
             </>
           ) : (
@@ -56,7 +56,7 @@ export const WallInfoBlock = () => {
               <p className="db-24 py-[5px] px-[16px]">
                 {wall.wallInfoBlock?.wallInfoTitle || '페이지명'}
               </p>
-              <p className="dm-16 text-gray88 py-[3px] px-[16px]">
+              <p className="dm-16 py-[3px] px-[16px]">
                 {wall.wallInfoBlock?.wallInfoDescription || '페이지설명'}
               </p>
             </div>

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ReactSortable, Sortable } from 'react-sortablejs';
 import { produce } from 'immer';
 import {
@@ -15,17 +15,15 @@ import {
   ListBlock,
   TemplateBlock,
 } from 'components/wall/blocks/index';
-import React from 'react';
-import { SubDatumType } from '@/types/wall';
 import { CustomizationLayout } from 'components/index';
 import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
 import useFetchWallData from '@/hooks/useFetchWallData';
 
-const BlockMapper: { [key: string]: JSX.Element } = {
+export const BlockMapper: { [key: string]: JSX.Element } = {
   listBlock: <ListBlock />,
   fileBlock: <FileBlock />,
   snsBlock: <SnsBlock />,
-  // templateBlock: <TemplateBlock />,
+  templateBlock: <TemplateBlock />,
   freeBlock: <FreeBlock />,
 };
 
@@ -34,37 +32,16 @@ export const WallPage = () => {
 
   const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
 
-  const { contextHolder, isEdit, wall, loading, error, setWall } =
-    useFetchWallData();
-
-  const [sortableBlocks, setSortableBlocks] = useState<
-    {
-      id: string;
-      block: JSX.Element;
-      subData: SubDatumType[];
-    }[]
-  >([]);
-
-  useEffect(() => {
-    if (wall.blocks) {
-      const objToComponent = wall.blocks.map((block) => {
-        const { blockType, blockUUID, subData } = block;
-        const component = BlockMapper[blockType];
-        return React.cloneElement(component, {
-          blockType,
-          blockUUID,
-          subData,
-        });
-      });
-      setSortableBlocks(
-        objToComponent.map((block) => ({
-          block,
-          id: block.props.blockUUID,
-          subData: block.props.subData,
-        })),
-      );
-    }
-  }, [wall]);
+  const {
+    contextHolder,
+    isEdit,
+    wall,
+    loading,
+    error,
+    setWall,
+    sortableBlocks,
+    setSortableBlocks,
+  } = useFetchWallData();
 
   const handleSortBlocks = (event: Sortable.SortableEvent) => {
     const item = sortableBlocks.splice(event.oldIndex as number, 1)[0];
