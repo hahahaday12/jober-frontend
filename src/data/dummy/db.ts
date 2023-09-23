@@ -1,6 +1,7 @@
 import { WallType } from '@/types/wall';
 
 export const wall: WallType = {
+  shareURL: 'howooking',
   isPublic: true,
   category: 'career',
   memberId: 1,

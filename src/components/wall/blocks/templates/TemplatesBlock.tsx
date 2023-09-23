@@ -23,7 +23,6 @@ export const TemplateBlock = ({
   const { isEdit, wall } = useWallStore();
   const backgroundColor = wall.styleSetting.backgroundSetting.solidColor;
 
-  console.log(templateBlockSubData);
   return (
     <BlockContainer blockName="templateBlock">
       <div

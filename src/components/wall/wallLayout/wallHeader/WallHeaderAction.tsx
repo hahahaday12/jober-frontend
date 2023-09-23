@@ -9,7 +9,7 @@ import moreVerticalIcon from '@/assets/icons/more-vertical.svg';
 export const WallHeaderActions = () => {
   const { toggleEdit } = useWallStore();
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-[8px] items-center">
       <ActionButton type={smsIcon} />
       <ActionButton type={exportIcon} />
       <ActionButton type={notificationIcon} />

@@ -1,4 +1,5 @@
 export type WallType = {
+  shareURL: string;
   isPublic: boolean;
   memberId: number;
   category: CategoryType;
