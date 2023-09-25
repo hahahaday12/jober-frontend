@@ -28,7 +28,7 @@ export const WallInfoBlock = ({ wallInfoRef }: WallInfoBlockProps) => {
     <BlockContainer blockName="wallInfoBlock">
       <div ref={wallInfoRef}>
         <BackgroundImage />
-        <div className="relative flex gap-[24px] px-[24px] py-[26px] items-center">
+        <div className="relative flex gap-[24px] sm:p-block px-[18px] pb-[18px] sm:px-[24px] pt-[84px] sm:pt-[24px] sm:pb-[24px] items-center">
           {/* TODO : 구독 기능 */}
           {!isEdit && (
             <div className="absolute top-[26px] right-[26px]">
@@ -58,10 +58,10 @@ export const WallInfoBlock = ({ wallInfoRef }: WallInfoBlockProps) => {
               </>
             ) : (
               <div className="space-y-[10px]">
-                <p className="db-24 py-[5px] px-[16px]">
+                <p className="db-24 py-[5px]">
                   {wall.wallInfoBlock?.wallInfoTitle || '페이지명'}
                 </p>
-                <p className="dm-16 py-[3px] px-[16px]">
+                <p className="dm-16 py-[3px]">
                   {wall.wallInfoBlock?.wallInfoDescription || '페이지설명'}
                 </p>
               </div>

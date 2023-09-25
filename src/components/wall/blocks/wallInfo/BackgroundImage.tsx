@@ -33,7 +33,7 @@ export const BackgroundImage = () => {
   };
 
   return (
-    <>
+    <div className="hidden sm:block">
       {contextHolder}
       {wall.wallInfoBlock?.backgroundImgURL ? (
         <img
@@ -58,6 +58,6 @@ export const BackgroundImage = () => {
           />
         </label>
       )}
-    </>
+    </div>
   );
 };
