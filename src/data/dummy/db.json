@@ -70,7 +70,7 @@
         "subData": [
           {
             "freeTitle": "자유블록은 자유롭고싶다.",
-            "freeDescription": "<p>자유는 공짜가 아니다.</p>"
+            "freeDescription": "<p>자유블록의 자유는 없다.</p>"
           }
         ]
       },
@@ -92,11 +92,6 @@
             "snsBlockUUID": "f108fff1-2106-4340-b505-280e15626ecc",
             "snsType": "linkedin",
             "snsUrl": "https://www.linkedin.com/in/drsohail269/"
-          },
-          {
-            "snsBlockUUID": "f108fff1-3106-4340-b505-280e15626ecc",
-            "snsType": "github",
-            "snsUrl": "https://github.com/howooking"
           }
         ]
       },
@@ -199,7 +194,7 @@
         "styleColor": "#ffebeb",
         "gradation": true,
         "shape": "6px",
-        "style": "shadow"
+        "style": "flat"
       },
       "themeSetting": null
     }

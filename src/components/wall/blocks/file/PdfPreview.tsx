@@ -7,12 +7,15 @@ import { Icon } from '@/components/common';
 import nextIcon from '@/assets/icons/next.svg';
 import previousIcon from '@/assets/icons/previous.svg';
 import { FileBlockType } from '..';
+import { useWindowWidth } from '@/hooks/useWindowWidth';
 
-export default function PdfPreview({
-  targetFileBlock,
-}: {
+type PdfPreviewProps = {
   targetFileBlock: FileBlockType;
-}) {
+};
+
+export default function PdfPreview({ targetFileBlock }: PdfPreviewProps) {
+  const windowWidth = useWindowWidth();
+
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
     import.meta.url,
@@ -61,12 +64,12 @@ export default function PdfPreview({
   return (
     <div className="select-none">
       {isFileExist && (
-        <section className="flex justify-between py-2 px-2">
+        <section className="flex justify-between py-2 truncate">
           <p className="dm-16 text-blue hover" onClick={handleDownload}>
             {targetFileBlock.subData[0].fileName}
           </p>
           <p>
-            Page {pageNumber} of {numPages}
+            {pageNumber} / {numPages}
           </p>
         </section>
       )}
@@ -76,7 +79,10 @@ export default function PdfPreview({
         file={targetFileBlock.subData[0].file}
         onLoadSuccess={onDocumentLoadSuccess}
       >
-        <Page pageNumber={pageNumber} width={810} />
+        <Page
+          pageNumber={pageNumber}
+          width={windowWidth < 640 ? windowWidth - 104 : 810}
+        />
         <Icon
           src={previousIcon}
           onClick={handleClickPrevious}

@@ -62,7 +62,6 @@ import facebookLogo from '@/assets/icons/facebook-logo.svg';
 import instagramLogo from '@/assets/icons/instagram-logo.svg';
 import linkedinLogo from '@/assets/icons/linkedin-logo.svg';
 import behanceLogo from '@/assets/icons/behance-logo.svg';
-import githubLogo from '@/assets/icons/github-logo.svg';
 
 export const ADDABLE_SNSS: {
   [key: string]: {
@@ -90,10 +89,5 @@ export const ADDABLE_SNSS: {
     title: 'Behance',
     svg: behanceLogo,
     url: 'behance.net/',
-  },
-  github: {
-    title: 'Github',
-    svg: githubLogo,
-    url: 'github.com/',
   },
 };

@@ -57,13 +57,15 @@ export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
     <BlockContainer blockName="snsBlock" blockUUID={blockUUID}>
       <div className="p-block">
         {isEdit && (
-          <div className="flex items-center gap-[8px] mb-[23px]">
-            <p className="db-20">SNS 연결</p>
-            <p className="dm-16">보여주고 싶은 SNS를 연결해주세요!</p>
+          <div className="flex items-end gap-[8px] mb-[23px]">
+            <p className="db-18 sm:db-20">SNS 연결</p>
+            <p className="dm-14 sm:dm-26 -translate-x-1">
+              보여주고 싶은 SNS를 연결해주세요!
+            </p>
           </div>
         )}
 
-        <div className="flex gap-[24px] justify-center">
+        <div className="flex gap-[16px] sm:gap-[16px] justify-center">
           {snsData?.map((sns) => (
             <Popconfirm
               key={sns.snsBlockUUID}
@@ -83,11 +85,11 @@ export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
               >
                 <Icon
                   src={ADDABLE_SNSS[sns.snsType as string]?.svg}
-                  className="w-[60px] h-[60px] rounded-full"
+                  className="w-[44px] h-[44px] sm:w-[60px] sm:h-[60px] rounded-full"
                   onClick={() => handleClickSnsIcons(sns.snsUrl as string)}
                 />
                 {isEdit && (
-                  <CloseOutlined className="group-hover:block hidden absolute top-[21.5px] left-[21.5px]" />
+                  <CloseOutlined className="group-hover:block hidden absolute top-[14px] left-[14px] sm:top-[21.5px] sm:left-[21.5px]" />
                 )}
               </div>
             </Popconfirm>
@@ -95,7 +97,7 @@ export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
           {isEdit && unregisteredSns.length > 0 && (
             <Button
               shape="circle"
-              className="w-[60px] h-[60px] flex justify-center items-center"
+              className="w-[44px] h-[44px] sm:w-[60px] sm:h-[60px] flex justify-center items-center"
               onClick={() => setIsSnsModalOpen(true)}
             >
               <PlusOutlined />

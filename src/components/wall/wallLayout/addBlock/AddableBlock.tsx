@@ -30,7 +30,7 @@ export const AddableBlock = ({
         draggable={false}
         src={ADDABLE_BLOCKS[block].image}
         alt={ADDABLE_BLOCKS[block].title}
-        className={`overflow-hidden rounded-[11px] w-[238px] h-[128px] hover:ring-blue hover:ring-2 hover ${
+        className={`overflow-hidden rounded-[11px] sm:w-[238px] w-[140px] hover:ring-blue hover:ring-2 hover ${
           selectedBlock === block && 'ring-blue ring-2'
         }`}
       />

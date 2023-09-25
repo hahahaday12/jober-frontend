@@ -47,7 +47,7 @@ export const FreeBlock = ({ blockUUID }: FreeBlockProps) => {
   return (
     <BlockContainer blockName="freeBlock" blockUUID={blockUUID}>
       <div className="p-block flex flex-col">
-        <div className="flex items-center gap-[6px] db-20 mb-[16px]">
+        <div className="flex items-center gap-[6px] db-18 sm:db-20 mb-[16px]">
           {isFreeTitleEdit ? (
             <Input
               placeholder="자유블록 제목을 입력해주세요."

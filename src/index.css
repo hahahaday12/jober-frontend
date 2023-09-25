@@ -56,7 +56,7 @@
   @apply hover:opacity-60 transition cursor-pointer;
 }
 .p-block {
-  @apply px-[28px] py-[26px];
+  @apply sm:px-[28px] sm:py-[26px] p-[18px];
 }
 
 ::-webkit-scrollbar {

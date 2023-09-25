@@ -38,7 +38,6 @@ export const SnsBlockModal = ({
       snsType: selectedSns,
       snsUrl: `https://${ADDABLE_SNSS[selectedSns].url}${snsInput}`,
     };
-    console.log(newSns);
     const snsBlockIndex = wall.blocks.findIndex(
       (block) => block.blockType === 'snsBlock',
     );
@@ -51,6 +50,7 @@ export const SnsBlockModal = ({
     }
     messageApi.success('SNS 계정을 연결했습니다.');
     setIsSnsModalOpen(false);
+    setSnsInput('');
   };
 
   return (
@@ -71,7 +71,7 @@ export const SnsBlockModal = ({
         onCancel={handleCloseSnsModal}
         width="520px"
       >
-        <div className="flex gap-[24px] justify-center pt-[24px]">
+        <div className="flex gap-[24px] justify-center pt-[18px] sm:pt-[24px]">
           {unregisteredSns.map((sns) => (
             <div key={sns} className="flex flex-col items-center gap-[8px]">
               <Icon

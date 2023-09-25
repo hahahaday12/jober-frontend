@@ -33,9 +33,9 @@ export const ProfileImage = () => {
   };
 
   return (
-    <>
+    <div className="absolute -top-[60px] left-[calc(50%-60px)] sm:block sm:static">
       {contextHolder}
-      <div className="flex w-[140px] h-[140px] flex-col items-center justify-center rounded-full bg-white overflow-hidden">
+      <div className="flex w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] flex-col items-center justify-center rounded-full bg-white overflow-hidden">
         {wall.wallInfoBlock?.wallInfoImgURL ? (
           <img
             src={wall.wallInfoBlock.wallInfoImgURL}
@@ -60,6 +60,6 @@ export const ProfileImage = () => {
           </label>
         )}
       </div>
-    </>
+    </div>
   );
 };

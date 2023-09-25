@@ -30,7 +30,7 @@ export const TemplateBlock = ({
       <div
         className={`
         ${isEdit && 'px-[8px] pb-[8px] pt-[40px]'} 
-        gap-4 grid grid-cols-2
+        gap-4 grid sm:grid-cols-2 grid-cols-1
         `}
         style={{ background: isEdit ? 'white' : backgroundColor }}
       >
@@ -45,7 +45,7 @@ export const TemplateBlock = ({
         {isEdit && (
           <BlockContainer blockName="template">
             <div
-              className="h-[210px] flex flex-col items-center justify-center gap-[8px] dm-16 hover"
+              className="sm:h-[210px] h-[115px] flex flex-col items-center justify-center gap-[8px] dm-16 hover"
               ref={templateAddButtonRef}
             >
               <p>템플릿추가하기</p>
