@@ -47,10 +47,10 @@ export const FileBlock = ({ blockUUID }: FileBlockProps) => {
   return (
     <BlockContainer blockName="fileBlock" blockUUID={blockUUID}>
       <div className="p-block flex flex-col">
-        <div className="db-20 flex items-center gap-[6px] mb-[16px]">
+        <div className="db-18 sm:db-20 flex items-center gap-[6px] mb-[16px]">
           {isFileTitleEdit ? (
             <Input
-              className="w-1/3 px-1 py-0 "
+              className="w-1/2 px-1 py-0 "
               name="fileTitle"
               value={targetFileBlock.subData[0].fileTitle}
               onChange={handleTitleAndDescription}
@@ -70,7 +70,7 @@ export const FileBlock = ({ blockUUID }: FileBlockProps) => {
         <div className="flex dm-16 items-center gap-[6px] mb-[10px]">
           {isFileDescriptionEdit ? (
             <Input
-              className="w-1/3 px-1 py-0 "
+              className="w-1/2 px-1 py-0 "
               name="fileDescription"
               value={targetFileBlock.subData[0].fileDescription}
               onChange={handleTitleAndDescription}
