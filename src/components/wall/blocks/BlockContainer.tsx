@@ -39,12 +39,13 @@ export const BlockContainer = ({
     <div
       className={`
       ${isEdit && 'text-gray88'}
-      rounded-[${blockBorderRadius}] 
-      ${!templateBlock && blockStyleClassName} 
+      rounded-[${blockBorderRadius}]
+      ${!templateBlock && blockStyleClassName}
       border-solid border-lightBlack relative
       `}
       style={{
         backgroundColor: blockBackgroundColor,
+        borderRadius: wall?.styleSetting?.blockSetting?.shape,
       }}
     >
       {isEdit && !defaultBlocks && (

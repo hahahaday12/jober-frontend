@@ -6,6 +6,7 @@ import {
   WallInfoBlock,
   ModalOpen,
   AddBlockModal,
+  Customization,
 } from 'components/index';
 import {
   FileBlock,
@@ -14,7 +15,7 @@ import {
   ListBlock,
   TemplateBlock,
 } from 'components/wall/blocks/index';
-import { CustomizationLayout } from 'components/index';
+
 import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
 import useFetchWallData from '@/hooks/useFetchWallData';
 import { Tour, type TourProps } from 'antd';
@@ -148,7 +149,7 @@ export const WallPage = () => {
                 addBlockButtonRef={tourAddBlockButtonRef}
                 setIsAddBlockModalOpen={setIsAddBlockModalOpen}
               />
-              <CustomizationLayout styleSettingRef={tourStyleSettingRef} />
+              <Customization styleSettingRef={tourStyleSettingRef} />
             </>
           )}
 
