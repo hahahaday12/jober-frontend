@@ -3,60 +3,60 @@ import { Input } from 'antd';
 import { produce } from 'immer';
 import { useWallStore } from '@/store';
 import { BlockContainer, FileUpload } from 'components/index';
-import { SubDataClassType } from '@/types/wall';
 import { Icon } from '@/components/common';
 import editThickIcon from '@/assets/icons/edit-thick.svg';
 import editIcon from '@/assets/icons/edit.svg';
+import { SubDatumType } from '@/types/wall';
 
-interface FileBlockProps {
+export type FileBlockSubDataType = Pick<
+  SubDatumType,
+  'fileTitle' | 'fileDescription' | 'fileName' | 'file'
+>;
+
+type FileBlockProps = {
   blockUUID?: string;
-}
+};
 
 export const FileBlock = ({ blockUUID }: FileBlockProps) => {
   const { isEdit, wall, setWall } = useWallStore();
+
   const [isFileTitleEdit, setIsFileTitleEdit] = useState(false);
-  const [isFileSubtitleEdit, setIsFileSubtitleEdit] = useState(false);
+  const [isFileDescriptionEdit, setIsFileDescriptionEdit] = useState(false);
 
   const tragetFileBlockIndex = wall.blocks.findIndex(
     (block) => block.blockUUID === blockUUID,
   );
   const targetFileBlock = wall.blocks[tragetFileBlockIndex];
 
-  const handleFileTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTitleAndDescription = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const { name, value } = e.target;
     setWall(
       produce(wall, (draft) => {
-        (
-          draft.blocks[tragetFileBlockIndex].subData as SubDataClassType
-        ).fileTitle = e.target.value;
-      }),
-    );
-  };
-  const handleFileSubtitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWall(
-      produce(wall, (draft) => {
-        (
-          draft.blocks[tragetFileBlockIndex].subData as SubDataClassType
-        ).fileSubtitle = e.target.value;
+        draft.blocks[tragetFileBlockIndex].subData[0][
+          name as keyof FileBlockSubDataType
+        ] = value;
       }),
     );
   };
 
+  if (tragetFileBlockIndex === -1) {
+    return null;
+  }
   return (
     <BlockContainer blockName="fileBlock" blockUUID={blockUUID}>
-      <div className="p-7 flex flex-col gap-5">
-        <div className="flex text-xl font-bold items-center gap-2 text-gray-600">
+      <div className="p-block flex flex-col">
+        <div className="db-18 sm:db-20 flex items-center gap-[6px] mb-[16px]">
           {isFileTitleEdit ? (
             <Input
-              className="w-1/3 px-1 py-0 "
+              className="w-1/2 px-1 py-0 "
               name="fileTitle"
-              value={(targetFileBlock.subData as SubDataClassType).fileTitle}
-              onChange={handleFileTitle}
+              value={targetFileBlock.subData[0].fileTitle}
+              onChange={handleTitleAndDescription}
             />
           ) : (
-            <div>
-              {(targetFileBlock.subData as SubDataClassType).fileTitle ||
-                '파일블록제목'}
-            </div>
+            <>{targetFileBlock.subData[0].fileTitle || '파일블록 제목'}</>
           )}
           {isEdit && (
             <Icon
@@ -66,28 +66,29 @@ export const FileBlock = ({ blockUUID }: FileBlockProps) => {
             />
           )}
         </div>
-        <div className="flex text-lg items-center gap-2 text-gray-600">
-          {isFileSubtitleEdit ? (
+
+        <div className="flex dm-16 items-center gap-[6px] mb-[10px]">
+          {isFileDescriptionEdit ? (
             <Input
-              className="w-1/3 px-1 py-0 "
-              name="fileSubtitle"
-              value={(targetFileBlock.subData as SubDataClassType).fileSubtitle}
-              onChange={handleFileSubtitle}
+              className="w-1/2 px-1 py-0 "
+              name="fileDescription"
+              value={targetFileBlock.subData[0].fileDescription}
+              onChange={handleTitleAndDescription}
             />
           ) : (
-            <div>
-              {(targetFileBlock.subData as SubDataClassType).fileSubtitle ||
-                '파일블록소제목'}
-            </div>
+            <>
+              {targetFileBlock.subData[0].fileDescription || '파일블록 부제목'}
+            </>
           )}
           {isEdit && (
             <Icon
               src={editIcon}
               className="hover"
-              onClick={() => setIsFileSubtitleEdit((prev) => !prev)}
+              onClick={() => setIsFileDescriptionEdit((prev) => !prev)}
             />
           )}
         </div>
+
         <FileUpload
           isEdit={isEdit}
           tragetFileBlockIndex={tragetFileBlockIndex}

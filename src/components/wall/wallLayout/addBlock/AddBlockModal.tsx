@@ -1,13 +1,11 @@
 import { ADDABLE_BLOCKS, DEFAULT_BLOCKS } from '@/data/constants/blocks';
 import { useWallStore } from '@/store';
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 import { produce } from 'immer';
-import { useMemo, useState } from 'react';
-scrollX;
-import { v4 as uuidv4 } from 'uuid';
-import { BlockElementType } from '@/types/wall';
+import { useState } from 'react';
 import { AddableBlock } from './AddableBlock';
 import { ModalHeader } from '@/components/common/ModalHeader';
+import { Block, BlockType, SubDatumType } from '@/types/wall';
 
 interface AddBlockModalProps {
   setIsAddBlockModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,6 +16,8 @@ export const AddBlockModal = ({
   setIsAddBlockModalOpen,
   isAddBlockModalOpen,
 }: AddBlockModalProps) => {
+  const [messageApi, contextHolder] = message.useMessage();
+
   const [selectedBlock, setSelectedBlock] = useState('');
 
   const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,9 +25,8 @@ export const AddBlockModal = ({
   };
 
   const { wall, setWall } = useWallStore();
-  const hasSnsBlock = useMemo(
-    () => wall?.blocks?.some((block) => block.blockType === 'snsBlock'),
-    [wall?.blocks],
+  const hasSnsBlock = wall?.blocks?.some(
+    (block) => block.blockType === 'snsBlock',
   );
 
   const handleCloseModal = () => {
@@ -36,48 +35,55 @@ export const AddBlockModal = ({
   };
 
   const handleAddBLock = () => {
-    if (selectedBlock) {
-      setWall(
-        produce(wall, (draft) => {
-          const newBlock = {
-            ...DEFAULT_BLOCKS[selectedBlock],
-            blockUUID: uuidv4(),
-          };
-          draft.blocks.push(newBlock as BlockElementType);
-        }),
-      );
+    if (!selectedBlock) {
+      messageApi.error('추가할 블록을 선택해주세요.');
+      return;
     }
+    setWall(
+      produce(wall, (draft) => {
+        const newBlock: Block = {
+          blockType: selectedBlock as BlockType,
+          blockUUID: crypto.randomUUID(),
+          subData: DEFAULT_BLOCKS[selectedBlock] as SubDatumType[],
+        };
+        draft.blocks.push(newBlock);
+      }),
+    );
+    messageApi.success('블록을 추가하였습니다.');
     setIsAddBlockModalOpen(false);
     setSelectedBlock('');
   };
 
   return (
-    <Modal
-      centered
-      closeIcon={false}
-      title={
-        <ModalHeader
-          title="항목 추가하기"
-          handleCloseModal={handleCloseModal}
-          handleOk={handleAddBLock}
-        />
-      }
-      footer={null}
-      open={isAddBlockModalOpen}
-      onCancel={handleCloseModal}
-      width="560px"
-    >
-      <div className="grid grid-cols-2 gap-x-[24px] gap-y-[32px] ">
-        {Object.keys(ADDABLE_BLOCKS).map((block) => (
-          <AddableBlock
-            hasSnsBlock={hasSnsBlock}
-            key={block}
-            block={block}
-            handleSelect={handleSelect}
-            selectedBlock={selectedBlock}
+    <>
+      {contextHolder}
+      <Modal
+        centered
+        closeIcon={false}
+        title={
+          <ModalHeader
+            title="항목 추가하기"
+            handleCloseModal={handleCloseModal}
+            handleOk={handleAddBLock}
           />
-        ))}
-      </div>
-    </Modal>
+        }
+        footer={null}
+        open={isAddBlockModalOpen}
+        onCancel={handleCloseModal}
+        width="560px"
+      >
+        <div className="grid grid-cols-2 gap-x-[24px] gap-y-[32px] ">
+          {Object.keys(ADDABLE_BLOCKS).map((block) => (
+            <AddableBlock
+              hasSnsBlock={hasSnsBlock}
+              key={block}
+              block={block}
+              handleSelect={handleSelect}
+              selectedBlock={selectedBlock}
+            />
+          ))}
+        </div>
+      </Modal>
+    </>
   );
 };

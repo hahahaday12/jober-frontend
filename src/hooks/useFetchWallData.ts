@@ -1,13 +1,23 @@
 import { useWallStore } from '@/store';
-import { WallType } from '@/types/wall';
+import { SubDatumType, WallType } from '@/types/wall';
 import { message } from 'antd';
+import React from 'react';
 import { useEffect, useState } from 'react';
 
-export default function useFetchWallData() {
+type SortableBlockType = {
+  id: string;
+  block: JSX.Element;
+  subData: SubDatumType[];
+}[];
+
+export default function useFetchWallData(BlockMapper: {
+  [key: string]: JSX.Element;
+}) {
   const [messageApi, contextHolder] = message.useMessage();
   const { wall, setWall, isEdit } = useWallStore();
   const [error, setError] = useState<Error>();
   const [loading, setLoading] = useState(false);
+  const [sortableBlocks, setSortableBlocks] = useState<SortableBlockType>([]);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -16,7 +26,10 @@ export default function useFetchWallData() {
     const getData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/wall', { signal });
+        const response = await fetch(
+          `${import.meta.env.VITE_SERVER_BASE_URL}/wall`,
+          { signal },
+        );
         if (!response.ok) {
           throw new Error('error while data fetching');
         }
@@ -37,5 +50,36 @@ export default function useFetchWallData() {
       abortController.abort();
     };
   }, [messageApi, setWall]);
-  return { wall, error, loading, contextHolder, isEdit, setWall };
+
+  useEffect(() => {
+    if (wall.blocks) {
+      const objToComponent = wall.blocks.map((block) => {
+        const { blockType, blockUUID, subData } = block;
+        const component = BlockMapper[blockType];
+        return React.cloneElement(component, {
+          blockType,
+          blockUUID,
+          subData,
+        });
+      });
+      setSortableBlocks(
+        objToComponent.map((block) => ({
+          block,
+          id: block.props.blockUUID,
+          subData: block.props.subData,
+        })),
+      );
+    }
+  }, [wall]);
+
+  return {
+    wall,
+    error,
+    loading,
+    contextHolder,
+    isEdit,
+    setWall,
+    sortableBlocks,
+    setSortableBlocks,
+  };
 }

@@ -9,14 +9,11 @@ import 'froala-editor/js/plugins.pkgd.min.js';
 import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
 import 'froala-editor/js/languages/ko.js';
-import { BlockType, SubDataClassType } from '@/types/wall';
 import { Icon } from '@/components/common';
 import editThickIcon from '@/assets/icons/edit-thick.svg';
 
 type FreeBlockProps = {
   blockUUID?: string;
-  blockType?: BlockType;
-  subData?: SubDataClassType;
 };
 
 export const FreeBlock = ({ blockUUID }: FreeBlockProps) => {
@@ -31,36 +28,36 @@ export const FreeBlock = ({ blockUUID }: FreeBlockProps) => {
   const handleFreeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
-        (
-          draft.blocks[targetFreeBlockIndex].subData as SubDataClassType
-        ).freeTitle = e.target.value;
+        draft.blocks[targetFreeBlockIndex].subData[0].freeTitle =
+          e.target.value;
       }),
     );
   };
   const handleEditorChange = (content: string) => {
     setWall(
       produce(wall, (draft) => {
-        (
-          draft.blocks[targetFreeBlockIndex].subData as SubDataClassType
-        ).freeDescription = content;
+        draft.blocks[targetFreeBlockIndex].subData[0].freeDescription = content;
       }),
     );
   };
 
+  if (targetFreeBlockIndex === -1) {
+    return null;
+  }
   return (
     <BlockContainer blockName="freeBlock" blockUUID={blockUUID}>
-      <div className="px-[28px] py-[26px] flex flex-col">
-        <div className="flex items-center gap-[6px] db-20 mb-[16px]">
+      <div className="p-block flex flex-col">
+        <div className="flex items-center gap-[6px] db-18 sm:db-20 mb-[16px]">
           {isFreeTitleEdit ? (
             <Input
               placeholder="자유블록 제목을 입력해주세요."
-              value={(targetFreeBlock.subData as SubDataClassType).freeTitle}
+              value={targetFreeBlock.subData[0].freeTitle}
               onChange={handleFreeTitle}
               className="w-1/3 px-1 py-0 "
             />
           ) : (
             <>
-              {(targetFreeBlock?.subData as SubDataClassType).freeTitle ||
+              {targetFreeBlock.subData[0].freeTitle ||
                 '자유블록 제목을 입력해주세요.'}
             </>
           )}
@@ -73,32 +70,26 @@ export const FreeBlock = ({ blockUUID }: FreeBlockProps) => {
           )}
         </div>
 
-        <div className="flex text-lg items-center gap-2 text-gray-600">
-          {isEdit ? (
-            <FroalaEditorComponent
-              tag="textarea"
-              config={{
-                heightMin: 200,
-                placeholderText: '자유블록 내용을 입력해주세요',
-                language: 'ko',
-                quickInsertEnabled: false,
-                imageUpload: false,
-                fileUpload: false,
-                imagePaste: false,
-              }}
-              model={
-                (targetFreeBlock.subData as SubDataClassType).freeDescription
-              }
-              onModelChange={handleEditorChange}
-            />
-          ) : (
-            <FroalaEditorView
-              model={
-                (targetFreeBlock.subData as SubDataClassType).freeDescription
-              }
-            />
-          )}
-        </div>
+        {isEdit ? (
+          <FroalaEditorComponent
+            tag="textarea"
+            config={{
+              heightMin: 200,
+              placeholderText: '자유블록 내용을 입력해주세요',
+              language: 'ko',
+              quickInsertEnabled: false,
+              imageUpload: false,
+              fileUpload: false,
+              imagePaste: false,
+            }}
+            model={targetFreeBlock.subData[0].freeDescription}
+            onModelChange={handleEditorChange}
+          />
+        ) : (
+          <FroalaEditorView
+            model={targetFreeBlock.subData[0].freeDescription}
+          />
+        )}
       </div>
     </BlockContainer>
   );

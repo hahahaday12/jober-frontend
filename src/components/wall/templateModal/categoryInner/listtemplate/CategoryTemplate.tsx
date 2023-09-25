@@ -15,7 +15,7 @@ const BookCategory: Category[] = [
 ];
 
 export const CategoryTemplate = () => {
-  const [categoryList, setCategoryList] = useState<string[]>([]);
+  const [categoryList, setCategoryList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('self');
 
   useEffect(() => {

@@ -1,170 +1,145 @@
 import { useWallStore } from '@/store';
-import { SubDataClassType } from '@/types/wall';
 import { Checkbox, Input } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { produce } from 'immer';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import editIcon from '@/assets/icons/edit.svg';
 import minusIcon from '@/assets/icons/minus.svg';
 import { Icon } from '@/components/common';
 
-interface ListProps {
+type SingleListProps = {
   id: number;
   targetListBlockIndex: number;
-  listUUID: string;
-  isEdit: boolean;
-  listSubtitle: string;
-  listDescription: string;
-  isLink: boolean;
-}
+  listBlockUUID?: string;
+  listTitle?: string;
+  listDescription?: string;
+  isLink?: boolean;
+};
 
 export const SingleList = ({
   id,
   targetListBlockIndex,
-  listUUID,
-  listSubtitle,
+  listBlockUUID,
+  listTitle,
   listDescription,
   isLink,
-  isEdit,
-}: ListProps) => {
-  const { wall, setWall } = useWallStore();
+}: SingleListProps) => {
+  const { wall, setWall, isEdit } = useWallStore();
 
   const [isListDescEdit, setIsListDescEdit] = useState(false);
 
-  const handleSubtitle = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setWall(
-        produce(wall, (draft) => {
-          if (targetListBlockIndex !== -1) {
-            const targetListBlockSubData = draft.blocks[targetListBlockIndex]
-              .subData as SubDataClassType;
-            if (targetListBlockSubData && targetListBlockSubData.lists) {
-              const listIndex = targetListBlockSubData.lists.findIndex(
-                (list) => list.listUUID === listUUID,
-              );
-              if (listIndex !== -1) {
-                targetListBlockSubData.lists[listIndex].listSubtitle =
-                  e.target.value;
-              }
-            }
-          }
-        }),
-      );
-    },
-    [listUUID, setWall, targetListBlockIndex, wall],
-  );
-
-  const handleIsLink = useCallback(
-    (e: CheckboxChangeEvent) => {
-      setWall(
-        produce(wall, (draft) => {
-          if (targetListBlockIndex !== -1) {
-            const targetListBlockSubData = draft.blocks[targetListBlockIndex]
-              .subData as SubDataClassType;
-            if (targetListBlockSubData && targetListBlockSubData.lists) {
-              const listIndex = targetListBlockSubData.lists.findIndex(
-                (list) => list.listUUID === listUUID,
-              );
-              if (listIndex !== -1) {
-                targetListBlockSubData.lists[listIndex].isLink =
-                  e.target.checked;
-              }
-            }
-          }
-        }),
-      );
-    },
-    [listUUID, setWall, targetListBlockIndex, wall],
-  );
-
-  const handleListDesc = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setWall(
-        produce(wall, (draft) => {
-          if (targetListBlockIndex !== -1) {
-            const targetListBlockSubData = draft.blocks[targetListBlockIndex]
-              .subData as SubDataClassType;
-            if (targetListBlockSubData && targetListBlockSubData.lists) {
-              const listIndex = targetListBlockSubData.lists.findIndex(
-                (list) => list.listUUID === listUUID,
-              );
-              if (listIndex !== -1) {
-                targetListBlockSubData.lists[listIndex].listDescription =
-                  e.target.value;
-              }
-            }
-          }
-        }),
-      );
-    },
-    [listUUID, setWall, targetListBlockIndex, wall],
-  );
-
-  const handleDeleteList = useCallback(() => {
+  const handleListTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
         if (targetListBlockIndex !== -1) {
-          (
-            draft.blocks[targetListBlockIndex].subData as SubDataClassType
-          ).lists = (
-            draft.blocks[targetListBlockIndex].subData as SubDataClassType
-          ).lists?.filter((list) => list.listUUID !== listUUID);
+          const targetListIndex = draft.blocks[
+            targetListBlockIndex
+          ].subData.findIndex((list) => list.listBlockUUID === listBlockUUID);
+          if (targetListIndex !== -1) {
+            draft.blocks[targetListBlockIndex].subData[
+              targetListIndex
+            ].listTitle = e.target.value;
+          }
         }
       }),
     );
-  }, [listUUID, setWall, targetListBlockIndex, wall]);
+  };
+
+  const handleListDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWall(
+      produce(wall, (draft) => {
+        if (targetListBlockIndex !== -1) {
+          const targetListIndex = draft.blocks[
+            targetListBlockIndex
+          ].subData.findIndex((list) => list.listBlockUUID === listBlockUUID);
+          if (targetListIndex !== -1) {
+            draft.blocks[targetListBlockIndex].subData[
+              targetListIndex
+            ].listDescription = e.target.value;
+          }
+        }
+      }),
+    );
+  };
+
+  const handleIsLink = (e: CheckboxChangeEvent) => {
+    setWall(
+      produce(wall, (draft) => {
+        if (targetListBlockIndex !== -1) {
+          const targetListIndex = draft.blocks[
+            targetListBlockIndex
+          ].subData.findIndex((list) => list.listBlockUUID === listBlockUUID);
+          if (targetListIndex !== -1) {
+            draft.blocks[targetListBlockIndex].subData[targetListIndex].isLink =
+              e.target.checked;
+          }
+        }
+      }),
+    );
+  };
+
+  const handleDeleteList = () => {
+    setWall(
+      produce(wall, (draft) => {
+        if (targetListBlockIndex !== -1) {
+          draft.blocks[targetListBlockIndex].subData = draft.blocks[
+            targetListBlockIndex
+          ].subData.filter((list) => list.listBlockUUID !== listBlockUUID);
+        }
+      }),
+    );
+  };
 
   return (
-    <div className={`space-y-2 ${isEdit ? 'text-gray88' : 'text-lightBlack'}`}>
-      <div className="flex justify-between">
-        <div className="flex items-center dm-16 gap-[6px]">
-          {isListDescEdit ? (
-            <Input
-              value={listSubtitle}
-              onChange={handleSubtitle}
-              className="py-0 px-1"
-            />
+    <div className="space-y-2 dm-16">
+      {!isEdit && (
+        <div className="flex items-center gap-[12px]">
+          <span className="db-16">{listTitle || '제목'}</span>
+          <span className="relative -top-[2.3px] db-16">|</span>
+          {isLink ? (
+            <a href={listDescription} target="_blank">
+              {listDescription}
+            </a>
           ) : (
-            <div className={`db-16 flex items-center gap-3`}>
-              {listSubtitle || '입력'}
-              {!isEdit && (
-                <>
-                  <span className="relative -top-[2.3px]">|</span>
-                  {isLink ? (
-                    <a href={listDescription} target="_blank">
-                      {listDescription}
-                    </a>
-                  ) : (
-                    <span className="dm-16">{listDescription}</span>
-                  )}
-                </>
-              )}
-            </div>
-          )}
-          {isEdit && (
-            <Icon
-              src={editIcon}
-              onClick={() => setIsListDescEdit((prev) => !prev)}
-            />
+            <span className="dm-16">{listDescription || '내용'}</span>
           )}
         </div>
-        {isEdit && (
-          <Icon
-            src={minusIcon}
-            onClick={handleDeleteList}
-            className={`${id === 0 && 'hidden'} mr-[16px]`}
-          />
-        )}
-      </div>
+      )}
+
       {isEdit && (
         <>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-[6px]">
+              {isListDescEdit ? (
+                <Input
+                  placeholder="제목"
+                  value={listTitle}
+                  onChange={handleListTitle}
+                  className="py-0 px-1"
+                />
+              ) : (
+                <span>{listTitle || '제목'}</span>
+              )}
+              <Icon
+                src={editIcon}
+                onClick={() => setIsListDescEdit((prev) => !prev)}
+                className="hover"
+              />
+            </div>
+
+            <Icon
+              src={minusIcon}
+              onClick={handleDeleteList}
+              className={`${id === 0 && 'hidden'} mr-[16px] hover`}
+            />
+          </div>
           <Input
             placeholder="내용"
             value={listDescription}
-            onChange={handleListDesc}
+            onChange={handleListDescription}
             className="h-[50px]"
           />
-          <Checkbox onChange={handleIsLink} checked={isLink} className="dm-16">
+          <Checkbox onChange={handleIsLink} checked={isLink}>
             링크
           </Checkbox>
         </>

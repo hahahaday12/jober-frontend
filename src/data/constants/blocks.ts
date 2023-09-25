@@ -1,57 +1,36 @@
 export const IMAGE_FILE_SIZE_LIMIT = 2 * 1024 * 1024;
 
 export const DEFAULT_BLOCKS: { [key: string]: object } = {
-  listBlock: {
-    blockType: 'listBlock',
-    subData: {
+  listBlock: [
+    {
+      listBlockUUID: crypto.randomUUID(),
+      listLabel: '',
       listTitle: '',
-      lists: [
-        {
-          listSubtitle: '',
-          listDescription: '',
-          isLink: false,
-        },
-      ],
+      listDescription: '',
+      isLink: false,
     },
-  },
-  fileBlock: {
-    blockType: 'fileBlock',
-    subData: {
+  ],
+  fileBlock: [
+    {
       fileTitle: '',
-      fileSubtitle: '',
+      fileDescription: '',
       fileName: '',
       file: '',
     },
-  },
-  snsBlock: {
-    blockType: 'snsBlock',
-    subData: [
-      {
-        snsTitle: '',
-        snsUrl: '',
-      },
-    ],
-  },
-  templatesBlcok: {
-    blockType: 'templatesBlock',
-    subData: [
-      {
-        templateTitle: '',
-        templateDescription: '',
-      },
-    ],
-  },
-  freeBlock: {
-    blockType: 'freeBlock',
-    subData: {
+  ],
+
+  snsBlock: [],
+  templateBlock: [],
+  freeBlock: [
+    {
       freeTitle: '',
       freeDescription: '',
     },
-  },
+  ],
 };
 
 import listBlock from '@/assets/addableBlocks/listBlock.png';
-import freeBlock from '@/assets/addableBlocks/listBlock.png';
+import freeBlock from '@/assets/addableBlocks/freeBlock.png';
 import fileBlock from '@/assets/addableBlocks/fileBlock.png';
 import snsBlock from '@/assets/addableBlocks/snsBlock.png';
 
@@ -83,7 +62,6 @@ import facebookLogo from '@/assets/icons/facebook-logo.svg';
 import instagramLogo from '@/assets/icons/instagram-logo.svg';
 import linkedinLogo from '@/assets/icons/linkedin-logo.svg';
 import behanceLogo from '@/assets/icons/behance-logo.svg';
-import githubLogo from '@/assets/icons/github-logo.svg';
 
 export const ADDABLE_SNSS: {
   [key: string]: {
@@ -111,10 +89,5 @@ export const ADDABLE_SNSS: {
     title: 'Behance',
     svg: behanceLogo,
     url: 'behance.net/',
-  },
-  github: {
-    title: 'Github',
-    svg: githubLogo,
-    url: 'github.com/',
   },
 };

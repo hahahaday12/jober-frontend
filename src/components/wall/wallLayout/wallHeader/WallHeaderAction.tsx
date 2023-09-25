@@ -9,10 +9,10 @@ import moreVerticalIcon from '@/assets/icons/more-vertical.svg';
 export const WallHeaderActions = () => {
   const { toggleEdit } = useWallStore();
   return (
-    <div className="flex gap-2 items-center">
-      <ActionButton type={smsIcon} />
-      <ActionButton type={exportIcon} />
-      <ActionButton type={notificationIcon} />
+    <div className="flex gap-[8px] items-center">
+      <ActionButton type={smsIcon} className="hidden sm:flex" />
+      <ActionButton type={exportIcon} className="hidden sm:flex" />
+      <ActionButton type={notificationIcon} className="hidden sm:flex" />
       <Button type="primary" onClick={() => toggleEdit()} className="dm-14">
         편집하기
       </Button>
