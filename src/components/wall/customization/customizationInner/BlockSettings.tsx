@@ -38,15 +38,6 @@ export const BlockSettings = () => {
     console.log(e.target.value);
   };
 
-  // 블록-스타일 컬러
-  // const handleStyleColor = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setWall(
-  //     produce(wall, (draft) => {
-  //       draft.style.block.color = e.target.value; //질문
-  //     }),
-  //   );
-  //   console.log(e.target.value);
-  // };
   useEffect(() => {
     const bgColor =
       typeof blockColor === 'string' ? blockColor : blockColor.toHexString();
