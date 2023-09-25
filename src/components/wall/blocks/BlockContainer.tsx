@@ -53,7 +53,9 @@ export const BlockContainer = ({
           {!templateBlock && !template && (
             <Icon
               src={trashIcon}
-              className={'absolute right-[26px] top-[26px] hover '}
+              className={
+                'absolute right-[12px] top-[16px] sm:right-[26px] sm:top-[26px] hover '
+              }
               onClick={handleDeleteBlock}
             />
           )}

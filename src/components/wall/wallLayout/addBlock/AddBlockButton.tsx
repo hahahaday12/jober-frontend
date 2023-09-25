@@ -16,7 +16,7 @@ export const AddBlockButton = ({
       <div
         ref={addBlockButtonRef}
         onClick={() => setIsAddBlockModalOpen(true)}
-        className="dm-16 hover flex justify-center items-center h-[76px]"
+        className="dm-16 hover flex justify-center items-center h-[50px] sm:h-[76px]"
       >
         <span>항목 추가하기</span>
         <Icon src={plusIcon} className="ml-[6px]" />
