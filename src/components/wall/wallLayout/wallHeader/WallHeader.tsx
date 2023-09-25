@@ -5,6 +5,9 @@ import closeIcon from '@/assets/icons/close.svg';
 import WallHeaderInput from './WallHeaderInput';
 import { Icon } from '@/components/common';
 import WallHeaderEditButtons from './WallHeaderSavigButtons';
+import { useState } from 'react';
+import MobileFixedFooter from './MobileFixedFooter';
+import mobileDropdown from '@/assets/icons/mobile-dropdown.svg';
 
 type WallHeaderProps = {
   previewRef: React.MutableRefObject<null>;
@@ -13,14 +16,22 @@ type WallHeaderProps = {
 export const WallHeader = ({ previewRef }: WallHeaderProps) => {
   const { isEdit, toggleEdit, isPreview } = useWallStore();
 
+  const [dropdownOpen, setdropDownOpen] = useState(false);
+
   const handleCancelSave = () => {
     location.reload();
     toggleEdit();
   };
 
   return (
-    <header className="bg-white h-[72px] z-10 flex items-center fixed w-full ring-line ring-[2px]">
-      <div className="w-[866px] mx-auto">
+    <header
+      className={`
+      flex bg-white sm:h-[72px] z-40 fixed w-full ring-line ring-[2px] items-center
+      ${dropdownOpen ? 'h-[87px]' : 'h-[48px]'}
+      `}
+    >
+      {/* ${!isEdit && 'flex items-center'} */}
+      <div className="w-full max-w-[866px] mx-[24px] sm:mx-auto">
         {isPreview ? (
           <div className="flex gap-[73px] items-center">
             <WallHeaderUser />
@@ -28,7 +39,7 @@ export const WallHeader = ({ previewRef }: WallHeaderProps) => {
             <WallHeaderEditButtons />
             <Icon
               src={closeIcon}
-              className="absolute top-[21px] right-[30px] hover"
+              className="absolute top-[21px] right-[30px] hover hidden sm:block"
               onClick={handleCancelSave}
             />
           </div>
@@ -40,21 +51,27 @@ export const WallHeader = ({ previewRef }: WallHeaderProps) => {
                 <WallHeaderActions />
                 <Icon
                   src={closeIcon}
-                  className="absolute top-[21px] right-[30px] hover"
+                  className="absolute top-[21px] right-[30px] hover hidden sm:block"
                 />
               </div>
             )}
 
             {isEdit && (
-              <div className="flex gap-[73px] items-center">
+              <div className="flex flex-col gap-2 sm:flex-row sm:gap-[73px] sm:items-center relative sm:static ">
                 <WallHeaderUser />
-                <WallHeaderInput />
+                <WallHeaderInput dropdownOpen={dropdownOpen} />
                 <WallHeaderEditButtons previewRef={previewRef} />
                 <Icon
                   src={closeIcon}
-                  className="absolute top-[21px] right-[30px] hover"
+                  className="absolute top-[21px] right-[30px] hover hidden sm:block"
                   onClick={handleCancelSave}
                 />
+                <Icon
+                  src={mobileDropdown}
+                  className="absolute hover right-0 top-[6px] sm:hidden"
+                  onClick={() => setdropDownOpen((prev) => !prev)}
+                />
+                <MobileFixedFooter />
               </div>
             )}
           </>

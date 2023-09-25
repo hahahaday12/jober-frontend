@@ -4,10 +4,12 @@ import { useState } from 'react';
 
 type WallHeaderEditButtonsProps = {
   previewRef?: React.MutableRefObject<null>;
+  footer?: boolean;
 };
 
 export default function WallHeaderEditButtons({
   previewRef,
+  footer,
 }: WallHeaderEditButtonsProps) {
   const { wall, toggleEdit, isPreview, togglePreview } = useWallStore();
   const [saving, setSaving] = useState(false);
@@ -72,13 +74,13 @@ export default function WallHeaderEditButtons({
   return (
     <>
       {contextHolder}
-      <div className="flex gap-[8px]">
+      <div className={`gap-[8px] sm:flex ${footer ? 'flex' : 'hidden'}`}>
         <Button
           className="dm-14 text-gray88 border-gray88"
           onClick={handlePreview}
           ref={previewRef}
         >
-          {isPreview ? '미리보기 종료' : ' 미리보기'}
+          {isPreview ? '미리보기 종료' : '미리보기'}
         </Button>
         {!isPreview && (
           <Button

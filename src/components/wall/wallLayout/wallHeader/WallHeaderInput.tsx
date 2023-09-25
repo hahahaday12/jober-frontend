@@ -3,7 +3,13 @@ import inputSuffixIcon from '@/assets/icons/input-suffix.svg';
 import { Icon } from '@/components/common';
 import { useWallStore } from '@/store';
 
-export default function WallHeaderInput() {
+type WallHeaderInputProps = {
+  dropdownOpen?: boolean;
+};
+
+export default function WallHeaderInput({
+  dropdownOpen,
+}: WallHeaderInputProps) {
   const { wall, setWall } = useWallStore();
 
   const handleShareURL = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,9 +18,12 @@ export default function WallHeaderInput() {
 
   return (
     <Input
-      className="flex-1 rounded-[10px] bg-sky"
+      className={`
+      rounded-[10px] bg-sky w-full overflow-hidden sm:flex-1 sm:static
+      ${dropdownOpen ? 'block' : 'hidden sm:block'}
+      `}
       addonBefore={
-        <div className="dm-14 text-gray88 ">java-jober.netlify.app/wall/</div>
+        <div className="dm-14 text-gray88">java-jober.netlify.app/wall/</div>
       }
       suffix={
         <Icon

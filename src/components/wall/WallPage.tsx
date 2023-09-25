@@ -93,8 +93,8 @@ export const WallPage = () => {
   } = useFetchWallData(BlockMapper);
 
   const handleSortBlocks = (event: Sortable.SortableEvent) => {
-    const item = sortableBlocks.splice(event.oldIndex as number, 1)[0];
-    sortableBlocks.splice(event.newIndex as number, 0, item);
+    const selectedBlock = sortableBlocks.splice(event.oldIndex as number, 1)[0];
+    sortableBlocks.splice(event.newIndex as number, 0, selectedBlock);
     const compToObj = sortableBlocks.map((comp) => ({
       blockUUID: comp.id,
       blockType: comp.block.props.blockType,
@@ -114,7 +114,7 @@ export const WallPage = () => {
 
   return (
     <div
-      className={`min-h-screen bg-gray flex flex-col`}
+      className="min-h-screen flex flex-col sm:items-center"
       style={{
         backgroundColor: wall?.styleSetting?.backgroundSetting?.solidColor,
       }}
@@ -126,19 +126,19 @@ export const WallPage = () => {
       {loading ? (
         <div className="py-[106px]">loading...</div>
       ) : (
-        <main className="py-[106px] flex-1 flex flex-col gap-[24px] w-[866px] mx-auto">
+        <main className="sm:pt-[106px] pt-[132px] pb-[24px] flex-1 flex flex-col gap-[12px] sm:gap-[24px] px-[24px] sm:px-0 max-w-[866px]">
           <WallInfoBlock wallInfoRef={tourWallInfoRef} />
           <ReactSortable
             list={sortableBlocks}
             setList={setSortableBlocks}
             handle=".handle"
-            className="flex gap-[24px] flex-col"
+            className="flex gap-[12px] sm:gap-[24px] flex-col"
             animation={400}
-            forceFallback
+            forceFallback // 스크롤가능하게
             onEnd={handleSortBlocks}
           >
-            {sortableBlocks?.map((item) => (
-              <div key={item.id}>{item.block}</div>
+            {sortableBlocks?.map((block) => (
+              <div key={block.id}>{block.block}</div>
             ))}
           </ReactSortable>
 
