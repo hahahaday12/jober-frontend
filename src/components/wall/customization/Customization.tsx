@@ -1,16 +1,14 @@
 import { Button, message } from 'antd';
 import brushIcon from '@/assets/icons/brush.svg';
-import { CustomizationModal } from '../customizationInner/CustomizationModal';
+import { CustomizationModal } from './customizationInner/CustomizationModal';
 import { useState } from 'react';
 import { Icon } from '@/components/common';
 
-type CustomizationLayoutProps = {
+type CustomizationProps = {
   styleSettingRef: React.MutableRefObject<null>;
 };
 
-export const CustomizationLayout = ({
-  styleSettingRef,
-}: CustomizationLayoutProps) => {
+export const Customization = ({ styleSettingRef }: CustomizationProps) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
