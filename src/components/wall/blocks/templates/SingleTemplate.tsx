@@ -16,11 +16,11 @@ export default function SingleTemplate({
   const { isEdit } = useWallStore();
   return (
     <BlockContainer blockName="template">
-      <div className="h-[210px] p-block">
+      <div className="sm:h-[210px] h-[115px] p-block">
         <div className="flex items-center justify-between mb-[12px]">
-          <h4 className="db-20">{templateTitle}</h4>
+          <h4 className="db-18 sm:db-20">{templateTitle}</h4>
           {isEdit && (
-            <div className="flex gap-[8px]">
+            <div className="flex sm:gap-[8px] gap-[6px]">
               <Icon src={trashIcon} className="hover" />
               <Icon src={moreVerticalIcon} className="hover" />
             </div>

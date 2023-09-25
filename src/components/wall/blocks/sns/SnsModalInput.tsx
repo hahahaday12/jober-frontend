@@ -11,7 +11,7 @@ const SnsModalInput = ({ sns, setSnsInput, snsInput }: SnsModalInputProps) => {
   return (
     <div className="text-center">
       <Input
-        className="mt-[24px] mb-[6px] rounded-[10px] bg-sky w-[395px]"
+        className="mt-[18px] sm:mt-[24px] mb-[6px] rounded-[10px] bg-sky max-w-[395px]"
         addonBefore={
           <div className="dm-14 text-gray88 ">{`${ADDABLE_SNSS[sns].url}`}</div>
         }
