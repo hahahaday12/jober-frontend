@@ -57,7 +57,7 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
   return (
     <BlockContainer blockName="listBlock" blockUUID={blockUUID}>
       <div className="p-block flex flex-col">
-        <div className="flex items-center gap-[6px] db-20 mb-[16px]">
+        <div className="flex items-center gap-[6px] db-18 sm:db-20 mb-[16px]">
           {isListTitleEdit ? (
             <Input
               placeholder="리스트블록 제목을 입력해주세요."
@@ -80,7 +80,7 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
           )}
         </div>
 
-        <div className="flex flex-col gap-[30px]">
+        <div className="flex flex-col sm:gap-[30px] gap-[24px]">
           {targetListBlock.subData.map((list, id) => (
             <SingleList
               id={id}
