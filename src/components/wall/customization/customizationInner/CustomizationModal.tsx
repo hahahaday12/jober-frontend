@@ -5,6 +5,9 @@ import { ThemeSettings } from './ThemeSettings';
 import { ModalHeader } from '@/components/common/ModalHeader';
 import { Icon } from '@/components/common';
 import brushIcon from '@/assets/icons/brush.svg';
+import { useWallStore } from '@/store';
+import { produce } from 'immer';
+import { useEffect, useState } from 'react';
 
 type CustomizationModalProps = {
   isModalOpen: boolean;
@@ -17,6 +20,8 @@ export const CustomizationModal = ({
   handleOk,
   handleCancel,
 }: CustomizationModalProps) => {
+  const { wall, setWall } = useWallStore();
+
   const modalTitle = (
     <div className="flex items-center gap-2">
       <Icon src={brushIcon} />
@@ -24,12 +29,36 @@ export const CustomizationModal = ({
     </div>
   );
 
-  // ?
-  const handleReset = () => {
-    // 각 섹션의 초기화 함수 호출
-    backgroundSettingsRef.current?.handleResetBackground();
-    blockSettingsRef.current?.handleResetBlock();
-    themeSettingsRef.current?.handleResetTheme();
+  const [backgroundOptions, setBackgroundOptions] = useState<
+    'solid' | 'gradation' | 'image'
+  >(() => {
+    if (wall.styleSetting.backgroundSetting.styleImgURL) {
+      return 'image';
+    }
+    if (wall.styleSetting.backgroundSetting.gradation) {
+      return 'gradation';
+    }
+    if (!wall.styleSetting.backgroundSetting.gradation) {
+      return 'solid';
+    }
+    return 'solid';
+  });
+
+  const handleResetStyle = () => {
+    setWall(
+      produce(wall, (draft) => {
+        draft.styleSetting.backgroundSetting.gradation = false;
+        draft.styleSetting.backgroundSetting.solidColor = '#eee';
+        draft.styleSetting.backgroundSetting.styleImgURL = '';
+        draft.styleSetting.blockSetting.gradation = false;
+        draft.styleSetting.blockSetting.shape = '0px';
+        draft.styleSetting.blockSetting.style = 'none';
+        draft.styleSetting.blockSetting.styleColor = '#fff';
+        draft.styleSetting.blockSetting.gradation = false;
+        draft.styleSetting.themeSetting = null;
+      }),
+    );
+    setBackgroundOptions('solid');
   };
 
   return (
@@ -47,9 +76,12 @@ export const CustomizationModal = ({
         handleOk={handleOk}
         handleCloseModal={handleCancel}
         reset={true}
-        handleReset={handleReset}
+        handleResetStyle={handleResetStyle}
       />
-      <BackgroundSettings />
+      <BackgroundSettings
+        backgroundOptions={backgroundOptions}
+        setBackgroundOptions={setBackgroundOptions}
+      />
       <BlockSettings />
       <ThemeSettings />
     </Modal>
