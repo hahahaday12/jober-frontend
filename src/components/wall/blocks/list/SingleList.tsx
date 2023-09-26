@@ -115,7 +115,7 @@ export const SingleList = ({
                   placeholder="제목"
                   value={listTitle}
                   onChange={handleListTitle}
-                  className="py-0 px-1"
+                  className="py-0 px-1 w-1/2"
                 />
               ) : (
                 <span>{listTitle || '제목'}</span>
