@@ -34,6 +34,7 @@ export const BlockContainer = ({
   const blockStyleClassName = wall?.styleSetting?.blockSetting?.style;
   const blockBorderRadius = wall?.styleSetting?.blockSetting?.shape;
   const blockBackgroundColor = wall?.styleSetting?.blockSetting?.styleColor;
+  const blockGradation = wall?.styleSetting?.blockSetting?.gradation;
 
   return (
     <div
@@ -43,6 +44,10 @@ export const BlockContainer = ({
       rounded-[${blockBorderRadius}]
       ${!templateBlock && blockStyleClassName}
       border-solid border-lightBlack relative
+      ${
+        blockGradation &&
+        'bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]'
+      }
       `}
       style={{
         backgroundColor: blockBackgroundColor,

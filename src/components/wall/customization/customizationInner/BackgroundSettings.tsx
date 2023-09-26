@@ -110,7 +110,6 @@ export const BackgroundSettings = ({
                 'ring-blue ring-2 ring-offset-2'
               }`}
             >
-              {/* 질문 */}
               <ColorPicker
                 value={wall.styleSetting.backgroundSetting.solidColor}
                 onChangeComplete={handleGradationPick}
