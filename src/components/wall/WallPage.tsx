@@ -112,11 +112,22 @@ export const WallPage = () => {
     return <div>ERROR, {error.message}</div>;
   }
 
+  const wallBgUrl = wall?.styleSetting?.backgroundSetting?.styleImgURL;
+  const wallBgColor = wall?.styleSetting?.backgroundSetting?.solidColor;
+  const wallBgGradation = wall?.styleSetting?.backgroundSetting?.gradation;
+
   return (
     <div
-      className="min-h-screen flex flex-col items-center"
+      className={`
+      ${
+        wallBgGradation &&
+        'bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]'
+      }
+      min-h-screen flex flex-col items-center
+      `}
       style={{
-        backgroundColor: wall?.styleSetting?.backgroundSetting?.solidColor,
+        backgroundImage: wallBgUrl ? `url(${wallBgUrl})` : '',
+        backgroundColor: wallBgColor,
       }}
     >
       {contextHolder}
