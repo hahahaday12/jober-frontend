@@ -3,11 +3,14 @@ import { Button, ColorPicker } from 'antd';
 import { Color } from 'antd/es/color-picker';
 import { produce } from 'immer';
 import { useEffect, useState } from 'react';
+import { Icon } from '@/components/common';
 import galleryIcon from '@/assets/icons/gallery.svg';
+import { message } from 'antd';
+import { STYLE_IMAGE_FILE_SIZE_LIMIT } from '@/data/constants/customization';
 
 export const BackgroundSettings = () => {
   const { wall, isEdit, setWall } = useWallStore();
-
+  const [messageApi] = message.useMessage();
   const [backgroundColor, setBackgroundColor] = useState<Color | string>(
     wall.styleSetting.backgroundSetting.solidColor,
   );
@@ -40,8 +43,12 @@ export const BackgroundSettings = () => {
   };
 
   // 배경-이미지
-  const handleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleStyleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile = event.target.files?.[0];
+    if (imageFile && imageFile.size > STYLE_IMAGE_FILE_SIZE_LIMIT) {
+      messageApi.error('이미지가 2MB를 초과하였습니다.');
+      return;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === FileReader.DONE) {
@@ -122,26 +129,25 @@ export const BackgroundSettings = () => {
                 'ring-blue ring-1'
               }`}
             >
-              <div className="flex w-[36px] h-[36px] flex-col items-center justify-center rounded-full bg-white overflow-hidden">
+              <div className="rounded-[8px] w-[194px] h-[100px] flex flex-col items-center justify-center bg-white overflow-hidden">
                 {wall.styleSetting.backgroundSetting.styleImgURL ? (
                   <img
                     src={wall.styleSetting.backgroundSetting.styleImgURL}
-                    alt="profile"
-                    className={`h-full w-full rounded-full object-cover ${
+                    alt="styleBGimage"
+                    className={`object-cover w-full h-full ${
                       isEdit ? 'opacity-50' : 'opacity-100'
                     }`}
                   />
                 ) : (
-                  <div className="w-full bg-lightGray h-full" />
+                  <div className="w-full h-full bg-lightGray" />
                 )}
-
                 {isEdit && (
-                  <label className="cursor-pointer hover:opacity-60 transition absolute bg-white z-20 w-10 h-10 rounded-full flex justify-center items-center">
-                    <img src={galleryIcon} alt="gallery icon" />
+                  <label className="hover absolute bg-white z-20 w-10 h-10 rounded-full flex justify-center items-center">
+                    <Icon src={galleryIcon} />
                     <input
                       type="file"
                       className="hidden"
-                      onChange={handleImage}
+                      onChange={handleStyleImage}
                       accept="image/*"
                     />
                   </label>
