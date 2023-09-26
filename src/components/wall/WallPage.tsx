@@ -117,6 +117,10 @@ export const WallPage = () => {
     <div
       className="min-h-screen flex flex-col sm:items-center"
       style={{
+        // 질문
+        // backgroundImage: wall?.styleSetting?.backgroundSetting?.styleImgURL
+        //   ? `url(${wall.styleSetting.backgroundSetting.styleImgURL})`
+        //   : null,
         backgroundColor: wall?.styleSetting?.backgroundSetting?.solidColor,
       }}
     >
