@@ -1,46 +1,15 @@
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
 import { BLOCK_SHAPE, BLOCK_STYLE } from '@/data/constants/customization';
-//import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, ColorPicker } from 'antd';
 import { Color } from 'antd/es/color-picker';
 
-export const BlockSettings = ({
-  setBlockOptions,
-  blockOptions,
-}: {
-  blockOptions: 'solid' | 'gradation';
-  setBlockOptions: React.Dispatch<React.SetStateAction<'solid' | 'gradation'>>;
-}) => {
+export const BlockSettings = () => {
   const { wall, setWall } = useWallStore();
-  const handleBlockColorPick = (backgroundColor: Color) => {
-    const bgColor =
-      typeof backgroundColor === 'string'
-        ? backgroundColor
-        : backgroundColor.toHexString();
-    setBlockOptions('solid');
-    setWall(
-      produce(wall, (draft) => {
-        draft.styleSetting.blockSetting.gradation = false;
-        draft.styleSetting.blockSetting.styleColor = bgColor;
-      }),
-    );
-    console.log('ColorPicker Value:', backgroundColor);
-    console.log('Block Setting:', wall.styleSetting.blockSetting);
-  };
-  const handleBlockGradationPick = (backgroundColor: Color) => {
-    const bgColor =
-      typeof backgroundColor === 'string'
-        ? backgroundColor
-        : backgroundColor.toHexString();
-    setBlockOptions('gradation');
-    setWall(
-      produce(wall, (draft) => {
-        draft.styleSetting.blockSetting.gradation = true;
-        draft.styleSetting.blockSetting.styleColor = bgColor;
-      }),
-    );
-  };
+  const [blockColor, setBlocklColor] = useState<Color | string>(
+    wall.styleSetting.blockSetting.styleColor,
+  );
 
   // 블록-모양
   const handleBorder = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +38,31 @@ export const BlockSettings = ({
     console.log(e.target.value);
   };
 
+  useEffect(() => {
+    const bgColor =
+      typeof blockColor === 'string' ? blockColor : blockColor.toHexString();
+    setWall(
+      produce(wall, (draft) => {
+        draft.styleSetting.blockSetting.styleColor = bgColor;
+      }),
+    );
+  }, [blockColor]);
+
+  const handleColorChange = (newColor: Color) => {
+    setBlocklColor(newColor.toHexString());
+  };
+
+  // 블록-스타일 컬러 그라데이션
+  const handleBlockGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWall(
+      produce(wall, (draft) => {
+        draft.styleSetting.blockSetting.gradation = e.target
+          .value as unknown as boolean;
+      }),
+    );
+    console.log(e.target.value);
+  };
+
   return (
     <div>
       <div className="db-18 mt-[30px] mb-[16px]">블록</div>
@@ -92,7 +86,7 @@ export const BlockSettings = ({
               />
             </label>
           ))}
-          <div className="dm-16 mt-[10px] text-center items-center">모양</div>
+          <div className="dm-16 mt-[10px]">모양</div>
         </div>
 
         <div className="flex flex-col gap-[8px]">
@@ -113,52 +107,57 @@ export const BlockSettings = ({
               />
             </label>
           ))}
-          <div className="dm-16 mt-[8px] text-center items-center">스타일</div>
+          <div className="dm-16 mt-[8px]">스타일</div>
         </div>
 
-        {/* 블록-컬러 */}
         <div className="flex flex-col gap-[10px]">
-          <div
-            className={` bg-sky rounded-[8px] w-[194px] h-[48px] hover ${
-              blockOptions === 'solid' && 'ring-blue ring-2 ring-offset-2'
+          <label
+            className={` bg-sky rounded-[8px] w-[194px] h-[48px] block hover ${
+              wall.styleSetting.blockSetting.styleColor === blockColor &&
+              'ring-blue ring-1'
             }`}
           >
-            <ColorPicker
-              value={wall.styleSetting.blockSetting.styleColor}
-              onChange={handleBlockColorPick}
-            >
+            <input
+              className="hidden"
+              type="radio"
+              name="style"
+              value="color"
+              checked={wall.styleSetting.blockSetting.styleColor === blockColor}
+              //onChange={handleStyleColor}
+            />
+            <ColorPicker value={blockColor} onChange={handleColorChange}>
               <Button
                 type="primary"
                 className={`w-[194px] h-[48px] rounded-[8px]`}
-                style={{
-                  backgroundColor: wall.styleSetting.blockSetting.styleColor,
-                }}
+                style={{ backgroundColor: blockColor as string }}
               />
             </ColorPicker>
-          </div>
+          </label>
 
           {/* 블록-그라데이션 */}
-          <div
-            className={`bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)] bg-sky rounded-[8px] w-[194px] h-[48px] hover ${
-              blockOptions === 'gradation' && 'ring-blue ring-2 ring-offset-2'
+          <label
+            className={`bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)] bg-sky rounded-[8px] w-[194px] h-[48px] block hover ${
+              wall.styleSetting.blockSetting.gradation === true &&
+              'ring-blue ring-1'
             }`}
           >
-            <ColorPicker
-              value={wall.styleSetting.blockSetting.styleColor}
-              onChange={handleBlockGradationPick}
-            >
+            <input
+              className="hidden"
+              type="radio"
+              name="style"
+              value="gradation"
+              checked={wall.styleSetting.blockSetting.gradation === true}
+              onChange={handleBlockGradation}
+            />
+            {/* <ColorPicker value={blockColor} onChange={handleColorChange}>
               <Button
                 type="primary"
                 className={`w-[194px] h-[48px] rounded-[8px]`}
-                style={{
-                  backgroundColor: wall.styleSetting.blockSetting.styleColor,
-                }}
+                style={{ backgroundColor: blockColor as string }}
               />
-            </ColorPicker>
-          </div>
-          <div className="dm-16 mt-[10px] text-center items-center">
-            스타일 색상
-          </div>
+            </ColorPicker> */}
+          </label>
+          <div className="dm-16 mt-[10px]">스타일 색상</div>
         </div>
       </div>
     </div>

@@ -123,7 +123,7 @@ export const WallPage = () => {
         wallBgGradation &&
         'bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]'
       }
-      min-h-screen flex flex-col items-center
+      min-h-screen flex flex-col items-center bg-no-repeat
       `}
       style={{
         backgroundImage: wallBgUrl ? `url(${wallBgUrl})` : '',
