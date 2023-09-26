@@ -63,7 +63,7 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
               placeholder="리스트블록 제목을 입력해주세요."
               value={targetListBlock.subData[0].listLabel}
               onChange={handleListTile}
-              className="w-1/3 px-1 py-0"
+              className="w-1/2 px-1 py-0"
             />
           ) : (
             <>

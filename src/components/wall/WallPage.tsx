@@ -15,7 +15,6 @@ import {
   ListBlock,
   TemplateBlock,
 } from 'components/wall/blocks/index';
-
 import { AddBlockButton } from './wallLayout/addBlock/AddBlockButton';
 import useFetchWallData from '@/hooks/useFetchWallData';
 import { Tour, type TourProps } from 'antd';
@@ -28,16 +27,6 @@ export const WallPage = () => {
   const tourAddBlockButtonRef = useRef(null);
   const tourStyleSettingRef = useRef(null);
   const tourPreviewRef = useRef(null);
-
-  const BlockMapper: { [key: string]: JSX.Element } = {
-    listBlock: <ListBlock />,
-    fileBlock: <FileBlock />,
-    snsBlock: <SnsBlock />,
-    templateBlock: (
-      <TemplateBlock templateAddButtonRef={tourTemplateAddButtonRef} />
-    ),
-    freeBlock: <FreeBlock />,
-  };
 
   const [tourOpen, setTourOpen] = useState(
     localStorage.getItem('hasVisited') ? false : true,
@@ -82,28 +71,38 @@ export const WallPage = () => {
 
   const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
 
+  const BlockMapper = {
+    listBlock: <ListBlock />,
+    fileBlock: <FileBlock />,
+    snsBlock: <SnsBlock />,
+    templateBlock: (
+      <TemplateBlock templateAddButtonRef={tourTemplateAddButtonRef} />
+    ),
+    freeBlock: <FreeBlock />,
+  };
+
   const {
     contextHolder,
     isEdit,
     wall,
     loading,
     error,
-    setWall,
     sortableBlocks,
+    setWall,
     setSortableBlocks,
   } = useFetchWallData(BlockMapper);
 
   const handleSortBlocks = (event: Sortable.SortableEvent) => {
     const selectedBlock = sortableBlocks.splice(event.oldIndex as number, 1)[0];
     sortableBlocks.splice(event.newIndex as number, 0, selectedBlock);
-    const compToObj = sortableBlocks.map((comp) => ({
-      blockUUID: comp.id,
-      blockType: comp.block.props.blockType,
-      subData: comp.block.props.subData,
+    const componentToObj = sortableBlocks.map((component) => ({
+      blockUUID: component.id,
+      blockType: component.block.props.blockType,
+      subData: component.block.props.subData,
     }));
     setWall(
       produce(wall, (draft) => {
-        draft.blocks = compToObj;
+        draft.blocks = componentToObj;
       }),
     );
   };
@@ -115,7 +114,7 @@ export const WallPage = () => {
 
   return (
     <div
-      className="min-h-screen flex flex-col sm:items-center"
+      className="min-h-screen flex flex-col items-center"
       style={{
         backgroundColor: wall?.styleSetting?.backgroundSetting?.solidColor,
       }}

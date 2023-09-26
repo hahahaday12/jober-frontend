@@ -38,6 +38,7 @@ export const BlockContainer = ({
   return (
     <div
       className={`
+      ${blockName === 'wallInfoBlock' && 'sm:overflow-hidden'}
       ${isEdit && 'text-gray88'}
       rounded-[${blockBorderRadius}]
       ${!templateBlock && blockStyleClassName}
