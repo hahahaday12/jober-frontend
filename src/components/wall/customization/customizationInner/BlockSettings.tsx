@@ -53,7 +53,7 @@ export const BlockSettings = () => {
   };
 
   // 블록-스타일 컬러 그라데이션
-  const handleStyleGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBlockGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
         draft.styleSetting.blockSetting.gradation = e.target
@@ -147,8 +147,15 @@ export const BlockSettings = () => {
               name="style"
               value="gradation"
               checked={wall.styleSetting.blockSetting.gradation === true}
-              onChange={handleStyleGradation}
+              onChange={handleBlockGradation}
             />
+            {/* <ColorPicker value={blockColor} onChange={handleColorChange}>
+              <Button
+                type="primary"
+                className={`w-[194px] h-[48px] rounded-[8px]`}
+                style={{ backgroundColor: blockColor as string }}
+              />
+            </ColorPicker> */}
           </label>
           <div className="dm-16 mt-[10px]">스타일 색상</div>
         </div>

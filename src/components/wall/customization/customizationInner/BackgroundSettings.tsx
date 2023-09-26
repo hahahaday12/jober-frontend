@@ -14,6 +14,9 @@ export const BackgroundSettings = () => {
   const [backgroundColor, setBackgroundColor] = useState<Color | string>(
     wall.styleSetting.backgroundSetting.solidColor,
   );
+  const [gradationColor, setGradationColor] = useState<boolean>(
+    wall.styleSetting.backgroundSetting.gradation,
+  );
 
   useEffect(() => {
     const bgColor =
@@ -33,14 +36,22 @@ export const BackgroundSettings = () => {
 
   // 배경-그라데이션
   const handleGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // const selectedColor = GRADIENT_COLOR;
     setWall(
       produce(wall, (draft) => {
-        draft.styleSetting.backgroundSetting.gradation = e.target
-          .value as unknown as boolean;
+        // draft.styleSetting.backgroundSetting.gradation = e.target
+        //   .value as unknown as boolean;
+        draft.styleSetting.backgroundSetting.gradation = true;
+        // draft.styleSetting.backgroundSetting.solidColor = selectedColor;
       }),
     );
     console.log(e.target.value);
   };
+  // const handleGradationColorChange = (colorIndex: number, newColor: Color) => {
+  //   const newGradationColors = [...gradationColors];
+  //   newGradationColors[colorIndex] = newColor.toHexString();
+  //   setGradationColors(newGradationColors);
+  // };
 
   // 배경-이미지
   const handleStyleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,14 +97,12 @@ export const BackgroundSettings = () => {
                   wall.styleSetting.backgroundSetting.solidColor ===
                   backgroundColor
                 }
-                //onChange={handleColor}
               />
               <ColorPicker value={backgroundColor} onChange={handleColorChange}>
                 <Button
                   type="primary"
                   className={`w-[194px] h-[100px] rounded-[8px]`}
                   style={{ backgroundColor: backgroundColor as string }}
-                  //style={{ backgroundColor }}
                 />
               </ColorPicker>
             </label>
@@ -116,7 +125,14 @@ export const BackgroundSettings = () => {
                 checked={wall.styleSetting.backgroundSetting.gradation === true}
                 onChange={handleGradation}
               />
-              <ColorPicker></ColorPicker>
+              {/* 질문 */}
+              <ColorPicker value={backgroundColor} onChange={handleGradation}>
+                <Button
+                  type="primary"
+                  className={`w-[194px] h-[100px] rounded-[8px]`}
+                  style={{}}
+                />
+              </ColorPicker>
             </label>
             <div className="dm-16 mt-[10px] text-center items-center">
               그라데이션

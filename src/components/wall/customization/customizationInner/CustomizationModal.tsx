@@ -23,6 +23,15 @@ export const CustomizationModal = ({
       <span>스타일 설정</span>
     </div>
   );
+
+  // ?
+  const handleReset = () => {
+    // 각 섹션의 초기화 함수 호출
+    backgroundSettingsRef.current?.handleResetBackground();
+    blockSettingsRef.current?.handleResetBlock();
+    themeSettingsRef.current?.handleResetTheme();
+  };
+
   return (
     <Modal
       centered
@@ -37,7 +46,8 @@ export const CustomizationModal = ({
         title={modalTitle}
         handleOk={handleOk}
         handleCloseModal={handleCancel}
-        reset
+        reset={true}
+        handleReset={handleReset}
       />
       <BackgroundSettings />
       <BlockSettings />
