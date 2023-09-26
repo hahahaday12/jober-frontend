@@ -103,7 +103,7 @@ export const BackgroundSettings = () => {
           {/* 그라데이션 */}
           <div>
             <label
-              className={`bg-sky rounded-[8px] w-[194px] h-[100px] block hover ${
+              className={`bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)] bg-sky rounded-[8px] w-[194px] h-[100px] block hover ${
                 wall.styleSetting.backgroundSetting.gradation === true &&
                 'ring-blue ring-1'
               }`}
@@ -116,11 +116,13 @@ export const BackgroundSettings = () => {
                 checked={wall.styleSetting.backgroundSetting.gradation === true}
                 onChange={handleGradation}
               />
+              <ColorPicker></ColorPicker>
             </label>
             <div className="dm-16 mt-[10px] text-center items-center">
               그라데이션
             </div>
           </div>
+
           {/* 이미지 */}
           <div>
             <label
