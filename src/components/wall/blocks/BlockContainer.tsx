@@ -45,6 +45,7 @@ export const BlockContainer = ({
       ${blockName === 'wallInfoBlock' && 'sm:overflow-hidden'}
       ${
         blockGradation &&
+        !templateBlock &&
         'bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]'
       }
       ${isEdit && 'text-gray88'}
@@ -53,7 +54,11 @@ export const BlockContainer = ({
       border-solid border-lightBlack relative
       `}
       style={{
-        backgroundColor: blockBackgroundColor,
+        backgroundColor: templateBlock
+          ? isEdit
+            ? templateBlockBackground
+            : 'transparent'
+          : blockBackgroundColor,
         borderRadius: wall?.styleSetting?.blockSetting?.shape,
       }}
     >
