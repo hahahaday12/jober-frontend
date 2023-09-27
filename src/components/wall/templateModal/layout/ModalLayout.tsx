@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Button, Modal, Select, Input } from 'antd';
 import styled from 'styled-components';
-
 import {
   BestTemplate,
   CategoryTemplate,
@@ -12,25 +11,19 @@ import { ModalHeader } from '@/components/common/ModalHeader';
 export const ModalOpen = () => {
   const { Search } = Input;
 
+  // modal contents 를 관리하는 state, type 생성
   const [procedure, setProcedure] = useState<
     'recommand' | 'category' | 'search'
   >('recommand');
-
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  // 처음 추천 템플릿을 보여주기 위한 상태관리
-
   const [inputText, setInputText] = useState('');
+  //const [keyword, setKeyword] = useState<string>('');
 
+  // 키값에 맞는 컴포넌트 객체 생성
   const PROCEDURE_MAPPER = {
     recommand: <BestTemplate />,
     category: <CategoryTemplate />,
     search: <SelecteSearchTemplate inputText={inputText} />,
-  };
-
-  // 검색 버튼 클릭시 실행되는 함수
-  const onSearch = (value: string) => {
-    console.log(value);
-    alert('');
   };
 
   // 모달창을 보여주는 함수
@@ -54,15 +47,17 @@ export const ModalOpen = () => {
     setProcedure('recommand');
   };
 
-  const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value);
-
-    if (e.target.value.length > 0) {
-      setProcedure('search');
-    } else {
-      setProcedure('category');
-    }
-  };
+  const handleChangeText = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInputText(e.target.value);
+      if (e.target.value.length > 0) {
+        setProcedure('search');
+      } else {
+        setProcedure('category');
+      }
+    },
+    [],
+  );
 
   return (
     <>
@@ -98,10 +93,9 @@ export const ModalOpen = () => {
                 className="searchBox"
                 type="text"
                 placeholder="input search text"
-                onSearch={onSearch}
                 onFocus={handleSearchFocus}
                 value={inputText}
-                onChange={handleChangeText}
+                onChange={(e) => handleChangeText(e)}
               />
             </InputBox>
             {PROCEDURE_MAPPER[procedure]}
@@ -141,7 +135,6 @@ const ModalHeaders = styled.div`
   margin-top: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid gray;
-  //background-color: rebeccapurple;
   display: flex;
 
   p {
@@ -172,11 +165,9 @@ const SelectBox = styled.div`
   position: relative;
   margin-top: 30px;
   padding-bottom: 100px;
-  //background-color: aqua;
 `;
 const InputBox = styled.div`
   width: 570px;
-  //background-color: red;
   display: flex;
   gap: 10px;
   margin-top: 20px;
