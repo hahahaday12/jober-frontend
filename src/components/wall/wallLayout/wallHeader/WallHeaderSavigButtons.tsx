@@ -3,12 +3,12 @@ import { Button, message } from 'antd';
 import { useState } from 'react';
 
 type WallHeaderEditButtonsProps = {
-  previewRef?: React.MutableRefObject<null>;
+  tourPreviewRef?: React.MutableRefObject<null>;
   footer?: boolean;
 };
 
 export default function WallHeaderEditButtons({
-  previewRef,
+  tourPreviewRef,
   footer,
 }: WallHeaderEditButtonsProps) {
   const { wall, toggleEdit, isPreview, togglePreview } = useWallStore();
@@ -37,7 +37,7 @@ export default function WallHeaderEditButtons({
       messageApi.error({ content: '저장 실패' });
     } finally {
       setSaving(false);
-      location.reload();
+      // location.reload();
       toggleEdit();
     }
   };
@@ -78,7 +78,7 @@ export default function WallHeaderEditButtons({
         <Button
           className="dm-14 text-gray88 border-gray88"
           onClick={handlePreview}
-          ref={previewRef}
+          ref={tourPreviewRef}
         >
           {isPreview ? '미리보기 종료' : '미리보기'}
         </Button>

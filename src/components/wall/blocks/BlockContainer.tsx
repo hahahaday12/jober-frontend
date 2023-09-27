@@ -34,6 +34,7 @@ export const BlockContainer = ({
   const blockStyleClassName = wall?.styleSetting?.blockSetting?.style;
   const blockBorderRadius = wall?.styleSetting?.blockSetting?.shape;
   const blockBackgroundColor = wall?.styleSetting?.blockSetting?.styleColor;
+  const templateBlockBackground = '#d1d0d0';
 
   return (
     <div
@@ -45,7 +46,11 @@ export const BlockContainer = ({
       border-solid border-lightBlack relative
       `}
       style={{
-        backgroundColor: blockBackgroundColor,
+        backgroundColor: templateBlock
+          ? isEdit
+            ? templateBlockBackground
+            : ''
+          : blockBackgroundColor,
         borderRadius: wall?.styleSetting?.blockSetting?.shape,
       }}
     >

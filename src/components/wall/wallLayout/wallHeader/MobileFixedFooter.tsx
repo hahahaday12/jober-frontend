@@ -2,10 +2,16 @@ import { Button } from 'antd';
 import WallHeaderEditButtons from './WallHeaderSavigButtons';
 import { useWallStore } from '@/store';
 
-export default function MobileFixedFooter() {
-  const { toggleEdit } = useWallStore();
+type MobileFixedFooterProps = {
+  tourMobilePreviewRef?: React.MutableRefObject<null>;
+};
+
+export default function MobileFixedFooter({
+  tourMobilePreviewRef,
+}: MobileFixedFooterProps) {
+  const { toggleEdit, getWall } = useWallStore();
   const handleCancelSave = () => {
-    location.reload();
+    getWall();
     toggleEdit();
   };
 
@@ -14,7 +20,7 @@ export default function MobileFixedFooter() {
       <Button danger onClick={handleCancelSave}>
         취소
       </Button>
-      <WallHeaderEditButtons footer />
+      <WallHeaderEditButtons footer tourPreviewRef={tourMobilePreviewRef} />
     </footer>
   );
 }

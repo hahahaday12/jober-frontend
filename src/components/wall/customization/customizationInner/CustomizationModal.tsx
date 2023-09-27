@@ -7,7 +7,7 @@ import { Icon } from '@/components/common';
 import brushIcon from '@/assets/icons/brush.svg';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 type CustomizationModalProps = {
   isModalOpen: boolean;
@@ -48,12 +48,12 @@ export const CustomizationModal = ({
     setWall(
       produce(wall, (draft) => {
         draft.styleSetting.backgroundSetting.gradation = false;
-        draft.styleSetting.backgroundSetting.solidColor = '#eee';
+        draft.styleSetting.backgroundSetting.solidColor = '#eeeeee';
         draft.styleSetting.backgroundSetting.styleImgURL = '';
         draft.styleSetting.blockSetting.gradation = false;
         draft.styleSetting.blockSetting.shape = '0px';
         draft.styleSetting.blockSetting.style = 'none';
-        draft.styleSetting.blockSetting.styleColor = '#fff';
+        draft.styleSetting.blockSetting.styleColor = '#ffffff';
         draft.styleSetting.blockSetting.gradation = false;
         draft.styleSetting.themeSetting = null;
       }),

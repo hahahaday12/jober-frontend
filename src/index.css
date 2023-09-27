@@ -81,3 +81,7 @@
   background: var(--Light-Gray, #fafafa);
   box-shadow: 3px 3px 0px 0px #2d2c38;
 }
+
+.ant-tour {
+  width: 350px;
+}

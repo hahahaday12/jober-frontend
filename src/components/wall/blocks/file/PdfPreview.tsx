@@ -75,7 +75,7 @@ export default function PdfPreview({ targetFileBlock }: PdfPreviewProps) {
       )}
 
       <Document
-        className="overflow-hidden w-full mx-auto relative"
+        className="overflow-hidden w-full mx-auto relative border-2 border-blue border-solid"
         file={targetFileBlock.subData[0].file}
         onLoadSuccess={onDocumentLoadSuccess}
       >

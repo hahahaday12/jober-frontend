@@ -5,7 +5,7 @@ type ModalHeaderProps = {
   handleOk: () => void;
   title: React.ReactNode;
   reset?: boolean;
-  handleResetStyle: () => void;
+  handleResetStyle?: () => void;
 };
 
 export const ModalHeader = ({

@@ -66,9 +66,9 @@ export const ModalOpen = () => {
 
   return (
     <>
-      <Button className="buttonOpen" type="primary" onClick={showModal}>
+      {/* <Button className="buttonOpen" type="primary" onClick={showModal}>
         템플릿 생성
-      </Button>
+      </Button> */}
       <Modals
         centered
         title={

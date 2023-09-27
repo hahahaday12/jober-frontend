@@ -28,10 +28,9 @@ export const TemplateBlock = ({
     <BlockContainer blockName="templateBlock">
       <div
         className={`
-        ${isEdit && 'px-[8px] pb-[8px] pt-[40px]'} 
+        ${isEdit && 'px-[8px] pb-[8px] pt-[30px]'} 
         gap-4 grid sm:grid-cols-2 grid-cols-1
         `}
-        style={{ background: isEdit ? 'white' : 'white' }}
       >
         {templateBlockSubData?.map((template) => (
           <SingleTemplate
