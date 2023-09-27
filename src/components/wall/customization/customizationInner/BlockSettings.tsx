@@ -186,7 +186,7 @@ export const BlockSettings = ({
             >
               <Button
                 type="primary"
-                className={`w-[194px] h-[48px] rounded-[8px]`}
+                className="w-[194px] h-[48px] rounded-[8px] bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]"
                 style={{
                   backgroundColor: wall.styleSetting.blockSetting.styleColor,
                 }}

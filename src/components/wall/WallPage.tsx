@@ -20,63 +20,28 @@ import useFetchWallData from '@/hooks/useFetchWallData';
 import { Tour, type TourProps } from 'antd';
 import previewTour from '@/assets/tour/preview.gif';
 import styleTour from '@/assets/tour/style.gif';
+import { useWindowWidth } from '@/hooks/useWindowWidth';
 
 export const WallPage = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 640;
   const tourWallInfoRef = useRef(null);
   const tourTemplateAddButtonRef = useRef(null);
   const tourAddBlockButtonRef = useRef(null);
   const tourStyleSettingRef = useRef(null);
   const tourPreviewRef = useRef(null);
-
-  const [tourOpen, setTourOpen] = useState(
-    localStorage.getItem('hasVisited') ? false : true,
-  );
-
-  const steps: TourProps['steps'] = [
-    {
-      title: (
-        <>
-          <p>페이지의 기본 정보를 설정합니다.</p>
-          <p>여러분과 페이지를 설명해주세요</p>
-        </>
-      ),
-      target: () => tourWallInfoRef.current,
-    },
-    {
-      title: <>원하는 템플릿을 넣고 빠르게 사용할 수 있어요!</>,
-      target: () => tourTemplateAddButtonRef.current,
-    },
-    {
-      title: <>손쉽게 여러종류의 블록을 추가해보세요!</>,
-      target: () => tourAddBlockButtonRef.current,
-    },
-    {
-      // TODO : 이미지 변경
-      cover: <img src={styleTour} alt="style gif" />,
-      title: <>페이지 스타일을 설정해 본인의 개선을 쉽게 표현해보세요!</>,
-      target: () => tourStyleSettingRef.current,
-    },
-    {
-      // TODO : 이미지 변경
-      cover: <img src={previewTour} alt="preview gif" />,
-      title: <>만든페이지를 미리 볼 수 있어요!</>,
-      target: () => tourPreviewRef.current,
-    },
-  ];
-
-  const handleTourClose = () => {
-    setTourOpen(false);
-    localStorage.setItem('hasVisited', '네');
-  };
-
-  const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
+  const tourMobilePreviewRef = useRef(null);
+  const [addTemplateModalOpen, setAddTemplateModalOpen] = useState(false);
 
   const BlockMapper = {
     listBlock: <ListBlock />,
     fileBlock: <FileBlock />,
     snsBlock: <SnsBlock />,
     templateBlock: (
-      <TemplateBlock templateAddButtonRef={tourTemplateAddButtonRef} />
+      <TemplateBlock
+        templateAddButtonRef={tourTemplateAddButtonRef}
+        setAddTemplateModalOpen={setAddTemplateModalOpen}
+      />
     ),
     freeBlock: <FreeBlock />,
   };
@@ -91,6 +56,49 @@ export const WallPage = () => {
     setWall,
     setSortableBlocks,
   } = useFetchWallData(BlockMapper);
+
+  const [tourOpen, setTourOpen] = useState(!localStorage.getItem('hasVisited'));
+
+  const steps: TourProps['steps'] = [
+    {
+      title: (
+        <>
+          <p>페이지의 기본 정보를 설정합니다.</p>
+          <p>여러분과 페이지를 설명해주세요</p>
+        </>
+      ),
+      target: () => tourWallInfoRef.current,
+      // onNext: () => setHideHeaderWhileTour(true),
+    },
+    {
+      title: <>원하는 템플릿을 넣고 빠르게 사용할 수 있어요!</>,
+      target: () => tourTemplateAddButtonRef.current,
+    },
+    {
+      title: <>손쉽게 여러종류의 블록을 추가해보세요!</>,
+      target: () => tourAddBlockButtonRef.current,
+    },
+    {
+      // TODO : 이미지 변경
+      cover: <img src={styleTour} alt="style gif" />,
+      title: <>페이지 스타일을 설정해 본인의 개성을 쉽게 표현해보세요!</>,
+      target: () => tourStyleSettingRef.current,
+    },
+    {
+      // TODO : 이미지 변경
+      cover: <img src={previewTour} alt="preview gif" />,
+      title: <>만든페이지를 미리 볼 수 있어요!</>,
+      target: () =>
+        isMobile ? tourMobilePreviewRef.current : tourPreviewRef.current,
+    },
+  ];
+
+  const handleTourClose = () => {
+    setTourOpen(false);
+    localStorage.setItem('hasVisited', '네');
+  };
+
+  const [isAddBlockModalOpen, setIsAddBlockModalOpen] = useState(false);
 
   const handleSortBlocks = (event: Sortable.SortableEvent) => {
     const selectedBlock = sortableBlocks.splice(event.oldIndex as number, 1)[0];
@@ -131,13 +139,21 @@ export const WallPage = () => {
       }}
     >
       {contextHolder}
-      <WallHeader previewRef={tourPreviewRef} />
+      <WallHeader
+        tourPreviewRef={tourPreviewRef}
+        tourMobilePreviewRef={tourMobilePreviewRef}
+      />
 
       {/* TODO : 로딩 */}
       {loading ? (
         <div className="py-[106px]">loading...</div>
       ) : (
-        <main className="sm:pt-[106px] pt-[132px] pb-[24px] flex-1 flex flex-col gap-[12px] sm:gap-[24px] px-[24px] sm:px-0 max-w-[866px]">
+        <main
+          className={`
+          ${isEdit ? 'pb-[79px]' : 'pb-[24px]'}
+          pt-[132px] sm:pt-[106px] sm:pb-[24px] flex-1 flex flex-col gap-[12px] sm:gap-[24px] px-[12px] w-full sm:px-0 max-w-[866px]
+          `}
+        >
           <WallInfoBlock wallInfoRef={tourWallInfoRef} />
           <ReactSortable
             list={sortableBlocks}
@@ -155,22 +171,19 @@ export const WallPage = () => {
 
           {isEdit && (
             <>
+              <Tour open={tourOpen} onClose={handleTourClose} steps={steps} />
+              <ModalOpen />
               <AddBlockButton
                 addBlockButtonRef={tourAddBlockButtonRef}
+                setIsAddBlockModalOpen={setIsAddBlockModalOpen}
+              />
+              <AddBlockModal
+                isAddBlockModalOpen={isAddBlockModalOpen}
                 setIsAddBlockModalOpen={setIsAddBlockModalOpen}
               />
               <Customization styleSettingRef={tourStyleSettingRef} />
             </>
           )}
-
-          <AddBlockModal
-            isAddBlockModalOpen={isAddBlockModalOpen}
-            setIsAddBlockModalOpen={setIsAddBlockModalOpen}
-          />
-          {isEdit && (
-            <Tour open={tourOpen} onClose={handleTourClose} steps={steps} />
-          )}
-          <ModalOpen />
         </main>
       )}
     </div>

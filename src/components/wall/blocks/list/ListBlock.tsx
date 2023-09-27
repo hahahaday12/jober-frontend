@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
@@ -19,6 +19,10 @@ type ListBlockProps = {
 export const ListBlock = ({ blockUUID }: ListBlockProps) => {
   const { isEdit, wall, setWall } = useWallStore();
   const [isListTitleEdit, setIsListTitleEdit] = useState(false);
+
+  useEffect(() => {
+    setIsListTitleEdit(false);
+  }, [isEdit]);
 
   const targetListBlockIndex = wall.blocks.findIndex(
     (block) => block.blockUUID === blockUUID,
@@ -58,7 +62,7 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
     <BlockContainer blockName="listBlock" blockUUID={blockUUID}>
       <div className="p-block flex flex-col">
         <div className="flex items-center gap-[6px] db-18 sm:db-20 mb-[16px]">
-          {isListTitleEdit ? (
+          {isListTitleEdit && isEdit ? (
             <Input
               placeholder="리스트블록 제목을 입력해주세요."
               value={targetListBlock.subData[0].listLabel}
