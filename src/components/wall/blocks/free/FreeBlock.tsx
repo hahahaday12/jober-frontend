@@ -1,6 +1,6 @@
 import { Input } from 'antd';
 import { produce } from 'immer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BlockContainer } from 'components/index';
 import { useWallStore } from '@/store';
 import FroalaEditorComponent from 'react-froala-wysiwyg';
@@ -19,6 +19,10 @@ type FreeBlockProps = {
 export const FreeBlock = ({ blockUUID }: FreeBlockProps) => {
   const { isEdit, wall, setWall } = useWallStore();
   const [isFreeTitleEdit, setIsFreeTitleEdit] = useState(false);
+
+  useEffect(() => {
+    setIsFreeTitleEdit(false);
+  }, [isEdit]);
 
   const targetFreeBlockIndex = wall.blocks.findIndex(
     (block) => block.blockUUID === blockUUID,
@@ -48,7 +52,7 @@ export const FreeBlock = ({ blockUUID }: FreeBlockProps) => {
     <BlockContainer blockName="freeBlock" blockUUID={blockUUID}>
       <div className="p-block flex flex-col">
         <div className="flex items-center gap-[6px] db-18 sm:db-20 mb-[16px]">
-          {isFreeTitleEdit ? (
+          {isFreeTitleEdit && isEdit ? (
             <Input
               placeholder="자유블록 제목을 입력해주세요."
               value={targetFreeBlock.subData[0].freeTitle}

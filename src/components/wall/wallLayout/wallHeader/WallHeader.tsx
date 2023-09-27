@@ -55,10 +55,6 @@ export const WallHeader = ({
               <div className="flex items-center justify-between">
                 <WallHeaderUser />
                 <WallHeaderActions />
-                <Icon
-                  src={closeIcon}
-                  className="absolute top-[21px] right-[30px] hover hidden sm:block"
-                />
               </div>
             )}
 

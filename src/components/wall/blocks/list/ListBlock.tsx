@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
@@ -19,6 +19,10 @@ type ListBlockProps = {
 export const ListBlock = ({ blockUUID }: ListBlockProps) => {
   const { isEdit, wall, setWall } = useWallStore();
   const [isListTitleEdit, setIsListTitleEdit] = useState(false);
+
+  useEffect(() => {
+    setIsListTitleEdit(false);
+  }, [isEdit]);
 
   const targetListBlockIndex = wall.blocks.findIndex(
     (block) => block.blockUUID === blockUUID,

@@ -11,7 +11,7 @@ export default function WallHeaderEditButtons({
   tourPreviewRef,
   footer,
 }: WallHeaderEditButtonsProps) {
-  const { wall, toggleEdit, isPreview, togglePreview } = useWallStore();
+  const { wall, toggleEdit, isPreview, togglePreview, isEdit } = useWallStore();
   const [saving, setSaving] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -38,7 +38,8 @@ export default function WallHeaderEditButtons({
     } finally {
       setSaving(false);
       // location.reload();
-      toggleEdit();
+      isEdit && toggleEdit();
+      isPreview && togglePreview();
     }
   };
 
