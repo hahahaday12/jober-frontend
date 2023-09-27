@@ -23,15 +23,16 @@ export const CategoryTemplate = () => {
     getListData('self');
   }, []); // 빈 배열을 전달하여 한 번만 실행되도록 함
 
-  const handleCategoryClick = (category) => {
+  const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
     getListData(category);
-    setModalContent();
   };
 
-  const getListData = async (category) => {
+  const getListData = async (category: string) => {
     try {
-      const response = await fetch(`http://localhost:4001/${category}`);
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_BASE_URL}/${category}`,
+      );
       if (response.ok) {
         const data = await response.json();
         // 'data' 객체 안의 'list'를 사용하여 카테고리별 데이터에 접근
@@ -48,7 +49,7 @@ export const CategoryTemplate = () => {
     <CategoryLayout>
       <Categorybox>
         <ul className="Category-menu__text">
-          {BookCategory.map((item, index) => (
+          {BookCategory.map((item) => (
             <li
               key={item.category}
               className={item.category === selectedCategory ? 'active' : ''}
@@ -60,7 +61,7 @@ export const CategoryTemplate = () => {
         </ul>
       </Categorybox>
       <TemplateList>
-        <ListTemplete list={categoryList} category={selectedCategory} />
+        <ListTemplete list={categoryList} />
       </TemplateList>
     </CategoryLayout>
   );
