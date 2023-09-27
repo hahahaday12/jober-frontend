@@ -42,7 +42,7 @@ export const Category = () => {
             <div className="dm-24">생성하기 원하는 페이지의</div>
             <div className="db-34 mt-[3px]">카테고리를 선택 해주세요</div>
           </div>
-          <div className="flex items-center gap-12 mt-[80px]">
+          <div className="flex items-center gap-[12px] mt-[80px]">
             {categories.map((categoryItem, index) => (
               <CategoryCard
                 key={index}
