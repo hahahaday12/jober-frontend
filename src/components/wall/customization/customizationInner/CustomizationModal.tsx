@@ -1,4 +1,4 @@
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 import { BackgroundSettings } from './BackgroundSettings';
 import { BlockSettings } from './BlockSettings';
 import { ThemeSettings } from './ThemeSettings';
@@ -7,7 +7,7 @@ import { Icon } from '@/components/common';
 import brushIcon from '@/assets/icons/brush.svg';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 type CustomizationModalProps = {
   isModalOpen: boolean;
@@ -20,6 +20,7 @@ export const CustomizationModal = ({
   handleOk,
   handleCancel,
 }: CustomizationModalProps) => {
+  const [messageApi, contextHolder] = message.useMessage();
   const { wall, setWall } = useWallStore();
 
   const modalTitle = (
@@ -59,7 +60,21 @@ export const CustomizationModal = ({
       }),
     );
     setBackgroundOptions('solid');
+    setBlockOptions('solid');
+    messageApi.info('스타일 설정을 초기화했습니다.');
   };
+
+  const [blockOptions, setBlockOptions] = useState<'solid' | 'gradation'>(
+    () => {
+      if (wall.styleSetting.blockSetting.gradation) {
+        return 'gradation';
+      }
+      if (!wall.styleSetting.blockSetting.gradation) {
+        return 'solid';
+      }
+      return 'solid';
+    },
+  );
 
   return (
     <Modal
@@ -71,6 +86,7 @@ export const CustomizationModal = ({
       getContainer={false}
       closable={false}
     >
+      {contextHolder}
       <ModalHeader
         title={modalTitle}
         handleOk={handleOk}
@@ -82,7 +98,10 @@ export const CustomizationModal = ({
         backgroundOptions={backgroundOptions}
         setBackgroundOptions={setBackgroundOptions}
       />
-      <BlockSettings />
+      <BlockSettings
+        blockOptions={blockOptions}
+        setBlockOptions={setBlockOptions}
+      />
       <ThemeSettings />
     </Modal>
   );
