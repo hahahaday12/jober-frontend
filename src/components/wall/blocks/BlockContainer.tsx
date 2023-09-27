@@ -34,31 +34,26 @@ export const BlockContainer = ({
   const blockStyleClassName = wall?.styleSetting?.blockSetting?.style;
   const blockBorderRadius = wall?.styleSetting?.blockSetting?.shape;
   const blockBackgroundColor = wall?.styleSetting?.blockSetting?.styleColor;
-<<<<<<< HEAD
   const blockGradation = wall?.styleSetting?.blockSetting?.gradation;
-=======
   const templateBlockBackground = '#d1d0d0';
->>>>>>> main
+
+  console.log(blockGradation);
 
   return (
     <div
       className={`
       ${blockName === 'wallInfoBlock' && 'sm:overflow-hidden'}
-      ${isEdit && 'text-gray88'}
-      rounded-[${blockBorderRadius}]
-      ${!templateBlock && blockStyleClassName}
-      border-solid border-lightBlack relative
       ${
         blockGradation &&
         'bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]'
       }
+      ${isEdit && 'text-gray88'}
+      rounded-[${blockBorderRadius}]
+      ${!templateBlock && blockStyleClassName}
+      border-solid border-lightBlack relative
       `}
       style={{
-        backgroundColor: templateBlock
-          ? isEdit
-            ? templateBlockBackground
-            : ''
-          : blockBackgroundColor,
+        backgroundColor: blockBackgroundColor,
         borderRadius: wall?.styleSetting?.blockSetting?.shape,
       }}
     >

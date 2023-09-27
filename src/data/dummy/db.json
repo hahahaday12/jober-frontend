@@ -181,15 +181,14 @@
         "styleImgURL": ""
       },
       "blockSetting": {
-        "styleColor": "#ffffff",
+        "styleColor": "#f0c2c2",
         "gradation": false,
-        "shape": "6px",
-        "style": "flat"
+        "shape": "13px",
+        "style": "shadow"
       },
       "themeSetting": null
     }
   },
-
   "self": [
     {
       "category": "[개인/소개]",
