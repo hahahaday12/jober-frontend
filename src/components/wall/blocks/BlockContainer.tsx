@@ -34,7 +34,11 @@ export const BlockContainer = ({
   const blockStyleClassName = wall?.styleSetting?.blockSetting?.style;
   const blockBorderRadius = wall?.styleSetting?.blockSetting?.shape;
   const blockBackgroundColor = wall?.styleSetting?.blockSetting?.styleColor;
+<<<<<<< HEAD
   const blockGradation = wall?.styleSetting?.blockSetting?.gradation;
+=======
+  const templateBlockBackground = '#d1d0d0';
+>>>>>>> main
 
   return (
     <div
@@ -50,7 +54,11 @@ export const BlockContainer = ({
       }
       `}
       style={{
-        backgroundColor: blockBackgroundColor,
+        backgroundColor: templateBlock
+          ? isEdit
+            ? templateBlockBackground
+            : ''
+          : blockBackgroundColor,
         borderRadius: wall?.styleSetting?.blockSetting?.shape,
       }}
     >

@@ -36,7 +36,7 @@ export const Customization = ({ styleSettingRef }: CustomizationProps) => {
         onClick={() => setIsModalOpen(true)}
       >
         <Icon src={brushIcon} />
-        <span>스타일 설정</span>
+        <div className="hidden sm:block">스타일 설정</div>
       </Button>
     </>
   );
