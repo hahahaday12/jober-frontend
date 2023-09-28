@@ -1,57 +1,82 @@
 import { useWallStore } from '@/store';
-import { ListBlockType } from '@/types/wall';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Checkbox, Input } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { produce } from 'immer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import editIcon from '@/assets/icons/edit.svg';
+import minusIcon from '@/assets/icons/minus.svg';
+import { Icon } from '@/components/common';
 
-interface ListProps {
-  blockId?: number;
-  isEdit: boolean;
+type SingleListProps = {
   id: number;
-  subTitle: string;
-  desc: string;
-  isLink: boolean;
-}
+  targetListBlockIndex: number;
+  listBlockUUID?: string;
+  listTitle?: string;
+  listDescription?: string;
+  isLink?: boolean;
+};
 
 export const SingleList = ({
-  blockId,
   id,
-  subTitle,
-  desc,
+  targetListBlockIndex,
+  listBlockUUID,
+  listTitle,
+  listDescription,
   isLink,
-  isEdit,
-}: ListProps) => {
-  const { wall, setWall } = useWallStore();
+}: SingleListProps) => {
+  const { wall, setWall, isEdit } = useWallStore();
 
   const [isListDescEdit, setIsListDescEdit] = useState(false);
 
-  const handleSubtitle = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  useEffect(() => {
+    setIsListDescEdit(false);
+  }, [isEdit]);
 
-  const handleIsLink = (e: CheckboxChangeEvent) => {
+  const handleListTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
-        if (draft.listBlock) {
-          draft.listBlock.lists = draft.listBlock.lists.map((list) =>
-            list.id === id ? { ...list, isLink: e.target.checked } : list,
-          );
+        if (targetListBlockIndex !== -1) {
+          const targetListIndex = draft.blocks[
+            targetListBlockIndex
+          ].subData.findIndex((list) => list.listBlockUUID === listBlockUUID);
+          if (targetListIndex !== -1) {
+            draft.blocks[targetListBlockIndex].subData[
+              targetListIndex
+            ].listTitle = e.target.value;
+          }
         }
       }),
     );
   };
 
-  const handleDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleListDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
-        if (draft.listBlock && draft.listBlock.lists) {
-          draft.listBlock.lists = draft.listBlock.lists.map((list) => {
-            if (list.id === id) {
-              list.listDescription = e.target.value;
-            }
-            return list;
-          });
+        if (targetListBlockIndex !== -1) {
+          const targetListIndex = draft.blocks[
+            targetListBlockIndex
+          ].subData.findIndex((list) => list.listBlockUUID === listBlockUUID);
+          if (targetListIndex !== -1) {
+            draft.blocks[targetListBlockIndex].subData[
+              targetListIndex
+            ].listDescription = e.target.value;
+          }
+        }
+      }),
+    );
+  };
+
+  const handleIsLink = (e: CheckboxChangeEvent) => {
+    setWall(
+      produce(wall, (draft) => {
+        if (targetListBlockIndex !== -1) {
+          const targetListIndex = draft.blocks[
+            targetListBlockIndex
+          ].subData.findIndex((list) => list.listBlockUUID === listBlockUUID);
+          if (targetListIndex !== -1) {
+            draft.blocks[targetListBlockIndex].subData[targetListIndex].isLink =
+              e.target.checked;
+          }
         }
       }),
     );
@@ -60,71 +85,68 @@ export const SingleList = ({
   const handleDeleteList = () => {
     setWall(
       produce(wall, (draft) => {
-        if (draft.listBlock) {
-          draft.listBlock.lists = draft.listBlock?.lists.filter(
-            (list) => list.id !== id,
-          );
+        if (targetListBlockIndex !== -1) {
+          draft.blocks[targetListBlockIndex].subData = draft.blocks[
+            targetListBlockIndex
+          ].subData.filter((list) => list.listBlockUUID !== listBlockUUID);
         }
       }),
     );
   };
+
   return (
-    <div className="space-y-2">
-      <div className="flex justify-between">
-        <div className="flex items-center dm-16 gap-[6px] text-gray88">
-          {isListDescEdit ? (
-            <Input
-              value={subTitle}
-              onChange={handleSubtitle}
-              className="w-1/3"
-            />
+    <div className="space-y-2 dm-16">
+      {!isEdit && (
+        <div className="flex items-center gap-[12px]">
+          <span className="db-16">{listTitle || '제목'}</span>
+          <span className="relative -top-[2.3px] db-16">|</span>
+          {isLink ? (
+            <a href={listDescription} target="_blank">
+              {listDescription}
+            </a>
           ) : (
-            <div
-              className={`db-16 ${
-                isEdit ? 'text-gray88' : 'text-lightBlack'
-              }  flex items-center gap-[12px]`}
-            >
-              {subTitle || '입력'}
-              {!isEdit && (
-                <>
-                  <div className="w-[2px] h-[22px] bg-lightBlack" />
-                  <span className="dm-16">{desc}</span>
-                </>
-              )}
-            </div>
-          )}
-          {isEdit && (
-            <>
-              <img
-                src={editIcon}
-                alt="edit icon"
-                className="hover"
-                onClick={() => setIsListDescEdit((prev) => !prev)}
-              />
-              <Checkbox
-                onChange={handleIsLink}
-                checked={isLink}
-                className="ml-5"
-              >
-                링크
-              </Checkbox>
-            </>
+            <span className="dm-16">{listDescription || '내용'}</span>
           )}
         </div>
-        {isEdit && (
-          <DeleteOutlined
-            className={`cursor-pointer ${id === 1 && 'hidden'}`}
-            onClick={handleDeleteList}
-          />
-        )}
-      </div>
+      )}
+
       {isEdit && (
-        <Input
-          placeholder="내용"
-          value={desc}
-          onChange={handleDesc}
-          className="h-[50px] text-gray88"
-        />
+        <>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-[6px]">
+              {isListDescEdit ? (
+                <Input
+                  placeholder="제목"
+                  value={listTitle}
+                  onChange={handleListTitle}
+                  className="py-0 px-1 w-1/2"
+                />
+              ) : (
+                <span>{listTitle || '제목'}</span>
+              )}
+              <Icon
+                src={editIcon}
+                onClick={() => setIsListDescEdit((prev) => !prev)}
+                className="hover"
+              />
+            </div>
+
+            <Icon
+              src={minusIcon}
+              onClick={handleDeleteList}
+              className={`${id === 0 && 'hidden'} mr-[16px] hover`}
+            />
+          </div>
+          <Input
+            placeholder="내용"
+            value={listDescription}
+            onChange={handleListDescription}
+            className="h-[50px]"
+          />
+          <Checkbox onChange={handleIsLink} checked={isLink}>
+            링크
+          </Checkbox>
+        </>
       )}
     </div>
   );

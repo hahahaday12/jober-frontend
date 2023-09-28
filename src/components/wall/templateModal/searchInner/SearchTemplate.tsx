@@ -14,32 +14,42 @@ interface Props {
 }
 
 export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
-  const [product, setProductInfo] = useState<ProductItem[]>([]);
+  const [debouncedInputValue, setDebouncedInputValue] = useState('');
   const [filteredResults, setFilteredResults] = useState<ProductItem[]>([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await fetch('http://localhost:3003/list');
-        if (response.ok) {
-          const data = await response.json();
-          setProductInfo([...product, ...data]);
-        } else {
-          console.error('Response not OK:', response);
-        }
-      } catch (error) {
-        console.error('Error while fetching data:', error);
-      }
+    // 입력값이 변경될 때마다 debounce된 값을 업데이트.
+    const debounceTimer = setTimeout(() => {
+      setDebouncedInputValue(inputText);
+    }, 300); // 300 밀리초(0.3초) 디바운스 시간
+
+    return () => {
+      // 이전 타이머를 클리어.
+      clearTimeout(debounceTimer);
     };
-    getData();
-  }, []);
+  }, [inputText]);
 
   useEffect(() => {
-    const filteredResults = product.filter((item) =>
-      item.title.toLowerCase().includes(inputText.toLowerCase()),
+    if (debouncedInputValue) {
+      const getData = async () => {
+        const results = await fetch(`http://localhost:4001/search`);
+        const data = await results.json();
+        setProducts(data);
+      };
+      getData();
+    } else {
+      setProducts([]);
+    }
+  }, [debouncedInputValue]);
+
+  useEffect(() => {
+    // 입력값에 따라 필터링된 결과를 업데이트합니다.
+    const filtered = products.filter((item) =>
+      item.title.toLowerCase().includes(debouncedInputValue.toLowerCase()),
     );
-    setFilteredResults(filteredResults);
-  }, [inputText, product]);
+    setFilteredResults(filtered);
+  }, [debouncedInputValue, products]);
 
   return (
     <>
@@ -58,7 +68,7 @@ export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
 
 const SeleteContainer = styled.div`
   width: 100%;
-  background-color: orange;
+  //background-color: orange;
   margin-top: 100px;
   position: absolute;
 

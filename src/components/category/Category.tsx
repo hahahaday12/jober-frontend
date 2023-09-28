@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { Button } from 'antd';
 import career from '@/assets/icons/categories/career.png';
 import private1 from '@/assets/icons/categories/private.png';
@@ -20,7 +19,6 @@ const categories = [
 export const Category = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>();
   const navigate = useNavigate();
-  const uuid = uuidv4().replace(/-/g, '');
 
   const handleSelectCategory = (category: string) => {
     setSelectedCategory(category);
@@ -28,16 +26,18 @@ export const Category = () => {
 
   const handleCreateWall = () => {
     if (selectedCategory) {
-      navigate(`/wall/${uuid}`, { state: { category: selectedCategory } });
+      navigate(`/wall/${crypto.randomUUID().replace(/-/g, '')}`, {
+        state: { category: selectedCategory },
+      });
     } else {
       console.error('카테고리를 선택하세요.');
     }
   };
 
   return (
-    <div className='w-[auto] h-[auto]'>
+    <div className="w-[auto] h-[auto]">
       <div className=" h-[calc(100vh-70px)] items-center flex flex-col justify-center">
-        <div >
+        <div>
           <div className=" ">
             <div className="dm-24">생성하기 원하는 페이지의</div>
             <div className="db-34 mt-[3px]">카테고리를 선택 해주세요</div>

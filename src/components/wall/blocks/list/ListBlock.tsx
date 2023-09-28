@@ -1,110 +1,98 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
 import { BlockContainer, SingleList } from 'components/index';
-import {
-  BlockType,
-  ListType,
-  SubDataClassType,
-  SubDatumType,
-} from '@/types/wall';
-import trashIcon from '@/assets/icons/trash.svg';
 import editThickIcon from '@/assets/icons/edit-thick.svg';
 import plusIcon from '@/assets/icons/plus.svg';
+import { Icon } from '@/components/common';
+import { SubDatumType } from '@/types/wall';
 
-interface ListBlockProps {
-  id?: number;
-  blockType?: BlockType;
-  subData?: SubDatumType[] | SubDataClassType;
-}
-export const ListBlock = ({ id, blockType, subData }: ListBlockProps) => {
-  const [isListTitleEdit, setIsListTitleEdit] = useState(false);
+type ListBlockSubData = Pick<
+  SubDatumType,
+  'listBlockUUID' | 'listLabel' | 'listTitle' | 'listDescription' | 'isLink'
+>;
+type ListBlockProps = {
+  blockUUID?: string;
+};
+
+export const ListBlock = ({ blockUUID }: ListBlockProps) => {
   const { isEdit, wall, setWall } = useWallStore();
-  const targetBlockData = wall.listBlocks?.find((block) => block.id === id);
+  const [isListTitleEdit, setIsListTitleEdit] = useState(false);
+
+  useEffect(() => {
+    setIsListTitleEdit(false);
+  }, [isEdit]);
+
+  const targetListBlockIndex = wall.blocks.findIndex(
+    (block) => block.blockUUID === blockUUID,
+  );
+  const targetListBlock = wall.blocks[targetListBlockIndex];
 
   const handleListTile = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
       produce(wall, (draft) => {
-        const listBlockIndex = (draft.listBlocks as ListBlockType[]).findIndex(
-          (block) => block.id === id,
-        );
-        if (listBlockIndex !== -1) {
-          (draft.listBlocks as ListBlockType[])[listBlockIndex].listTitle =
-            e.target.value;
+        draft.blocks[targetListBlockIndex].subData[0].listLabel =
+          e.target.value;
+      }),
+    );
+  };
+
+  const handleAddList = () => {
+    setWall(
+      produce(wall, (draft) => {
+        if (targetListBlockIndex !== -1) {
+          const newList: ListBlockSubData = {
+            listBlockUUID: crypto.randomUUID(),
+            listLabel: '',
+            listTitle: '',
+            listDescription: '',
+            isLink: false,
+          };
+          draft.blocks[targetListBlockIndex].subData.push(newList);
         }
       }),
     );
   };
 
-  // const handleDeletBlock = () => {
-  //   setWall(
-  //     produce(wall, (draft) => {
-  //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //       (draft as any)[blockName] = undefined;
-  //       draft.order = draft.order.filter((block) => block !== blockName);
-  //     }),
-  //   );
-  // };
-
-  // const handleAddList = () => {
-  //   setWall(
-  //     produce(wall, (draft) => {
-  //       draft.listBlock?.lists.push({
-  //         id: draft.listBlock.lists[draft.listBlock.lists.length - 1].id + 1,
-  //         listSubtitle: '',
-  //         listDescription: '',
-  //         isLink: false,
-  //       });
-  //     }),
-  //   );
-  // };
-
+  if (targetListBlockIndex === -1) {
+    return null;
+  }
   return (
-    <BlockContainer blockName="listBlock">
-      {isEdit && (
-        <img
-          src={trashIcon}
-          alt="trash icon"
-          className="absolute right-[27px] top-[26px] hover:opacity-60 transition cursor-pointer"
-          // onClick={handleDeletBlock}
-        />
-      )}
-
-      <div className="px-[28px] pt-[26px] pb-[22px] flex flex-col">
-        <div
-          className={`flex items-center gap-[6px] db-20 mb-[16px] ${
-            isEdit && 'text-gray88'
-          }`}
-        >
-          {isListTitleEdit ? (
+    <BlockContainer blockName="listBlock" blockUUID={blockUUID}>
+      <div className="p-block flex flex-col">
+        <div className="flex items-center gap-[6px] db-18 sm:db-20 mb-[16px]">
+          {isListTitleEdit && isEdit ? (
             <Input
-              placeholder="내용을 입력해주세요."
-              value={targetBlockData?.listTitle}
+              placeholder="리스트블록 제목을 입력해주세요."
+              value={targetListBlock.subData[0].listLabel}
               onChange={handleListTile}
-              className="db-20 text-gray88 w-1/3"
+              className="w-1/2 px-1 py-0"
             />
           ) : (
-            <div>{targetBlockData?.listTitle || '내용을 입력해주세요.'}</div>
+            <>
+              {targetListBlock.subData[0].listLabel ||
+                '리스트블록 제목을 입력해주세요.'}
+            </>
           )}
           {isEdit && (
-            <img
+            <Icon
               src={editThickIcon}
-              alt="edit icon"
-              className="hover:opacity-60 transition cursor-pointer"
               onClick={() => setIsListTitleEdit((prev) => !prev)}
+              className="hover"
             />
           )}
         </div>
-        <div className="flex flex-col gap-[30px]">
-          {targetBlockData?.lists.map((list: ListType) => (
+
+        <div className="flex flex-col sm:gap-[30px] gap-[24px]">
+          {targetListBlock.subData.map((list, id) => (
             <SingleList
-              blockId={id}
-              key={list.id}
-              isEdit={isEdit}
-              id={list.id}
-              subTitle={list.listSubtitle}
-              desc={list.listDescription}
+              id={id}
+              targetListBlockIndex={targetListBlockIndex}
+              listBlockUUID={list.listBlockUUID}
+              key={list.listBlockUUID}
+              listTitle={list.listTitle}
+              listDescription={list.listDescription}
               isLink={list.isLink}
             />
           ))}
@@ -112,7 +100,11 @@ export const ListBlock = ({ id, blockType, subData }: ListBlockProps) => {
 
         {isEdit && (
           <div className="w-full text-center">
-            <img src={plusIcon} alt="plus icon" className="hover mt-[20px]" />
+            <Icon
+              src={plusIcon}
+              onClick={handleAddList}
+              className="mt-[20px] hover"
+            />
           </div>
         )}
       </div>
