@@ -2,7 +2,7 @@ import koKR from 'antd/locale/ko_KR';
 import { ConfigProvider } from 'antd';
 import { Route, Routes } from 'react-router-dom';
 import UIUX from '../UIUX';
-import { CategoryPage, HomePage, WallAllPage } from 'pages/index';
+import { Category, HomePage, WallAllPage } from 'pages/index';
 
 export const App = () => {
   return (
@@ -25,7 +25,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/uiux" element={<UIUX />} />
-        <Route path="/category" element={<CategoryPage />} />
+        <Route path="/category" element={<Category />} />
         <Route path="wall/:wallId" element={<WallAllPage />} />
       </Routes>
     </ConfigProvider>

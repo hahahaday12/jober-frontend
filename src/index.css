@@ -59,10 +59,6 @@
   @apply sm:px-[28px] sm:py-[26px] p-[18px];
 }
 
-.cardshadow {
-  box-shadow: 5px 6px 16px -1px #00000029;
-}
-
 ::-webkit-scrollbar {
   width: 0.5rem;
 }

@@ -3,6 +3,7 @@ interface CategoryCardProps {
   imageSrc: string;
   onSelectCategory: (category: string) => void;
   isSelected: boolean;
+  label: string;
 }
 
 export const CategoryCard: React.FC<CategoryCardProps> = ({
@@ -10,20 +11,31 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
   imageSrc,
   onSelectCategory,
   isSelected,
+  label,
 }) => {
-  const cardClasses = `flex flex-col h-[290px] w-[302px] rounded-lg bg-lightGray items-center transition ${
-    isSelected ? 'cardshadow' : 'grayscale-[100]'
-  }`;
-
   return (
-    <div
-      className={cardClasses}
+    <li
+      className={`px-7 pt-6 pb-5 sm:px-14 sm:pt-10 sm:pb-5 flex flex-col rounded-[20px] items-center transition bg-gray hover hover:grayscale-[0]
+      ${isSelected ? 'shadow-lg' : 'grayscale-[100]'}
+      `}
       onClick={() => {
         onSelectCategory(category);
       }}
     >
-      <img src={imageSrc} alt={category} className="mt-[59px]" />
-      <div className="db-24 mt-[36px]">{category}</div>
-    </div>
+      <img
+        src={imageSrc}
+        alt={category}
+        draggable={false}
+        className="w-[82px] sm:w-[134px]"
+      />
+      <span
+        className={`
+        ${isSelected ? 'text-lightBlack' : 'text-gray88'}
+        text-[16px] font-normal sm:text-[24px] sm:font-bold mt-[15px] sm:mt-[30px] 
+        `}
+      >
+        {label}
+      </span>
+    </li>
   );
 };
