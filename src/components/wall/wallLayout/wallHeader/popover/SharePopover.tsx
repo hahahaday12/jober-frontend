@@ -1,6 +1,7 @@
-import { Button, Divider, Input, message } from 'antd';
+import { Button, Divider, message } from 'antd';
 import { SHARINGS } from '@/data/constants/sharings';
 import { useWallStore } from '@/store';
+import { kakaoShare } from '@/utils/kakaoShare';
 
 type SharePopoverProps = {
   setSharePopoverOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,35 +29,7 @@ export default function SharePopover({
       return;
     }
     if (method === 'kakao') {
-      if (window.Kakao) {
-        const kakao = window.Kakao;
-        if (!kakao.isInitialized()) {
-          kakao.init(`${import.meta.env.VITE_KAKAO_JS_KEY}`);
-        }
-        kakao.Share.sendDefault({
-          objectType: 'feed',
-          content: {
-            title: wall.wallInfoBlock.wallInfoTitle,
-            description: wall.wallInfoBlock.wallInfoDescription,
-            imageUrl: wall.wallInfoBlock.wallInfoImgURL,
-            link: {
-              webUrl: `${import.meta.env.VITE_CLIENT_URL}/wall/${
-                wall.shareURL
-              }`,
-            },
-          },
-          buttons: [
-            {
-              title: '웹으로 이동',
-              link: {
-                webUrl: `${import.meta.env.VITE_CLIENT_URL}/wall/${
-                  wall.shareURL
-                }`,
-              },
-            },
-          ],
-        });
-      }
+      kakaoShare(wall);
       setSharePopoverOpen(false);
       handleVerticalMorePopoevrOpenChange(false);
       return;
@@ -83,15 +56,6 @@ export default function SharePopover({
        pb-[18px]
       `}
       >
-        <Input
-          className="rounded-[10px] bg-sky w-full overflow-hidden"
-          addonBefore={
-            <div className="dm-14 text-gray88">
-              java-jober.netlify.app/wall/
-            </div>
-          }
-          value={wall.shareURL}
-        />
         <ul className="flex justify-between gap-[24px] mt-[31px]">
           {SHARINGS.map((share) => (
             <li
