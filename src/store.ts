@@ -28,3 +28,29 @@ export const useWallStore = create<WallStoreType>((set) => ({
   setWall: (states: object) =>
     set((state) => ({ wall: { ...state.wall, ...states } })),
 }));
+
+type TemplateState = {
+  selectedTemplate: {
+    category: string;
+    id: string;
+    title: string;
+    description: string;
+  };
+  setSelectedTemplate: (template: {
+    category: string;
+    id: string;
+    title: string;
+    description: string;
+  }) => void;
+};
+
+export const useTemplateStore = create<TemplateState>((set) => ({
+  selectedTemplate: {
+    category: '',
+    id: '',
+    title: '',
+    description: '',
+  },
+  setSelectedTemplate: (template) =>
+    set({ selectedTemplate: template }),
+}));
