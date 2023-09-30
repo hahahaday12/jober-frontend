@@ -23,7 +23,6 @@ export const WallHeader = ({
   const [dropdownOpen, setdropDownOpen] = useState(false);
 
   const handleCancelSave = () => {
-    // location.reload();
     getWall();
     toggleEdit();
   };
@@ -35,7 +34,6 @@ export const WallHeader = ({
       ${dropdownOpen ? 'h-[87px]' : 'h-[48px]'}
       `}
     >
-      {/* ${!isEdit && 'flex items-center'} */}
       <div className="w-full max-w-[866px] mx-[24px] sm:mx-auto">
         {isPreview ? (
           <div className="flex gap-[73px] items-center">

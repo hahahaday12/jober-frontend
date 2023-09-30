@@ -5,6 +5,7 @@ import { useWallStore } from '@/store';
 
 type WallHeaderInputProps = {
   dropdownOpen?: boolean;
+  verticalMore?: boolean;
 };
 
 export default function WallHeaderInput({
