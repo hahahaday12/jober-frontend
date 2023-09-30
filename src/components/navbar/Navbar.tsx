@@ -4,15 +4,18 @@ import message from '@/assets/icons/categories/message.svg';
 import zoom from '@/assets/icons/categories/zoom-in.svg';
 import { Input } from 'antd';
 import { Icon } from '../common';
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <header className="bg-sky">
       <div className="flex items-center h-[48px] sm:h-[70px] px-[24px] sm:px-[30px] justify-between max-w-[1920px] mx-auto">
         <img
           src={joberLogo}
           alt="jober logo"
-          className="w-[80px] sm:w-[115px]"
+          className="w-[80px] sm:w-[115px] hover"
+          onClick={() => navigate('/')}
         />
 
         {/* DESKTOP */}

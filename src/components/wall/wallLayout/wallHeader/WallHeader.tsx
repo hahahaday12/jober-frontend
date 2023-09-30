@@ -8,6 +8,7 @@ import WallHeaderEditButtons from './WallHeaderSavigButtons';
 import { useState } from 'react';
 import MobileFixedFooter from './MobileFixedFooter';
 import mobileDropdown from '@/assets/icons/mobile-dropdown.svg';
+import ConfirmCancelModal from './ConfirmCancelModal';
 
 type WallHeaderProps = {
   tourPreviewRef: React.MutableRefObject<null>;
@@ -18,14 +19,17 @@ export const WallHeader = ({
   tourPreviewRef,
   tourMobilePreviewRef,
 }: WallHeaderProps) => {
-  const { isEdit, toggleEdit, isPreview, getWall } = useWallStore();
+  const { isEdit, setIsEdit, isPreview, getWall } = useWallStore();
 
   const [dropdownOpen, setdropDownOpen] = useState(false);
 
   const handleCancelSave = () => {
     getWall();
-    toggleEdit();
+    setIsEdit(false);
   };
+
+  const [isConfirmCancelModalOpen, setIsConfirmCancelModalOpen] =
+    useState(false);
 
   return (
     <header
@@ -45,7 +49,9 @@ export const WallHeader = ({
               className="absolute top-[21px] right-[30px] hover hidden sm:block"
               onClick={handleCancelSave}
             />
-            <MobileFixedFooter />
+            <MobileFixedFooter
+              setIsConfirmCancelModalOpen={setIsConfirmCancelModalOpen}
+            />
           </div>
         ) : (
           <>
@@ -64,7 +70,11 @@ export const WallHeader = ({
                 <Icon
                   src={closeIcon}
                   className="absolute top-[21px] right-[30px] hover hidden sm:block"
-                  onClick={handleCancelSave}
+                  onClick={() => setIsConfirmCancelModalOpen(true)}
+                />
+                <ConfirmCancelModal
+                  isConfirmCancelModalOpen={isConfirmCancelModalOpen}
+                  setIsConfirmCancelModalOpen={setIsConfirmCancelModalOpen}
                 />
                 <Icon
                   src={mobileDropdown}
@@ -72,6 +82,7 @@ export const WallHeader = ({
                   onClick={() => setdropDownOpen((prev) => !prev)}
                 />
                 <MobileFixedFooter
+                  setIsConfirmCancelModalOpen={setIsConfirmCancelModalOpen}
                   tourMobilePreviewRef={tourMobilePreviewRef}
                 />
               </div>

@@ -11,13 +11,13 @@ export default function WallHeaderEditButtons({
   tourPreviewRef,
   footer,
 }: WallHeaderEditButtonsProps) {
-  const { wall, toggleEdit, isPreview, togglePreview, isEdit } = useWallStore();
+  const { wall, setIsEdit, isPreview, setIsPreview } = useWallStore();
   const [saving, setSaving] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
   const handlePreview = () => {
-    togglePreview();
-    toggleEdit();
+    setIsPreview(!isPreview);
+    setIsEdit(false);
   };
 
   const handleTempSave = () => {};
@@ -37,9 +37,8 @@ export default function WallHeaderEditButtons({
       messageApi.error({ content: '저장 실패' });
     } finally {
       setSaving(false);
-      // location.reload();
-      isEdit && toggleEdit();
-      isPreview && togglePreview();
+      setIsEdit(false);
+      setIsPreview(false);
     }
   };
 

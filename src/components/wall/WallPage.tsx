@@ -31,17 +31,13 @@ export const WallPage = () => {
   const tourStyleSettingRef = useRef(null);
   const tourPreviewRef = useRef(null);
   const tourMobilePreviewRef = useRef(null);
-  const [addTemplateModalOpen, setAddTemplateModalOpen] = useState(false);
 
   const BlockMapper = {
     listBlock: <ListBlock />,
     fileBlock: <FileBlock />,
     snsBlock: <SnsBlock />,
     templateBlock: (
-      <TemplateBlock
-        templateAddButtonRef={tourTemplateAddButtonRef}
-        setAddTemplateModalOpen={setAddTemplateModalOpen}
-      />
+      <TemplateBlock templateAddButtonRef={tourTemplateAddButtonRef} />
     ),
     freeBlock: <FreeBlock />,
   };
@@ -57,7 +53,10 @@ export const WallPage = () => {
     setSortableBlocks,
   } = useFetchWallData(BlockMapper);
 
-  const [tourOpen, setTourOpen] = useState(!localStorage.getItem('hasVisited'));
+  const [tourOpen, setTourOpen] = useState(
+    // true,
+    !localStorage.getItem('hasVisited'),
+  );
 
   const steps: TourProps['steps'] = [
     {
@@ -68,7 +67,6 @@ export const WallPage = () => {
         </>
       ),
       target: () => tourWallInfoRef.current,
-      // onNext: () => setHideHeaderWhileTour(true),
     },
     {
       title: <>원하는 템플릿을 넣고 빠르게 사용할 수 있어요!</>,
