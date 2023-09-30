@@ -1,78 +1,99 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { useMutation } from 'react-query';
+import { Radio } from 'antd';
+import { useTemplateStore } from '@/store';
+import { templateText } from '@/textConstants';
 
-interface TemplateData {
-  id: number;
+type TemplateData = {
+  templateId: string;
+  id: string;
   title: string;
   description: string;
-}
+};
 
-export const BestTemplate = () => {
-  const [templateData] = useState<TemplateData[]>([
-    {
-      id: 1,
-      title: '템플릿1',
-      description: '내용1',
+type BestTemplateProps = {
+  PERSONAL: string;
+};
+
+const fetchTemplateData = async (PERSONAL: string) => {
+  const response = await axios.get(`/api/wall/templates?category=${PERSONAL}`);
+  return response.data.data.list;
+};
+
+export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
+  const [templateData, setTemplateData] = useState<TemplateData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const { setSelectedTemplate } = useTemplateStore();
+
+  const { mutate } = useMutation(fetchTemplateData, {
+    onMutate: () => {
+      setIsLoading(true);
     },
-    {
-      id: 2,
-      title: '템플릿2',
-      description: '내용2',
+    onError: (error) => {
+      setIsError(true);
+      console.error('API 호출 에러:', error);
+      setIsLoading(false);
     },
-    {
-      id: 3,
-      title: '템플릿3',
-      description: '내용3',
+    onSuccess: (data) => {
+      setTemplateData(data);
+      setIsLoading(false);
     },
-    {
-      id: 4,
-      title: '템플릿4',
-      description: '내용4',
-    },
-    {
-      id: 5,
-      title: '템플릿5',
-      description: '내용5',
-    },
-    {
-      id: 6,
-      title: '템플릿6',
-      description: '내용6',
-    },
-  ]);
+  });
+
+  useEffect(() => {
+    mutate('PERSONAL');
+  }, [mutate]);
+
+  const handleRadioChange = (item: TemplateData, status: boolean) => {
+    const param = {
+      category: PERSONAL,
+      id: item.id,
+      title: item.title,
+      description: item.description,
+    };
+    console.log(item);
+    console.log(status);
+    setSelectedTemplate(param);
+  };
 
   return (
     <>
       <BestTemplateLayout>
         <TemplateHeader>
-          <p>추천 템플릿</p>
-          <p>#추천 해시태그1</p>
-          <p>#추천 해시태그2</p>
+          <p>{templateText.recommendTemplate}</p>
         </TemplateHeader>
         <TemplateContainer>
-          {templateData.map((item) => (
-            <TemplateBox>
-              {item.title}
-              <br />
-              {item.description}
-            </TemplateBox>
-          ))}
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : isError ? (
+            <p>Error fetching data</p>
+          ) : (
+            templateData.map((item) => (
+              <TemplateBox key={item.id}>
+                <Radio
+                  onChange={(e) => handleRadioChange(item, e.target.checked)}
+                />
+                <p>{item.title}</p>
+                <h3>{item.description}</h3>
+              </TemplateBox>
+            ))
+          )}
         </TemplateContainer>
       </BestTemplateLayout>
     </>
   );
-}
+};
 
 const BestTemplateLayout = styled.div`
   width: 100%;
-  //background-color: pink;
-  //position: absolute;
   margin-top: 10px;
 `;
 const TemplateHeader = styled.div`
   width: 60%;
   padding-bottom: 20px;
-  //background-color: orange;
   display: flex;
 
   p {
@@ -87,12 +108,29 @@ const TemplateHeader = styled.div`
 const TemplateContainer = styled.div`
   margin-top: 20px;
   display: grid;
-  grid-template-columns: 295px 295px;
+  grid-template-columns: 298px 298px;
   grid-template-rows: 90px 90px 90px;
-  gap: 5px;
+  gap: 10px;
+  grid-row-gap: 90px;
 `;
+
 const TemplateBox = styled.div`
   border-radius: 10px;
-  margin-top: 10px;
-  background-color: gray;
+  margin-top: 20px;
+  background-color: rgba(217, 217, 217, 1);
+  width: 290px;
+  position: relative;
+  padding-bottom: 135px;
+
+  p {
+    width: 270px;
+  }
+
+  h3 {
+    width: 275px;
+    padding: 10px;
+    padding-bottom: 20px;
+    position: relative;
+    margin-top: 5px;
+  }
 `;
