@@ -60,7 +60,7 @@ export type SubDatumType = {
 export type StyleSettingType = {
   backgroundSetting: BackgroundSettingType;
   blockSetting: BlockSettingType;
-  themeSetting: ('modern' | 'classic' | 'simple' | 'dark') | null;
+  themeSetting: string | null;
 };
 
 export type BackgroundSettingType = {

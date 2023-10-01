@@ -10,19 +10,22 @@ type SortableBlockType = {
   subData: SubDatumType[];
 }[];
 
-export default function useFetchWallData(BlockMapper: {
-  listBlock: JSX.Element;
-  fileBlock: JSX.Element;
-  snsBlock: JSX.Element;
-  templateBlock: JSX.Element;
-  freeBlock: JSX.Element;
-}) {
+export default function useFetchWallData(
+  BlockMapper: {
+    listBlock: JSX.Element;
+    fileBlock: JSX.Element;
+    snsBlock: JSX.Element;
+    templateBlock: JSX.Element;
+    freeBlock: JSX.Element;
+  },
+  isNew: boolean | undefined,
+) {
   const [messageApi, contextHolder] = message.useMessage();
   const { wall, setWall, isEdit } = useWallStore();
   const [error, setError] = useState<Error>();
   const [loading, setLoading] = useState(false);
   const [sortableBlocks, setSortableBlocks] = useState<SortableBlockType>([]);
-
+  console.log(isNew);
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
@@ -38,7 +41,7 @@ export default function useFetchWallData(BlockMapper: {
           throw new Error('error while data fetching');
         }
         const wallData = (await response.json()) as WallType;
-        // setWall(wallData);
+        setWall(wallData);
       } catch (error) {
         // TODO : 에러 핸들링
         console.log(error);
@@ -48,12 +51,12 @@ export default function useFetchWallData(BlockMapper: {
         setLoading(false);
       }
     };
-    getData();
+    !isNew && getData();
 
     return () => {
       abortController.abort();
     };
-  }, [messageApi, setWall]);
+  }, [isNew, messageApi, setWall]);
 
   useEffect(() => {
     if (wall.blocks) {

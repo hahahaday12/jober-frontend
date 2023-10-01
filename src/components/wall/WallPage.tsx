@@ -21,8 +21,11 @@ import { Tour, type TourProps } from 'antd';
 import previewTour from '@/assets/tour/preview.gif';
 import styleTour from '@/assets/tour/style.gif';
 import { useWindowWidth } from '@/hooks/useWindowWidth';
+import { useLocation } from 'react-router-dom';
 
 export const WallPage = () => {
+  const { state } = useLocation();
+  const isNew = state ? state.isNew : false;
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth < 640;
   const tourWallInfoRef = useRef(null);
@@ -51,7 +54,7 @@ export const WallPage = () => {
     sortableBlocks,
     setWall,
     setSortableBlocks,
-  } = useFetchWallData(BlockMapper);
+  } = useFetchWallData(BlockMapper, isNew);
 
   const [tourOpen, setTourOpen] = useState(
     // true,

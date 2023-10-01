@@ -100,6 +100,7 @@ export const BlockSettings = ({
         <div className="flex flex-col gap-[8px]">
           {BLOCK_SHAPE.map((shape) => (
             <label
+              key={shape}
               className={`bg-lightGray border-[1px] border-solid border-line w-[194px] h-[30px] block hover ${
                 wall.styleSetting.blockSetting.shape === shape &&
                 'ring-blue ring-1 ring-offset-2'
@@ -122,6 +123,7 @@ export const BlockSettings = ({
         <div className="flex flex-col gap-[8px]">
           {BLOCK_STYLE.map((style) => (
             <label
+              key={style}
               className={`${style} bg-lightGray w-[194px] h-[30px] block hover ${
                 wall.styleSetting.blockSetting.style === style &&
                 'ring-blue ring-1 ring-offset-2'

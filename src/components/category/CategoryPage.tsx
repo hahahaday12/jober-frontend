@@ -31,7 +31,7 @@ export const CategoryPage = () => {
       memberId: '1',
     });
     setIsEdit(true);
-    navigate(`/wall/${addSpaceId}`);
+    navigate(`/wall/${addSpaceId}`, { state: { isNew: true } });
   };
 
   return (

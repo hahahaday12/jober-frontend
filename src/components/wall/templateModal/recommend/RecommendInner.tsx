@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import { Radio } from 'antd';
 import { useTemplateStore } from '@/store';
-import { templateText } from '@/textConstants';
+// import { templateText } from '@/textConstants';
 
 type TemplateData = {
   templateId: string;
@@ -63,7 +63,7 @@ export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
     <>
       <BestTemplateLayout>
         <TemplateHeader>
-          <p>{templateText.recommendTemplate}</p>
+          {/* <p>{templateText.recommendTemplate}</p> */}
         </TemplateHeader>
         <TemplateContainer>
           {isLoading ? (
