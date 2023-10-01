@@ -4,8 +4,8 @@ import { Color } from 'antd/es/color-picker';
 import { produce } from 'immer';
 import { Icon } from '@/components/common';
 import galleryIcon from '@/assets/icons/gallery.svg';
+import { STYLE_IMAGE_FILE_SIZE_LIMIT } from '@/data/constants/customization';
 //import { message } from 'antd';
-//import { STYLE_IMAGE_FILE_SIZE_LIMIT } from '@/data/constants/customization';
 
 export const BackgroundSettings = ({
   setBackgroundOptions,
