@@ -34,14 +34,12 @@ export const ThemeSettings = () => {
               alignItems: 'center', // 세로 중앙 정렬
             }}
           >
-            <div className={`w-[160px] h-[20px] block bg-white shadow`}>
-              모던테마
-            </div>
-            <div className={`w-[160px] h-[20px] block bg-white shadow`}>
-              모던테마
-            </div>
-            <div className={`w-[160px] h-[20px] block bg-white shadow`}>
-              모던테마
+            <div className="mt-[20px] grid grid-cols-1 gap-2">
+              <div className="col-span-2 w-[160px] h-[20px] block bg-white shadow">
+                1
+              </div>
+              <div className="w-[76px] h-[20px] block bg-white shadow">2</div>
+              <div className="w-[76px] h-[20px] block bg-white shadow">3</div>
             </div>
           </div>
         </SwiperSlide>

@@ -52,10 +52,10 @@ export const BackgroundSettings = ({
   // 배경-이미지
   const handleStyleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile = event.target.files?.[0];
-    // if (imageFile && imageFile.size > STYLE_IMAGE_FILE_SIZE_LIMIT) {
-    //   messageApi.error('이미지가 2MB를 초과하였습니다.');
-    //   return;
-    // }
+    if (imageFile && imageFile.size > STYLE_IMAGE_FILE_SIZE_LIMIT) {
+      messageApi.error('이미지가 2MB를 초과하였습니다.');
+      return;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === FileReader.DONE) {
