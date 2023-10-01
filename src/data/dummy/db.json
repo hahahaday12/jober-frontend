@@ -183,15 +183,15 @@
     ],
     "styleSetting": {
       "backgroundSetting": {
-        "solidColor": "#01203e",
+        "solidColor": "#fddfdf",
         "gradation": true,
         "styleImgURL": ""
       },
       "blockSetting": {
-        "styleColor": "#fcbcbc",
+        "styleColor": "#21ef42",
         "gradation": true,
-        "shape": "13px",
-        "style": "shadow"
+        "shape": "6px",
+        "style": "flat"
       },
       "themeSetting": null
     }

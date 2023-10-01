@@ -25,7 +25,6 @@ export default function useFetchWallData(
   const [error, setError] = useState<Error>();
   const [loading, setLoading] = useState(false);
   const [sortableBlocks, setSortableBlocks] = useState<SortableBlockType>([]);
-  console.log(isNew);
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;

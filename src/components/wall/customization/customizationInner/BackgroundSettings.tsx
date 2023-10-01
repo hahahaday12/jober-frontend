@@ -31,6 +31,7 @@ export const BackgroundSettings = ({
         draft.styleSetting.backgroundSetting.gradation = false;
         draft.styleSetting.backgroundSetting.styleImgURL = '';
         draft.styleSetting.backgroundSetting.solidColor = bgColor;
+        draft.styleSetting.themeSetting = null;
       }),
     );
   };
@@ -45,9 +46,12 @@ export const BackgroundSettings = ({
         draft.styleSetting.backgroundSetting.gradation = true;
         draft.styleSetting.backgroundSetting.styleImgURL = '';
         draft.styleSetting.backgroundSetting.solidColor = bgColor;
+        draft.styleSetting.themeSetting = null;
       }),
     );
   };
+
+  console.log(wall.styleSetting);
 
   // 배경-이미지
   const handleStyleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +67,7 @@ export const BackgroundSettings = ({
           produce(wall, (draft) => {
             draft.styleSetting.backgroundSetting.styleImgURL =
               reader.result as string;
+            draft.styleSetting.themeSetting = null;
           }),
         );
       }

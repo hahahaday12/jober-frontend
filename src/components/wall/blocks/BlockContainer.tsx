@@ -3,6 +3,7 @@ import DragHandle from '@/components/wall/blocks/DragHandle';
 import trashIcon from '@/assets/icons/trash.svg';
 import { produce } from 'immer';
 import { Icon } from '@/components/common';
+import { THEMES } from '@/data/constants/theme';
 
 type BlockContainerProps = {
   children: React.ReactNode;
@@ -49,8 +50,7 @@ export const BlockContainer = ({
       ${isEdit && 'text-gray88'}
       rounded-[${blockBorderRadius}]
       ${!templateBlock && blockStyleClassName}
-      border-solid border-lightBlack relative
-      `}
+      border-solid border-lightBlack relative`}
       style={{
         backgroundColor: templateBlock
           ? isEdit

@@ -22,10 +22,9 @@ export const BlockSettings = ({
       produce(wall, (draft) => {
         draft.styleSetting.blockSetting.gradation = false;
         draft.styleSetting.blockSetting.styleColor = bgColor;
+        draft.styleSetting.themeSetting = null;
       }),
     );
-    console.log('ColorPicker Value:', backgroundColor);
-    console.log('Block Setting:', wall.styleSetting.blockSetting.styleColor);
   };
   const handleBlockGradationPick = (backgroundColor: Color) => {
     const bgColor =
@@ -37,6 +36,7 @@ export const BlockSettings = ({
       produce(wall, (draft) => {
         draft.styleSetting.blockSetting.gradation = true;
         draft.styleSetting.blockSetting.styleColor = bgColor;
+        draft.styleSetting.themeSetting = null;
       }),
     );
   };
@@ -50,6 +50,7 @@ export const BlockSettings = ({
           | '0px'
           | '6px'
           | '13px';
+        draft.styleSetting.themeSetting = null;
       }),
     );
     console.log(e.target.value);
@@ -63,22 +64,23 @@ export const BlockSettings = ({
           | 'none'
           | 'shadow'
           | 'flat';
+        draft.styleSetting.themeSetting = null;
       }),
     );
     console.log(e.target.value);
   };
 
   return (
-    <div>
+    <>
       <div className="db-18 mt-[30px] mb-[16px]">블록</div>
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-3">
         <div className="flex flex-col gap-[8px] w-full">
           {BLOCK_SHAPE.map((shape) => (
             <label
               key={shape}
               className={`bg-lightGray border-[1px] border-solid border-line sm:w-[194px] h-[30px] w-full block hover ${
                 wall.styleSetting.blockSetting.shape === shape &&
-                'ring-blue ring-1 ring-offset-2'
+                'ring-blue ring-2 ring-offset-2'
               }`}
               style={{ borderRadius: shape }}
             >
@@ -101,7 +103,7 @@ export const BlockSettings = ({
               key={style}
               className={`${style} bg-lightGray sm:w-[194px] w-full h-[30px] block hover ${
                 wall.styleSetting.blockSetting.style === style &&
-                'ring-blue ring-1 ring-offset-2'
+                'ring-blue ring-2 ring-offset-2'
               }`}
             >
               <input
@@ -120,7 +122,7 @@ export const BlockSettings = ({
         <div className="flex flex-col gap-[10px] w-full">
           <label
             className={` bg-sky rounded-[8px] sm:w-[194px] h-[48px] w-full block hover ${
-              blockOptions === 'solid' && 'ring-blue ring-1'
+              blockOptions === 'solid' && 'ring-blue ring-2 ring-offset-2'
             }`}
           >
             <input
@@ -147,7 +149,7 @@ export const BlockSettings = ({
           {/* 블록-그라데이션 */}
           <label
             className={`rounded-[8px] sm:w-[194px] h-[48px] block hover ${
-              blockOptions === 'gradation' && 'ring-blue ring-1'
+              blockOptions === 'gradation' && 'ring-blue ring-2 ring-offset-2'
             }`}
           >
             <input
@@ -175,6 +177,6 @@ export const BlockSettings = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

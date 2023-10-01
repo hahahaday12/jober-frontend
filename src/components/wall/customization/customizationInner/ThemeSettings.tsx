@@ -6,6 +6,7 @@ import '@/index.css';
 import { THEMES } from '@/data/constants/theme';
 import { useState } from 'react';
 import { produce } from 'immer';
+import { useWindowWidth } from '@/hooks/useWindowWidth';
 
 // TODO
 // 1. 이미지 변경하기, constant에서 label이름 변경
@@ -14,11 +15,8 @@ import { produce } from 'immer';
 
 export const ThemeSettings = () => {
   const { wall, setWall } = useWallStore();
-  const [selectedTheme, setSelectedTheme] = useState(
-    wall.styleSetting.themeSetting,
-  );
+
   const handleSelectTheme = (themeLabel: string) => {
-    setSelectedTheme(themeLabel);
     setWall(
       produce(wall, (draft) => {
         draft.styleSetting.themeSetting = themeLabel;
@@ -26,17 +24,23 @@ export const ThemeSettings = () => {
     );
   };
 
+  const windowWidth = useWindowWidth();
+  const mobile = windowWidth < 640;
+
   return (
     <>
       <div className="db-18 mt-[30px] mb-[16px]">테마</div>
-      <Swiper spaceBetween={10} slidesPerView={1.5}>
+      <Swiper spaceBetween={10} slidesPerView={mobile ? 1.5 : 3}>
         {THEMES.map((theme) => (
-          <SwiperSlide onClick={() => handleSelectTheme(theme.label)}>
+          <SwiperSlide
+            onClick={() => handleSelectTheme(theme.label)}
+            key={theme.label}
+          >
             <div className="p-1">
               <img
                 src={theme.src}
                 className={` rounded-[8px] w-[194px] h-[100px] block hover ${
-                  selectedTheme === theme.label &&
+                  wall.styleSetting.themeSetting === theme.label &&
                   'ring-blue ring-2 ring-offset-2'
                 }`}
               />
