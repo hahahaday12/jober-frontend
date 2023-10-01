@@ -3,7 +3,6 @@ import DragHandle from '@/components/wall/blocks/DragHandle';
 import trashIcon from '@/assets/icons/trash.svg';
 import { produce } from 'immer';
 import { Icon } from '@/components/common';
-import { THEMES } from '@/data/constants/theme';
 
 type BlockContainerProps = {
   children: React.ReactNode;

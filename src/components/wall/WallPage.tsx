@@ -132,10 +132,10 @@ export const WallPage = () => {
         wallBgGradation &&
         'bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]'
       }
-      min-h-screen flex flex-col items-center bg-no-repeat bg-center bg-cover
+      min-h-screen flex flex-col items-center bg-no-repeat bg-center bg-cover relative
       `}
       style={{
-        backgroundImage: wallBgUrl ? `url(${wallBgUrl})` : '',
+        backgroundImage: wallBgUrl && `url(${wallBgUrl})`,
         backgroundColor: wallBgColor,
       }}
     >
@@ -155,6 +155,9 @@ export const WallPage = () => {
           pt-[132px] sm:pt-[106px] sm:pb-[24px] flex-1 flex flex-col gap-[12px] sm:gap-[24px] px-[12px] w-full sm:px-0 max-w-[866px]
           `}
         >
+          {wallBgUrl && (
+            <div className="w-full h-full absolute inset-0 bg-white opacity-10" />
+          )}
           <WallInfoBlock wallInfoRef={tourWallInfoRef} />
           <ReactSortable
             list={sortableBlocks}
