@@ -40,7 +40,7 @@ export const FreeBlock = ({ blockUUID }: FreeBlockProps) => {
   const handleEditorChange = (content: string) => {
     setWall(
       produce(wall, (draft) => {
-        draft.blocks[targetFreeBlockIndex].subData[0].freeDescription = content;
+        draft.blocks[targetFreeBlockIndex].subData[0].freeContent = content;
       }),
     );
   };
@@ -86,13 +86,11 @@ export const FreeBlock = ({ blockUUID }: FreeBlockProps) => {
               fileUpload: false,
               imagePaste: false,
             }}
-            model={targetFreeBlock.subData[0].freeDescription}
+            model={targetFreeBlock.subData[0].freeContent}
             onModelChange={handleEditorChange}
           />
         ) : (
-          <FroalaEditorView
-            model={targetFreeBlock.subData[0].freeDescription}
-          />
+          <FroalaEditorView model={targetFreeBlock.subData[0].freeContent} />
         )}
       </div>
     </BlockContainer>

@@ -17,6 +17,7 @@ export const BackgroundSettings = ({
   >;
 }) => {
   const { wall, isEdit, setWall } = useWallStore();
+  const isThemeSelected = wall?.styleSetting?.themeSetting;
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -89,6 +90,7 @@ export const BackgroundSettings = ({
             <div
               className={`bg-sky rounded-[8px] sm:w-[194px] h-[100px] w-full hover ${
                 backgroundOptions === 'solid' &&
+                !isThemeSelected &&
                 'ring-blue ring-2 ring-offset-2'
               }`}
             >
@@ -114,6 +116,7 @@ export const BackgroundSettings = ({
             <div
               className={`rounded-[8px] sm:w-[194px] h-[100px] hover ${
                 backgroundOptions === 'gradation' &&
+                !isThemeSelected &&
                 'ring-blue ring-2 ring-offset-2'
               }`}
             >
@@ -141,6 +144,7 @@ export const BackgroundSettings = ({
             <label
               className={`bg-sky rounded-[8px] sm:w-[194px] h-[100px] block hover ${
                 backgroundOptions === 'image' &&
+                !isThemeSelected &&
                 'ring-blue ring-2 ring-offset-2'
               }`}
             >

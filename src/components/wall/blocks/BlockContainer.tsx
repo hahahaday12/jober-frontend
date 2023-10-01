@@ -38,6 +38,8 @@ export const BlockContainer = ({
   const blockGradation = wall?.styleSetting?.blockSetting?.gradation;
   const templateBlockBackground = '#d1d0d0';
 
+  const isDark = wall?.styleSetting?.themeSetting === 'dark';
+
   return (
     <div
       className={`
@@ -47,7 +49,7 @@ export const BlockContainer = ({
         !templateBlock &&
         'bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]'
       }
-      ${isEdit && 'text-gray88'}
+      ${isEdit ? 'text-gray88' : isDark ? 'text-white' : 'text-lightBlack'}
       rounded-[${blockBorderRadius}]
       ${!templateBlock && blockStyleClassName}
       border-solid border-lightBlack relative`}

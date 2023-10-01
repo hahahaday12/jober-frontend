@@ -59,7 +59,7 @@ export const wall: WallType = {
       subData: [
         {
           freeTitle: '자유의 여신상 블록입니다.',
-          freeDescription:
+          freeContent:
             '<p style="text-align: left;"><strong>1. 자버</strong></p><p><strong>2. 버스</strong></p><p>3. 스타</p><p><u>4. 타조</u></p><p><sup><span style="font-family: Impact, Charcoal, sans-serif;">5. 조리</span></sup></p>',
         },
       ],

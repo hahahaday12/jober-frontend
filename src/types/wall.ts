@@ -46,7 +46,7 @@ export type SubDatumType = {
   fileName?: string;
   file?: string;
   freeTitle?: string;
-  freeDescription?: string;
+  freeContent?: string;
   snsBlockUUID?: string;
   snsType?: string;
   snsUrl?: string;
@@ -71,7 +71,7 @@ export type BackgroundSettingType = {
 
 export type BlockSettingType = {
   shape: '0px' | '6px' | '13px';
-  style: 'none' | 'flat' | 'shadow';
+  style: 'none' | 'flat' | 'shadow' | string;
   styleColor: string;
   gradation: boolean;
 };

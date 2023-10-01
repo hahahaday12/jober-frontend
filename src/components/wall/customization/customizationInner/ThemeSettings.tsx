@@ -1,25 +1,32 @@
 import { useWallStore } from '@/store';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-//import { BLOCK_SHAPE, BLOCK_STYLE } from '@/data/constants/customization';
 import '@/index.css';
 import { THEMES } from '@/data/constants/theme';
-import { useState } from 'react';
 import { produce } from 'immer';
 import { useWindowWidth } from '@/hooks/useWindowWidth';
-
-// TODO
-// 1. 이미지 변경하기, constant에서 label이름 변경
-// 2. 반응형 해보기
-// 3. theme가 설정되어 있을 때 최상위 조건으로 바꾸기.
 
 export const ThemeSettings = () => {
   const { wall, setWall } = useWallStore();
 
-  const handleSelectTheme = (themeLabel: string) => {
+  const handleSelectTheme = (theme: {
+    label: string;
+    src: string;
+    bg: string;
+    blockBorderRadius: '0px' | '6px' | '13px';
+    blockBg?: string;
+    blockStyle: string;
+  }) => {
     setWall(
       produce(wall, (draft) => {
-        draft.styleSetting.themeSetting = themeLabel;
+        draft.styleSetting.themeSetting = theme.label;
+        draft.styleSetting.backgroundSetting.gradation = false;
+        draft.styleSetting.backgroundSetting.solidColor = '#eeeeee';
+        draft.styleSetting.blockSetting.gradation = false;
+        draft.styleSetting.blockSetting.styleColor = theme.blockBg || '#ffffff';
+        draft.styleSetting.blockSetting.shape = theme.blockBorderRadius;
+        draft.styleSetting.blockSetting.style = theme.blockStyle;
+        draft.styleSetting.backgroundSetting.styleImgURL = theme.bg;
       }),
     );
   };
@@ -33,7 +40,7 @@ export const ThemeSettings = () => {
       <Swiper spaceBetween={10} slidesPerView={mobile ? 1.5 : 3}>
         {THEMES.map((theme) => (
           <SwiperSlide
-            onClick={() => handleSelectTheme(theme.label)}
+            onClick={() => handleSelectTheme(theme)}
             key={theme.label}
           >
             <div className="p-1">

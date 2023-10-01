@@ -28,8 +28,8 @@ export const TemplateBlock = ({
     <BlockContainer blockName="templateBlock">
       <div
         className={`
-        ${isEdit && 'px-[8px] pb-[8px] pt-[30px]'} 
-        gap-4 grid sm:grid-cols-2 grid-cols-1
+        ${isEdit && 'px-[8px] pb-[8px] pt-[16px] sm:pt-[26px]'} 
+        gap-[8px] grid sm:grid-cols-2 grid-cols-1
         `}
       >
         {templateBlockSubData?.map((template) => (

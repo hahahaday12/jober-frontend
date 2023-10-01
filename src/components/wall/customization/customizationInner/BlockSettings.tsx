@@ -12,6 +12,7 @@ export const BlockSettings = ({
   setBlockOptions: React.Dispatch<React.SetStateAction<'solid' | 'gradation'>>;
 }) => {
   const { wall, setWall } = useWallStore();
+  const isThemeSelected = wall?.styleSetting?.themeSetting;
   const handleBlockColorPick = (backgroundColor: Color) => {
     const bgColor =
       typeof backgroundColor === 'string'
@@ -80,6 +81,7 @@ export const BlockSettings = ({
               key={shape}
               className={`bg-lightGray border-[1px] border-solid border-line sm:w-[194px] h-[30px] w-full block hover ${
                 wall.styleSetting.blockSetting.shape === shape &&
+                !isThemeSelected &&
                 'ring-blue ring-2 ring-offset-2'
               }`}
               style={{ borderRadius: shape }}
@@ -103,6 +105,7 @@ export const BlockSettings = ({
               key={style}
               className={`${style} bg-lightGray sm:w-[194px] w-full h-[30px] block hover ${
                 wall.styleSetting.blockSetting.style === style &&
+                !isThemeSelected &&
                 'ring-blue ring-2 ring-offset-2'
               }`}
             >
@@ -122,7 +125,9 @@ export const BlockSettings = ({
         <div className="flex flex-col gap-[10px] w-full">
           <label
             className={` bg-sky rounded-[8px] sm:w-[194px] h-[48px] w-full block hover ${
-              blockOptions === 'solid' && 'ring-blue ring-2 ring-offset-2'
+              blockOptions === 'solid' &&
+              !isThemeSelected &&
+              'ring-blue ring-2 ring-offset-2'
             }`}
           >
             <input

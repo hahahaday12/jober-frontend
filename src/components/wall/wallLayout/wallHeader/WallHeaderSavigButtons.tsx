@@ -11,13 +11,13 @@ export default function WallHeaderEditButtons({
   tourPreviewRef,
   footer,
 }: WallHeaderEditButtonsProps) {
-  const { wall, setIsEdit, isPreview, setIsPreview } = useWallStore();
+  const { wall, setIsEdit, isPreview, setIsPreview, isEdit } = useWallStore();
   const [saving, setSaving] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
   const handlePreview = () => {
     setIsPreview(!isPreview);
-    setIsEdit(false);
+    setIsEdit(!isEdit);
   };
 
   const handleTempSave = () => {};

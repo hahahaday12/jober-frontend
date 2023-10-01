@@ -121,7 +121,7 @@
         "subData": [
           {
             "freeTitle": "자유블록은 자유롭고싶다.",
-            "freeDescription": "<p>자유블록의 자유는 없다.</p>"
+            "freeContent": "<p>자유블록의 자유는 없다.</p>"
           }
         ]
       },
@@ -183,17 +183,17 @@
     ],
     "styleSetting": {
       "backgroundSetting": {
-        "solidColor": "#fddfdf",
-        "gradation": true,
-        "styleImgURL": ""
+        "solidColor": "#eeeeee",
+        "gradation": false,
+        "styleImgURL": "/src/assets/theme/dark-bg.png"
       },
       "blockSetting": {
-        "styleColor": "#21ef42",
-        "gradation": true,
-        "shape": "6px",
-        "style": "flat"
+        "styleColor": "RGBA(0, 0, 0, 0.6)",
+        "gradation": false,
+        "shape": "0px",
+        "style": "dark"
       },
-      "themeSetting": null
+      "themeSetting": "dark"
     }
   },
   "self": [

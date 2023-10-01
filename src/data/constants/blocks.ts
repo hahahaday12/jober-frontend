@@ -24,7 +24,7 @@ export const DEFAULT_BLOCKS: { [key: string]: object } = {
   freeBlock: [
     {
       freeTitle: '',
-      freeDescription: '',
+      freeContent: '',
     },
   ],
 };
@@ -129,7 +129,7 @@ export const DEFAULT_WALL: {
         subData: [
           {
             freeTitle: '',
-            freeDescription: '',
+            freeContent: '',
           },
         ],
       },
@@ -181,7 +181,7 @@ export const DEFAULT_WALL: {
         subData: [
           {
             freeTitle: '',
-            freeDescription: '',
+            freeContent: '',
           },
         ],
       },
