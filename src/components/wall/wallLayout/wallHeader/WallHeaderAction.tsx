@@ -8,7 +8,7 @@ import MoreVerticalPopover from './popover/MoreVerticalPopover';
 import WallHeaderPopoverTriggers from './WallHeaderPopoverTriggers';
 
 export const WallHeaderActions = () => {
-  const { toggleEdit, wall } = useWallStore();
+  const { setIsEdit, wall } = useWallStore();
 
   const [verticalMorePopoevrOpen, setVerticalMorePopoevrOpen] = useState(false);
   const handleVerticalMorePopoevrOpenChange = (newOpen: boolean) => {
@@ -27,7 +27,7 @@ export const WallHeaderActions = () => {
         }
       />
 
-      <Button type="primary" onClick={() => toggleEdit()} className="dm-14">
+      <Button type="primary" onClick={() => setIsEdit(true)} className="dm-14">
         편집하기
       </Button>
 

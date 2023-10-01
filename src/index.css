@@ -31,6 +31,9 @@
 .db-14 {
   @apply font-bold text-[14px] -tracking-[1px];
 }
+.db-12 {
+  @apply font-bold text-[12px] -tracking-[1px];
+}
 .dm-24 {
   @apply font-[500] text-[24px] -tracking-[1px];
 }

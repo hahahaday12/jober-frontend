@@ -38,7 +38,7 @@ export default function useFetchWallData(BlockMapper: {
           throw new Error('error while data fetching');
         }
         const wallData = (await response.json()) as WallType;
-        setWall(wallData);
+        // setWall(wallData);
       } catch (error) {
         // TODO : 에러 핸들링
         console.log(error);

@@ -37,8 +37,6 @@ export const BlockContainer = ({
   const blockGradation = wall?.styleSetting?.blockSetting?.gradation;
   const templateBlockBackground = '#d1d0d0';
 
-  console.log(blockGradation);
-
   return (
     <div
       className={`

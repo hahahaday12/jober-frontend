@@ -23,11 +23,14 @@ export const WallInfoBlock = ({ wallInfoRef }: WallInfoBlockProps) => {
       }),
     );
   };
-  [];
+
+  const eventWall = wall.category === 'event';
+  const personalWall = wall.category === 'personal';
+
   return (
     <BlockContainer blockName="wallInfoBlock">
       <div ref={wallInfoRef}>
-        <BackgroundImage />
+        {(eventWall || personalWall) && <BackgroundImage />}
         <div className="relative flex gap-[24px] sm:p-block px-[18px] pb-[18px] sm:px-[24px] pt-[84px] sm:pt-[24px] sm:pb-[24px] items-center">
           {/* TODO : 구독 기능 */}
           {!isEdit && (

@@ -1,11 +1,15 @@
-import { Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import HomeProfile from './HomeProfile';
+import HomeSpace from './HomeSpace';
+import HomeRecentDocument from './HomeRecentDocument';
+import useMemberInfo from '@/hooks/useMemberInfo';
 
 export const Home = () => {
-  const navigate = useNavigate();
+  const { memberInfo } = useMemberInfo();
   return (
-    <>
-      <Button onClick={() => navigate('/category')}>공유페이지 생성</Button>
-    </>
+    <div className="px-[24px] py-[22px] break-keep">
+      <HomeProfile member={memberInfo?.member} />
+      <HomeSpace space={memberInfo?.spaceWall} />
+      <HomeRecentDocument />
+    </div>
   );
 };
