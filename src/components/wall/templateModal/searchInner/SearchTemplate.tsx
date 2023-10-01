@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BestTemplate } from 'components/index';
+import { templateText } from '@/textConstants';
+import axios from 'axios';
 
-interface ProductItem {
-  id: number;
-  title: string;
-  description: string;
-  tag: string;
+type ProductItem = {
+  templateId: number;
+  templateTitle: string;
+  templateDescription: string;
 }
 
-interface Props {
+type Props = {
   inputText: string;
 }
 
 export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
   const [debouncedInputValue, setDebouncedInputValue] = useState('');
-  const [filteredResults, setFilteredResults] = useState<ProductItem[]>([]);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductItem[]>([]);
 
   useEffect(() => {
     // 입력값이 변경될 때마다 debounce된 값을 업데이트.
@@ -33,9 +33,17 @@ export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
   useEffect(() => {
     if (debouncedInputValue) {
       const getData = async () => {
-        const results = await fetch(`http://localhost:4001/search`);
-        const data = await results.json();
-        setProducts(data);
+        try {
+          const response = await axios.get(`/api/api/wall/templates`, {
+            params: {
+              search: debouncedInputValue,
+            },
+          });
+          const data = response.data.data.list;
+          setProducts([...data]);
+        } catch (error) {
+          console.error('API 호출 에러:', error);
+        }
       };
       getData();
     } else {
@@ -43,24 +51,19 @@ export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
     }
   }, [debouncedInputValue]);
 
-  useEffect(() => {
-    // 입력값에 따라 필터링된 결과를 업데이트합니다.
-    const filtered = products.filter((item) =>
-      item.title.toLowerCase().includes(debouncedInputValue.toLowerCase()),
-    );
-    setFilteredResults(filtered);
-  }, [debouncedInputValue, products]);
-
   return (
     <>
       <SeleteContainer>
-        <h3>검색결과</h3>
+        <h3>{templateText.inputResult}</h3>
         <ResultBox>
-          {filteredResults.map((item) => (
-            <ResultTemBox key={item.id}>{item.title}</ResultTemBox>
+          {products.map((item) => (
+            <ResultTemBox key={item.templateId}>
+              {item.templateTitle} <br />
+              {item.templateDescription}
+            </ResultTemBox>
           ))}
         </ResultBox>
-        <BestTemplate />
+        <BestTemplate PERSONAL={''} />
       </SeleteContainer>
     </>
   );
@@ -81,7 +84,7 @@ const ResultBox = styled.div`
   width: 90%;
   height: 210px;
   margin: auto;
-  background-color: #108fdd;
+  //background-color: #108fdd;
   max-height: 200px;
   overflow-y: auto;
 `;
