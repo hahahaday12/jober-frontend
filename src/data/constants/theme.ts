@@ -1,4 +1,8 @@
 import modern from '@/assets/theme/modern.png';
+import simple from '@/assets/theme/simple.png';
+import classic from '@/assets/theme/classic.png';
+import dark from '@/assets/theme/dark.png';
+import blue from '@/assets/theme/blue.png';
 
 export const THEMES = [
   {
@@ -6,19 +10,19 @@ export const THEMES = [
     src: modern,
   },
   {
-    label: '1',
-    src: modern,
+    label: 'simple',
+    src: simple,
   },
   {
-    label: '2',
-    src: modern,
+    label: 'classic',
+    src: classic,
   },
   {
-    label: '3',
-    src: modern,
+    label: 'dark',
+    src: dark,
   },
   {
-    label: '4',
-    src: modern,
+    label: 'blue',
+    src: blue,
   },
 ];

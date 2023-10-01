@@ -68,40 +68,15 @@ export const BlockSettings = ({
     console.log(e.target.value);
   };
 
-  // useEffect(() => {
-  //   const bgColor =
-  //     typeof blockColor === 'string' ? blockColor : blockColor.toHexString();
-  //   setWall(
-  //     produce(wall, (draft) => {
-  //       draft.styleSetting.blockSetting.styleColor = bgColor;
-  //     }),
-  //   );
-  // }, [blockColor]);
-
-  // const handleColorChange = (newColor: Color) => {
-  //   setBlocklColor(newColor.toHexString());
-  // };
-
-  // // 블록-스타일 컬러 그라데이션
-  // const handleBlockGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setWall(
-  //     produce(wall, (draft) => {
-  //       draft.styleSetting.blockSetting.gradation = e.target
-  //         .value as unknown as boolean;
-  //     }),
-  //   );
-  //   console.log(e.target.value);
-  // };
-
   return (
     <div>
       <div className="db-18 mt-[30px] mb-[16px]">블록</div>
       <div className="flex justify-between">
-        <div className="flex flex-col gap-[8px]">
+        <div className="flex flex-col gap-[8px] w-full">
           {BLOCK_SHAPE.map((shape) => (
             <label
               key={shape}
-              className={`bg-lightGray border-[1px] border-solid border-line w-[194px] h-[30px] block hover ${
+              className={`bg-lightGray border-[1px] border-solid border-line sm:w-[194px] h-[30px] w-full block hover ${
                 wall.styleSetting.blockSetting.shape === shape &&
                 'ring-blue ring-1 ring-offset-2'
               }`}
@@ -120,11 +95,11 @@ export const BlockSettings = ({
           <div className="text-center items-center dm-16 mt-[10px]">모양</div>
         </div>
 
-        <div className="flex flex-col gap-[8px]">
+        <div className="flex flex-col gap-[8px] w-full">
           {BLOCK_STYLE.map((style) => (
             <label
               key={style}
-              className={`${style} bg-lightGray w-[194px] h-[30px] block hover ${
+              className={`${style} bg-lightGray sm:w-[194px] w-full h-[30px] block hover ${
                 wall.styleSetting.blockSetting.style === style &&
                 'ring-blue ring-1 ring-offset-2'
               }`}
@@ -142,9 +117,9 @@ export const BlockSettings = ({
           <div className="text-center items-center dm-16 mt-[8px]">스타일</div>
         </div>
 
-        <div className="flex flex-col gap-[10px]">
+        <div className="flex flex-col gap-[10px] w-full">
           <label
-            className={` bg-sky rounded-[8px] w-[194px] h-[48px] block hover ${
+            className={` bg-sky rounded-[8px] sm:w-[194px] h-[48px] w-full block hover ${
               blockOptions === 'solid' && 'ring-blue ring-1'
             }`}
           >
@@ -161,7 +136,7 @@ export const BlockSettings = ({
             >
               <Button
                 type="primary"
-                className={`w-[194px] h-[48px] rounded-[8px]`}
+                className={`sm:w-[194px] h-[48px] w-full rounded-[8px]`}
                 style={{
                   backgroundColor: wall.styleSetting.blockSetting.styleColor,
                 }}
@@ -171,7 +146,7 @@ export const BlockSettings = ({
 
           {/* 블록-그라데이션 */}
           <label
-            className={`bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)] rounded-[8px] w-[194px] h-[48px] block hover ${
+            className={`rounded-[8px] sm:w-[194px] h-[48px] block hover ${
               blockOptions === 'gradation' && 'ring-blue ring-1'
             }`}
           >
@@ -188,7 +163,7 @@ export const BlockSettings = ({
             >
               <Button
                 type="primary"
-                className="w-[194px] h-[48px] rounded-[8px] bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]"
+                className="sm:w-[194px] h-[48px] w-full rounded-[8px] bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]"
                 style={{
                   backgroundColor: wall.styleSetting.blockSetting.styleColor,
                 }}
