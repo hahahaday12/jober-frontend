@@ -2,7 +2,7 @@ import { useWallStore } from '@/store';
 import { Checkbox, Input } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { produce } from 'immer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import editIcon from '@/assets/icons/edit.svg';
 import minusIcon from '@/assets/icons/minus.svg';
 import { Icon } from '@/components/common';
@@ -27,6 +27,10 @@ export const SingleList = ({
   const { wall, setWall, isEdit } = useWallStore();
 
   const [isListDescEdit, setIsListDescEdit] = useState(false);
+
+  useEffect(() => {
+    setIsListDescEdit(false);
+  }, [isEdit]);
 
   const handleListTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWall(
@@ -115,7 +119,7 @@ export const SingleList = ({
                   placeholder="제목"
                   value={listTitle}
                   onChange={handleListTitle}
-                  className="py-0 px-1"
+                  className="py-0 px-1 w-1/2"
                 />
               ) : (
                 <span>{listTitle || '제목'}</span>

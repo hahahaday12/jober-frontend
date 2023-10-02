@@ -70,6 +70,7 @@ export const ModalOpen = () => {
 
   return (
     <>
+
       <Button className="buttonOpen" type="primary" onClick={showModal}>
         {templateText.createTemplate}
       </Button>

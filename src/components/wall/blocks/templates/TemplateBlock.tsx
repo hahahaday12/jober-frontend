@@ -22,17 +22,15 @@ export const TemplateBlock = ({
   subData: templateBlockSubData,
   templateAddButtonRef,
 }: TemplateBlockProps) => {
-  const { isEdit, wall } = useWallStore();
-  const backgroundColor = wall.styleSetting.backgroundSetting.solidColor;
+  const { isEdit } = useWallStore();
 
   return (
     <BlockContainer blockName="templateBlock">
       <div
         className={`
-        ${isEdit && 'px-[8px] pb-[8px] pt-[40px]'} 
+        ${isEdit && 'px-[8px] pb-[8px] pt-[30px]'} 
         gap-4 grid sm:grid-cols-2 grid-cols-1
         `}
-        style={{ background: isEdit ? 'white' : backgroundColor }}
       >
         {templateBlockSubData?.map((template) => (
           <SingleTemplate

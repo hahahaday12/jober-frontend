@@ -14,11 +14,12 @@ export const Customization = ({ styleSettingRef }: CustomizationProps) => {
 
   const handleOk = () => {
     setIsModalOpen(false);
-    messageApi.error('스타일 변경 성공');
+    messageApi.success('스타일 설정을 완료했습니다.');
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    messageApi.error('스타일 설정을 취소합니다.');
   };
 
   return (

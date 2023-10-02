@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import { produce } from 'immer';
 import { useWallStore } from '@/store';
@@ -22,6 +22,11 @@ export const FileBlock = ({ blockUUID }: FileBlockProps) => {
 
   const [isFileTitleEdit, setIsFileTitleEdit] = useState(false);
   const [isFileDescriptionEdit, setIsFileDescriptionEdit] = useState(false);
+
+  useEffect(() => {
+    setIsFileTitleEdit(false);
+    setIsFileDescriptionEdit(false);
+  }, [isEdit]);
 
   const tragetFileBlockIndex = wall.blocks.findIndex(
     (block) => block.blockUUID === blockUUID,
@@ -48,7 +53,7 @@ export const FileBlock = ({ blockUUID }: FileBlockProps) => {
     <BlockContainer blockName="fileBlock" blockUUID={blockUUID}>
       <div className="p-block flex flex-col">
         <div className="db-18 sm:db-20 flex items-center gap-[6px] mb-[16px]">
-          {isFileTitleEdit ? (
+          {isFileTitleEdit && isEdit ? (
             <Input
               className="w-1/2 px-1 py-0 "
               name="fileTitle"
@@ -68,7 +73,7 @@ export const FileBlock = ({ blockUUID }: FileBlockProps) => {
         </div>
 
         <div className="flex dm-16 items-center gap-[6px] mb-[10px]">
-          {isFileDescriptionEdit ? (
+          {isFileDescriptionEdit && isEdit ? (
             <Input
               className="w-1/2 px-1 py-0 "
               name="fileDescription"

@@ -11,7 +11,11 @@ type SortableBlockType = {
 }[];
 
 export default function useFetchWallData(BlockMapper: {
-  [key: string]: JSX.Element;
+  listBlock: JSX.Element;
+  fileBlock: JSX.Element;
+  snsBlock: JSX.Element;
+  templateBlock: JSX.Element;
+  freeBlock: JSX.Element;
 }) {
   const [messageApi, contextHolder] = message.useMessage();
   const { wall, setWall, isEdit } = useWallStore();

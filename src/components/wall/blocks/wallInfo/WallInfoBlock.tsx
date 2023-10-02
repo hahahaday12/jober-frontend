@@ -23,7 +23,7 @@ export const WallInfoBlock = ({ wallInfoRef }: WallInfoBlockProps) => {
       }),
     );
   };
-
+  [];
   return (
     <BlockContainer blockName="wallInfoBlock">
       <div ref={wallInfoRef}>
