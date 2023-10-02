@@ -8,9 +8,8 @@ import { templateText } from '@/textConstants';
 
 type TemplateData = {
   templateId: string;
-  id: string;
-  title: string;
-  description: string;
+  templateTitle: string;
+  templateDescription: string;
 };
 
 type BestTemplateProps = {
@@ -18,7 +17,9 @@ type BestTemplateProps = {
 };
 
 const fetchTemplateData = async (PERSONAL: string) => {
-  const response = await axios.get(`/api/wall/templates?category=${PERSONAL}`);
+  const response = await axios.get(
+    `/api/api/wall/templates?category=${PERSONAL}`,
+  );
   return response.data.data.list;
 };
 
@@ -50,9 +51,9 @@ export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
   const handleRadioChange = (item: TemplateData, status: boolean) => {
     const param = {
       category: PERSONAL,
-      id: item.id,
-      title: item.title,
-      description: item.description,
+      templateId: item.templateId,
+      templateTitle: item.templateTitle,
+      templateDescription: item.templateDescription,
     };
     console.log(item);
     console.log(status);
@@ -61,10 +62,10 @@ export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
 
   return (
     <>
+      <TemplateHeader>
+        <p>{templateText.recommendTemplate}</p>
+      </TemplateHeader>
       <BestTemplateLayout>
-        <TemplateHeader>
-          <p>{templateText.recommendTemplate}</p>
-        </TemplateHeader>
         <TemplateContainer>
           {isLoading ? (
             <p>Loading...</p>
@@ -72,12 +73,15 @@ export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
             <p>Error fetching data</p>
           ) : (
             templateData.map((item) => (
-              <TemplateBox key={item.id}>
-                <Radio
-                  onChange={(e) => handleRadioChange(item, e.target.checked)}
-                />
-                <p>{item.title}</p>
-                <h3>{item.description}</h3>
+              <TemplateBox key={item.templateId}>
+                <TempalteHeaderBox>
+                  <Radio
+                    onChange={(e) => handleRadioChange(item, e.target.checked)}
+                  />
+                  <p className="templateTitle">{item.templateTitle}</p>
+                </TempalteHeaderBox>
+
+                <h3>{item.templateDescription}</h3>
               </TemplateBox>
             ))
           )}
@@ -89,24 +93,16 @@ export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
 
 const BestTemplateLayout = styled.div`
   width: 100%;
-  margin-top: 10px;
+  margin-top: 50px;
 `;
 const TemplateHeader = styled.div`
-  width: 60%;
-  padding-bottom: 20px;
+  width: 110px;
   display: flex;
-
-  p {
-    width: 112px;
-    color: blue;
-    font-weight: 500;
-    font-size: 10px;
-    height: 10px;
-  }
+  top: 70px;
+  position: absolute;
 `;
 
 const TemplateContainer = styled.div`
-  margin-top: 20px;
   display: grid;
   grid-template-columns: 298px 298px;
   grid-template-rows: 90px 90px 90px;
@@ -117,20 +113,31 @@ const TemplateContainer = styled.div`
 const TemplateBox = styled.div`
   border-radius: 10px;
   margin-top: 20px;
-  background-color: rgba(217, 217, 217, 1);
+  background-color: #f0f0f0;
   width: 290px;
   position: relative;
-  padding-bottom: 135px;
-
-  p {
-    width: 270px;
-  }
+  padding: 10px;
+  height: 170px;
 
   h3 {
-    width: 275px;
+    width: 270px;
     padding: 10px;
     padding-bottom: 20px;
     position: relative;
     margin-top: 5px;
+    font-size: 14px;
+  }
+`;
+
+const TempalteHeaderBox = styled.div`
+  width: inherit;
+  display: flex;
+
+  .templateTitle {
+    width: inherit;
+    color: rgba(45, 44, 56, 1);
+    font-weight: 800;
+    font-size: 16px;
+    height: 30px;
   }
 `;
