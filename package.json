@@ -24,6 +24,7 @@
     "react-sortablejs": "^6.1.4",
     "sortablejs": "^1.15.0",
     "styled-components": "^6.0.7",
+    "swiper": "^10.3.0",
     "uuid": "^9.0.0",
     "vite-tsconfig-paths": "^4.2.0",
     "zustand": "^4.4.1"

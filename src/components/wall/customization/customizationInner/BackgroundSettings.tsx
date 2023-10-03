@@ -2,46 +2,60 @@ import { useWallStore } from '@/store';
 import { Button, ColorPicker } from 'antd';
 import { Color } from 'antd/es/color-picker';
 import { produce } from 'immer';
-import { useEffect, useState } from 'react';
+import { Icon } from '@/components/common';
 import galleryIcon from '@/assets/icons/gallery.svg';
+//import { message } from 'antd';
+//import { STYLE_IMAGE_FILE_SIZE_LIMIT } from '@/data/constants/customization';
 
-export const BackgroundSettings = () => {
+export const BackgroundSettings = ({
+  setBackgroundOptions,
+  backgroundOptions,
+}: {
+  backgroundOptions: 'solid' | 'gradation' | 'image';
+  setBackgroundOptions: React.Dispatch<
+    React.SetStateAction<'solid' | 'gradation' | 'image'>
+  >;
+}) => {
   const { wall, isEdit, setWall } = useWallStore();
 
-  const [backgroundColor, setBackgroundColor] = useState<Color | string>(
-    wall.styleSetting.backgroundSetting.solidColor,
-  );
+  //const [messageApi, contextHolder] = message.useMessage();
 
-  useEffect(() => {
+  const handleSolidPick = (backgroundColor: Color) => {
     const bgColor =
       typeof backgroundColor === 'string'
         ? backgroundColor
         : backgroundColor.toHexString();
+    setBackgroundOptions('solid');
     setWall(
       produce(wall, (draft) => {
+        draft.styleSetting.backgroundSetting.gradation = false;
+        draft.styleSetting.backgroundSetting.styleImgURL = '';
         draft.styleSetting.backgroundSetting.solidColor = bgColor;
       }),
     );
-  }, [backgroundColor]);
-
-  const handleColorChange = (newColor: Color) => {
-    setBackgroundColor(newColor.toHexString());
   };
-
-  // 배경-그라데이션
-  const handleGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleGradationPick = (backgroundColor: Color) => {
+    const bgColor =
+      typeof backgroundColor === 'string'
+        ? backgroundColor
+        : backgroundColor.toHexString();
+    setBackgroundOptions('gradation');
     setWall(
       produce(wall, (draft) => {
-        draft.styleSetting.backgroundSetting.gradation = e.target
-          .value as unknown as boolean;
+        draft.styleSetting.backgroundSetting.gradation = true;
+        draft.styleSetting.backgroundSetting.styleImgURL = '';
+        draft.styleSetting.backgroundSetting.solidColor = bgColor;
       }),
     );
-    console.log(e.target.value);
   };
 
   // 배경-이미지
-  const handleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleStyleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile = event.target.files?.[0];
+    // if (imageFile && imageFile.size > STYLE_IMAGE_FILE_SIZE_LIMIT) {
+    //   messageApi.error('이미지가 2MB를 초과하였습니다.');
+    //   return;
+    // }
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === FileReader.DONE) {
@@ -55,93 +69,92 @@ export const BackgroundSettings = () => {
     };
     if (imageFile) {
       reader.readAsDataURL(imageFile);
+      setBackgroundOptions('image');
     }
   };
 
   return (
     <>
+      {/* {contextHolder} */}
       <div className="db-18 mt-[30px] mb-[16px]">배경</div>
       <div className="flex justify-between">
         <div className="flex flex-row gap-[10px]">
           <div>
-            <label
-              className={`bg-sky rounded-[8px] w-[194px] h-[100px] block hover ${
-                wall.styleSetting.backgroundSetting.solidColor ===
-                  backgroundColor && 'ring-blue ring-1'
+            <div
+              className={`bg-sky rounded-[8px] w-[194px] h-[100px] hover ${
+                backgroundOptions === 'solid' &&
+                'ring-blue ring-2 ring-offset-2'
               }`}
             >
-              <input
-                className="hidden"
-                type="radio"
-                name="style"
-                value="color"
-                checked={
-                  wall.styleSetting.backgroundSetting.solidColor ===
-                  backgroundColor
-                }
-                //onChange={handleColor}
-              />
-              <ColorPicker value={backgroundColor} onChange={handleColorChange}>
+              <ColorPicker
+                value={wall.styleSetting.backgroundSetting.solidColor}
+                onChangeComplete={handleSolidPick}
+              >
                 <Button
                   type="primary"
                   className={`w-[194px] h-[100px] rounded-[8px]`}
-                  style={{ backgroundColor: backgroundColor as string }}
-                  //style={{ backgroundColor }}
+                  style={{
+                    backgroundColor:
+                      wall.styleSetting.backgroundSetting.solidColor,
+                  }}
                 />
               </ColorPicker>
-            </label>
+            </div>
             <div className="dm-16 mt-[10px] text-center items-center">단색</div>
           </div>
 
           {/* 그라데이션 */}
           <div>
-            <label
-              className={`bg-sky rounded-[8px] w-[194px] h-[100px] block hover ${
-                wall.styleSetting.backgroundSetting.gradation === true &&
-                'ring-blue ring-1'
+            <div
+              className={`bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)] rounded-[8px] w-[194px] h-[100px] hover ${
+                backgroundOptions === 'gradation' &&
+                'ring-blue ring-2 ring-offset-2'
               }`}
             >
-              <input
-                className="hidden"
-                type="radio"
-                name="style"
-                value="gradation"
-                checked={wall.styleSetting.backgroundSetting.gradation === true}
-                onChange={handleGradation}
-              />
-            </label>
+              <ColorPicker
+                value={wall.styleSetting.backgroundSetting.solidColor}
+                onChangeComplete={handleGradationPick}
+              >
+                <Button
+                  type="primary"
+                  className={`w-[194px] h-[100px] rounded-[8px] bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]`}
+                  style={{
+                    backgroundColor:
+                      wall.styleSetting.backgroundSetting.solidColor,
+                  }}
+                />
+              </ColorPicker>
+            </div>
             <div className="dm-16 mt-[10px] text-center items-center">
               그라데이션
             </div>
           </div>
+
           {/* 이미지 */}
           <div>
             <label
               className={`bg-sky rounded-[8px] w-[194px] h-[100px] block hover ${
-                wall.styleSetting.backgroundSetting.styleImgURL ===
-                'ring-blue ring-1'
+                backgroundOptions === 'image' &&
+                'ring-blue ring-2 ring-offset-2'
               }`}
             >
-              <div className="flex w-[36px] h-[36px] flex-col items-center justify-center rounded-full bg-white overflow-hidden">
+              <div className="rounded-[8px] w-[194px] h-[100px] flex flex-col items-center justify-center bg-white overflow-hidden">
                 {wall.styleSetting.backgroundSetting.styleImgURL ? (
                   <img
                     src={wall.styleSetting.backgroundSetting.styleImgURL}
-                    alt="profile"
-                    className={`h-full w-full rounded-full object-cover ${
-                      isEdit ? 'opacity-50' : 'opacity-100'
-                    }`}
+                    alt="styleBGimage"
+                    className="object-cover w-full h-full opacity-50"
                   />
                 ) : (
-                  <div className="w-full bg-lightGray h-full" />
+                  <div className="w-full h-full bg-sky" />
                 )}
-
                 {isEdit && (
-                  <label className="cursor-pointer hover:opacity-60 transition absolute bg-white z-20 w-10 h-10 rounded-full flex justify-center items-center">
-                    <img src={galleryIcon} alt="gallery icon" />
+                  <label className="hover absolute bg-white z-20 w-10 h-10 rounded-full flex justify-center items-center">
+                    <Icon src={galleryIcon} />
                     <input
                       type="file"
                       className="hidden"
-                      onChange={handleImage}
+                      onChange={handleStyleImage}
                       accept="image/*"
                     />
                   </label>

@@ -10,16 +10,20 @@ import MobileFixedFooter from './MobileFixedFooter';
 import mobileDropdown from '@/assets/icons/mobile-dropdown.svg';
 
 type WallHeaderProps = {
-  previewRef: React.MutableRefObject<null>;
+  tourPreviewRef: React.MutableRefObject<null>;
+  tourMobilePreviewRef: React.MutableRefObject<null>;
 };
 
-export const WallHeader = ({ previewRef }: WallHeaderProps) => {
-  const { isEdit, toggleEdit, isPreview } = useWallStore();
+export const WallHeader = ({
+  tourPreviewRef,
+  tourMobilePreviewRef,
+}: WallHeaderProps) => {
+  const { isEdit, toggleEdit, isPreview, getWall } = useWallStore();
 
   const [dropdownOpen, setdropDownOpen] = useState(false);
 
   const handleCancelSave = () => {
-    location.reload();
+    getWall();
     toggleEdit();
   };
 
@@ -30,7 +34,6 @@ export const WallHeader = ({ previewRef }: WallHeaderProps) => {
       ${dropdownOpen ? 'h-[87px]' : 'h-[48px]'}
       `}
     >
-      {/* ${!isEdit && 'flex items-center'} */}
       <div className="w-full max-w-[866px] mx-[24px] sm:mx-auto">
         {isPreview ? (
           <div className="flex gap-[73px] items-center">
@@ -42,6 +45,7 @@ export const WallHeader = ({ previewRef }: WallHeaderProps) => {
               className="absolute top-[21px] right-[30px] hover hidden sm:block"
               onClick={handleCancelSave}
             />
+            <MobileFixedFooter />
           </div>
         ) : (
           <>
@@ -49,18 +53,14 @@ export const WallHeader = ({ previewRef }: WallHeaderProps) => {
               <div className="flex items-center justify-between">
                 <WallHeaderUser />
                 <WallHeaderActions />
-                <Icon
-                  src={closeIcon}
-                  className="absolute top-[21px] right-[30px] hover hidden sm:block"
-                />
               </div>
             )}
 
             {isEdit && (
-              <div className="flex flex-col gap-2 sm:flex-row sm:gap-[73px] sm:items-center relative sm:static ">
+              <div className="flex flex-col gap-2 sm:flex-row sm:gap-[73px] sm:items-center relative sm:static">
                 <WallHeaderUser />
                 <WallHeaderInput dropdownOpen={dropdownOpen} />
-                <WallHeaderEditButtons previewRef={previewRef} />
+                <WallHeaderEditButtons tourPreviewRef={tourPreviewRef} />
                 <Icon
                   src={closeIcon}
                   className="absolute top-[21px] right-[30px] hover hidden sm:block"
@@ -71,7 +71,9 @@ export const WallHeader = ({ previewRef }: WallHeaderProps) => {
                   className="absolute hover right-0 top-[6px] sm:hidden"
                   onClick={() => setdropDownOpen((prev) => !prev)}
                 />
-                <MobileFixedFooter />
+                <MobileFixedFooter
+                  tourMobilePreviewRef={tourMobilePreviewRef}
+                />
               </div>
             )}
           </>
