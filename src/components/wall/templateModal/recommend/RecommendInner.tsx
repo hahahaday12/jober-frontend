@@ -66,12 +66,6 @@ export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
         <p>{templateText.recommendTemplate}</p>
       </TemplateHeader>
       <BestTemplateLayout>
-<<<<<<< HEAD
-        <TemplateHeader>
-          {/* <p>{templateText.recommendTemplate}</p> */}
-        </TemplateHeader>
-=======
->>>>>>> 8328028427a112d5f67c51aece0b6437093a2048
         <TemplateContainer>
           {isLoading ? (
             <p>Loading...</p>

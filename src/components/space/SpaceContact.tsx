@@ -16,11 +16,11 @@ export default function SpaceContact() {
             className="flex items-center gap-[3px] hover"
             onClick={() => navigate('/category')}
           >
-            <span>공유페이지 생성</span>
+            <div className="w-[100px] dm-16">공유페이지 생성</div>
             <Icon src={circleArrowRightIcon} />
           </div>
           <div className="flex items-center gap-2">
-            <Input className="w-60 border-none" />
+            <Input className="border-none" />
             <Icon src={zoominIcon} className="hover" />
           </div>
         </div>

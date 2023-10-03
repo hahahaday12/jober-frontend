@@ -4,11 +4,19 @@ import hamburgerIcon from '@/assets/icons/space/hamburger.svg';
 import mobileDropdownIcon from '@/assets/icons/mobile-dropdown.svg';
 import darkBellICon from '@/assets/icons/space/dark-bell.svg';
 import userIcon from '@/assets/icons/user.svg';
+import { Menu } from 'antd';
+import { useState } from 'react';
+import userMenuIcon from '@/assets/icons/space/userMenuIcon.svg';
 
 export default function SpaceNavbar({ memberName }: { memberName?: string }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className="h-[70px] bg-sky px-[24px] fixed w-full flex items-center justify-between">
-      <Icon src={hamburgerIcon} className="hover" />
+      <Icon src={hamburgerIcon} className="hover" onClick={handleMenuClick} />
       <div className="flex items-center gap-[4px]">
         <span className="db-20">{memberName}</span>
         <Icon src={mobileDropdownIcon} className="hover" />
@@ -21,6 +29,29 @@ export default function SpaceNavbar({ memberName }: { memberName?: string }) {
           <Icon src={userIcon} />
         </div>
       </div>
+      {/* 햄버거 메뉴 */}
+      {isMenuOpen && (
+        <Menu mode="inline" className="w-[296px] bg-sky fixed top-0 left-0">
+          <Menu.SubMenu key="sub1" title="연락처">
+            <Menu.Item key="1">전체</Menu.Item>
+          </Menu.SubMenu>
+
+          <Menu.SubMenu key="sub2" title="문서 보관함">
+            <Menu.Item key="2">전체 문서</Menu.Item>
+            <Menu.Item key="3">수신함</Menu.Item>
+            <Menu.Item key="4">발신함</Menu.Item>
+            <Menu.Item key="5">보관 문서</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.SubMenu key="sub3" title="관리 및 문의">
+            <Menu.Item key="6">스페이스 정보 관리</Menu.Item>
+            <Menu.Item key="7">초대 및 권한 설정</Menu.Item>
+            <Menu.Item key="8">전자문서 환경설정</Menu.Item>
+            <Menu.Item key="9">시스템 사용문의</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Item>문서 템플릿 모음</Menu.Item>
+          <Menu.Item>요금제 업그레이드</Menu.Item>
+        </Menu>
+      )}
     </header>
   );
 }
