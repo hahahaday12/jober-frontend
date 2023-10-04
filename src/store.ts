@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { WallType } from '@/types/wall';
 
-export interface WallStoreType {
+export type WallStoreType = {
   isEdit: boolean;
   setIsEdit: (bool: boolean) => void;
   isPreview: boolean;
@@ -9,7 +9,7 @@ export interface WallStoreType {
   wall: WallType;
   setWall: (states: object) => void;
   getWall: () => Promise<void>;
-}
+};
 
 export const useWallStore = create<WallStoreType>((set) => ({
   isEdit: false,
@@ -42,7 +42,7 @@ type TemplateState = {
     templateTitle: string;
     templateDescription: string;
   }) => void;
-  newStatus: boolean; // Define newStatus in TemplateState
+  newStatus: boolean;
   setNewStatus: (newStatus: boolean) => void;
 };
 

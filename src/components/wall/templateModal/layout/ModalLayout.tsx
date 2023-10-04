@@ -10,7 +10,8 @@ import {
   CategoryTemplate,
   SelecteSearchTemplate,
 } from 'components/index';
-import { useTemplateStore } from '@/store';
+import { useTemplateStore, useWallStore } from '@/store';
+import { produce } from 'immer';
 
 export const ModalOpen = () => {
   const { Search } = Input;
@@ -19,8 +20,8 @@ export const ModalOpen = () => {
   >('recommand');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [inputText, setInputText] = useState<string>('');
-
-  const { setNewStatus } = useTemplateStore();
+  const { wall, setWall } = useWallStore();
+  const { selectedTemplate } = useTemplateStore();
 
   const PROCEDURE_MAPPER = {
     recommand: <BestTemplate PERSONAL={''} />,
@@ -37,7 +38,19 @@ export const ModalOpen = () => {
     setIsModalOpen(false);
     setInputText('');
     setProcedure('recommand');
-    setNewStatus(true);
+    setWall(
+      produce(wall, (draft) => {
+        const templateIndex = draft.blocks.findIndex(
+          (block) => block.blockType === 'templateBlock',
+        );
+        draft.blocks[templateIndex].subData.push({
+          templateBlockId: 0,
+          templateUUID: crypto.randomUUID(),
+          templateTitle: selectedTemplate.templateTitle,
+          templateDescription: selectedTemplate.templateDescription,
+        });
+      }),
+    );
   };
 
   const handleContents = () => {
