@@ -8,9 +8,16 @@ type TemplateData = {
   templateDescription: string;
 };
 
-export const ListTemplete = ({ list, category }) => {
-  const { selectedTemplate, setSelectedTemplate, setNewStatus } =
-    useTemplateStore();
+type ListTemplateProps = {
+  list: TemplateData[];
+  category: string;
+};
+
+export const ListTemplete: React.FC<ListTemplateProps> = ({
+  list,
+  category,
+}) => {
+  const { selectedTemplate, setSelectedTemplate } = useTemplateStore();
 
   const handleRadioChange = (item: TemplateData) => {
     if (item !== null) {
@@ -21,7 +28,6 @@ export const ListTemplete = ({ list, category }) => {
         templateDescription: item.templateDescription,
       };
       setSelectedTemplate(param);
-      setNewStatus(false);
     }
   };
 
