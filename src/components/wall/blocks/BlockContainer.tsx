@@ -37,7 +37,7 @@ export const BlockContainer = ({
   const blockGradation = wall?.styleSetting?.blockSetting?.gradation;
   const templateBlockBackground = '#d1d0d0';
 
-  const isDark = wall?.styleSetting?.themeSetting === 'dark';
+  const isDark = wall?.styleSetting?.themeSetting?.theme === 'dark';
 
   return (
     <div

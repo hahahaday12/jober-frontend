@@ -1,13 +1,21 @@
 import SpaceNavbar from './SpaceNavbar';
 import SpaceContact from './SpaceContact';
-import useMemberInfo from '@/hooks/useMemberInfo';
+import { useLocation } from 'react-router-dom';
+
+export type Space = {
+  addSpaceId: number;
+  spaceType: 'personal' | 'organization';
+  spaceTitle: string;
+};
 
 export default function SpacePage() {
-  const { memberInfo } = useMemberInfo();
+  const { state } = useLocation();
+  const space: Space[] = state;
+
   return (
     <>
-      <SpaceNavbar memberName={memberInfo?.member.memberName} />
-      <SpaceContact />
+      <SpaceNavbar spaceTitle={space[0].spaceTitle} />
+      <SpaceContact space={space} />
     </>
   );
 }

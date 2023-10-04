@@ -17,7 +17,7 @@ export const BackgroundSettings = ({
   >;
 }) => {
   const { wall, isEdit, setWall } = useWallStore();
-  const isThemeSelected = wall?.styleSetting?.themeSetting;
+  const isThemeSelected = wall?.styleSetting?.themeSetting.theme;
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -32,7 +32,7 @@ export const BackgroundSettings = ({
         draft.styleSetting.backgroundSetting.gradation = false;
         draft.styleSetting.backgroundSetting.styleImgURL = '';
         draft.styleSetting.backgroundSetting.solidColor = bgColor;
-        draft.styleSetting.themeSetting = null;
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
   };
@@ -47,12 +47,10 @@ export const BackgroundSettings = ({
         draft.styleSetting.backgroundSetting.gradation = true;
         draft.styleSetting.backgroundSetting.styleImgURL = '';
         draft.styleSetting.backgroundSetting.solidColor = bgColor;
-        draft.styleSetting.themeSetting = null;
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
   };
-
-  console.log(wall.styleSetting);
 
   // 배경-이미지
   const handleStyleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +66,7 @@ export const BackgroundSettings = ({
           produce(wall, (draft) => {
             draft.styleSetting.backgroundSetting.styleImgURL =
               reader.result as string;
-            draft.styleSetting.themeSetting = null;
+            draft.styleSetting.themeSetting.theme = null;
           }),
         );
       }

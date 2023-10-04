@@ -29,14 +29,10 @@ export const DEFAULT_BLOCKS: { [key: string]: object } = {
   ],
 };
 
-export const DEFAULT_WALL: {
-  [key: string]: Omit<
-    WallType,
-    'isPublic' | 'category' | 'memberId' | 'shareURL'
-  >;
-} = {
+export const DEFAULT_WALL = {
   career: {
     wallInfoBlock: {
+      wallInfoBlockId: 1,
       wallInfoTitle: '',
       wallInfoDescription: '',
       backgroundImgURL: '',
@@ -48,6 +44,7 @@ export const DEFAULT_WALL: {
         blockType: 'listBlock',
         subData: [
           {
+            listBlockId: 1,
             listBlockUUID: crypto.randomUUID(),
             listLabel: '학력/경력/링크',
             listTitle: '',
@@ -63,8 +60,6 @@ export const DEFAULT_WALL: {
           {
             fileTitle: '포트폴리오',
             fileDescription: '포트폴리오 설명',
-            fileName: '',
-            file: '',
           },
         ],
       },

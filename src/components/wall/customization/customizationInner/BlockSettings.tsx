@@ -23,7 +23,7 @@ export const BlockSettings = ({
       produce(wall, (draft) => {
         draft.styleSetting.blockSetting.gradation = false;
         draft.styleSetting.blockSetting.styleColor = bgColor;
-        draft.styleSetting.themeSetting = null;
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
   };
@@ -37,7 +37,7 @@ export const BlockSettings = ({
       produce(wall, (draft) => {
         draft.styleSetting.blockSetting.gradation = true;
         draft.styleSetting.blockSetting.styleColor = bgColor;
-        draft.styleSetting.themeSetting = null;
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
   };
@@ -51,7 +51,7 @@ export const BlockSettings = ({
           | '0px'
           | '6px'
           | '13px';
-        draft.styleSetting.themeSetting = null;
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
     console.log(e.target.value);
@@ -65,7 +65,7 @@ export const BlockSettings = ({
           | 'none'
           | 'shadow'
           | 'flat';
-        draft.styleSetting.themeSetting = null;
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
     console.log(e.target.value);

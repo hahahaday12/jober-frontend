@@ -25,12 +25,12 @@ export default function WallHeaderEditButtons({
   const handleSave = async () => {
     setSaving(true);
     try {
-      await fetch('http://localhost:3000/wall', {
-        method: 'POST',
+      await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/wall`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(wall),
+        body: JSON.stringify({ data: wall }),
       });
     } catch (error) {
       console.log(error);

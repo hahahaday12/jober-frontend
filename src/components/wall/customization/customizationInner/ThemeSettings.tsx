@@ -1,7 +1,6 @@
 import { useWallStore } from '@/store';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import '@/index.css';
 import { THEMES } from '@/data/constants/theme';
 import { produce } from 'immer';
 import { useWindowWidth } from '@/hooks/useWindowWidth';
@@ -13,13 +12,13 @@ export const ThemeSettings = () => {
     label: string;
     src: string;
     bg: string;
-    blockBorderRadius: '0px' | '6px' | '13px';
+    blockBorderRadius: string;
     blockBg?: string;
     blockStyle: string;
   }) => {
     setWall(
       produce(wall, (draft) => {
-        draft.styleSetting.themeSetting = theme.label;
+        draft.styleSetting.themeSetting.theme = theme.label;
         draft.styleSetting.backgroundSetting.gradation = false;
         draft.styleSetting.backgroundSetting.solidColor = '#eeeeee';
         draft.styleSetting.blockSetting.gradation = false;
@@ -47,7 +46,7 @@ export const ThemeSettings = () => {
               <img
                 src={theme.src}
                 className={` rounded-[8px] w-[194px] h-[100px] block hover ${
-                  wall.styleSetting.themeSetting === theme.label &&
+                  wall.styleSetting.themeSetting.theme === theme.label &&
                   'ring-blue ring-2 ring-offset-2'
                 }`}
               />

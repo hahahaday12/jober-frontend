@@ -1,15 +1,16 @@
 import { useWallStore } from '@/store';
-import { SubDatumType } from '@/types/wall';
 import { BlockContainer } from 'components/index';
 import SingleTemplate from './SingleTemplate';
+import { SubDatum } from '@/types/wall';
 
 export type TemplateBlockSubDataType = Pick<
-  SubDatumType,
+  SubDatum,
+  | 'templateBlockId'
+  | 'templateUUID'
   | 'templateTitle'
   | 'templateDescription'
   | 'hasAccessTemplateAuth'
   | 'hasDenyTemplateAuth'
-  | 'templateBlockUUID'
 >;
 
 type TemplateBlockProps = {
@@ -34,7 +35,7 @@ export const TemplateBlock = ({
       >
         {templateBlockSubData?.map((template) => (
           <SingleTemplate
-            key={template.templateBlockUUID}
+            key={template.templateUUID}
             templateTitle={template.templateTitle}
             templateDescription={template.templateDescription}
           />

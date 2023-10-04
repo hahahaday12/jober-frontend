@@ -3,9 +3,19 @@ import circleArrowRightIcon from '@/assets/icons/space/circle-arrow-right.svg';
 import zoominIcon from '@/assets/icons/categories/zoom-in.svg';
 import { Button, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { Space } from './SpacePage';
+import { useWallStore } from '@/store';
 
-export default function SpaceContact() {
+export default function SpaceContact({ space }: { space: Space[] }) {
   const navigate = useNavigate();
+  const { setIsEdit } = useWallStore();
+  const handleNextStep = () => {
+    // if (space.length > 0) {
+    //   navigate(`/wall/${space[0].addSpaceId}`);
+    // }
+    navigate(`/category`);
+    setIsEdit(true);
+  };
 
   return (
     <div className="bg-sky min-h-screen pl-[24px] pt-[70px]">
@@ -14,9 +24,11 @@ export default function SpaceContact() {
         <div className="flex items-center justify-between border-lightBlack border-solid border-b-[1px] pb-[15px] mb-[15px]">
           <div
             className="flex items-center gap-[3px] hover"
-            onClick={() => navigate('/category')}
+            onClick={handleNextStep}
           >
-            <span>공유페이지 생성</span>
+            <span>
+              {space.length > 0 ? '공유페이지 이동' : '공유페이지 생성'}
+            </span>
             <Icon src={circleArrowRightIcon} />
           </div>
           <div className="flex items-center gap-2">

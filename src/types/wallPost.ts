@@ -1,4 +1,4 @@
-export type WallType = {
+export interface PostData {
   category: string;
   memberId: number;
   addSpaceId: number;
@@ -6,21 +6,6 @@ export type WallType = {
   wallInfoBlock: WallInfoBlock;
   blocks: Block[];
   styleSetting: StyleSetting;
-};
-
-export type CategoryType =
-  | 'career'
-  | 'personal'
-  | 'event'
-  | 'enterprise'
-  | 'basic';
-
-export interface WallInfoBlockResponse {
-  wallInfoBlockId: number;
-  wallInfoTitle: string;
-  wallInfoDescription: string;
-  wallInfoImgURL: null;
-  backgroundImgURL: null;
 }
 
 export interface Block {
@@ -29,36 +14,24 @@ export interface Block {
   subData: SubDatum[];
 }
 
-export type BlockType =
-  | 'listBlock'
-  | 'fileBlock'
-  | 'snsBlock'
-  | 'templateBlock'
-  | 'freeBlock';
-
 export interface SubDatum {
-  freeBlockId?: number;
-  freeTitle?: string;
-  freeContent?: string;
-  listBlockId?: number;
+  listUUID?: string;
   listLabel?: string;
   listTitle?: string;
   listDescription?: string;
   isLink?: boolean;
-  snsBlockId?: number;
-  snsUUID?: string;
-  snsType?: string;
-  snsURL?: string;
-  fileBlockId?: number;
-  fileTitle?: string;
-  fileDescription?: string;
-  fileName?: null;
-  templateBlockId?: number;
+  freeTitle?: string;
+  freeContent?: string;
   templateUUID?: string;
   templateTitle?: string;
   templateDescription?: string;
-  hasAccessTemplateAuth?: number[];
-  hasDenyTemplateAuth?: number[];
+  snsUUID?: string;
+  snsType?: string;
+  snsURL?: string;
+  fileTitle?: string;
+  fileDescription?: string;
+  fileName?: string;
+  file?: string;
 }
 
 export interface StyleSetting {
@@ -68,14 +41,12 @@ export interface StyleSetting {
 }
 
 export interface BackgroundSetting {
-  backgroundSettingId: number;
   solidColor: string;
   gradation: boolean;
   styleImgURL: null | string;
 }
 
 export interface BlockSetting {
-  blockSettingId: number;
   shape: string;
   style: string;
   styleColor: string;
@@ -83,12 +54,10 @@ export interface BlockSetting {
 }
 
 export interface ThemeSetting {
-  themeSettingId: number;
-  theme: string | null;
+  theme: null | string;
 }
 
 export interface WallInfoBlock {
-  wallInfoBlockId: number;
   wallInfoTitle: string;
   wallInfoDescription: string;
   wallInfoImgURL: null | string;

@@ -3,7 +3,6 @@ import { ProfileImage } from './ProfileImage';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
 import { BackgroundImage, BlockContainer } from '..';
-import { wallInfoBlockType } from '@/types/wall';
 import { Icon } from '@/components/common';
 import heartOutlinedIcon from '@/assets/icons/heart-outlined.svg';
 import heartFilledIcon from '@/assets/icons/heart-filled.svg';
@@ -19,7 +18,8 @@ export const WallInfoBlock = ({ wallInfoRef }: WallInfoBlockProps) => {
     const { name, value } = e.target;
     setWall(
       produce(wall, (draft) => {
-        draft.wallInfoBlock[name as keyof wallInfoBlockType] = value;
+        draft.wallInfoBlock[name as 'wallInfoTitle' | 'wallInfoDescription'] =
+          value;
       }),
     );
   };
