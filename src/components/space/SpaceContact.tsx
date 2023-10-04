@@ -9,7 +9,7 @@ import polygonIcon from '@/assets/icons/space/polygon.svg';
 import lineIcon from '@/assets/icons/space/line.svg';
 import userIcon from '@/assets/icons/user.svg';
 
-export default function SpaceContact() {
+export default function SpaceContact({ memberName }: { memberName?: string }) {
   const navigate = useNavigate();
 
   return (
@@ -69,7 +69,7 @@ export default function SpaceContact() {
             <div className="flex justify-center items-center w-[28px] h-[28px] bg-lightGray rounded-full">
               <Icon src={userIcon} className="w-[18px] h-[18px]" />
             </div>
-            <p className="text-gray88 dm-16">김현우</p>
+            <span className="dm-16">{memberName}</span>
             <p className="text-gray88 dm-16">010-1234-5678</p>
             <Icon src={arrowdownIcon} />
           </div>
