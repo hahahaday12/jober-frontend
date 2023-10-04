@@ -33,7 +33,7 @@ export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
     // 입력값이 변경될 때마다 debounce된 값을 업데이트.
     const debounceTimer = setTimeout(() => {
       setDebouncedInputValue(inputText);
-    }, 400); // 300 밀리초(0.3초) 디바운스 시간
+    }, 500); // 300 밀리초(0.3초) 디바운스 시간
 
     return () => {
       // 이전 타이머를 클리어.
@@ -105,7 +105,7 @@ const ResultContainer = styled.div`
   width: 100%;
   height: 400px;
   padding-bottom: 70px;
- //background-color: rebeccapurple;
+  //background-color: rebeccapurple;
   margin-top: 50px;
 
   p {
@@ -150,7 +150,6 @@ const SearchBestContainer = styled.div`
   .calrouselBox {
     width: inherit;
     padding-bottom: 70px;
-    //background-color: #f31616;
   }
 
   :where(.css-dev-only-do-not-override-847yc7).ant-carousel .slick-dots li {

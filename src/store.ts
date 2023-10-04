@@ -32,25 +32,28 @@ export const useWallStore = create<WallStoreType>((set) => ({
 type TemplateState = {
   selectedTemplate: {
     category: string;
-    id: string;
-    title: string;
-    description: string;
+    templateId: string;
+    templateTitle: string;
+    templateDescription: string;
   };
   setSelectedTemplate: (template: {
     category: string;
-    id: string;
-    title: string;
-    description: string;
+    templateId: string;
+    templateTitle: string;
+    templateDescription: string;
   }) => void;
+  newStatus: boolean; // Define newStatus in TemplateState
+  setNewStatus: (newStatus: boolean) => void;
 };
 
 export const useTemplateStore = create<TemplateState>((set) => ({
   selectedTemplate: {
     category: '',
-    id: '',
-    title: '',
-    description: '',
+    templateId: '',
+    templateTitle: '',
+    templateDescription: '',
   },
-  setSelectedTemplate: (template) =>
-    set({ selectedTemplate: template }),
+  setSelectedTemplate: (template) => set({ selectedTemplate: template }),
+  newStatus: false,
+  setNewStatus: (newStatus) => set({ newStatus }),
 }));

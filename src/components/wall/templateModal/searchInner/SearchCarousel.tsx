@@ -43,11 +43,13 @@ export const SearchCarousel = () => {
 
   return (
     <>
-      <Carousel className="calrouselBox">
+      <Carousel autoplay className="calrouselBox">
         {templateData?.map((item) => (
           <TemplateBox key={item.templateId}>
-            {item.templateTitle}
-            {item.templateDescription}
+            <TempalteHeaderBox>
+              <p className="templateTitle">{item.templateTitle}</p>
+            </TempalteHeaderBox>
+            <p className='descriptionBox'>{item.templateDescription}</p>
           </TemplateBox>
         ))}
       </Carousel>
@@ -61,7 +63,6 @@ const TemplateBox = styled.div`
   border-radius: 5px;
   margin-top: 10px;
   background-color: #f0f0f0;
-  //background-color: aqua;
   padding: 10px;
 
   :where(.css-dev-only-do-not-override-847yc7).ant-carousel .slick-dots li {
@@ -75,5 +76,25 @@ const TemplateBox = styled.div`
     button {
     background: #f0f0f0;
     opacity: 1;
+  }
+
+  .descriptionBox{
+    width: auto;
+    margin: auto;
+    margin-top: 10px;
+  }
+`;
+
+const TempalteHeaderBox = styled.div`
+  width: 300px;
+  display: flex;
+  margin: auto;
+
+  .templateTitle {
+    width: auto;
+    color: rgba(45, 44, 56, 1);
+    font-weight: 800;
+    font-size: 16px;
+    height: 30px;
   }
 `;
