@@ -3,21 +3,24 @@ import { Button, Modal, Select, Input } from 'antd';
 import styled from 'styled-components';
 import { ModalContents } from './modalListContent';
 import { templateText } from '@/textConstants';
-
+import plusIcon from '@/assets/icons/plus.svg';
+import { Icon } from '@/components/common';
 import {
   BestTemplate,
   CategoryTemplate,
   SelecteSearchTemplate,
 } from 'components/index';
+import { useTemplateStore } from '@/store';
 
 export const ModalOpen = () => {
   const { Search } = Input;
-  // modal contents 를 리하는 state, type 생성
   const [procedure, setProcedure] = useState<
     'recommand' | 'category' | 'search' | 'select'
   >('recommand');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [inputText, setInputText] = useState<string>('');
+
+  const { setNewStatus } = useTemplateStore();
 
   const PROCEDURE_MAPPER = {
     recommand: <BestTemplate PERSONAL={''} />,
@@ -31,14 +34,13 @@ export const ModalOpen = () => {
   };
 
   const handleOk = () => {
-    // 템플릿 선택하고 확인 클릭했을때 자기소개서에 반영이 되야함.
-    //setIsModalOpen(false);
+    setIsModalOpen(false);
     setInputText('');
     setProcedure('recommand');
+    setNewStatus(true);
   };
 
   const handleContents = () => {
-    //alert('클릭');
     setProcedure('select');
   };
 
@@ -70,10 +72,11 @@ export const ModalOpen = () => {
 
   return (
     <>
-
-      <Button className="buttonOpen" type="primary" onClick={showModal}>
+      <ButtonOpen onClick={showModal}>
         {templateText.createTemplate}
-      </Button>
+        <br />
+        <Icon src={plusIcon} className="ml-[30px] mt-[20px]" />
+      </ButtonOpen>
       <Modals
         centered
         open={isModalOpen}
@@ -121,6 +124,10 @@ export const ModalOpen = () => {
   );
 };
 
+const ButtonOpen = styled.div`
+  cursor: pointer;
+`;
+
 const Modals = styled(Modal)`
   .ant-modal-content {
     width: 660px;
@@ -130,30 +137,31 @@ const Modals = styled(Modal)`
     padding-bottom: 106px;
   }
 
-  /* .ant-btn css-dev-only-do-not-override-847yc7 ant-btn-default {
-    position: absolute;
-    top: 40px;
-    left: 40px;
+  :where(.css-dev-only-do-not-override-847yc7).ant-btn-default {
     border: 1px solid red;
-    background-color: red;
-  } */
-
-  /* .ant-btn.css-dev-only-do-not-override-12nk7v7.ant-btn-primary {
-    position: absolute;
-    right: 40px;
-    top: 40px;
-  } */
-
-  .ant-modal-footer {
-    background-color: pink;
-    top: 10px;
-    position: absolute;
+    color: red;
   }
 
-  .seeTemplate {
+  :where(.css-dev-only-do-not-override-847yc7).ant-btn-primary {
+    margin-bottom: 0;
+    margin-inline-start: 8px;
+    background-color: #2493fb;
+    position: relative;
+    left: 420px;
+  }
+
+  :where(.css-dev-only-do-not-override-847yc7).seeTemplate {
     position: absolute;
-    top: 20px;
-    right: 50px;
+    right: 150px;
+    top: 22px;
+    background-color: #ffff;
+    color: rgba(136, 136, 136, 1);
+    border: 1px solid rgba(136, 136, 136, 1);
+  }
+
+  .ant-modal-footer {
+    top: 10px;
+    position: absolute;
   }
 `;
 

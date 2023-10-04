@@ -2,6 +2,9 @@ import { useWallStore } from '@/store';
 import { BlockContainer } from 'components/index';
 import SingleTemplate from './SingleTemplate';
 import { SubDatum } from '@/types/wall';
+import { ModalOpen } from 'components/index';
+import { useTemplateStore } from '@/store';
+import { useEffect, useState } from 'react';
 
 export type TemplateBlockSubDataType = Pick<
   SubDatum,
@@ -17,6 +20,14 @@ type TemplateBlockProps = {
   blockUUID?: string;
   subData?: TemplateBlockSubDataType[];
   templateAddButtonRef: React.MutableRefObject<null>;
+  onClick?: () => void;
+};
+
+type TemplateItem = {
+  category: string;
+  templateId: string;
+  templateTitle: string;
+  templateDescription: string;
 };
 
 export const TemplateBlock = ({
@@ -24,6 +35,15 @@ export const TemplateBlock = ({
   templateAddButtonRef,
 }: TemplateBlockProps) => {
   const { isEdit } = useWallStore();
+  const { selectedTemplate, newStatus } = useTemplateStore();
+  const [templateHistory, setTemplateHistory] = useState<Array<TemplateItem>>(
+    [],
+  );
+  useEffect(() => {
+    if (newStatus) {
+      setTemplateHistory((prevHistory) => [...prevHistory, selectedTemplate]);
+    }
+  }, [newStatus, selectedTemplate]);
 
   return (
     <BlockContainer blockName="templateBlock">
@@ -42,15 +62,31 @@ export const TemplateBlock = ({
         ))}
 
         {isEdit && (
-          <BlockContainer blockName="template">
-            <div
-              className="sm:h-[210px] h-[115px] flex flex-col items-center justify-center gap-[8px] dm-16 hover"
-              ref={templateAddButtonRef}
-            >
-              <p>템플릿추가하기</p>
-              <p className="text-[24px]">+</p>
-            </div>
-          </BlockContainer>
+          <>
+            <BlockContainer blockName="template">
+              <div
+                className="sm:h-[210px] h-[115px] flex flex-col items-center justify-center gap-[8px] dm-16 "
+                ref={templateAddButtonRef}
+              >
+                <ModalOpen />
+              </div>
+            </BlockContainer>
+
+            {templateHistory.map((template, index) => (
+              <BlockContainer key={index} blockName="template">
+                <div className="sm:h-[210px] h-[115px] p-block">
+                  <div className="flex items-center justify-between mb-[12px]">
+                    <h4 className="db-18 sm:db-20">{template.templateTitle}</h4>
+                  </div>
+                  <div className="flex sm:gap-[8px] gap-[6px]">
+                    <p className="dm-16 text-gray88">
+                      {template.templateDescription}
+                    </p>
+                  </div>
+                </div>
+              </BlockContainer>
+            ))}
+          </>
         )}
       </div>
     </BlockContainer>

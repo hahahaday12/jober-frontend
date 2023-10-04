@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { ListTemplete } from 'components/index';
+import axios from 'axios';
+import { useMutation } from 'react-query';
 
 export interface Category {
   category: string;
@@ -8,41 +10,50 @@ export interface Category {
 }
 
 const BookCategory: Category[] = [
-  { category: 'self', text: '개인/소개' },
-  { category: 'event', text: '이벤트/일상' },
-  { category: 'company', text: '기업/근로양식' },
-  { category: 'employment', text: '취업/이직' },
+  { category: 'PERSONAL', text: '개인/소개' },
+  { category: 'EVENT', text: '이벤트/일상' },
+  { category: 'ENTERPRISE', text: '기업/근로양식' },
+  { category: 'CAREER', text: '취업/이직' },
 ];
+
+const fetchTemplateData = async (category: string) => {
+  const response = await axios.get(
+    `/api/api/wall/templates/lists?category=${category}`,
+  );
+  return response.data.data.list;
+};
 
 export const CategoryTemplate = () => {
   const [categoryList, setCategoryList] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('self');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('PERSONAL');
+
+  const { mutate } = useMutation(fetchTemplateData, {
+    onMutate: () => {
+      setIsLoading(true);
+      setIsError(false);
+    },
+    onError: (error) => {
+      setIsError(true);
+      console.error('API 호출 에러:', error);
+      setIsLoading(false);
+    },
+    onSuccess: (data) => {
+      setCategoryList(data);
+      setIsLoading(false);
+    },
+  });
 
   useEffect(() => {
-    // 페이지 로딩 시 'self' 타입의 데이터를 가져옴
-    getListData('self');
-  }, []); // 빈 배열을 전달하여 한 번만 실행되도록 함
+    mutate('PERSONAL');
+  }, [mutate]);
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
-    getListData(category);
-  };
-
-  const getListData = async (category: string) => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SERVER_BASE_URL}/${category}`,
-      );
-      if (response.ok) {
-        const data = await response.json();
-        // 'data' 객체 안의 'list'를 사용하여 카테고리별 데이터에 접근
-        setCategoryList([...data]);
-      } else {
-        console.error('API 호출 실패:', response.status);
-      }
-    } catch (error) {
-      console.error('API 호출 에러:', error);
-    }
+    setCategoryList([]); // clear categoryList if needed
+    // 데이터를 다시 가져옵니다.
+    mutate(category);
   };
 
   return (
@@ -61,7 +72,13 @@ export const CategoryTemplate = () => {
         </ul>
       </Categorybox>
       <TemplateList>
-        <ListTemplete list={categoryList} />
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : isError ? (
+          <p>Error fetching data</p>
+        ) : (
+          <ListTemplete list={categoryList} category={selectedCategory} />
+        )}
       </TemplateList>
     </CategoryLayout>
   );
@@ -72,8 +89,6 @@ const CategoryLayout = styled.div`
   position: absolute;
   height: 500px;
   margin-top: 90px;
-  //padding-bottom: 10px;
-  //background-color: yellow;
   border-top: 1px solid gray;
   max-height: 500px;
   overflow-y: auto;
@@ -81,43 +96,45 @@ const CategoryLayout = styled.div`
 `;
 
 const Categorybox = styled.div`
-  width: 20%;
+  width: 25%;
   height: inherit;
   float: left;
   box-sizing: border-box;
-  //background-color: aqua;
   border-right: 1px solid gray;
-  color: black;
+  color: rgba(136, 136, 136, 1);
 
   .Category-menu__text {
-    width: 110px;
+    width: auto;
     margin: auto;
-    padding-bottom: 10px;
+    padding: 10px;
+
 
     li {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 40px;
-      width: 6.8rem;
+      height: 45px;
+      width: 130px;
       margin-top: 5px;
       border-radius: 20px;
-      font-weight: bold;
-      font-size: 15px;
+      font-weight: 500;
+      font-size: 18px;
       transition: background-color 0.3s;
       cursor: pointer;
     }
     .active {
-      background-color: #15c6b7;
+      background-color: rgba(36, 147, 251, 1);
+      font-weight: 700;
+      color: #ffff;
+      
     }
   }
 `;
 
 const TemplateList = styled.div`
-  width: 80%;
+  width: 75%;
   float: right;
   box-sizing: border-box;
-  //background-color: blue;
   max-height: 500px;
   overflow-y: auto;
 `;
