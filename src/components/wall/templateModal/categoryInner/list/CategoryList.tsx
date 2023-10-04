@@ -1,14 +1,46 @@
-//import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Radio } from 'antd';
+import { useTemplateStore } from '@/store';
 
-export const ListTemplete = ({ list }) => {
+type TemplateData = {
+  templateId: string;
+  templateTitle: string;
+  templateDescription: string;
+};
+
+export const ListTemplete = ({ list, category }) => {
+  const { selectedTemplate, setSelectedTemplate, setNewStatus } =
+    useTemplateStore();
+
+  const handleRadioChange = (item: TemplateData) => {
+    if (item !== null) {
+      const param = {
+        category: category,
+        templateId: item.templateId,
+        templateTitle: item.templateTitle,
+        templateDescription: item.templateDescription,
+      };
+      setSelectedTemplate(param);
+      setNewStatus(false);
+    }
+  };
+
   return (
     <Listbox>
-      {list.map((item) => (
-        <TemplateBox key={item.category}>
-          {item.title}
-          <br />
-          {item.description}
+      {list.map((item: TemplateData) => (
+        <TemplateBox key={item.templateId}>
+          <TemplateHeader>
+            <Radio
+              onChange={() => handleRadioChange(item)}
+              checked={
+                selectedTemplate &&
+                selectedTemplate.templateId === item.templateId
+              }
+            />
+            {item.templateTitle}
+          </TemplateHeader>
+
+          <p className="innerListText">{item.templateDescription}</p>
         </TemplateBox>
       ))}
     </Listbox>
@@ -16,22 +48,30 @@ export const ListTemplete = ({ list }) => {
 };
 
 const Listbox = styled.div`
-  //width: 100%;
   width: inherit;
-  //background-color: rebeccapurple;
-  margin-left: 20px;
-
-  .tag-box {
-    padding-bottom: 10px;
-    //background-color: red;
-    font-weight: 600;
-    margin-top: 10px;
-  }
+  padding: 10px;
 `;
 const TemplateBox = styled.div`
   width: 420px;
-  height: 90px;
+  height: 120px;
   border-radius: 5px;
   margin-top: 10px;
-  background-color: #dddddd;
+  background-color: #f0f0f0;
+  padding: 10px;
+
+  .innerListText {
+    width: auto;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(136, 136, 136, 1);
+  }
+`;
+
+const TemplateHeader = styled.div`
+  width: auto;
+  height: 20px;
+  display: flex;
+  font-size: 14px;
+  font-weight: 700;
 `;
