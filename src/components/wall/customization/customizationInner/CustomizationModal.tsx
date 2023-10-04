@@ -56,7 +56,7 @@ export const CustomizationModal = ({
         draft.styleSetting.blockSetting.style = 'none';
         draft.styleSetting.blockSetting.styleColor = '#ffffff';
         draft.styleSetting.blockSetting.gradation = false;
-        draft.styleSetting.themeSetting = null;
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
     setBackgroundOptions('solid');

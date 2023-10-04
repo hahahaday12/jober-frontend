@@ -31,6 +31,9 @@
 .db-14 {
   @apply font-bold text-[14px] -tracking-[1px];
 }
+.db-12 {
+  @apply font-bold text-[12px] -tracking-[1px];
+}
 .dm-24 {
   @apply font-[500] text-[24px] -tracking-[1px];
 }
@@ -73,11 +76,23 @@
 }
 
 .flat {
-  border: 1px solid var(--Light-Black, #2d2c38);
+  border: 1px solid #2d2c38;
 }
 .shadow {
-  border: 1px solid var(--Light-Black, #2d2c38);
+  border: 1px solid #2d2c38;
   box-shadow: 3px 3px 0px 0px #2d2c38;
+}
+.simple {
+  border: 3px solid #a9c5e7;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.45);
+}
+.simple {
+  box-shadow: 1px 1px 4px 0px rgba(12, 17, 26, 0.25);
+}
+.dark {
+  background: #000;
+  border: 3px solid #fff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.45);
 }
 
 .ant-tour {

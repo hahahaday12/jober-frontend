@@ -10,7 +10,7 @@ import { Icon } from '@/components/common';
 type SingleListProps = {
   id: number;
   targetListBlockIndex: number;
-  listBlockUUID?: string;
+  listBlockId?: number;
   listTitle?: string;
   listDescription?: string;
   isLink?: boolean;
@@ -19,7 +19,7 @@ type SingleListProps = {
 export const SingleList = ({
   id,
   targetListBlockIndex,
-  listBlockUUID,
+  listBlockId,
   listTitle,
   listDescription,
   isLink,
@@ -38,7 +38,7 @@ export const SingleList = ({
         if (targetListBlockIndex !== -1) {
           const targetListIndex = draft.blocks[
             targetListBlockIndex
-          ].subData.findIndex((list) => list.listBlockUUID === listBlockUUID);
+          ].subData.findIndex((list) => list.listBlockId === listBlockId);
           if (targetListIndex !== -1) {
             draft.blocks[targetListBlockIndex].subData[
               targetListIndex
@@ -55,7 +55,7 @@ export const SingleList = ({
         if (targetListBlockIndex !== -1) {
           const targetListIndex = draft.blocks[
             targetListBlockIndex
-          ].subData.findIndex((list) => list.listBlockUUID === listBlockUUID);
+          ].subData.findIndex((list) => list.listBlockId === listBlockId);
           if (targetListIndex !== -1) {
             draft.blocks[targetListBlockIndex].subData[
               targetListIndex
@@ -72,9 +72,9 @@ export const SingleList = ({
         if (targetListBlockIndex !== -1) {
           const targetListIndex = draft.blocks[
             targetListBlockIndex
-          ].subData.findIndex((list) => list.listBlockUUID === listBlockUUID);
+          ].subData.findIndex((list) => list.listBlockId === listBlockId);
           if (targetListIndex !== -1) {
-            draft.blocks[targetListBlockIndex].subData[targetListIndex].isLink =
+            draft.blocks[targetListBlockIndex].subData[targetListIndex].link =
               e.target.checked;
           }
         }
@@ -88,7 +88,7 @@ export const SingleList = ({
         if (targetListBlockIndex !== -1) {
           draft.blocks[targetListBlockIndex].subData = draft.blocks[
             targetListBlockIndex
-          ].subData.filter((list) => list.listBlockUUID !== listBlockUUID);
+          ].subData.filter((list) => list.listBlockId !== listBlockId);
         }
       }),
     );

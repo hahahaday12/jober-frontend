@@ -1,21 +1,21 @@
 import { create } from 'zustand';
 import { WallType } from '@/types/wall';
 
-export interface WallStoreType {
+export type WallStoreType = {
   isEdit: boolean;
-  toggleEdit: () => void;
+  setIsEdit: (bool: boolean) => void;
   isPreview: boolean;
-  togglePreview: () => void;
+  setIsPreview: (bool: boolean) => void;
   wall: WallType;
   setWall: (states: object) => void;
   getWall: () => Promise<void>;
-}
+};
 
 export const useWallStore = create<WallStoreType>((set) => ({
   isEdit: false,
-  toggleEdit: () => set((state) => ({ isEdit: !state.isEdit })),
+  setIsEdit: (bool) => set(() => ({ isEdit: bool })),
   isPreview: false,
-  togglePreview: () => set((state) => ({ isPreview: !state.isPreview })),
+  setIsPreview: (bool) => set(() => ({ isPreview: bool })),
 
   getWall: async () => {
     const response = await fetch('http://localhost:3000/wall');
@@ -42,7 +42,7 @@ type TemplateState = {
     templateTitle: string;
     templateDescription: string;
   }) => void;
-  newStatus: boolean; // Define newStatus in TemplateState
+  newStatus: boolean;
   setNewStatus: (newStatus: boolean) => void;
 };
 

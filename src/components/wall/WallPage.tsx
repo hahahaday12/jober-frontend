@@ -20,8 +20,12 @@ import { Tour, type TourProps } from 'antd';
 import previewTour from '@/assets/tour/preview.gif';
 import styleTour from '@/assets/tour/style.gif';
 import { useWindowWidth } from '@/hooks/useWindowWidth';
+import { useLocation, useParams } from 'react-router-dom';
 
 export const WallPage = () => {
+  const { wallId } = useParams();
+  const { state } = useLocation();
+  const isNew = state ? state.isNew : false;
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth < 640;
   const tourWallInfoRef = useRef(null);
@@ -30,17 +34,13 @@ export const WallPage = () => {
   const tourStyleSettingRef = useRef(null);
   const tourPreviewRef = useRef(null);
   const tourMobilePreviewRef = useRef(null);
-  const [addTemplateModalOpen, setAddTemplateModalOpen] = useState(false);
 
   const BlockMapper = {
     listBlock: <ListBlock />,
     fileBlock: <FileBlock />,
     snsBlock: <SnsBlock />,
     templateBlock: (
-      <TemplateBlock
-        templateAddButtonRef={tourTemplateAddButtonRef}
-        setAddTemplateModalOpen={setAddTemplateModalOpen}
-      />
+      <TemplateBlock templateAddButtonRef={tourTemplateAddButtonRef} />
     ),
     freeBlock: <FreeBlock />,
   };
@@ -54,9 +54,11 @@ export const WallPage = () => {
     sortableBlocks,
     setWall,
     setSortableBlocks,
-  } = useFetchWallData(BlockMapper);
-
-  const [tourOpen, setTourOpen] = useState(!localStorage.getItem('hasVisited'));
+  } = useFetchWallData(BlockMapper, isNew, wallId);
+  const [tourOpen, setTourOpen] = useState(
+    // true,
+    !localStorage.getItem('hasVisited'),
+  );
 
   const steps: TourProps['steps'] = [
     {
@@ -67,7 +69,6 @@ export const WallPage = () => {
         </>
       ),
       target: () => tourWallInfoRef.current,
-      // onNext: () => setHideHeaderWhileTour(true),
     },
     {
       title: <>원하는 템플릿을 넣고 빠르게 사용할 수 있어요!</>,
@@ -130,7 +131,7 @@ export const WallPage = () => {
         wallBgGradation &&
         'bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]'
       }
-      min-h-screen flex flex-col items-center bg-no-repeat bg-center bg-cover
+      min-h-screen flex flex-col items-center bg-no-repeat bg-center bg-cover relative
       `}
       style={{
         backgroundImage: wallBgUrl ? `url(${wallBgUrl})` : '',
@@ -153,6 +154,9 @@ export const WallPage = () => {
           pt-[132px] sm:pt-[106px] sm:pb-[24px] flex-1 flex flex-col gap-[12px] sm:gap-[24px] px-[12px] w-full sm:px-0 max-w-[866px]
           `}
         >
+          {wallBgUrl && (
+            <div className="w-full h-full absolute inset-0 bg-white opacity-10" />
+          )}
           <WallInfoBlock wallInfoRef={tourWallInfoRef} />
           <ReactSortable
             list={sortableBlocks}

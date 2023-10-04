@@ -6,10 +6,10 @@ import { BlockContainer, FileUpload } from 'components/index';
 import { Icon } from '@/components/common';
 import editThickIcon from '@/assets/icons/edit-thick.svg';
 import editIcon from '@/assets/icons/edit.svg';
-import { SubDatumType } from '@/types/wall';
+import { SubDatum } from '@/types/wall';
 
 export type FileBlockSubDataType = Pick<
-  SubDatumType,
+  SubDatum,
   'fileTitle' | 'fileDescription' | 'fileName' | 'file'
 >;
 

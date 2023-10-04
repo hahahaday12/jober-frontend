@@ -19,7 +19,6 @@ export const Customization = ({ styleSettingRef }: CustomizationProps) => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
-    messageApi.error('스타일 설정을 취소합니다.');
   };
 
   return (

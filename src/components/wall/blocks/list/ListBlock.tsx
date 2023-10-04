@@ -6,12 +6,7 @@ import { BlockContainer, SingleList } from 'components/index';
 import editThickIcon from '@/assets/icons/edit-thick.svg';
 import plusIcon from '@/assets/icons/plus.svg';
 import { Icon } from '@/components/common';
-import { SubDatumType } from '@/types/wall';
 
-type ListBlockSubData = Pick<
-  SubDatumType,
-  'listBlockUUID' | 'listLabel' | 'listTitle' | 'listDescription' | 'isLink'
->;
 type ListBlockProps = {
   blockUUID?: string;
 };
@@ -42,7 +37,7 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
     setWall(
       produce(wall, (draft) => {
         if (targetListBlockIndex !== -1) {
-          const newList: ListBlockSubData = {
+          const newList = {
             listBlockUUID: crypto.randomUUID(),
             listLabel: '',
             listTitle: '',
@@ -89,11 +84,11 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
             <SingleList
               id={id}
               targetListBlockIndex={targetListBlockIndex}
-              listBlockUUID={list.listBlockUUID}
-              key={list.listBlockUUID}
+              listBlockId={list.listBlockId}
+              key={list.listBlockId}
               listTitle={list.listTitle}
               listDescription={list.listDescription}
-              isLink={list.isLink}
+              isLink={list.link}
             />
           ))}
         </div>

@@ -1,9 +1,10 @@
-import { Home } from "components/index"
+import { Home, Navbar } from 'components/index';
 
 export const HomePage = () => {
-  return(
+  return (
     <>
-    <Home/>
+      <Navbar />
+      <Home />
     </>
-  )
-}
+  );
+};

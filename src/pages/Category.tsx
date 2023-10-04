@@ -1,9 +1,10 @@
-import { Category } from 'components/index';
+import { CategoryPage, Navbar } from '@/components';
 
-export const CategoryPage = () => {
+export const Category = () => {
   return (
     <>
-      <Category />
+      <Navbar />
+      <CategoryPage />
     </>
   );
 };
