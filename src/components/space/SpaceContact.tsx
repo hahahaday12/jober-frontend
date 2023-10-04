@@ -7,6 +7,7 @@ import addIcon from '@/assets/icons/space/add.svg';
 import arrowdownIcon from '@/assets/icons/space/arrowdown.svg';
 import polygonIcon from '@/assets/icons/space/polygon.svg';
 import lineIcon from '@/assets/icons/space/line.svg';
+//import userIcon from '@/assets/icons/user.svg';
 import userIcon from '@/assets/icons/user.svg';
 
 export default function SpaceContact({ memberName }: { memberName?: string }) {
