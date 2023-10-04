@@ -4,7 +4,6 @@ import { produce } from 'immer';
 import {
   WallHeader,
   WallInfoBlock,
-  ModalOpen,
   AddBlockModal,
   Customization,
 } from 'components/index';
@@ -172,7 +171,6 @@ export const WallPage = () => {
           {isEdit && (
             <>
               <Tour open={tourOpen} onClose={handleTourClose} steps={steps} />
-              <ModalOpen />
               <AddBlockButton
                 addBlockButtonRef={tourAddBlockButtonRef}
                 setIsAddBlockModalOpen={setIsAddBlockModalOpen}
