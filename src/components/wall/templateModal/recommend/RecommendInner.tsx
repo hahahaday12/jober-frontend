@@ -27,7 +27,8 @@ export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
   const [templateData, setTemplateData] = useState<TemplateData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const { setSelectedTemplate } = useTemplateStore();
+  const { selectedTemplate, setSelectedTemplate, setNewStatus } =
+    useTemplateStore();
 
   const { mutate } = useMutation(fetchTemplateData, {
     onMutate: () => {
@@ -48,16 +49,15 @@ export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
     mutate('PERSONAL');
   }, [mutate]);
 
-  const handleRadioChange = (item: TemplateData, status: boolean) => {
+  const handleRadioChange = (item: TemplateData) => {
     const param = {
       category: PERSONAL,
       templateId: item.templateId,
       templateTitle: item.templateTitle,
-      templateDescription: item.templateDescription,
+      templateDescription: item.templateDescription, 
     };
-    console.log(item);
-    console.log(status);
     setSelectedTemplate(param);
+    setNewStatus(false);
   };
 
   return (
@@ -76,7 +76,11 @@ export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
               <TemplateBox key={item.templateId}>
                 <TempalteHeaderBox>
                   <Radio
-                    onChange={(e) => handleRadioChange(item, e.target.checked)}
+                    onChange={() => handleRadioChange(item)}
+                    checked={
+                      selectedTemplate &&
+                      selectedTemplate.templateId === item.templateId
+                    }
                   />
                   <p className="templateTitle">{item.templateTitle}</p>
                 </TempalteHeaderBox>
@@ -104,7 +108,7 @@ const TemplateHeader = styled.div`
 
 const TemplateContainer = styled.div`
   display: grid;
-  grid-template-columns: 298px 298px;
+  grid-template-columns: 300px 300px;
   grid-template-rows: 90px 90px 90px;
   gap: 10px;
   grid-row-gap: 90px;
@@ -114,7 +118,7 @@ const TemplateBox = styled.div`
   border-radius: 10px;
   margin-top: 20px;
   background-color: #f0f0f0;
-  width: 290px;
+  width: 300px;
   position: relative;
   padding: 10px;
   height: 170px;
@@ -124,7 +128,6 @@ const TemplateBox = styled.div`
     padding: 10px;
     padding-bottom: 20px;
     position: relative;
-    margin-top: 5px;
     font-size: 14px;
   }
 `;
