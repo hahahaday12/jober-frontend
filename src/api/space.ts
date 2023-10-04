@@ -1,7 +1,13 @@
 /* eslint-disable no-useless-catch */
-export const getSpace = async (memberId: number, addSpaceId: number) => {
+export const getSpace = async (
+  memberId: number,
+  spaceId: number,
+  spaceType: string,
+) => {
   try {
-    const url = `api/api/employee/1/1?spaceType=PERSONAL`;
+    const url = `${
+      import.meta.env.VITE_SERVER_BASE_URL
+    }/employee/${memberId}/${spaceId}?spaceType=${spaceType.toUpperCase()}`;
 
     const response = await fetch(url);
 

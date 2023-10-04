@@ -10,8 +10,9 @@ import lineIcon from '@/assets/icons/space/line.svg';
 //import userIcon from '@/assets/icons/user.svg';
 import userIcon from '@/assets/icons/user.svg';
 import { useWallStore } from '@/store';
+import { useEffect } from 'react';
 
-export default function SpaceContact({ memberName }: { memberName?: string }) {
+export default function SpaceContact({ space }: { spcae: any }) {
   const navigate = useNavigate();
   const { setIsEdit } = useWallStore();
   const handleNextStep = () => {
@@ -21,6 +22,13 @@ export default function SpaceContact({ memberName }: { memberName?: string }) {
     navigate(`/category`);
     setIsEdit(true);
   };
+  console.log(space);
+
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const response = fetch('');
+  //   };
+  // }, []);
 
   return (
     <div className="bg-sky min-h-screen pl-[24px] pt-[70px]">
@@ -79,7 +87,7 @@ export default function SpaceContact({ memberName }: { memberName?: string }) {
             <div className="flex justify-center items-center w-[28px] h-[28px] bg-lightGray rounded-full">
               <Icon src={userIcon} className="w-[18px] h-[18px]" />
             </div>
-            <span className="dm-16">{memberName}</span>
+            <span className="dm-16">{123}</span>
             <p className="text-gray88 dm-16">010-1234-5678</p>
             <Icon src={arrowdownIcon} />
           </div>

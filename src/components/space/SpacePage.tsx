@@ -1,6 +1,7 @@
 import SpaceNavbar from './SpaceNavbar';
 import SpaceContact from './SpaceContact';
 import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export type Space = {
   addSpaceId: number;
@@ -9,12 +10,12 @@ export type Space = {
 };
 
 export default function SpacePage() {
-  const { state } = useLocation();
-  const space: Space[] = state;
+  const { state: space } = useLocation();
+  console.log(space);
 
   return (
     <>
-      <SpaceNavbar spaceTitle={space[0].spaceTitle} />
+      <SpaceNavbar spaceTitle={space.spaceTitle} />
       <SpaceContact space={space} />
     </>
   );

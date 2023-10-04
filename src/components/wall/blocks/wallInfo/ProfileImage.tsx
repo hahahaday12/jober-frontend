@@ -77,6 +77,7 @@ export const ProfileImage = () => {
             }),
           );
           console.log('Upload successful:', data);
+          message.success('d');
         } catch (err) {
           console.error('Error uploading image:', err);
         } finally {

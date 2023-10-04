@@ -22,8 +22,8 @@ export default function HomeSpace({ space }: { space?: SpaceWall }) {
             지인들에게 공지·레터·계약문서를 보낼 수 있어요.
           </p>
           <div
-            className="flex items-center justify-between hover ring-2 ring-offset-2"
-            onClick={() => navigate('/space', { state: space?.personal })}
+            className="flex items-center justify-between hover ring-2 ring-offset-2 ring-blue"
+            onClick={() => navigate('/space', { state: space?.personal[0] })}
           >
             <div>
               <Icon src={userIcon} className="w-[16px] mr-[15px]" />
@@ -39,10 +39,7 @@ export default function HomeSpace({ space }: { space?: SpaceWall }) {
             <br />
             다양한 자버 문서를 보낼 수 있어요.
           </p>
-          <div
-            className="flex items-center justify-between hover ring-2 ring-offset-2"
-            onClick={() => navigate('/space', { state: space?.organization })}
-          >
+          <div className="flex items-center justify-between hover">
             <div>
               <Icon src={userIcon} className="w-[16px] mr-[15px]" />
               <span className="dm-16 space-x-6">
