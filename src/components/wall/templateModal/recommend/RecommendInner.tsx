@@ -25,6 +25,7 @@ const fetchTemplateData = async (PERSONAL: string) => {
 
 export const BestTemplate: React.FC<BestTemplateProps> = ({ PERSONAL }) => {
   const [templateData, setTemplateData] = useState<TemplateData[]>([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const { selectedTemplate, setSelectedTemplate } = useTemplateStore();

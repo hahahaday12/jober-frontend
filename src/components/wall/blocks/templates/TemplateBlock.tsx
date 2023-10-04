@@ -1,16 +1,17 @@
 import { useWallStore } from '@/store';
-import { SubDatumType } from '@/types/wall';
 import { BlockContainer } from 'components/index';
 import SingleTemplate from './SingleTemplate';
+import { SubDatum } from '@/types/wall';
 import { ModalOpen } from 'components/index';
 
 export type TemplateBlockSubDataType = Pick<
-  SubDatumType,
+  SubDatum,
+  | 'templateBlockId'
+  | 'templateUUID'
   | 'templateTitle'
   | 'templateDescription'
   | 'hasAccessTemplateAuth'
   | 'hasDenyTemplateAuth'
-  | 'templateBlockUUID'
 >;
 
 type TemplateBlockProps = {
@@ -30,13 +31,13 @@ export const TemplateBlock = ({
     <BlockContainer blockName="templateBlock">
       <div
         className={`
-        ${isEdit && 'px-[8px] pb-[8px] pt-[30px]'} 
-        gap-4 grid sm:grid-cols-2 grid-cols-1
+        ${isEdit && 'px-[8px] pb-[8px] pt-[16px] sm:pt-[26px]'} 
+        gap-[8px] grid sm:grid-cols-2 grid-cols-1
         `}
       >
         {templateBlockSubData?.map((template) => (
           <SingleTemplate
-            key={template.templateBlockUUID}
+            key={template.templateUUID}
             templateTitle={template.templateTitle}
             templateDescription={template.templateDescription}
           />

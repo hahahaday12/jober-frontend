@@ -11,13 +11,13 @@ export default function WallHeaderEditButtons({
   tourPreviewRef,
   footer,
 }: WallHeaderEditButtonsProps) {
-  const { wall, toggleEdit, isPreview, togglePreview, isEdit } = useWallStore();
+  const { wall, setIsEdit, isPreview, setIsPreview, isEdit } = useWallStore();
   const [saving, setSaving] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
   const handlePreview = () => {
-    togglePreview();
-    toggleEdit();
+    setIsPreview(!isPreview);
+    setIsEdit(!isEdit);
   };
 
   const handleTempSave = () => {};
@@ -25,21 +25,20 @@ export default function WallHeaderEditButtons({
   const handleSave = async () => {
     setSaving(true);
     try {
-      await fetch('http://localhost:3000/wall', {
-        method: 'POST',
+      await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/wall`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(wall),
+        body: JSON.stringify({ data: wall }),
       });
     } catch (error) {
       console.log(error);
       messageApi.error({ content: '저장 실패' });
     } finally {
       setSaving(false);
-      // location.reload();
-      isEdit && toggleEdit();
-      isPreview && togglePreview();
+      setIsEdit(false);
+      setIsPreview(false);
     }
   };
 

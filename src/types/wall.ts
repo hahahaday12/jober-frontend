@@ -1,11 +1,11 @@
 export type WallType = {
-  shareURL: string;
-  isPublic: boolean;
+  category: string;
   memberId: number;
-  category: CategoryType;
-  wallInfoBlock: wallInfoBlockType;
+  addSpaceId: number;
+  shareURL: string;
+  wallInfoBlock: WallInfoBlock;
   blocks: Block[];
-  styleSetting: StyleSettingType;
+  styleSetting: StyleSetting;
 };
 
 export type CategoryType =
@@ -15,18 +15,19 @@ export type CategoryType =
   | 'enterprise'
   | 'basic';
 
-export type wallInfoBlockType = {
+export interface WallInfoBlockResponse {
+  wallInfoBlockId: number;
   wallInfoTitle: string;
   wallInfoDescription: string;
-  backgroundImgURL: string;
-  wallInfoImgURL: string;
-};
+  wallInfoImgURL: null;
+  backgroundImgURL: null;
+}
 
-export type Block = {
+export interface Block {
   blockUUID: string;
-  blockType: BlockType;
-  subData: SubDatumType[];
-};
+  blockType: string;
+  subData: SubDatum[];
+}
 
 export type BlockType =
   | 'listBlock'
@@ -35,43 +36,61 @@ export type BlockType =
   | 'templateBlock'
   | 'freeBlock';
 
-export type SubDatumType = {
-  listBlockUUID?: string;
+export interface SubDatum {
+  freeBlockId?: number;
+  freeTitle?: string;
+  freeContent?: string;
+  listBlockId?: number;
   listLabel?: string;
   listTitle?: string;
   listDescription?: string;
   isLink?: boolean;
+  snsBlockId?: number;
+  snsUUID?: string;
+  snsType?: string;
+  snsURL?: string;
+  fileBlockId?: number;
   fileTitle?: string;
   fileDescription?: string;
-  fileName?: string;
-  file?: string;
-  freeTitle?: string;
-  freeDescription?: string;
-  snsBlockUUID?: string;
-  snsType?: string;
-  snsUrl?: string;
-  templateBlockUUID?: string;
+  fileName?: null;
+  templateBlockId?: number;
+  templateUUID?: string;
   templateTitle?: string;
   templateDescription?: string;
   hasAccessTemplateAuth?: number[];
   hasDenyTemplateAuth?: number[];
-};
+}
 
-export type StyleSettingType = {
-  backgroundSetting: BackgroundSettingType;
-  blockSetting: BlockSettingType;
-  themeSetting: ('modern' | 'classic' | 'simple' | 'dark') | null;
-};
+export interface StyleSetting {
+  backgroundSetting: BackgroundSetting;
+  blockSetting: BlockSetting;
+  themeSetting: ThemeSetting;
+}
 
-export type BackgroundSettingType = {
+export interface BackgroundSetting {
+  backgroundSettingId: number;
   solidColor: string;
   gradation: boolean;
-  styleImgURL: string;
-};
+  styleImgURL: null | string;
+}
 
-export type BlockSettingType = {
-  shape: '0px' | '6px' | '13px';
-  style: 'none' | 'flat' | 'shadow';
+export interface BlockSetting {
+  blockSettingId: number;
+  shape: string;
+  style: string;
   styleColor: string;
   gradation: boolean;
-};
+}
+
+export interface ThemeSetting {
+  themeSettingId: number;
+  theme: string | null;
+}
+
+export interface WallInfoBlock {
+  wallInfoBlockId: number;
+  wallInfoTitle: string;
+  wallInfoDescription: string;
+  wallInfoImgURL: null | string;
+  backgroundImgURL: null | string;
+}

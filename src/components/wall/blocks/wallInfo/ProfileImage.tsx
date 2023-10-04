@@ -4,11 +4,37 @@ import { produce } from 'immer';
 import { IMAGE_FILE_SIZE_LIMIT } from '@/data/constants/blocks';
 import { message } from 'antd';
 import { Icon } from '@/components/common';
+import { useState } from 'react';
+import { LoadingOutlined } from '@ant-design/icons';
+
+interface ImageData {
+  access_mode: string;
+  asset_id: string;
+  bytes: number;
+  created_at: Date;
+  etag: string;
+  folder: string;
+  format: string;
+  height: number;
+  original_filename: string;
+  placeholder: boolean;
+  public_id: string;
+  resource_type: string;
+  secure_url: string;
+  signature: string;
+  tags: string[];
+  type: string;
+  url: string;
+  version: number;
+  version_id: string;
+  width: number;
+}
 
 export const ProfileImage = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const { wall, setWall, isEdit } = useWallStore();
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile = event.target.files?.[0];
@@ -17,19 +43,48 @@ export const ProfileImage = () => {
       return;
     }
     const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === FileReader.DONE) {
-        setWall(
-          produce(wall, (draft) => {
-            draft.wallInfoBlock.wallInfoImgURL = reader.result as string;
-          }),
-        );
-      }
-    };
     if (imageFile) {
       reader.readAsDataURL(imageFile);
-      messageApi.success('프로필이미지를 변경하였습니다');
     }
+    reader.onload = async () => {
+      if (reader.readyState === FileReader.DONE) {
+        if (!reader.result) return;
+        setIsUploading(true);
+        const formData = new FormData();
+        formData.append('file', reader.result as string);
+        formData.append(
+          'upload_preset',
+          import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET,
+        );
+        try {
+          const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${
+              import.meta.env.VITE_CLOUDINARY_API
+            }/image/upload`,
+            {
+              method: 'POST',
+              body: formData,
+            },
+          );
+          if (!response.ok) {
+            throw new Error('Upload failed');
+          }
+          const data: ImageData = await response.json();
+          console.log(data);
+          setWall(
+            produce(wall, (draft) => {
+              draft.wallInfoBlock.wallInfoImgURL = data.url;
+            }),
+          );
+          console.log('Upload successful:', data);
+          message.success('d');
+        } catch (err) {
+          console.error('Error uploading image:', err);
+        } finally {
+          setIsUploading(false);
+        }
+      }
+    };
   };
 
   return (
@@ -50,7 +105,7 @@ export const ProfileImage = () => {
 
         {isEdit && (
           <label className="hover absolute bg-white z-20 w-10 h-10 rounded-full flex justify-center items-center">
-            <Icon src={galleryIcon} />
+            {isUploading ? <LoadingOutlined /> : <Icon src={galleryIcon} />}
             <input
               type="file"
               className="hidden"

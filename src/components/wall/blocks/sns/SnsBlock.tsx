@@ -2,15 +2,15 @@ import { Button, Popconfirm } from 'antd';
 import { useMemo, useState } from 'react';
 import { useWallStore } from '@/store';
 import { BlockContainer, SnsBlockModal } from 'components/index';
-import { SubDatumType } from '@/types/wall';
 import { Icon } from '@/components/common';
 import { ADDABLE_SNSS } from '@/data/constants/blocks';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { produce } from 'immer';
+import { SubDatum } from '@/types/wall';
 
 export type SnsBlockSubData = Pick<
-  SubDatumType,
-  'snsBlockUUID' | 'snsType' | 'snsUrl'
+  SubDatum,
+  'snsBlockId' | 'snsUUID' | 'snsURL' | 'snsType'
 >;
 
 type SnsBlockProps = {
@@ -38,7 +38,7 @@ export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
     !isEdit && window.open(snsUrl, '_blank');
   };
 
-  const handleDeleteSingleSns = (snsBlockUUID: string) => {
+  const handleDeleteSingleSns = (snsBlockId: number) => {
     const snsBlockIndex = wall.blocks.findIndex(
       (block) => block.blockType === 'snsBlock',
     );
@@ -47,7 +47,7 @@ export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
         produce(wall, (draft) => {
           draft.blocks[snsBlockIndex].subData = draft.blocks[
             snsBlockIndex
-          ].subData.filter((sns) => sns.snsBlockUUID !== snsBlockUUID);
+          ].subData.filter((sns) => sns.snsBlockId !== snsBlockId);
         }),
       );
     }
@@ -68,25 +68,23 @@ export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
         <div className="flex gap-[16px] sm:gap-[16px] justify-center">
           {snsData?.map((sns) => (
             <Popconfirm
-              key={sns.snsBlockUUID}
+              key={sns.snsBlockId}
               title="SNS 연결해제"
               description={`정말로 ${sns.snsType} 연결을 해제하시겠습니까?`}
               showCancel={false}
-              onConfirm={() =>
-                handleDeleteSingleSns(sns.snsBlockUUID as string)
-              }
+              onConfirm={() => handleDeleteSingleSns(sns.snsBlockId as number)}
               disabled={!isEdit}
               okButtonProps={{ danger: true }}
               okText="해제"
             >
               <div
-                key={sns.snsBlockUUID}
+                key={sns.snsBlockId}
                 className="relative rounded-full group overflow-hidden hover"
               >
                 <Icon
                   src={ADDABLE_SNSS[sns.snsType as string]?.svg}
                   className="w-[44px] h-[44px] sm:w-[60px] sm:h-[60px] rounded-full"
-                  onClick={() => handleClickSnsIcons(sns.snsUrl as string)}
+                  onClick={() => handleClickSnsIcons(sns.snsURL as string)}
                 />
                 {isEdit && (
                   <CloseOutlined className="group-hover:block hidden absolute top-[14px] left-[14px] sm:top-[21.5px] sm:left-[21.5px]" />

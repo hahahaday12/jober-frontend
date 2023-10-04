@@ -23,7 +23,7 @@ export default function MoreVerticalPopover({
     <div>
       <label
         htmlFor="disclosure"
-        className="dm-16 text-gray88 flex items-center"
+        className="dm-16 text-gray88 flex items-center hover"
       >
         <Switch
           defaultChecked

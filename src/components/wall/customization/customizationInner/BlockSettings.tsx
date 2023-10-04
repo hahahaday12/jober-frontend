@@ -12,6 +12,7 @@ export const BlockSettings = ({
   setBlockOptions: React.Dispatch<React.SetStateAction<'solid' | 'gradation'>>;
 }) => {
   const { wall, setWall } = useWallStore();
+  const isThemeSelected = wall?.styleSetting?.themeSetting;
   const handleBlockColorPick = (backgroundColor: Color) => {
     const bgColor =
       typeof backgroundColor === 'string'
@@ -22,10 +23,9 @@ export const BlockSettings = ({
       produce(wall, (draft) => {
         draft.styleSetting.blockSetting.gradation = false;
         draft.styleSetting.blockSetting.styleColor = bgColor;
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
-    console.log('ColorPicker Value:', backgroundColor);
-    console.log('Block Setting:', wall.styleSetting.blockSetting.styleColor);
   };
   const handleBlockGradationPick = (backgroundColor: Color) => {
     const bgColor =
@@ -37,6 +37,7 @@ export const BlockSettings = ({
       produce(wall, (draft) => {
         draft.styleSetting.blockSetting.gradation = true;
         draft.styleSetting.blockSetting.styleColor = bgColor;
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
   };
@@ -50,6 +51,7 @@ export const BlockSettings = ({
           | '0px'
           | '6px'
           | '13px';
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
     console.log(e.target.value);
@@ -63,46 +65,24 @@ export const BlockSettings = ({
           | 'none'
           | 'shadow'
           | 'flat';
+        draft.styleSetting.themeSetting.theme = null;
       }),
     );
     console.log(e.target.value);
   };
 
-  // useEffect(() => {
-  //   const bgColor =
-  //     typeof blockColor === 'string' ? blockColor : blockColor.toHexString();
-  //   setWall(
-  //     produce(wall, (draft) => {
-  //       draft.styleSetting.blockSetting.styleColor = bgColor;
-  //     }),
-  //   );
-  // }, [blockColor]);
-
-  // const handleColorChange = (newColor: Color) => {
-  //   setBlocklColor(newColor.toHexString());
-  // };
-
-  // // 블록-스타일 컬러 그라데이션
-  // const handleBlockGradation = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setWall(
-  //     produce(wall, (draft) => {
-  //       draft.styleSetting.blockSetting.gradation = e.target
-  //         .value as unknown as boolean;
-  //     }),
-  //   );
-  //   console.log(e.target.value);
-  // };
-
   return (
-    <div>
+    <>
       <div className="db-18 mt-[30px] mb-[16px]">블록</div>
-      <div className="flex justify-between">
-        <div className="flex flex-col gap-[8px]">
+      <div className="flex justify-between gap-3">
+        <div className="flex flex-col gap-[8px] w-full">
           {BLOCK_SHAPE.map((shape) => (
             <label
-              className={`bg-lightGray border-[1px] border-solid border-line w-[194px] h-[30px] block hover ${
+              key={shape}
+              className={`bg-lightGray border-[1px] border-solid border-line sm:w-[194px] h-[30px] w-full block hover ${
                 wall.styleSetting.blockSetting.shape === shape &&
-                'ring-blue ring-1 ring-offset-2'
+                !isThemeSelected &&
+                'ring-blue ring-2 ring-offset-2'
               }`}
               style={{ borderRadius: shape }}
             >
@@ -119,12 +99,14 @@ export const BlockSettings = ({
           <div className="text-center items-center dm-16 mt-[10px]">모양</div>
         </div>
 
-        <div className="flex flex-col gap-[8px]">
+        <div className="flex flex-col gap-[8px] w-full">
           {BLOCK_STYLE.map((style) => (
             <label
-              className={`${style} bg-lightGray w-[194px] h-[30px] block hover ${
+              key={style}
+              className={`${style} bg-lightGray sm:w-[194px] w-full h-[30px] block hover ${
                 wall.styleSetting.blockSetting.style === style &&
-                'ring-blue ring-1 ring-offset-2'
+                !isThemeSelected &&
+                'ring-blue ring-2 ring-offset-2'
               }`}
             >
               <input
@@ -140,10 +122,12 @@ export const BlockSettings = ({
           <div className="text-center items-center dm-16 mt-[8px]">스타일</div>
         </div>
 
-        <div className="flex flex-col gap-[10px]">
+        <div className="flex flex-col gap-[10px] w-full">
           <label
-            className={` bg-sky rounded-[8px] w-[194px] h-[48px] block hover ${
-              blockOptions === 'solid' && 'ring-blue ring-1'
+            className={` bg-sky rounded-[8px] sm:w-[194px] h-[48px] w-full block hover ${
+              blockOptions === 'solid' &&
+              !isThemeSelected &&
+              'ring-blue ring-2 ring-offset-2'
             }`}
           >
             <input
@@ -159,7 +143,7 @@ export const BlockSettings = ({
             >
               <Button
                 type="primary"
-                className={`w-[194px] h-[48px] rounded-[8px]`}
+                className={`sm:w-[194px] h-[48px] w-full rounded-[8px]`}
                 style={{
                   backgroundColor: wall.styleSetting.blockSetting.styleColor,
                 }}
@@ -169,8 +153,8 @@ export const BlockSettings = ({
 
           {/* 블록-그라데이션 */}
           <label
-            className={`bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)] rounded-[8px] w-[194px] h-[48px] block hover ${
-              blockOptions === 'gradation' && 'ring-blue ring-1'
+            className={`rounded-[8px] sm:w-[194px] h-[48px] block hover ${
+              blockOptions === 'gradation' && 'ring-blue ring-2 ring-offset-2'
             }`}
           >
             <input
@@ -186,7 +170,7 @@ export const BlockSettings = ({
             >
               <Button
                 type="primary"
-                className="w-[194px] h-[48px] rounded-[8px] bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]"
+                className="sm:w-[194px] h-[48px] w-full rounded-[8px] bg-gradient-to-t from-white to-[rgba(237, 248, 252, 0.20)]"
                 style={{
                   backgroundColor: wall.styleSetting.blockSetting.styleColor,
                 }}
@@ -198,6 +182,6 @@ export const BlockSettings = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

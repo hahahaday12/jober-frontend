@@ -11,7 +11,7 @@ export const kakaoShare = (wall: WallType) => {
       content: {
         title: wall.wallInfoBlock.wallInfoTitle,
         description: wall.wallInfoBlock.wallInfoDescription,
-        imageUrl: wall.wallInfoBlock.wallInfoImgURL,
+        imageUrl: 'https://avatars.githubusercontent.com/u/87072568?v=4',
         link: {
           webUrl: `${import.meta.env.VITE_CLIENT_URL}/wall/${wall.shareURL}`,
         },
