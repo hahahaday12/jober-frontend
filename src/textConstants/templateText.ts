@@ -7,4 +7,8 @@ export const templateText = {
   templateTitle: '템플릿 제목',
   templateDescription: '템플릿 내용',
   recommendTemplate: '추천 템플릿',
+  templateCategory: '카테고리 폴더',
+  final: '최종확인',
+  textSaveAccess: '문서 저장 허용 여부',
+  isLogined: '작성자 로그인 필요여부',
 };
