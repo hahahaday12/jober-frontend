@@ -4,9 +4,11 @@ import { templateText } from '@/textConstants';
 import axios from 'axios';
 import { useMutation } from 'react-query';
 import { SearchCarousel } from './SearchCarousel';
+import { Radio } from 'antd';
+import { useTemplateStore } from '@/store';
 
 type ProductItem = {
-  templateId: number;
+  templateId: string;
   templateTitle: string;
   templateDescription: string;
 };
@@ -27,7 +29,7 @@ export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
   const [isError, setIsError] = useState(false);
   const [debouncedInputValue, setDebouncedInputValue] = useState('');
   const [products, setProducts] = useState<ProductItem[]>([]);
-  //const [templateData, setTemplateData] = useState([]);
+  const { selectedTemplate, setSelectedTemplate } = useTemplateStore();
 
   useEffect(() => {
     // 입력값이 변경될 때마다 debounce된 값을 업데이트.
@@ -64,6 +66,16 @@ export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
     }
   }, [debouncedInputValue]);
 
+  const handleRadioChange = (item: ProductItem) => {
+    const param = {
+      category: '',
+      templateId: item.templateId,
+      templateTitle: item.templateTitle,
+      templateDescription: item.templateDescription,
+    };
+    setSelectedTemplate(param);
+  };
+
   if (isLoading) {
     return <p>loading...</p>;
   }
@@ -87,7 +99,16 @@ export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
         <ResultBox>
           {products?.map((item) => (
             <ResultTemBox key={item.templateId}>
-              {item.templateTitle} <br />
+              <TempalteHeaderBox>
+                <Radio
+                  onChange={() => handleRadioChange(item)}
+                  checked={
+                    selectedTemplate &&
+                    selectedTemplate.templateId === item.templateId
+                  }
+                />
+                <p className="templateTitle">{item.templateTitle}</p>
+              </TempalteHeaderBox>
               {item.templateDescription}
             </ResultTemBox>
           ))}
@@ -127,14 +148,13 @@ const SeleteContainer = styled.div`
 const ResultBox = styled.div`
   width: 100%;
   height: 240px;
-  //background-color: #108fdd;
   max-height: 240px;
   overflow-y: auto;
 `;
 
 const ResultTemBox = styled.div`
   width: 100%;
-  height: 90px;
+  height: 130px;
   background-color: #f0f0f0;
   margin-top: 10px;
   border-radius: 10px;
@@ -162,5 +182,18 @@ const SearchBestContainer = styled.div`
     button {
     background: #7d7c7c;
     opacity: 1;
+  }
+`;
+
+const TempalteHeaderBox = styled.div`
+  width: inherit;
+  display: flex;
+
+  .templateTitle {
+    width: inherit;
+    color: rgba(45, 44, 56, 1);
+    font-weight: 800;
+    font-size: 16px;
+    height: 30px;
   }
 `;
