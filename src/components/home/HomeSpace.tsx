@@ -3,9 +3,8 @@ import spaceIcon from '@/assets/icons/home/space.svg';
 import userIcon from '@/assets/icons/home/user.svg';
 import arrowRightIcon from '@/assets/icons/home/arrowRight.svg';
 import { useNavigate } from 'react-router-dom';
-import { SpaceWall } from '@/types/home';
 
-export default function HomeSpace({ space }: { space?: SpaceWall }) {
+export default function HomeSpace({ memberName }: { memberName?: string }) {
   const navigate = useNavigate();
   return (
     <section className="mb-[40px]">
@@ -23,11 +22,11 @@ export default function HomeSpace({ space }: { space?: SpaceWall }) {
           </p>
           <div
             className="flex items-center justify-between hover ring-2 ring-offset-2 ring-blue"
-            onClick={() => navigate('/space', { state: space?.personal[0] })}
+            onClick={() => navigate('/space/personal')}
           >
             <div>
               <Icon src={userIcon} className="w-[16px] mr-[15px]" />
-              <span className="dm-16">{space?.personal[0]?.spaceTitle}</span>
+              <span className="dm-16">{memberName}</span>
             </div>
             <Icon src={arrowRightIcon} />
           </div>
@@ -43,9 +42,7 @@ export default function HomeSpace({ space }: { space?: SpaceWall }) {
             <div>
               <Icon src={userIcon} className="w-[16px] mr-[15px]" />
               <span className="dm-16 space-x-6">
-                {space?.organization.map((space) => (
-                  <span key={space.addSpaceId}>{space.spaceTitle}</span>
-                ))}
+                <span>단체스페이스</span>
               </span>
             </div>
             <Icon src={arrowRightIcon} />

@@ -1,126 +1,52 @@
 import { WallType } from '@/types/wall';
 
 export const wall: WallType = {
-  category: 'career',
+  category: 'personal',
   memberId: 1,
-  addSpaceId: 1,
+  spaceId: 1,
   shareURL: 'howooking',
   wallInfoBlock: {
-    wallInfoBlockId: 27,
-    wallInfoTitle: '개발자 이호우',
-    wallInfoDescription: '안녕하세요, 고양이 개발자 이호우입니다.',
-    wallInfoImgURL: null,
-    backgroundImgURL: null,
+    wallInfoBlockId: 9,
+    wallInfoTitle: '김현우',
+    wallInfoDescription: '안녕하세요. 백엔드 개발자 김현우입니다.',
+    wallInfoImgURL: 'https://avatars.githubusercontent.com/u/87072568?v=4',
+    backgroundImgURL:
+      'https://images.unsplash.com/photo-1696251143046-2d32fb985b59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80',
   },
   blocks: [
     {
-      blockUUID: '111',
-      blockType: 'freeBlock',
-      subData: [
-        {
-          freeBlockId: 27,
-          freeTitle: '자유블록은 자유롭고싶다.',
-          freeContent: '<p>자유블록의 자유는 없다.</p>',
-        },
-      ],
-    },
-    {
-      blockUUID: '222',
+      blockUUID: '1108fff1-0106-4340-b505-280e15626ecc',
       blockType: 'listBlock',
       subData: [
         {
-          listBlockId: 123,
-          listLabel: '프로그래밍 기술 스택',
-          listTitle: 'HTML',
-          listDescription: '고수',
+          listBlockId: 33,
+          listLabel: '학력/경력',
+          listTitle: '학력',
+          listDescription: '서울대학교',
           isLink: false,
         },
         {
-          listBlockId: 124,
-          listLabel: '',
-          listTitle: 'CSS',
-          listDescription: '중수',
-          isLink: false,
-        },
-        {
-          listBlockId: 125,
-          listLabel: '',
-          listTitle: 'JAVASCRIPT',
-          listDescription: '하수',
-          isLink: false,
-        },
-        {
-          listBlockId: 126,
-          listLabel: '',
-          listTitle: 'REACT',
-          listDescription: '입문',
-          isLink: false,
-        },
-        {
-          listBlockId: 127,
-          listLabel: '',
-          listTitle: '뷰',
-          listDescription: '문외한',
-          isLink: false,
-        },
-        {
-          listBlockId: 128,
-          listLabel: '',
-          listTitle: 'JAVA/SPRING',
-          listDescription: '마스터',
-          isLink: false,
+          listBlockId: 34,
+          listLabel: '학력/경력',
+          listTitle: '경력',
+          listDescription: 'https://www.naver.com',
+          isLink: true,
         },
       ],
     },
     {
-      blockUUID: '333',
-      blockType: 'snsBlock',
-      subData: [
-        {
-          snsBlockId: 77,
-          snsUUID: '444',
-          snsType: 'facebook',
-          snsURL: 'https://www.facebook.com/neocsv',
-        },
-        {
-          snsBlockId: 78,
-          snsUUID: '555',
-          snsType: 'instagram',
-          snsURL: 'https://www.instagram.com/shin0._.e/',
-        },
-        {
-          snsBlockId: 79,
-          snsUUID: '666',
-          snsType: 'empty',
-          snsURL: 'https://www.isLinkedin.com/in/drsohail269/',
-        },
-      ],
-    },
-    {
-      blockUUID: '777',
-      blockType: 'fileBlock',
-      subData: [
-        {
-          fileBlockId: 17,
-          fileTitle: '이력서',
-          fileDescription: '개발자 이력서 2023',
-          fileName: null,
-        },
-      ],
-    },
-    {
-      blockUUID: '888',
+      blockUUID: '4-0106-4340-b505-280e15626ecc',
       blockType: 'listBlock',
       subData: [
         {
-          listBlockId: 129,
+          listBlockId: 35,
           listLabel: '자격증',
           listTitle: '운전면허증',
           listDescription: '2종보통',
           isLink: false,
         },
         {
-          listBlockId: 130,
+          listBlockId: 36,
           listLabel: '자격증',
           listTitle: '바리스타자격증',
           listDescription: '스타벅스',
@@ -129,45 +55,93 @@ export const wall: WallType = {
       ],
     },
     {
-      blockUUID: '444bf0e4-b861-46c2-939e-c3db0ad1c402',
+      blockUUID: '7-0106-4340-b505-280e15626ecc',
+      blockType: 'freeBlock',
+      subData: [
+        {
+          freeBlockId: 13,
+          freeTitle: '자유블록 제목',
+          freeContent: '자유블록 내용',
+        },
+      ],
+    },
+    {
+      blockUUID: '8-0106-4340-b505-280e15626ecc',
+      blockType: 'freeBlock',
+      subData: [
+        {
+          freeBlockId: 14,
+          freeTitle: '자유블록 제목',
+          freeContent: '자유블록 내용',
+        },
+      ],
+    },
+    {
+      blockUUID: '9-0106-4340-b505-280e15626ecc',
       blockType: 'templateBlock',
       subData: [
         {
-          templateBlockId: 19,
-          templateUUID: 'f108fff1-d106-4340-b505-280e15626ecc',
+          templateBlockId: 17,
+          templateUUID: '0-0106-4340-b505-280e15626ecc',
           templateTitle: '자기소개서',
-          templateDescription: '내가 누구게',
-          hasAccessTemplateAuth: [],
-          hasDenyTemplateAuth: [],
+          templateDescription: '김현우님의 자기소개서입니다.',
         },
         {
-          templateBlockId: 20,
-          templateUUID: 'f108fff1-e106-4340-b505-280e15626ecc',
-          templateTitle: '이력서',
-          templateDescription: '이력없음',
-          hasAccessTemplateAuth: [],
-          hasDenyTemplateAuth: [],
+          templateBlockId: 18,
+          templateUUID: 'a-0106-4340-b505-280e15626ecc',
+          templateTitle: '문의하기',
+          templateDescription: '궁금한 점이나 제안할 내용을 작성해주세요.',
+        },
+      ],
+    },
+    {
+      blockUUID: 'b-0106-4340-b505-280e15626ecc',
+      blockType: 'snsBlock',
+      subData: [
+        {
+          snsBlockId: 25,
+          snsUUID: 'c-0106-4340-b505-280e15626ecc',
+          snsType: 'facebook',
+          snsURL: 'https://asdf.facebook.com',
+        },
+        {
+          snsBlockId: 26,
+          snsUUID: 'd-0106-4340-b505-280e15626ecc',
+          snsType: 'instagram',
+          snsURL: 'https://adfd.instagram.com',
+        },
+      ],
+    },
+    {
+      blockUUID: 'f108fff1-0106-4340-b505-280e15626ecc',
+      blockType: 'fileBlock',
+      subData: [
+        {
+          fileBlockId: 11,
+          fileTitle: '포트폴리오1',
+          fileDescription: '2022년 포트폴리오',
+          fileName: '',
         },
       ],
     },
   ],
   styleSetting: {
     backgroundSetting: {
-      backgroundSettingId: 18,
+      backgroundSettingBlockId: 7,
       solidColor: '#eeeeee',
       gradation: false,
       styleImgURL: null,
     },
     blockSetting: {
-      blockSettingId: 18,
+      blockSettingBlockId: 7,
       shape: '0px',
-      style: 'simple',
+      style: 'none',
       styleColor: '#ffffff',
       gradation: false,
     },
     themeSetting: {
-      themeSettingId: 18,
-      theme: 'modern',
+      themeSettingBlockId: 7,
+      theme: null,
     },
   },
 };

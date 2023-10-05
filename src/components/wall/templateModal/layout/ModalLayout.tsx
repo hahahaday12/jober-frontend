@@ -44,7 +44,6 @@ export const ModalOpen = () => {
           (block) => block.blockType === 'templateBlock',
         );
         draft.blocks[templateIndex].subData.push({
-          templateBlockId: 0,
           templateUUID: crypto.randomUUID(),
           templateTitle: selectedTemplate.templateTitle,
           templateDescription: selectedTemplate.templateDescription,
@@ -123,7 +122,7 @@ export const ModalOpen = () => {
                     placeholder="input search text"
                     onFocus={handleSearchFocus}
                     value={inputText}
-                    onChange={(e) => handleChangeText(e)}
+                    onChange={handleChangeText}
                   />
                 </InputBox>
 

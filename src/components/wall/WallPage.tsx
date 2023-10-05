@@ -55,6 +55,7 @@ export const WallPage = () => {
     setWall,
     setSortableBlocks,
   } = useFetchWallData(BlockMapper, isNew, wallId);
+
   const [tourOpen, setTourOpen] = useState(
     // true,
     !localStorage.getItem('hasVisited'),
@@ -142,6 +143,7 @@ export const WallPage = () => {
       <WallHeader
         tourPreviewRef={tourPreviewRef}
         tourMobilePreviewRef={tourMobilePreviewRef}
+        isNew={isNew}
       />
 
       {/* TODO : 로딩 */}

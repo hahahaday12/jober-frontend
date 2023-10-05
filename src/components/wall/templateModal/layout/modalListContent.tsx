@@ -38,7 +38,7 @@ export const ModalContents = () => {
   ));
 
   return (
-    <>
+    <div>
       <ContentsHeader>
         <p>{templateText.templateSetting}</p>
       </ContentsHeader>
@@ -60,7 +60,7 @@ export const ModalContents = () => {
         </SelectFolder>
         <ToggleBox>{toggleBoxes}</ToggleBox>
       </ContentsCenter>
-    </>
+    </div>
   );
 };
 

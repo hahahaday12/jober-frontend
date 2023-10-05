@@ -1,7 +1,7 @@
 export interface PostData {
   category: string;
   memberId: number;
-  addSpaceId: number;
+  spaceId: number;
   shareURL: string;
   wallInfoBlock: WallInfoBlock;
   blocks: Block[];

@@ -17,10 +17,12 @@ export default function WallHeaderInput({
     setWall({ ...wall, shareURL: e.target.value });
   };
 
+  console.log(wall);
+
   return (
     <Input
       className={`
-      rounded-[10px] bg-sky w-full overflow-hidden sm:flex-1 sm:static
+      rounded-[6px] bg-sky w-full overflow-hidden sm:flex-1 sm:static
       ${dropdownOpen ? 'block' : 'hidden sm:block'}
       `}
       addonBefore={

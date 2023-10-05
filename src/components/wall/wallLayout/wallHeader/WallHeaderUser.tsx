@@ -9,7 +9,7 @@ export default function WallHeaderUser() {
   return (
     <div
       className="flex items-center gap-[10px] hover"
-      onClick={() => navigate('/space')}
+      onClick={() => navigate('/space/personal')}
     >
       <div className="bg-sky w-[36px] h-[36px] flex justify-center items-center rounded-full">
         <Icon src={userIcon} />

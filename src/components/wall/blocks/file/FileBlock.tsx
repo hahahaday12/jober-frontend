@@ -10,7 +10,7 @@ import { SubDatum } from '@/types/wall';
 
 export type FileBlockSubDataType = Pick<
   SubDatum,
-  'fileTitle' | 'fileDescription' | 'fileName' | 'file'
+  'fileTitle' | 'fileDescription' | 'fileName' | 'file' | 'fileBlockId'
 >;
 
 type FileBlockProps = {
@@ -39,9 +39,8 @@ export const FileBlock = ({ blockUUID }: FileBlockProps) => {
     const { name, value } = e.target;
     setWall(
       produce(wall, (draft) => {
-        draft.blocks[tragetFileBlockIndex].subData[0][
-          name as keyof FileBlockSubDataType
-        ] = value;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (draft.blocks[tragetFileBlockIndex].subData[0] as any)[name] = value;
       }),
     );
   };
