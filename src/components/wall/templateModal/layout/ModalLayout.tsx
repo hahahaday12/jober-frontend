@@ -21,7 +21,7 @@ export const ModalOpen = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [inputText, setInputText] = useState<string>('');
   const { wall, setWall } = useWallStore();
-  const { selectedTemplate } = useTemplateStore();
+  const { selectedTemplate, setSelectedTemplate } = useTemplateStore();
 
   const PROCEDURE_MAPPER = {
     recommand: <BestTemplate PERSONAL={''} />,
@@ -50,6 +50,12 @@ export const ModalOpen = () => {
         });
       }),
     );
+    setSelectedTemplate({
+      category: '',
+      templateId: '',
+      templateTitle: '',
+      templateDescription: '',
+    });
   };
 
   const handleContents = () => {
@@ -149,7 +155,7 @@ const Modals = styled(Modal)`
     padding-bottom: 106px;
   }
 
-  .ant-modal-footer{
+  .ant-modal-footer {
     position: absolute;
     right: 70px;
     top: 5px;
