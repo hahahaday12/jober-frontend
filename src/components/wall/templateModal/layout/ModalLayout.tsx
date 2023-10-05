@@ -148,7 +148,7 @@ const Modals = styled(Modal)`
     flex-direction: column;
     padding-bottom: 106px;
   }
-
+  
   :where(.css-dev-only-do-not-override-847yc7).ant-btn-default {
     border: 1px solid red;
     color: red;

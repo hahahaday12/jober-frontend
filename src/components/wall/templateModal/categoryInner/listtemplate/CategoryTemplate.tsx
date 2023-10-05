@@ -51,7 +51,7 @@ export const CategoryTemplate = () => {
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
-    setCategoryList([]); // clear categoryList if needed
+    setCategoryList([]);
     // 데이터를 다시 가져옵니다.
     mutate(category);
   };
@@ -108,7 +108,6 @@ const Categorybox = styled.div`
     margin: auto;
     padding: 10px;
 
-
     li {
       display: flex;
       align-items: center;
@@ -126,7 +125,6 @@ const Categorybox = styled.div`
       background-color: rgba(36, 147, 251, 1);
       font-weight: 700;
       color: #ffff;
-      
     }
   }
 `;
