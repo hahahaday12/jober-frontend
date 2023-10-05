@@ -42,8 +42,6 @@ type TemplateState = {
     templateTitle: string;
     templateDescription: string;
   }) => void;
-  newStatus: boolean;
-  setNewStatus: (newStatus: boolean) => void;
 };
 
 export const useTemplateStore = create<TemplateState>((set) => ({
@@ -54,6 +52,4 @@ export const useTemplateStore = create<TemplateState>((set) => ({
     templateDescription: '',
   },
   setSelectedTemplate: (template) => set({ selectedTemplate: template }),
-  newStatus: false,
-  setNewStatus: (newStatus) => set({ newStatus }),
 }));
