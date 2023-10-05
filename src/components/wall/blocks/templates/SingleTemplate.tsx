@@ -4,6 +4,8 @@ import trashIcon from '@/assets/icons/trash.svg';
 import moreVerticalIcon from '@/assets/icons/more-vertical.svg';
 import { useWallStore } from '@/store';
 import { produce } from 'immer';
+import { Popover } from 'antd';
+import { AccessModal } from '../../templateModal/accessInner/AccessModal';
 
 type SingleTemplateProps = {
   templateTitle?: string;
@@ -38,6 +40,12 @@ export default function SingleTemplate({
     );
   };
 
+  const content = (
+    <div className="w-[80px]">
+      <AccessModal />
+    </div>
+  );
+
   return (
     <BlockContainer blockName="template">
       <div className="sm:h-[210px] h-[115px] p-block">
@@ -50,7 +58,9 @@ export default function SingleTemplate({
                 className="hover"
                 onClick={handleDeleteBlock}
               />
-              <Icon src={moreVerticalIcon} className="hover" />
+              <Popover placement="bottomLeft" content={content} trigger="click">
+                <Icon src={moreVerticalIcon} className="hover" />
+              </Popover>
             </div>
           )}
         </div>
