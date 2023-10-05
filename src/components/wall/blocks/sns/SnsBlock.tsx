@@ -68,7 +68,7 @@ export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
         <div className="flex gap-[16px] sm:gap-[16px] justify-center">
           {snsData?.map((sns) => (
             <Popconfirm
-              key={sns.snsBlockId}
+              key={sns.snsUUID}
               title="SNS 연결해제"
               description={`정말로 ${sns.snsType} 연결을 해제하시겠습니까?`}
               showCancel={false}

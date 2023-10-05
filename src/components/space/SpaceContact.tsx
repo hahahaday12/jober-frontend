@@ -7,39 +7,93 @@ import addIcon from '@/assets/icons/space/add.svg';
 import arrowdownIcon from '@/assets/icons/space/arrowdown.svg';
 import polygonIcon from '@/assets/icons/space/polygon.svg';
 import lineIcon from '@/assets/icons/space/line.svg';
-//import userIcon from '@/assets/icons/user.svg';
 import userIcon from '@/assets/icons/user.svg';
-import { useWallStore } from '@/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { getSpace } from '@/api/space';
+import TempSaveModal from './TempSaveModal';
 
-export default function SpaceContact({ space }: { spcae: any }) {
-  const navigate = useNavigate();
-  const { setIsEdit } = useWallStore();
-  const handleNextStep = () => {
-    // if (space.length > 0) {
-    //   navigate(`/wall/${space[0].addSpaceId}`);
-    // }
-    navigate(`/category`);
-    setIsEdit(true);
+type MemberInfo = {
+  member: {
+    memberId: number;
+    memberName: string;
+    memberProfileImageUrl: null;
+    memberShip: string;
   };
-  console.log(space);
+  spaceWall: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    organization: any;
+    // TODO
+    personal: { spaceId: number; spaceType: string; spaceTitle: string }[];
+  };
+};
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const response = fetch('');
-  //   };
-  // }, []);
+export default function SpaceContact({
+  memberInfo,
+}: {
+  memberInfo: MemberInfo | null;
+}) {
+  const hasSpace = memberInfo && memberInfo?.spaceWall.personal.length > 0;
+  const navigate = useNavigate();
+  const [spaceWallId, setSpaceWallId] = useState<number | undefined>();
+  const [isTempModalOpen, setIsTempModalOpen] = useState(false);
+
+  const handleNextStep = async () => {
+    // TODO
+    if (!hasSpace) {
+      navigate(`/wall/${spaceWallId}`);
+      return;
+    }
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_BASE_URL}/wall-temporary/storage/${
+          memberInfo?.member.memberId as number
+        }/${memberInfo?.spaceWall.personal[0].spaceId as number}`,
+      );
+      if (response.ok) {
+        navigate(`/category`);
+        return;
+      }
+      setIsTempModalOpen(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const getData = async () => {
+      console.log(memberInfo?.member.memberId);
+      try {
+        const response = await getSpace(
+          memberInfo?.member.memberId as number,
+          memberInfo?.spaceWall.personal[0].spaceId as number,
+          memberInfo?.spaceWall.personal[0].spaceType as string,
+        );
+        setSpaceWallId(response.data.spaceWallId);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getData();
+  }, [memberInfo?.member.memberId, memberInfo?.spaceWall.personal]);
 
   return (
     <div className="bg-sky min-h-screen pl-[24px] pt-[70px]">
+      <TempSaveModal
+        spaceWallId={spaceWallId}
+        isTempModalOpen={isTempModalOpen}
+        setIsTempModalOpen={setIsTempModalOpen}
+        memberInfo={memberInfo}
+      />
       <div className="bg-white px-[24px] py-[22px] rounded-tl-[24px] rounded-bl-[24px] min-h-[calc(100vh-99px)] ">
         {/* 공유페이지 생성, 검색 */}
         <div className="flex items-center justify-between border-lightBlack border-solid border-b-[1px] pb-[15px] mb-[15px]">
           <div
-            className="flex items-center gap-[3px] hover"
+            className="flex items-center gap-[3px] hover ring-2 ring-blue ring-offset-2"
             onClick={handleNextStep}
           >
-            <div className="w-[100px] dm-16">공유페이지 생성</div>
+            <div className="dm-16">
+              {!hasSpace ? '공유페이지 이동' : '공유페이지 생성'}
+            </div>
             <Icon src={circleArrowRightIcon} />
           </div>
           <div className="flex items-center gap-2">

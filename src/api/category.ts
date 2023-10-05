@@ -1,9 +1,4 @@
-import { customAxios } from './customAxios';
-
-export const hasWallTemporary = async (
-  memberId: string,
-  addSpaceId: string,
-) => {
+export const hasWallTemporary = async (memberId: string) => {
   // eslint-disable-next-line no-useless-catch
   try {
     const response = await fetch(

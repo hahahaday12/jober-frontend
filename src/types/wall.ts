@@ -1,7 +1,7 @@
 export type WallType = {
   category: string;
   memberId: number;
-  addSpaceId: number;
+  spaceId: number;
   shareURL: string;
   wallInfoBlock: WallInfoBlock;
   blocks: Block[];
@@ -41,6 +41,7 @@ export interface SubDatum {
   freeTitle?: string;
   freeContent?: string;
   listBlockId?: number;
+  listUUID?: string;
   listLabel?: string;
   listTitle?: string;
   listDescription?: string;
@@ -52,7 +53,8 @@ export interface SubDatum {
   fileBlockId?: number;
   fileTitle?: string;
   fileDescription?: string;
-  fileName?: null;
+  file?: string | null;
+  fileName?: null | string;
   templateBlockId?: number;
   templateUUID?: string;
   templateTitle?: string;
@@ -68,14 +70,14 @@ export interface StyleSetting {
 }
 
 export interface BackgroundSetting {
-  backgroundSettingId: number;
+  backgroundSettingBlockId: number;
   solidColor: string;
   gradation: boolean;
   styleImgURL: null | string;
 }
 
 export interface BlockSetting {
-  blockSettingId: number;
+  blockSettingBlockId: number;
   shape: string;
   style: string;
   styleColor: string;
@@ -83,7 +85,7 @@ export interface BlockSetting {
 }
 
 export interface ThemeSetting {
-  themeSettingId: number;
+  themeSettingBlockId: number;
   theme: string | null;
 }
 

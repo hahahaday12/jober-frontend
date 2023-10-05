@@ -14,7 +14,7 @@ export default function ConfirmCancelModal({
 
   const handleDeleteWall = () => {
     setIsConfirmCancelModalOpen(false);
-    navigate('/category');
+    navigate('/space/personal');
   };
 
   return (

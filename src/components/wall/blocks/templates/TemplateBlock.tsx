@@ -35,8 +35,9 @@ export const TemplateBlock = ({
         gap-[8px] grid sm:grid-cols-2 grid-cols-1
         `}
       >
-        {templateBlockSubData?.map((template) => (
+        {templateBlockSubData?.map((template, id) => (
           <SingleTemplate
+            isFirst={id === 0}
             key={template.templateUUID}
             templateTitle={template.templateTitle}
             templateDescription={template.templateDescription}

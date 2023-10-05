@@ -7,7 +7,7 @@ import { Icon } from '@/components/common';
 import { useState } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 
-interface ImageData {
+export type ImageData = {
   access_mode: string;
   asset_id: string;
   bytes: number;
@@ -28,11 +28,10 @@ interface ImageData {
   version: number;
   version_id: string;
   width: number;
-}
+};
 
 export const ProfileImage = () => {
   const [messageApi, contextHolder] = message.useMessage();
-
   const { wall, setWall, isEdit } = useWallStore();
   const [isUploading, setIsUploading] = useState(false);
 
@@ -77,7 +76,7 @@ export const ProfileImage = () => {
             }),
           );
           console.log('Upload successful:', data);
-          message.success('d');
+          message.success('이미지를 업로드하였습니다.');
         } catch (err) {
           console.error('Error uploading image:', err);
         } finally {

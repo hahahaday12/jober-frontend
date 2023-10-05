@@ -5,7 +5,7 @@ import { produce } from 'immer';
 import { useState } from 'react';
 import { AddableBlock } from './AddableBlock';
 import { ModalHeader } from '@/components/common/ModalHeader';
-import { Block, BlockType, SubDatumType } from '@/types/wall';
+import { Block, BlockType, SubDatum } from '@/types/wall';
 
 interface AddBlockModalProps {
   setIsAddBlockModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -44,7 +44,7 @@ export const AddBlockModal = ({
         const newBlock: Block = {
           blockType: selectedBlock as BlockType,
           blockUUID: crypto.randomUUID(),
-          subData: DEFAULT_BLOCKS[selectedBlock] as SubDatumType[],
+          subData: DEFAULT_BLOCKS[selectedBlock] as SubDatum[],
         };
         draft.blocks.push(newBlock);
       }),

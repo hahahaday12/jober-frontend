@@ -1,18 +1,16 @@
 import { useNavigate } from 'react-router-dom';
-import { useMemo, useState } from 'react';
-import { Button } from 'antd';
+import { useState } from 'react';
+import { Button, message } from 'antd';
 import { CategoryCard } from 'components/index';
 import { CATEGORIES } from '@/data/constants/category';
-import useMessage from 'antd/es/message/useMessage';
 import { useWallStore } from '@/store';
 import { DEFAULT_WALL } from '@/data/constants/blocks';
 
 export const CategoryPage = () => {
   const { setWall, setIsEdit } = useWallStore();
-  const [messageApi, contextHolder] = useMessage();
+  const [messageApi, contextHolder] = message.useMessage();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const navigate = useNavigate();
-  const addSpaceId = useMemo(() => crypto.randomUUID().replace(/-/g, ''), []);
 
   const handleSelectCategory = (category: string) => {
     setSelectedCategory(category);
@@ -25,13 +23,13 @@ export const CategoryPage = () => {
     }
     setWall({
       ...DEFAULT_WALL[selectedCategory],
-      shareURL: addSpaceId,
+      shareURL: crypto.randomUUID().replace(/-/g, ''),
       isPublic: true,
       category: selectedCategory,
       memberId: '1',
     });
     setIsEdit(true);
-    navigate(`/wall/${addSpaceId}`, { state: { isNew: true } });
+    navigate(`/wall/new`, { state: { isNew: true } });
   };
 
   return (
@@ -58,12 +56,6 @@ export const CategoryPage = () => {
               isSelected={category.value === selectedCategory}
             />
           ))}
-          <Button
-            className="db-16 text-gray88 rounded-full h-[49px] w-[119px] block sm:hidden mx-auto"
-            onClick={handleCreateWall}
-          >
-            작성하기
-          </Button>
         </ul>
 
         <Button

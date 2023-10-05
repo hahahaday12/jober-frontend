@@ -1,18 +1,36 @@
+import useMemberInfo from '@/hooks/useMemberInfo';
 import { useWallStore } from '@/store';
 import { Button, message } from 'antd';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type WallHeaderEditButtonsProps = {
   tourPreviewRef?: React.MutableRefObject<null>;
   footer?: boolean;
+  isNew?: boolean;
 };
 
 export default function WallHeaderEditButtons({
   tourPreviewRef,
   footer,
+  isNew,
 }: WallHeaderEditButtonsProps) {
+  const navigate = useNavigate();
   const { wall, setIsEdit, isPreview, setIsPreview, isEdit } = useWallStore();
+  const { memberInfo } = useMemberInfo();
+  const newWall = { ...wall, spaceId: 1 };
+  const updateWall = {
+    ...wall,
+    spaceId: 1,
+    spaceWallId: 52,
+    styleSetting: {
+      ...wall.styleSetting,
+      styleSettingBlockId: 1,
+    },
+  };
+  console.log(updateWall);
   const [saving, setSaving] = useState(false);
+  const [tempSaving, setTempSaving] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
   const handlePreview = () => {
@@ -20,18 +38,51 @@ export default function WallHeaderEditButtons({
     setIsEdit(!isEdit);
   };
 
-  const handleTempSave = () => {};
-
-  const handleSave = async () => {
-    setSaving(true);
+  const handleTempSave = async () => {
+    setTempSaving(true);
     try {
-      await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/wall`, {
-        method: 'PUT',
+      await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/wall-temporary`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: wall }),
+        body: JSON.stringify({
+          data: {
+            ...wall,
+            spaceId: memberInfo?.spaceWall.personal[0].spaceId,
+          },
+        }),
       });
+      message.success('임시저장이 되었습니다.');
+    } catch (error) {
+      console.log(error);
+      messageApi.error('임시저장에 실패했습니다.');
+    } finally {
+      navigate(`/space/personal`);
+      setTempSaving(false);
+      setIsEdit(false);
+      setIsPreview(false);
+    }
+  };
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_BASE_URL}/wall`,
+        {
+          method: isNew ? 'POST' : 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            data: isNew ? newWall : updateWall,
+          }),
+        },
+      );
+      if (response.ok) {
+        const data = await response.json();
+        navigate(`/wall/${data.data.spaceWallId}`);
+      }
     } catch (error) {
       console.log(error);
       messageApi.error({ content: '저장 실패' });
@@ -41,35 +92,6 @@ export default function WallHeaderEditButtons({
       setIsPreview(false);
     }
   };
-
-  // multipart/form-data json 같이 보내기 (서버 완성되면 수정할 예정)
-  // const handleSave = async () => {
-  //   setSaving(true);
-  //   const formData = new FormData();
-  //   formData.append('pro', wall.profileBlock.profileImageUrl);
-  //   // formData.append('profileImage', wall.profileBlock.profileImageUrl);
-  //   const jsonData = JSON.stringify(wall);
-  //   // formData.append(
-  //   //   'jsonData',
-  //   //   new Blob([jsonData], { type: 'application/json' }),
-  //   // );
-  //   formData.append('jsonData', JSON.stringify(jsonData));
-  //   try {
-  //     const res = await axios.post('http://localhost:4000/wall', formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data', // 세팅 안해야될수도 있음
-  //       },
-  //     });
-  //     console.log(res);
-  //   } catch (error) {
-  //     console.log(error);
-  //     message.error({ content: '저장 실패' });
-  //   } finally {
-  //     setSaving(false);
-  //     // location.reload();
-  //     toggleEdit();
-  //   }
-  // };
 
   return (
     <>
@@ -86,6 +108,7 @@ export default function WallHeaderEditButtons({
           <Button
             className="dm-14 text-blue border-blue"
             onClick={handleTempSave}
+            loading={tempSaving}
           >
             임시저장
           </Button>

@@ -34,9 +34,9 @@ export const SnsBlockModal = ({
 
   const handleOk = () => {
     const newSns: SnsBlockSubData = {
-      snsBlockUUID: crypto.randomUUID(),
+      snsUUID: crypto.randomUUID(),
       snsType: selectedSns,
-      snsUrl: `https://${ADDABLE_SNSS[selectedSns].url}${snsInput}`,
+      snsURL: `https://${ADDABLE_SNSS[selectedSns].url}${snsInput}`,
     };
     const snsBlockIndex = wall.blocks.findIndex(
       (block) => block.blockType === 'snsBlock',

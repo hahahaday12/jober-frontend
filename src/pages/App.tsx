@@ -1,4 +1,3 @@
-import koKR from 'antd/locale/ko_KR';
 import { ConfigProvider } from 'antd';
 import { Route, Routes } from 'react-router-dom';
 import UIUX from '../UIUX';
@@ -11,22 +10,14 @@ export const App = () => {
         token: {
           colorPrimary: '#2493FB',
         },
-        components: {
-          Button: {
-            borderRadius: 2,
-          },
-          Input: {
-            borderRadius: 9,
-          },
-        },
       }}
-      locale={koKR}
     >
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/uiux" element={<UIUX />} />
+        <Route path="/space/personal" element={<Space />} />
         <Route path="/category" element={<Category />} />
-        <Route path="/space" element={<Space />} />
+        <Route path="/uiux" element={<UIUX />} />
+        <Route path="wall/temp" element={<WallAllPage />} />
         <Route path="wall/:wallId" element={<WallAllPage />} />
       </Routes>
     </ConfigProvider>
