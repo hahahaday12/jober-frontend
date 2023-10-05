@@ -38,7 +38,7 @@ export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
     !isEdit && window.open(snsUrl, '_blank');
   };
 
-  const handleDeleteSingleSns = (snsBlockId: number) => {
+  const handleDeleteSingleSns = (snsUUID: string) => {
     const snsBlockIndex = wall.blocks.findIndex(
       (block) => block.blockType === 'snsBlock',
     );
@@ -47,7 +47,7 @@ export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
         produce(wall, (draft) => {
           draft.blocks[snsBlockIndex].subData = draft.blocks[
             snsBlockIndex
-          ].subData.filter((sns) => sns.snsBlockId !== snsBlockId);
+          ].subData.filter((sns) => sns.snsUUID !== snsUUID);
         }),
       );
     }
@@ -72,7 +72,7 @@ export const SnsBlock = ({ blockUUID, subData: snsData }: SnsBlockProps) => {
               title="SNS 연결해제"
               description={`정말로 ${sns.snsType} 연결을 해제하시겠습니까?`}
               showCancel={false}
-              onConfirm={() => handleDeleteSingleSns(sns.snsBlockId as number)}
+              onConfirm={() => handleDeleteSingleSns(sns.snsUUID as string)}
               disabled={!isEdit}
               okButtonProps={{ danger: true }}
               okText="해제"

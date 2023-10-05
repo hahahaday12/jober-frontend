@@ -52,7 +52,7 @@ export default function SingleTemplate({
       <div className="sm:h-[210px] h-[115px] p-block">
         <div className="flex items-center justify-between mb-[12px]">
           <h4 className="db-18 sm:db-20">{templateTitle}</h4>
-          {isEdit && (
+         {isEdit && (
             <div className="flex sm:gap-[8px] gap-[6px]">
               <Icon
                 src={trashIcon}
