@@ -148,32 +148,11 @@ const Modals = styled(Modal)`
     flex-direction: column;
     padding-bottom: 106px;
   }
-  
-  :where(.css-dev-only-do-not-override-847yc7).ant-btn-default {
-    border: 1px solid red;
-    color: red;
-  }
 
-  :where(.css-dev-only-do-not-override-847yc7).ant-btn-primary {
-    margin-bottom: 0;
-    margin-inline-start: 8px;
-    background-color: #2493fb;
-    position: relative;
-    left: 420px;
-  }
-
-  :where(.css-dev-only-do-not-override-847yc7).seeTemplate {
+  .ant-modal-footer{
     position: absolute;
-    right: 150px;
-    top: 22px;
-    background-color: #ffff;
-    color: rgba(136, 136, 136, 1);
-    border: 1px solid rgba(136, 136, 136, 1);
-  }
-
-  .ant-modal-footer {
-    top: 10px;
-    position: absolute;
+    right: 70px;
+    top: 5px;
   }
 `;
 
