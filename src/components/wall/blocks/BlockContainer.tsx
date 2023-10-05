@@ -17,16 +17,6 @@ export const BlockContainer = ({
 }: BlockContainerProps) => {
   const { isEdit, wall, setWall } = useWallStore();
 
-  const handleDeleteBlock = () => {
-    setWall(
-      produce(wall, (draft) => {
-        draft.blocks = draft.blocks.filter(
-          (block) => block.blockUUID !== blockUUID,
-        );
-      }),
-    );
-  };
-
   const defaultBlocks =
     blockName === 'wallInfoBlock' || blockName === 'addButton';
   const templateBlock = blockName === 'templateBlock';
@@ -38,6 +28,16 @@ export const BlockContainer = ({
   const templateBlockBackground = '#d1d0d0';
 
   const isDark = wall?.styleSetting?.themeSetting?.theme === 'dark';
+
+  const handleDeleteBlock = () => {
+    setWall(
+      produce(wall, (draft) => {
+        draft.blocks = draft.blocks.filter(
+          (block) => block.blockUUID !== blockUUID,
+        );
+      }),
+    );
+  };
 
   return (
     <div

@@ -5,11 +5,11 @@ import useMemberInfo from '@/hooks/useMemberInfo';
 
 export const Home = () => {
   const { memberInfo } = useMemberInfo();
-  console.log(memberInfo);
+
   return (
     <div className="px-[24px] py-[22px] break-keep">
       <HomeProfile member={memberInfo?.member} />
-      <HomeSpace space={memberInfo?.spaceWall} />
+      <HomeSpace memberName={memberInfo?.member.memberName} />
       <HomeRecentDocument />
     </div>
   );

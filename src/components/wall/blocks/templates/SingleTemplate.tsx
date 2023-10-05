@@ -9,12 +9,14 @@ type SingleTemplateProps = {
   templateTitle?: string;
   templateDescription?: string;
   templateUUID?: string;
+  isFirst: boolean;
 };
 
 export default function SingleTemplate({
   templateUUID,
   templateTitle,
   templateDescription,
+  isFirst,
 }: SingleTemplateProps) {
   const { isEdit, wall, setWall } = useWallStore();
 
@@ -45,11 +47,14 @@ export default function SingleTemplate({
           <h4 className="db-18 sm:db-20">{templateTitle}</h4>
           {isEdit && (
             <div className="flex sm:gap-[8px] gap-[6px]">
-              <Icon
-                src={trashIcon}
-                className="hover"
-                onClick={handleDeleteBlock}
-              />
+              {!isFirst && (
+                <Icon
+                  src={trashIcon}
+                  className="hover"
+                  onClick={handleDeleteBlock}
+                />
+              )}
+
               <Icon src={moreVerticalIcon} className="hover" />
             </div>
           )}

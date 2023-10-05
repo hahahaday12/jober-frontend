@@ -38,7 +38,7 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
       produce(wall, (draft) => {
         if (targetListBlockIndex !== -1) {
           const newList = {
-            listBlockUUID: crypto.randomUUID(),
+            listUUID: crypto.randomUUID(),
             listLabel: '',
             listTitle: '',
             listDescription: '',
@@ -83,12 +83,12 @@ export const ListBlock = ({ blockUUID }: ListBlockProps) => {
           {targetListBlock.subData.map((list, id) => (
             <SingleList
               id={id}
+              key={list.listUUID}
               targetListBlockIndex={targetListBlockIndex}
-              listBlockId={list.listBlockId}
-              key={list.listBlockId}
+              listUUID={list.listUUID}
               listTitle={list.listTitle}
               listDescription={list.listDescription}
-              isLink={list.link}
+              isLink={list.isLink}
             />
           ))}
         </div>

@@ -8,14 +8,13 @@ import MoreVerticalPopover from './popover/MoreVerticalPopover';
 import WallHeaderPopoverTriggers from './WallHeaderPopoverTriggers';
 
 export const WallHeaderActions = () => {
-  const { setIsEdit, wall } = useWallStore();
+  const { setIsEdit } = useWallStore();
 
   const [verticalMorePopoevrOpen, setVerticalMorePopoevrOpen] = useState(false);
   const handleVerticalMorePopoevrOpenChange = (newOpen: boolean) => {
     setVerticalMorePopoevrOpen(newOpen);
     if (!newOpen) {
       // TODO : 저장 PUT request
-      console.log(wall.isPublic, '저장');
     }
   };
 

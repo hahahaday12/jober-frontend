@@ -12,7 +12,7 @@ export const BlockSettings = ({
   setBlockOptions: React.Dispatch<React.SetStateAction<'solid' | 'gradation'>>;
 }) => {
   const { wall, setWall } = useWallStore();
-  const isThemeSelected = wall?.styleSetting?.themeSetting;
+  const isThemeSelected = wall?.styleSetting?.themeSetting.theme;
   const handleBlockColorPick = (backgroundColor: Color) => {
     const bgColor =
       typeof backgroundColor === 'string'
@@ -54,7 +54,6 @@ export const BlockSettings = ({
         draft.styleSetting.themeSetting.theme = null;
       }),
     );
-    console.log(e.target.value);
   };
 
   // 블록-스타일
@@ -68,7 +67,6 @@ export const BlockSettings = ({
         draft.styleSetting.themeSetting.theme = null;
       }),
     );
-    console.log(e.target.value);
   };
 
   return (
@@ -103,20 +101,24 @@ export const BlockSettings = ({
           {BLOCK_STYLE.map((style) => (
             <label
               key={style}
-              className={`${style} bg-lightGray sm:w-[194px] w-full h-[30px] block hover ${
-                wall.styleSetting.blockSetting.style === style &&
-                !isThemeSelected &&
-                'ring-blue ring-2 ring-offset-2'
-              }`}
+              className={`${style} bg-lightGray sm:w-[194px] w-full h-[30px] block hover `}
             >
-              <input
-                className="hidden"
-                type="radio"
-                name="style"
-                value={style}
-                checked={wall.styleSetting.blockSetting.style === style}
-                onChange={handleStyle}
-              />
+              <div
+                className={`${
+                  wall.styleSetting.blockSetting.style === style &&
+                  !isThemeSelected &&
+                  'ring-2 ring-blue h-[30px] ring-offset-2'
+                }`}
+              >
+                <input
+                  className="hidden"
+                  type="radio"
+                  name="style"
+                  value={style}
+                  checked={wall.styleSetting.blockSetting.style === style}
+                  onChange={handleStyle}
+                />
+              </div>
             </label>
           ))}
           <div className="text-center items-center dm-16 mt-[8px]">스타일</div>
@@ -140,6 +142,9 @@ export const BlockSettings = ({
             <ColorPicker
               value={wall.styleSetting.blockSetting.styleColor}
               onChange={handleBlockColorPick}
+              getPopupContainer={undefined}
+              autoAdjustOverflow={undefined}
+              destroyTooltipOnHide={undefined}
             >
               <Button
                 type="primary"
@@ -167,6 +172,9 @@ export const BlockSettings = ({
             <ColorPicker
               value={wall.styleSetting.blockSetting.styleColor}
               onChange={handleBlockGradationPick}
+              getPopupContainer={undefined}
+              autoAdjustOverflow={undefined}
+              destroyTooltipOnHide={undefined}
             >
               <Button
                 type="primary"

@@ -4,9 +4,13 @@ import galleryIcon from '@/assets/icons/gallery.svg';
 import { message } from 'antd';
 import { IMAGE_FILE_SIZE_LIMIT } from '@/data/constants/blocks';
 import { Icon } from '@/components/common';
+import { useState } from 'react';
+import { ImageData } from '..';
+import { LoadingOutlined } from '@ant-design/icons';
 
 export const BackgroundImage = () => {
   const { wall, setWall, isEdit } = useWallStore();
+  const [isUploading, setIsUploading] = useState(false);
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -17,19 +21,48 @@ export const BackgroundImage = () => {
       return;
     }
     const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === FileReader.DONE) {
-        setWall(
-          produce(wall, (draft) => {
-            draft.wallInfoBlock.backgroundImgURL = reader.result as string;
-          }),
-        );
-      }
-    };
     if (imageFile) {
       reader.readAsDataURL(imageFile);
-      messageApi.success('배경이미지를 변경하였습니다');
     }
+    reader.onload = async () => {
+      if (reader.readyState === FileReader.DONE) {
+        if (!reader.result) return;
+        setIsUploading(true);
+        const formData = new FormData();
+        formData.append('file', reader.result as string);
+        formData.append(
+          'upload_preset',
+          import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET,
+        );
+        try {
+          const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${
+              import.meta.env.VITE_CLOUDINARY_API
+            }/image/upload`,
+            {
+              method: 'POST',
+              body: formData,
+            },
+          );
+          if (!response.ok) {
+            throw new Error('Upload failed');
+          }
+          const data: ImageData = await response.json();
+          console.log(data);
+          setWall(
+            produce(wall, (draft) => {
+              draft.wallInfoBlock.backgroundImgURL = data.url;
+            }),
+          );
+          console.log('Upload successful:', data);
+          message.success('이미지를 업로드하였습니다.');
+        } catch (err) {
+          console.error('Error uploading image:', err);
+        } finally {
+          setIsUploading(false);
+        }
+      }
+    };
   };
 
   return (
@@ -49,7 +82,7 @@ export const BackgroundImage = () => {
 
       {isEdit && (
         <label className="hover absolute top-[20px] right-[20px] bg-white w-[36px] h-[36px] rounded-full flex justify-center items-center">
-          <Icon src={galleryIcon} />
+          {isUploading ? <LoadingOutlined /> : <Icon src={galleryIcon} />}
           <input
             type="file"
             className="hidden"

@@ -16,7 +16,7 @@ export interface SpaceWall {
 }
 
 export interface Organization {
-  addSpaceId: number;
+  spaceId: number;
   spaceType: string;
   spaceTitle: string;
 }

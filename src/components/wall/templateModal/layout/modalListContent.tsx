@@ -6,7 +6,7 @@ export const ModalContents = () => {
   const { selectedTemplate } = useTemplateStore();
 
   return (
-    <>
+    <div>
       <ContentsHeader>
         <p>{templateText.templateSetting}</p>
       </ContentsHeader>
@@ -24,7 +24,7 @@ export const ModalContents = () => {
           <p>{selectedTemplate.category}</p>
         </SelectFolder>
       </ContentsCenter>
-    </>
+    </div>
   );
 };
 

@@ -13,11 +13,13 @@ import ConfirmCancelModal from './ConfirmCancelModal';
 type WallHeaderProps = {
   tourPreviewRef: React.MutableRefObject<null>;
   tourMobilePreviewRef: React.MutableRefObject<null>;
+  isNew: boolean;
 };
 
 export const WallHeader = ({
   tourPreviewRef,
   tourMobilePreviewRef,
+  isNew,
 }: WallHeaderProps) => {
   const { isEdit, setIsEdit, isPreview, getWall } = useWallStore();
 
@@ -40,10 +42,10 @@ export const WallHeader = ({
     >
       <div className="w-full max-w-[866px] mx-[24px] sm:mx-auto">
         {isPreview ? (
-          <div className="flex gap-[73px] items-center">
+          <div className="flex justify-between gap-10 items-center">
             <WallHeaderUser />
             <WallHeaderInput />
-            <WallHeaderEditButtons />
+            <WallHeaderEditButtons isNew={isNew} />
             <Icon
               src={closeIcon}
               className="absolute top-[21px] right-[30px] hover hidden sm:block"
@@ -63,10 +65,13 @@ export const WallHeader = ({
             )}
 
             {isEdit && (
-              <div className="flex flex-col gap-2 sm:flex-row sm:gap-[73px] sm:items-center relative sm:static">
+              <div className="flex flex-col gap-2 sm:gap-10 sm:flex-row sm:justify-between sm:items-center relative sm:static">
                 <WallHeaderUser />
                 <WallHeaderInput dropdownOpen={dropdownOpen} />
-                <WallHeaderEditButtons tourPreviewRef={tourPreviewRef} />
+                <WallHeaderEditButtons
+                  tourPreviewRef={tourPreviewRef}
+                  isNew={isNew}
+                />
                 <Icon
                   src={closeIcon}
                   className="absolute top-[21px] right-[30px] hover hidden sm:block"

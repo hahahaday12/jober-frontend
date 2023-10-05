@@ -2,7 +2,7 @@
   "data": {
     "category": "personal",
     "memberId": 1,
-    "addSpaceId": 1,
+    "spaceId": 1,
     "shareURL": "howooking",
     "wallInfoBlock": {
       "wallInfoTitle": "김현우",
@@ -10,7 +10,6 @@
       "wallInfoImgURL": "https://avatars.githubusercontent.com/u/87072568?v=4",
       "backgroundImgURL": "https://images.unsplash.com/photo-1696251143046-2d32fb985b59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
     },
-
     "blocks": [
       {
         "blockUUID": "1108fff1-0106-4340-b505-280e15626ecc",
@@ -27,7 +26,7 @@
             "listUUID": "3108fff1-0106-4340-b505-280e15626ecc",
             "listLabel": "학력/경력",
             "listTitle": "경력",
-            "listDescription": "www.naver.com",
+            "listDescription": "https://www.naver.com",
             "isLink": true
           }
         ]
@@ -95,12 +94,12 @@
           {
             "snsUUID": "c-0106-4340-b505-280e15626ecc",
             "snsType": "facebook",
-            "snsURL": "asdf.facebook.com"
+            "snsURL": "https://asdf.facebook.com"
           },
           {
             "snsUUID": "d-0106-4340-b505-280e15626ecc",
             "snsType": "instagram",
-            "snsURL": "adfd.instagram.com"
+            "snsURL": "https://adfd.instagram.com"
           }
         ]
       },
@@ -111,22 +110,21 @@
           {
             "fileTitle": "포트폴리오1",
             "fileDescription": "2022년 포트폴리오",
-            "fileName": "",
-            "file": ""
+            "fileName": ""
           }
         ]
       }
     ],
     "styleSetting": {
       "backgroundSetting": {
-        "solidColor": "#ffffff",
+        "solidColor": "#eeeeee",
         "gradation": false,
         "styleImgURL": null
       },
       "blockSetting": {
         "shape": "0px",
         "style": "none",
-        "styleColor": "#ffff8ff",
+        "styleColor": "#ffffff",
         "gradation": false
       },
       "themeSetting": {
