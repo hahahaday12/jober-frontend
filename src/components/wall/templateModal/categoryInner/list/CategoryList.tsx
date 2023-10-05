@@ -20,15 +20,13 @@ export const ListTemplete: React.FC<ListTemplateProps> = ({
   const { selectedTemplate, setSelectedTemplate } = useTemplateStore();
 
   const handleRadioChange = (item: TemplateData) => {
-    if (item !== null) {
-      const param = {
-        category: category,
-        templateId: item.templateId,
-        templateTitle: item.templateTitle,
-        templateDescription: item.templateDescription,
-      };
-      setSelectedTemplate(param);
-    }
+    const param = {
+      category: category,
+      templateId: item.templateId,
+      templateTitle: item.templateTitle,
+      templateDescription: item.templateDescription,
+    };
+    setSelectedTemplate(param);
   };
 
   return (
