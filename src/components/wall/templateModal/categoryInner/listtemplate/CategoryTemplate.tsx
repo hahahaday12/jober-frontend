@@ -18,7 +18,9 @@ const BookCategory: Category[] = [
 
 const fetchTemplateData = async (category: string) => {
   const response = await axios.get(
-    `/api/api/wall/templates/lists?category=${category}`,
+    `${
+      import.meta.env.VITE_SERVER_BASE_URL
+    }/wall/templates/lists?category=${category}`,
   );
   return response.data.data.list;
 };

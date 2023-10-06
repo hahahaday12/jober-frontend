@@ -18,7 +18,9 @@ type BestTemplateProps = {
 
 const fetchTemplateData = async (PERSONAL: string) => {
   const response = await axios.get(
-    `/api/api/wall/templates?category=${PERSONAL}`,
+    `${
+      import.meta.env.VITE_SERVER_BASE_URL
+    }/wall/templates?category=${PERSONAL}`,
   );
   return response.data.data.list;
 };
