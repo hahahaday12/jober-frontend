@@ -34,12 +34,20 @@
   <tr>
     <td align="center" width="400"><strong>Front-end 기술 스택</strong></td>
     <td>
-       <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-squre&logo=springboot&logoColor=white"> 
-       <img src="https://img.shields.io/badge/Spring Data JPA-6DB33F?style=flat-squre&logo=spring&logoColor=white"> 
-       <img src="https://img.shields.io/badge/Java 11-FF160B?style=flat-squre&logo=java&logoColor=white"> 
-       <img src="https://img.shields.io/badge/Gradle-02303A?style=flat-squre&logo=gradle&logoColor=white"> 
+        <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"> 
+        <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
+        <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=react-query&logoColor=white"> 
+        <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"> 
+        <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
     </td>
   </tr>
+   <tr>
+    <td align="center" width="400"><strong>Front-end 배포</strong></td>
+    <td>
+        <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white"> 
+    </td>
+  </tr>
+
   <tr>
     <td align="center"><strong>배포</strong></td>
     <td>
@@ -200,3 +208,103 @@ setWall(
   }),
 );
 ```
+
+## 👨‍👩‍👧‍👦 개발 팀 소개
+
+
+<table>
+  <tr>
+     💜 <b>Front-end</b>
+    <td align="center" width="200px">
+      <a href="https://github.com/howooking" target="_blank">
+        <img src="https://github.com/howooking.png" alt="이정우 프로필" />
+      </a>
+    </td>
+    <td align="center" width="200px">
+      <a href="https://github.com/hahahaday12" target="_blank">
+        <img src="https://github.com/hahahaday12.png" alt="김하은 프로필" />
+      </a>
+    </td>
+    <td align="center" width="200px">
+      <a href="https://github.com/0299bang" target="_blank">
+        <img src="https://github.com/0299bang.png" alt="방미선 프로필" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/howooking" target="_blank">
+        이정우(팀장)<br />(Front-end)
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/hahahaday12" target="_blank">
+        김하은<br />(Front-end)
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/0299bang" target="_blank">
+        방미선<br />(Front-end)
+      </a>
+    </td> 
+  </tr>
+    <br />
+
+
+<table>
+  <tr>
+     💜 <b>Back-end</b>
+    <td align="center" width="200px">
+      <a href="https://github.com/miyounlee" target="_blank">
+        <img src="https://github.com/miyounlee.png" alt="이미연 프로필" />
+      </a>
+    </td>
+    <td align="center" width="200px">
+      <a href="https://github.com/dpdmstjs" target="_blank">
+        <img src="https://github.com/dpdmstjs.png" alt="선예은 프로필" />
+      </a>
+    </td>
+    <td align="center" width="200px">
+      <a href="https://github.com/YangSooHyun0" target="_blank">
+        <img src="https://github.com/YangSooHyun0.png" alt="양수현 프로필" />
+      </a>
+    </td>
+    <td align="center" width="200px">
+      <a href="https://github.com/freshh17" target="_blank">
+        <img src="https://github.com/freshh17.png" alt="김희현 프로필" />
+      </a>
+    </td>
+    <td align="center" width="200px">
+      <a href="https://github.com/hybiis" target="_blank">
+        <img src="https://github.com/hybiis.png" alt="윤현진 프로필" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/miyounlee" target="_blank">
+        이미연(팀장)<br />(Back-end)
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/dpdmstjs" target="_blank">
+        선예은<br />(Back-end)
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/YangSooHyun0" target="_blank">
+        양수현<br />(Back-end)
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/freshh17" target="_blank">
+        김희현<br />(Back-end)
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/hybiis" target="_blank">
+        윤현진<br />(Back-end)
+      </a>
+    </td>
+  </tr>
+    <br />
