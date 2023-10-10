@@ -84,12 +84,244 @@
 | <img src="https://github.com/Fastcampus-Final-Team3/jober-backend/assets/111266513/f1b91773-af64-4ca6-a71d-3a7d0eb345be " width="500" />                                   | **공유페이지 url**<br/>- 공유페이지 편집하기 시 url도 커스텀이 가능합니다. <br/> - url로 공유페이지에 접근이 가능합니다.       |
 <br>
 
-# ✨ 프로젝트 오류 & 해결
-1. 템플릿 생성 
-2
-3
-4
-5
+# ✨ 기능 구현중 오류 & 해결
+
+###  1. 📍 공통 modalComponents 안에 변경되는 많은 modalContents 관리
+
+#### 기능 구현 모습
+ ![ezgif com-video-to-gif (20)](https://github.com/hahahaday12/jober-frontend/assets/101441685/a19e5954-852e-4bde-af9f-e128b3a1e43e)
+
+#### 기능 구현중 문제점
+
+-> 템플릿 생성 클릭시 추천 템플릿▶ input창에 focus시 카테고리 템플릿 ▶ input창에 검색어 입력시 검색 템플릿  총 3번의 페이지 상태 변화가 있게 됩니다.<br/> 
+처음 코드 작성시 공통 모달 레이아웃 안에 모든 페이지를 관리할 각각의 state 값을 생성하고 true, false 로 모달안의 컨텐츠 상태값을 변경하게 하였으며, 2번째 페이지가 보일시 1번째 페이지가 보이지 않도록 하기 위해 false 값을 주었습니다.<br/>
+ **이렇게 하나의 컴포넌트가 변경될때마다 이전 컴포넌트가 보이지 않게 하기 위해 true, false(boolean 타입)으로 컴포넌트 관리를 하다보니 , 공통 모달 안에 더 많은 컴포넌트가 변경될시 관리 하기 어렵고 코드가 복잡 해지는 문제점이 생겼습니다.**
+
+#### 초기 기능 구현 코드
+```javascript
+export const ModalOpen = () => {
+  const { Search } = Input;
+  // 모달 오픈을 관리하기 위한 상태관리
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // 처음 추천 템플릿을 보여주기 위한 상태관리
+  const [showBestTemplate, setShowBestTemplate] = useState<boolean>(true);
+  // 인풋창에 포커스시 보여주기 위한 상태관리
+  const [categoryTemplate, setCategoryTemplate] = useState<boolean>(false);
+  // 인풋창에 입력시 변경되는 상태관리
+  const [inputText, setInputText] = useState('');
+  // 검색 버튼 클릭시 실행되는 함수
+  const onSearch = (value: string) => {
+    console.log(value);
+    alert('');
+  };
+  // 모달창을 보여주는 함수
+  const showModal = () => {
+    setIsModalOpen(true);
+    setShowBestTemplate(true);
+    setCategoryTemplate(false);
+  };
+
+  const handleSearchFocus = () => {
+    setShowBestTemplate(false); // Search 입력에 포커스가 클릭되면 BestTemplate 숨김
+    setCategoryTemplate(true);
+    //  이슈: input창에 입력하고 나서 외부에 커서 클릭후 다시 input창으로 커서를 두게 되면
+    // 상태변화 때문에 리스트 추천 템플릿 컴포넌트의 false 가 해제되게 됨. 따라 조건식으로
+    //input창에 입력된 문자열 길이가 0 위로 존재하면 추천 템플릿이 보이지 않게끔 해결.
+    if (inputText.length > 0) {
+      setCategoryTemplate(false);
+    } else {
+      return;
+    }
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+    setShowBestTemplate(false);
+    //setInputText('');
+  };
+
+  const handleCancel = () => {
+    alert('취소');
+    setIsModalOpen(false);
+    setShowBestTemplate(true);
+    setCategoryTemplate(false);
+    //setInputText('');
+  };
+
+  const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputText(e.target.value);
+    if (e.target.value.length > 0) {
+      setCategoryTemplate(false);
+      setShowBestTemplate(false);
+      console.log(e.target.value);
+    } else {
+      setCategoryTemplate(true);
+    }
+  };
+
+  return (
+    <>
+      <Button className="buttonOpen" type="primary" onClick={showModal}>
+        템플릿 생성
+      </Button>
+      <Modals
+        title="Basic Modal"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        maskClosable={false}
+      >
+        <ModalHeader>
+          <p>템플릿 선택하기</p>
+        </ModalHeader>
+        <SettingTemplet>
+          <p className="settingtText">템플릿 설정하기</p>
+          <SelectBox>
+            <InputBox>
+              <Select
+                className="selectbox"
+                defaultValue="문서제목"
+                allowClear
+                options={[{ value: '문서', label: '문서제목' }]}
+              />
+              <Search
+                className="searchBox"
+                type="text"
+                placeholder="input search text"
+                onSearch={onSearch}
+                onFocus={handleSearchFocus}
+                value={inputText}
+                onChange={handleChangeText}
+              />
+            </InputBox>
+            {showBestTemplate && <BestTemplate />}
+            {categoryTemplate && <CategoryTemplet />}
+            {inputText && <SelecteSearchTemplate inputText={inputText} />}
+          </SelectBox>
+        </SettingTemplet>
+      </Modals>
+    </>
+  );
+};
+```
+#### 해결 방안
+-> 키값에 맞는 컴포넌트 객체를 생성하여 해당 객체를 상태관리 하도록 구현하였습니다. 하나의 setState 를 통하여 각각의 컴포넌트를 변경시켜 주도록 하였습니다. 
+
+
+#### 개선 후 코드
+```javascript
+export const ModalOpen = () => {
+  const { Search } = Input;
+
+  // modal contents 를 관리하는 state, type 생성
+  const [procedure, setProcedure] = useState<'recommand' | 'category' | 'search'>('recommand');
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [inputText, setInputText] = useState('');
+
+  // 키값에 맞는 컴포넌트 객체 생성
+  const PROCEDURE_MAPPER = {
+    recommand: <BestTemplate />,
+    category: <CategoryTemplate />,
+    search: <SelecteSearchTemplate inputText={inputText} />,
+  };
+  // 검색 버튼 클릭시 실행되는 함수
+  const onSearch = (value: string) => {
+    console.log(value);
+    alert('');
+  };
+  // 모달창을 보여주는 함수
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleSearchFocus = () => {
+    setProcedure('category');
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+    setInputText('');
+    setProcedure('recommand');
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setInputText('');
+    setProcedure('recommand');
+  };
+  const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputText(e.target.value);
+    if (e.target.value.length > 0) {
+      setProcedure('search');
+    } else {
+      setProcedure('category');
+    }
+  };
+  return (
+    <>
+      <Button className="buttonOpen" type="primary" onClick={showModal}>
+        템플릿 생성
+      </Button>
+      <Modals
+        centered
+        title={
+          <ModalHeader
+            title="템플릿 선택하기"
+            handleOk={handleOk}
+            handleCloseModal={handleCancel}
+          />
+        }
+        footer={null}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        closeIcon={null}
+      >
+        <SettingTemplet>
+          <p className="settingtText">템플릿 설정하기</p>
+          <SelectBox>
+            <InputBox>
+              <Select
+                className="selectbox"
+                defaultValue="문서제목"
+                allowClear
+                options={[{ value: '문서', label: '문서제목' }]}
+              />
+              <Search
+                className="searchBox"
+                type="text"
+                placeholder="input search text"
+                onSearch={onSearch}
+                onFocus={handleSearchFocus}
+                value={inputText}
+                onChange={handleChangeText}
+              />
+            </InputBox>
+            {PROCEDURE_MAPPER[procedure]}
+          </SelectBox>
+        </SettingTemplet>
+      </Modals>
+    </>
+  );
+};
+```
+###  2. 📍 공통 modalComponents 안에 변경되는 많은 modalContents 관리
+3. 
+
+4.
+
+5.
+
+6.
+
+7.
+
+
+
+
+
+
+
+
+
 
 
 
