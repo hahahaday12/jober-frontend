@@ -84,25 +84,18 @@
 | <img src="https://github.com/Fastcampus-Final-Team3/jober-backend/assets/111266513/f1b91773-af64-4ca6-a71d-3a7d0eb345be " width="500" />                                   | **공유페이지 url**<br/>- 공유페이지 편집하기 시 url도 커스텀이 가능합니다. <br/> - url로 공유페이지에 접근이 가능합니다.       |
 <br>
 
-## 📂 프로젝트 구성도
+# ✨ 프로젝트 오류 & 해결
+1
+2
+3
+4
+5
 
-|                                               <div align="center">아키텍쳐(Architecture)</div>                                                |
-| :------------------------------------------------------------------------------------------------------------------------------------------: |
-|        <img src="https://github.com/Fastcampus-Final-Team3/jober-backend/assets/111266513/4aa7c991-576a-4758-b7cf-6bd7b15d87c0 " width="900"/>        |
-|                                                           **개체-관계 모델 (ERD)**                                                           |
-| <img src="https://github.com/Fastcampus-Final-Team3/jober-backend/assets/111266513/23da776e-17a7-40ad-8f27-ae43d966d6d2" width="900" height="500" /> |
 
-<br />
-<div id="6"></div>
 
-## 📂 API 명세서 [🔗](https://spangle-rhubarb-620.notion.site/API-0fc3026a2d764cc1a19a144eacc86a17)
 
-|                                               <div align="center">API 명세서</div>                                                |
-| :------------------------------------------------------------------------------------------------------------------------------------------: |
-|        <img src="https://github.com/Fastcampus-Final-Team3/jober-backend/assets/111266513/d240c947-9496-42e5-b558-0391f1edc522 " width="900"/>        |
 
-<br />
-<div id="6"></div>
+
 
 # ✨ 프로젝트 를 하면서 크게 배웠던 "리액트 불변성" 에 관하여. 
 
@@ -208,6 +201,27 @@ setWall(
   }),
 );
 ```
+
+## 📂 프로젝트 구성도
+
+|                                               <div align="center">아키텍쳐(Architecture)</div>                                                |
+| :------------------------------------------------------------------------------------------------------------------------------------------: |
+|        <img src="https://github.com/Fastcampus-Final-Team3/jober-backend/assets/111266513/4aa7c991-576a-4758-b7cf-6bd7b15d87c0 " width="900"/>        |
+|                                                           **개체-관계 모델 (ERD)**                                                           |
+| <img src="https://github.com/Fastcampus-Final-Team3/jober-backend/assets/111266513/23da776e-17a7-40ad-8f27-ae43d966d6d2" width="900" height="500" /> |
+
+<br />
+<div id="6"></div>
+
+## 📂 API 명세서 [🔗](https://spangle-rhubarb-620.notion.site/API-0fc3026a2d764cc1a19a144eacc86a17)
+
+|                                               <div align="center">API 명세서</div>                                                |
+| :------------------------------------------------------------------------------------------------------------------------------------------: |
+|        <img src="https://github.com/Fastcampus-Final-Team3/jober-backend/assets/111266513/d240c947-9496-42e5-b558-0391f1edc522 " width="900"/>        |
+
+<br />
+<div id="6"></div>
+
 
 ## 👨‍👩‍👧‍👦 개발 팀 소개
 
