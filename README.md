@@ -86,7 +86,7 @@
 
 # ✨ 기능 구현중 오류 & 해결
 
-###  1. 📍 공통 modalComponents 안에 변경되는 많은 modalContents 관리
+### 🍒1. 공통 modalComponents 안에 변경되는 많은 modalContents 관리
 
 #### 기능 구현 모습
  ![ezgif com-video-to-gif (20)](https://github.com/hahahaday12/jober-frontend/assets/101441685/a19e5954-852e-4bde-af9f-e128b3a1e43e)
@@ -302,7 +302,7 @@ export const ModalOpen = () => {
   );
 };
 ```
-###  2. 검색페이지 기능 구현 방법과 오류  
+### 🍒2. 검색페이지 기능 구현 방법과 오류  
 
 **🎈방법 1<br/>**
 📍처음 페이지 mount 시 서버에서 모든 데이터를 가져오는 api를 호출후 프론트에서 filter 처리후 결과값 노출 <br/>
@@ -425,7 +425,7 @@ export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
 
 따라 사용자가 검색창에 타이핑 할때마다 Api가 호출되는것이 아닌 , debounce 를 사용하여 마지막에 타이핑 입력할때 Api가 호출되도록 기능 구현을 하였습니다.
 
-### 3. antd button components 사용시 한개의 버튼만 선택되는게 아닌, 여러 버튼 선택됨 ( 다음 체크 버튼 클릭시 이전 클릭된 체크 버튼은 없어져야함)
+### 🍒3. antd button components 사용시 한개의 버튼만 선택되는게 아닌, 여러 버튼 선택됨 ( 다음 체크 버튼 클릭시 이전 클릭된 체크 버튼은 없어져야함)
 
 #### 오류 이미지 
 <img width="538" alt="image" src="https://github.com/Fastcampus-Final-Team3/jober-frontend/assets/101441685/239d2307-5e5f-4c81-9239-521d8b11df0e">
@@ -456,7 +456,7 @@ export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
 
 ![ezgif com-video-to-gif (19)](https://github.com/Fastcampus-Final-Team3/jober-frontend/assets/101441685/3efbc12e-a738-4145-8cd4-82514a8dfb6c)
 
-### 4. 미리보기 페이지 구현
+### 🍒4. 미리보기 페이지 구현
 미리보기 페이지 구현을 위해 상태관리 라이브러리 zustand 를 사용해  Radio button 클릭시 해당 데이터가 store에 저장하도록 구현하였습니다. 
 
 -> 각 페이지 마다 펨플릿 옆에 radio버튼을 선택할수 있게 되고, 선택시 해당 id,title, description 이 전역관리 상태 store 저장됨.
@@ -518,15 +518,9 @@ return(
 ```
 ->  store에 만들어진   setSelectedTemplate 를 이용해서 데이터 저장 
 
+### 🍒5.
 
 
-
-
-### 5.
-
-### 6.
-
-### 7.
 
 
 
