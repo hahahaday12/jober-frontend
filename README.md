@@ -615,6 +615,7 @@ const handleRadioChange = (item: TemplateData) => {
 부자연스러운 모습이 보입니다.
 
 **기능 구현모습**
+
 <img width="646" alt="image" src="https://github.com/Fastcampus-Final-Team3/jober-frontend/assets/101441685/b3459519-8ab2-45ab-8799-8b5c028e0d91">
 
 **오류 해결방법**
