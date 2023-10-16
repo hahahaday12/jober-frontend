@@ -519,9 +519,11 @@ return(
 ->  store에 만들어진   setSelectedTemplate 를 이용해서 데이터 저장 
 
 #### 🔥 위의 방식으로 기능 구현했을때 생긴 문제점 및 해결 방식 
-🔥 **문제점** :  템플릿에 있는 radio button  클릭시 해당 데이터를 store에 저장하고 store을 구독하고 있는 wallcomponent에 해당 데이터가 바로 나타내는 문제점이 생겼습니다. 
+**문제점** :  템플릿에 있는 radio button  클릭시 해당 데이터를 store에 저장하고 store을 구독하고 있는 wallcomponent에 해당 데이터가 바로 나타내는 문제점이 생겼습니다. <br/>
 radio button  클릭시 바로 등록된 템플릿이 보이는게 아닌, radio button 클릭후 "완료" 버튼을 눌러야 모달창이 닫힘과 동시에 wallcomponent에 등록된 템플릿이 보여야 합니다. 
 
+**해결 방법**
+-> true, false 상태값에 대한 조건식을 추가해서 radio button 클릭시에는 상태가 false 이고, "확인" 버튼 클릭시에는 true.  true 일때만 템플릿 등록이 되는 로직으로 구현하였습니다. 
 
 ```
 ```
