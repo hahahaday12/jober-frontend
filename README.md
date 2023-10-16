@@ -525,8 +525,71 @@ radio button  클릭시 바로 등록된 템플릿이 보이는게 아닌, radio
 **해결 방법**
 -> true, false 상태값에 대한 조건식을 추가해서 radio button 클릭시에는 상태가 false 이고, "확인" 버튼 클릭시에는 true.  true 일때만 템플릿 등록이 되는 로직으로 구현하였습니다. 
 
+**수정 코드**
+📂store.ts
+
+```javascript
+export const useTemplateStore = create<TemplateState>((set) => ({
+  selectedTemplate: {
+    category: '',
+    templateId: '',
+    templateTitle: '',
+    templateDescription: '',
+  },
+  setSelectedTemplate: (template) => set({ selectedTemplate: template }),
+ // 새로운 상태값 추가 
+  newStatus: false,
+  setNewStatus: (newStatus) => set({ newStatus }),
+}));
 ```
+📂RecommedInner.tsx
+
+```javascript
+const handleRadioChange = (item: TemplateData) => {
+    const param = {
+      category: PERSONAL,
+      templateId: item.templateId,
+      templateTitle: item.templateTitle,
+      templateDescription: item.templateDescription, 
+    };
+    setSelectedTemplate(param);
+    // radio 버튼 클릭시 Status false
+    setNewStatus(false);
+  };
 ```
+📂TemplateModal.tsx
+
+```javascript
+  const { selectedTemplate, newStatus } = useTemplateStore();
+  const [templateHistory, setTemplateHistory] = useState<Array<TemplateItem>>(
+    [],
+  );
+  useEffect(() => {
+    // 상태값 조건식을 통하여 저장된 템플릿을 보여줌.
+    if (newStatus) {
+      setTemplateHistory((prevHistory) => [...prevHistory, selectedTemplate]);
+    }
+  }, [newStatus, selectedTemplate]);
+
+  return(
+   {templateHistory.map((template, index) => (
+      <BlockContainer key={index} blockName="template">
+        <div className="sm:h-[210px] h-[115px] p-block">
+          <div className="flex items-center justify-between mb-[12px]">
+            <h4 className="db-18 sm:db-20">{template.templateTitle}</h4>
+          </div>
+          <div className="flex sm:gap-[8px] gap-[6px]">
+            <p className="dm-16 text-gray88">
+              {template.templateDescription}
+            </p>
+          </div>
+        </div>
+      </BlockContainer>
+   ))}
+  )
+```
+
+**수정후 생긴 2차 문제점**
 
 ```
 ```
