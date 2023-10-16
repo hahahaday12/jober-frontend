@@ -572,25 +572,52 @@ const handleRadioChange = (item: TemplateData) => {
   }, [newStatus, selectedTemplate]);
 
   return(
-   {templateHistory.map((template, index) => (
-      <BlockContainer key={index} blockName="template">
-        <div className="sm:h-[210px] h-[115px] p-block">
-          <div className="flex items-center justify-between mb-[12px]">
-            <h4 className="db-18 sm:db-20">{template.templateTitle}</h4>
-          </div>
-          <div className="flex sm:gap-[8px] gap-[6px]">
-            <p className="dm-16 text-gray88">
-              {template.templateDescription}
-            </p>
-          </div>
-        </div>
-      </BlockContainer>
-   ))}
-  )
+    <BlockContainer blockName="templateBlock">
+      <div
+        className={`
+        ${isEdit && 'px-[8px] pb-[8px] pt-[30px]'} 
+        gap-4 grid sm:grid-cols-2 grid-cols-1
+        `}
+        >
+        {templateBlockSubData?.map((template) => (
+          <SingleTemplate
+            key={template.templateBlockUUID}
+            templateTitle={template.templateTitle}
+            templateDescription={template.templateDescription}
+          />
+        ))}
+       {isEdit && (
+          <>
+          <BlockContainer blockName="template">
+           <div className="sm:h-[210px] h-[115px] flex flex-col items-center justify-center gap-[8px] dm-16" ref={templateAddButtonRef}>
+            <ModalOpen />
+           </div>
+          </BlockContainer>
+       {templateHistory.map((template, index) => (
+          <BlockContainer key={index} blockName="template">
+            <div className="sm:h-[210px] h-[115px] p-block">
+              <div className="flex items-center justify-between mb-[12px]">
+                <h4 className="db-18 sm:db-20">{template.templateTitle}</h4>
+              </div>
+              <div className="flex sm:gap-[8px] gap-[6px]">
+                <p className="dm-16 text-gray88">
+                  {template.templateDescription}
+                </p>
+              </div>
+            </div>
+          </BlockContainer>
+       ))}
+      )
 ```
 
 **수정후 생긴 2차 문제점**
+**🔥문제점** :  아래 이미지 처럼 추가 할때마다 <BlockContainer> 안에 템플릿이 추가될때마다 템플릿 생성의 블럭이 자연스럽게 밀려나야 하는데, 위의 방법대로 구현하면 템플릿이 추가되도 템플릿 생성의 블럭의 위치는 그대로 있는<br/>
+부자연스러운 모습이 보입니다.
 
+**기능 구현모습**
+<img width="646" alt="image" src="https://github.com/Fastcampus-Final-Team3/jober-frontend/assets/101441685/b3459519-8ab2-45ab-8799-8b5c028e0d91">
+
+**오류 해결방법**
 ```
 ```
 
