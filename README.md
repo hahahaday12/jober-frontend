@@ -124,9 +124,6 @@ export const ModalOpen = () => {
   const handleSearchFocus = () => {
     setShowBestTemplate(false); // Search 입력에 포커스가 클릭되면 BestTemplate 숨김
     setCategoryTemplate(true);
-    //  이슈: input창에 입력하고 나서 외부에 커서 클릭후 다시 input창으로 커서를 두게 되면
-    // 상태변화 때문에 리스트 추천 템플릿 컴포넌트의 false 가 해제되게 됨. 따라 조건식으로
-    //input창에 입력된 문자열 길이가 0 위로 존재하면 추천 템플릿이 보이지 않게끔 해결.
     if (inputText.length > 0) {
       setCategoryTemplate(false);
     } else {
@@ -194,6 +191,7 @@ export const ModalOpen = () => {
                 onChange={handleChangeText}
               />
             </InputBox>
+            // 변경전
             {showBestTemplate && <BestTemplate />}
             {categoryTemplate && <CategoryTemplet />}
             {inputText && <SelecteSearchTemplate inputText={inputText} />}
@@ -295,6 +293,7 @@ export const ModalOpen = () => {
                 onChange={handleChangeText}
               />
             </InputBox>
+            // 변경후
             {PROCEDURE_MAPPER[procedure]}
           </SelectBox>
         </SettingTemplet>
@@ -303,18 +302,225 @@ export const ModalOpen = () => {
   );
 };
 ```
-###  2. 검색페이지 기능 구현 방법에 대한 선택 과정과 생겼던 오류 
+###  2. 검색페이지 기능 구현 방법과 오류  
 
-**🎈처음 생각했던 방식<br/>**
-처음 페이지 mount 시 서버에서 모든 데이터를 가져오는 api를 호출후 프론트에서 filter 처리후 노출
--> 해당 방법으로 기능 구현시 생기는 문제점 = 데이터 변경이 많이 있을 경우 프론트에서 filter 처리를 하면 최신으로 반영되는 데이터를 가져오지 못하는 문제점을 생각하였습니다.
-또한 데이터가 많을수록 모든 데이터를 받아오는것은 성능 적으로도 좋지 않을것 같다고 판단하였습니다.
+**🎈방법 1<br/>**
+📍처음 페이지 mount 시 서버에서 모든 데이터를 가져오는 api를 호출후 프론트에서 filter 처리후 결과값 노출 <br/>
+-> 해당 방법으로 기능 구현시 생기는 문제점 = 데이터 변경이 많이 있을 경우 프론트에서 filter 처리를 하면 최신으로 반영되는 데이터를 가져오지 못하는 문제점을 생각하였습니다. <br/>
+또한 데이터가 많을수록 모든 데이터를 받아오는것은 성능 적으로도 좋지 않을것 같다고 판단하였습니다. <br/>
 
-3) 서버에서 입력값에 대해 필터링된 데이터가 담긴 api를 호출후 노출  
--> 
-### 3. 
+**🎈방법 2<br/>**
+📍서버에서 입력값에 대해 필터링된 데이터에 대한 api 를 사용하여 결과값 노출 <br/>
+-> 첫번째 방식에서의 문제점을 생각하여 두번째 방식으로 검색 페이지를 구현하였습니다. 따라 서버에서 입력값에 대해 필터링된 api를 생성후 해당 api를 이용하여 검색 페이지를 구현하였습니다. <br/>
 
-### 4.
+
+#### 이전 코드
+```javascript
+export const SelecteSearchTemplate: React.FC<Props> = ({ keyword }) => {
+  const [product, setProductInfo] = useState<ProductItem[]>([]);
+  const [filteredResults, setFilteredResults] = useState<ProductItem[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_SERVER_BASE_URL}/${keyword}`,
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setProductInfo([...product, ...data]);
+        } else {
+          console.error('Response not OK:', response);
+        }
+      } catch (error) {
+        console.error('Error while fetching data:', error);
+      }
+    };
+    getData();
+  }, [keyword, product]);
+
+  useEffect(() => {
+    const filteredResults = product.filter((item) =>
+      item.title.toLowerCase().includes(keyword),
+    );
+    setFilteredResults(filteredResults);
+  }, [keyword, product]);
+
+  return (
+    <>
+      <SeleteContainer>
+        <h3>검색결과</h3>
+        <ResultBox>
+          {filteredResults.map((item) => (
+            <ResultTemBox key={item.id}>{item.title}</ResultTemBox>
+          ))}
+        </ResultBox>
+        <BestTemplate />
+      </SeleteContainer>
+    </>
+  );
+};
+```
+#### 이후 코드 
+```javascript
+export const SelecteSearchTemplate: React.FC<Props> = ({ inputText }) => {
+  const [debouncedInputValue, setDebouncedInputValue] = useState('');
+  const [products, setProducts] = useState<ProductItem[]>([]);
+
+  useEffect(() => {
+    // 입력값이 변경될 때마다 debounce된 값을 업데이트.
+    const debounceTimer = setTimeout(() => {
+      setDebouncedInputValue(inputText);
+    }, 300); // 300 밀리초(0.3초) 디바운스 시간
+
+    return () => {
+      // 이전 타이머를 클리어.
+      clearTimeout(debounceTimer);
+    };
+  }, [inputText]);
+
+  useEffect(() => {
+    if (debouncedInputValue) {
+      const getData = async () => {
+        try {
+          const response = await axios.get(`${import.meta.env.VITE_SERVER_BASE_URL}`, {
+            params: {
+              search: debouncedInputValue,
+            },
+          });
+          const data = response.data.data.list;
+          setProducts([...data]);
+        } catch (error) {
+          console.error('API 호출 에러:', error);
+        }
+      };
+      getData();
+    } else {
+      setProducts([]);
+    }
+  }, [debouncedInputValue]);
+
+  return (
+    <>
+      <SeleteContainer>
+        <h3>{templateText.inputResult}</h3>
+        <ResultBox>
+          {products.map((item) => (
+            <ResultTemBox key={item.templateId}>
+              {item.templateTitle} <br />
+              {item.templateDescription}
+            </ResultTemBox>
+          ))}
+        </ResultBox>
+        <BestTemplate PERSONAL={''} />
+      </SeleteContainer>
+    </>
+  );
+};
+
+```
+-> 서버에서 user 입력값에 대해 filter 처리를 하고, debounce 를 사용하여 기능 구현하였습니다. 
+### 👀debounce 란?
+> -> 일정 시간 동안 연속적으로 발생했던 이벤트들 중 마지막만 실행시켜 과다한 호출이나 렌더를 막아 최적화하는 기술 입니다. <br/>
+
+따라 사용자가 검색창에 타이핑 할때마다 Api가 호출되는것이 아닌 , debounce 를 사용하여 마지막에 타이핑 입력할때 Api가 호출되도록 기능 구현을 하였습니다.
+
+### 3. antd button components 사용시 한개의 버튼만 선택되는게 아닌, 여러 버튼 선택됨 ( 다음 체크 버튼 클릭시 이전 클릭된 체크 버튼은 없어져야함)
+
+#### 오류 이미지 
+<img width="538" alt="image" src="https://github.com/Fastcampus-Final-Team3/jober-frontend/assets/101441685/239d2307-5e5f-4c81-9239-521d8b11df0e">
+
+#### 이전 코드 
+->  radio 버튼 클릭시 handleRadioChange 함수 실행.
+
+```javascript
+ <Radio
+     onChange={() => handleRadioChange(item)}
+ />
+```
+
+#### 수정 코드 
+-> radio 버튼의 속성값 checked를 이용하여  선택한템플릿의 아이디와 , 노출된 템플릿의 아이디가 같아 true이 되어야 체크가 되도록 조건식을 추가 하였습니다. 
+
+```javascript
+ <Radio
+     onChange={() => handleRadioChange(item)}
+     checked={
+      selectedTemplate &&
+       selectedTemplate.templateId === item.templateId
+     }
+ />
+```
+## 수정후
+-> 한개의 버튼만 선택됩니다. 
+
+![ezgif com-video-to-gif (19)](https://github.com/Fastcampus-Final-Team3/jober-frontend/assets/101441685/3efbc12e-a738-4145-8cd4-82514a8dfb6c)
+
+### 4. 미리보기 페이지 구현
+미리보기 페이지 구현을 위해 상태관리 라이브러리 zustand 를 사용해  Radio button 클릭시 해당 데이터가 store에 저장하도록 구현하였습니다. 
+
+-> 각 페이지 마다 펨플릿 옆에 radio버튼을 선택할수 있게 되고, 선택시 해당 id,title, description 이 전역관리 상태 store 저장됨.
+
+## 작성 코드
+📂store.ts
+-> store 와 type 생성
+
+```javascript
+type TemplateState = {
+  selectedTemplate: {
+    category: string;
+    id: string;
+    title: string;
+    description: string;
+  };
+  setSelectedTemplate: (template: {
+    category: string;
+    id: string;
+    title: string;
+    description: string;
+  }) => void;
+};
+
+export const useTemplateStore = create<TemplateState>((set) => ({
+  selectedTemplate: {
+    category: '',
+    id: '',
+    title: '',
+    description: '',
+  },
+  setSelectedTemplate: (template) =>
+    set({ selectedTemplate: template }),
+}));
+```
+📂RecommendInner.ts
+-> 만들어진 store에 선택한 템플릿 데이터 저장 
+
+```javascript
+const { setSelectedTemplate } = useTemplateStore();
+
+const handleRadioChange = (item: TemplateData, status: boolean) => {
+    const param = {
+      category: PERSONAL,
+      id: item.id,
+      title: item.title,
+      description: item.description,
+    };
+    console.log(item);
+    console.log(status);
+    setSelectedTemplate(param);
+  };
+
+return(
+ <Radio
+    onChange={(e) => handleRadioChange(item, e.target.checked)}
+ />
+)
+```
+->  store에 만들어진   setSelectedTemplate 를 이용해서 데이터 저장 
+
+
+
+
 
 ### 5.
 
