@@ -619,8 +619,37 @@ const handleRadioChange = (item: TemplateData) => {
 <img width="646" alt="image" src="https://github.com/Fastcampus-Final-Team3/jober-frontend/assets/101441685/b3459519-8ab2-45ab-8799-8b5c028e0d91">
 
 **오류 해결방법**
+-> 현재  store에 저장된 데이터로 wall 데이터로 전역적으로 쓰고 있다. 
+
+store.tsx
 ```
+export const useWallStore = create<WallStoreType>((set) => ({
+  isEdit: false,
+  setIsEdit: (bool) => set(() => ({ isEdit: bool })),
+  isPreview: false,
+  setIsPreview: (bool) => set(() => ({ isPreview: bool })),
+
+  getWall: async () => {
+    const response = await fetch('http://localhost:3000/wall');
+    if (response.ok) {
+      set({ wall: await response.json() });
+    }
+  },
+
+  wall: {} as WallType,
+  setWall: (states: object) =>
+    set((state) => ({ wall: { ...state.wall, ...states } })),
+}));
+
 ```
+위의 템플릿 블록에 대한 컴포넌트 코드는 아래와 같다. 
+
+SingleTemplate.tsx
+
+```
+
+```
+
 
 ### 🍒5.
 
